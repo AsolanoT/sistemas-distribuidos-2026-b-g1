@@ -5,9 +5,9 @@
 # Weekly Status - Week 01
 
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
-- FULL_NAME:
-- GITHUB_USER:
-- TEAM:
+- FULL_NAME:  Angel Gustavo Solano Trujillo
+- GITHUB_USER: AsolanoT
+- TEAM: Group  - GESTION-VENTAS-V1
 - SPRINT_GOAL:
 <!-- CONFIG-END -->
 
