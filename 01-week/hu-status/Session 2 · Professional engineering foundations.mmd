@@ -1,0 +1,36 @@
+flowchart TD
+
+    DEF["<b>What is it?</b><br/>Engineering discipline to build<br/>distributed systems that survive in<br/>production: domain design (DDD),<br/>decoupled architecture (hexagonal),<br/>clean code, fault tolerance<br/>(resilience), real testing and a<br/>verifiable agile way of working"]
+
+    A(("Distributed<br/>Systems<br/>Unit 1"))
+
+    DEF --- A
+
+    A --> B["Executable<br/>Standards"]
+    A --> C["DDD"]
+    A --> D["Hexagonal<br/>Architecture"]
+    A --> E["SOLID &<br/>Clean Code"]
+    A --> F["Resilience<br/>Patterns"]
+    A --> G["Testing"]
+    A --> H["Scrum +<br/>Git Flow"]
+    A --> I["Weekly<br/>Deliverable"]
+
+    B --> B1["Quality breaks<br/>the build if it fails"]
+    C --> C1["Bounded Contexts,<br/>Aggregates, Entities"]
+    D --> D1["Ports and<br/>Adapters"]
+    E --> E1["SRP · DIP ·<br/>honest code"]
+    F --> F1["Circuit Breaker · Saga ·<br/>Outbox · CQRS"]
+    G --> G1["Unit · Integration ·<br/>Contract · E2E"]
+    H --> H1["Sprints, User Stories,<br/>dev → qa → main"]
+    I --> I1["Individual fork<br/>README.md per User Story"]
+
+    style DEF fill:#FEF9E7,stroke:#B7950B,stroke-width:1.5px,color:#1B2631
+    style A fill:#2C3E50,color:#ffffff,stroke:#1B2631,stroke-width:2px
+    style B fill:#D6EAF8,stroke:#2874A6
+    style C fill:#D6EAF8,stroke:#2874A6
+    style D fill:#D6EAF8,stroke:#2874A6
+    style E fill:#D6EAF8,stroke:#2874A6
+    style F fill:#D6EAF8,stroke:#2874A6
+    style G fill:#D6EAF8,stroke:#2874A6
+    style H fill:#D6EAF8,stroke:#2874A6
+    style I fill:#D6EAF8,stroke:#2874A6

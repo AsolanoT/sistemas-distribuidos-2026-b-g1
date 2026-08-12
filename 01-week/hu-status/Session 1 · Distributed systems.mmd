@@ -1,0 +1,35 @@
+flowchart TD
+    DEF["<b>What is it?</b><br/>Study of how state, time and<br/>failures change when crossing the network: a<br/>distributed system is independent nodes that<br/>only communicate by messages over an<br/>unreliable network and cooperate to appear<br/>as a single coherent system"]
+
+    A(("Models, Time,<br/>Consistency<br/>and Trade-offs"))
+
+    DEF --- A
+
+    A --> B["8 Fallacies of<br/>Distributed Computing"]
+    A --> C["System<br/>and Failure Models"]
+    A --> D["Logical Clocks<br/>and Causality"]
+    A --> E["Consistency<br/>Spectrum"]
+    A --> F["CAP / PACELC"]
+    A --> G["Replication and<br/>Quorums"]
+    A --> H["Consensus<br/>(Raft)"]
+    A --> I["Delivery<br/>Semantics"]
+
+    B --> B1["Eg: the network is reliable,<br/>zero latency... (false)"]
+    C --> C1["crash-stop → crash-recovery<br/>→ omission → Byzantine"]
+    D --> D1["Lamport: happens-before,<br/>don't use wall clock"]
+    E --> E1["Strong → sequential →<br/>causal → eventual"]
+    F --> F1["Partition: C vs A ·<br/>Normal: Latency vs Consistency"]
+    G --> G1["R + W > N ensures<br/>read of the last written"]
+    H --> H1["Leader replicates log,<br/>commit with majority"]
+    I --> I1["At-least-once + idempotence<br/>= exactly-once processing"]
+
+    style DEF fill:#FEF9E7,stroke:#B7950B,stroke-width:1.5px,color:#1B2631
+    style A fill:#2C3E50,color:#ffffff,stroke:#1B2631,stroke-width:2px
+    style B fill:#D6EAF8,stroke:#2874A6
+    style C fill:#D6EAF8,stroke:#2874A6
+    style D fill:#D6EAF8,stroke:#2874A6
+    style E fill:#D6EAF8,stroke:#2874A6
+    style F fill:#D6EAF8,stroke:#2874A6
+    style G fill:#D6EAF8,stroke:#2874A6
+    style H fill:#D6EAF8,stroke:#2874A6
+    style I fill:#D6EAF8,stroke:#2874A6
