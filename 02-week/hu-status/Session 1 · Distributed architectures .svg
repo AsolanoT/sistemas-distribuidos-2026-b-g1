@@ -1,0 +1,330 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1150" viewBox="0 0 1600 1150">
+  <defs>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F2940"/>
+      <stop offset="100%" stop-color="#1A4A6B"/>
+    </linearGradient>
+    <linearGradient id="sessionGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EAF4FA"/>
+      <stop offset="100%" stop-color="#F8FBFD"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F9FC"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5FCF8"/>
+    </linearGradient>
+    <linearGradient id="warningGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9EB"/>
+      <stop offset="100%" stop-color="#FFF3D6"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <filter id="shadowSmall" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#1A4A6B"/>
+    </marker>
+    <style>
+      .title { font: 700 40px Inter, Segoe UI, Arial, sans-serif; fill: #FFFFFF; }
+      .subtitle { font: 400 18px Inter, Segoe UI, Arial, sans-serif; fill: #DDEAF2; }
+      .sectionTitle { font: 700 26px Inter, Segoe UI, Arial, sans-serif; fill: #0F2940; }
+      .sectionSub { font: 600 15px Inter, Segoe UI, Arial, sans-serif; fill: #475569; }
+      .cardTitle { font: 700 17px Inter, Segoe UI, Arial, sans-serif; fill: #0F2940; }
+      .body { font: 400 14px Inter, Segoe UI, Arial, sans-serif; fill: #334155; }
+      .small { font: 400 12px Inter, Segoe UI, Arial, sans-serif; fill: #64748B; }
+      .chip { font: 700 13px Inter, Segoe UI, Arial, sans-serif; fill: #0F2940; }
+      .flowTitle { font: 700 15px Inter, Segoe UI, Arial, sans-serif; fill: #FFFFFF; }
+      .footerTitle { font: 700 21px Inter, Segoe UI, Arial, sans-serif; fill: #FFFFFF; }
+      .footerBody { font: 400 15px Inter, Segoe UI, Arial, sans-serif; fill: #DDEAF2; }
+      .tag { font: 600 11px Inter, Segoe UI, Arial, sans-serif; fill: #FFFFFF; }
+    </style>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1600" height="1150" fill="#F0F4F8"/>
+
+  <!-- Cabecera -->
+  <rect x="0" y="0" width="1600" height="140" fill="url(#headerGrad)"/>
+  <text x="80" y="58" class="title">Distributed Architectures · Week 2</text>
+  <text x="80" y="92" class="subtitle">Client-Server · P2P · SOA · Microservices · Boundaries + Communication</text>
+  <rect x="1332" y="38" width="188" height="56" rx="28" fill="#FFFFFF" fill-opacity="0.12"/>
+  <text x="1426" y="73" text-anchor="middle" style="font:700 17px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">CORHUILA · 2026-B</text>
+
+  <!-- ════════════ BLOQUE 1: ESTILOS PRINCIPALES ════════════ -->
+  <rect x="40" y="175" width="750" height="775" rx="24" fill="url(#sessionGrad)" stroke="#B9D9EA" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="84" cy="225" r="25" fill="#1A4A6B"/>
+  <text x="84" y="232" text-anchor="middle" style="font:700 20px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">1</text>
+  <text x="125" y="220" class="sectionTitle">Architecture Styles</text>
+  <text x="125" y="248" class="sectionSub">How to partition? How to communicate?</text>
+
+  <!-- Idea clave -->
+  <rect x="70" y="275" width="690" height="56" rx="14" fill="#E2EDF6" stroke="#8CBFD3"/>
+  <text x="95" y="300" class="cardTitle">Architecture = boundaries + communication</text>
+  <text x="95" y="322" class="body">Boundaries follow business capabilities (DDD), not technical layers.</text>
+
+  <!-- Grid de estilos -->
+  <g transform="translate(70 350)">
+    <!-- Fila 1 -->
+    <rect x="0" y="0" width="220" height="95" rx="14" fill="url(#cardGrad1)" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+    <rect x="0" y="0" width="220" height="28" rx="14" fill="#1A4A6B"/>
+    <rect x="0" y="16" width="220" height="12" rx="0" fill="#1A4A6B"/>
+    <text x="110" y="19" text-anchor="middle" style="font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">Client-Server</text>
+    <text x="15" y="48" class="chip">Idea:</text>
+    <text x="70" y="48" class="small">Clients call the server</text>
+    <text x="15" y="68" class="chip">Watch out:</text>
+    <text x="82" y="68" class="small">SPOF · bottleneck</text>
+    <text x="15" y="86" class="chip">Fits:</text>
+    <text x="55" y="86" class="small">Simple apps, central authority</text>
+
+    <rect x="235" y="0" width="220" height="95" rx="14" fill="url(#cardGrad1)" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+    <rect x="235" y="0" width="220" height="28" rx="14" fill="#1A4A6B"/>
+    <rect x="235" y="16" width="220" height="12" rx="0" fill="#1A4A6B"/>
+    <text x="345" y="19" text-anchor="middle" style="font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">Peer-to-Peer (P2P)</text>
+    <text x="250" y="48" class="chip">Idea:</text>
+    <text x="305" y="48" class="small">Each node is client and server</text>
+    <text x="250" y="68" class="chip">Watch out:</text>
+    <text x="317" y="68" class="small">Coordination, security</text>
+    <text x="250" y="86" class="chip">Fits:</text>
+    <text x="290" y="86" class="small">Resilience, blockchains</text>
+
+    <rect x="470" y="0" width="220" height="95" rx="14" fill="url(#cardGrad1)" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+    <rect x="470" y="0" width="220" height="28" rx="14" fill="#1A4A6B"/>
+    <rect x="470" y="16" width="220" height="12" rx="0" fill="#1A4A6B"/>
+    <text x="580" y="19" text-anchor="middle" style="font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">Layers / N-tier</text>
+    <text x="485" y="48" class="chip">Idea:</text>
+    <text x="540" y="48" class="small">Presentation → Logic → Data</text>
+    <text x="485" y="68" class="chip">Watch out:</text>
+    <text x="552" y="68" class="small">Distributed monolith</text>
+    <text x="485" y="86" class="chip">Fits:</text>
+    <text x="525" y="86" class="small">Classic enterprise apps</text>
+
+    <!-- Fila 2 -->
+    <rect x="0" y="110" width="220" height="95" rx="14" fill="url(#cardGrad1)" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+    <rect x="0" y="110" width="220" height="28" rx="14" fill="#1A4A6B"/>
+    <rect x="0" y="126" width="220" height="12" rx="0" fill="#1A4A6B"/>
+    <text x="110" y="129" text-anchor="middle" style="font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">SOA</text>
+    <text x="15" y="158" class="chip">Idea:</text>
+    <text x="70" y="158" class="small">Fat services + ESB</text>
+    <text x="15" y="178" class="chip">Watch out:</text>
+    <text x="82" y="178" class="small">Heavy middleware</text>
+    <text x="15" y="196" class="chip">Fits:</text>
+    <text x="55" y="196" class="small">Enterprise integration</text>
+
+    <rect x="235" y="110" width="220" height="95" rx="14" fill="url(#cardGrad1)" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+    <rect x="235" y="110" width="220" height="28" rx="14" fill="#1A4A6B"/>
+    <rect x="235" y="126" width="220" height="12" rx="0" fill="#1A4A6B"/>
+    <text x="345" y="129" text-anchor="middle" style="font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">Microservices</text>
+    <text x="250" y="158" class="chip">Idea:</text>
+    <text x="305" y="158" class="small">Services by capability + own data</text>
+    <text x="250" y="178" class="chip">Watch out:</text>
+    <text x="317" y="178" class="small">Operational complexity</text>
+    <text x="250" y="196" class="chip">Fits:</text>
+    <text x="290" y="196" class="small">Independent scaling and deployment</text>
+
+    <rect x="470" y="110" width="220" height="95" rx="14" fill="url(#cardGrad1)" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+    <rect x="470" y="110" width="220" height="28" rx="14" fill="#1A4A6B"/>
+    <rect x="470" y="126" width="220" height="12" rx="0" fill="#1A4A6B"/>
+    <text x="580" y="129" text-anchor="middle" style="font:700 13px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">Event-Driven</text>
+    <text x="485" y="158" class="chip">Idea:</text>
+    <text x="540" y="158" class="small">Reaction to events (async)</text>
+    <text x="485" y="178" class="chip">Watch out:</text>
+    <text x="552" y="178" class="small">Eventual consistency</text>
+    <text x="485" y="196" class="chip">Fits:</text>
+    <text x="525" y="196" class="small">Decoupling, traffic spikes</text>
+  </g>
+
+
+<!-- ════════════ BLOQUE 3: TRADE-OFF ════════════ -->
+<rect x="70" y="710" width="690" height="165" rx="16"
+      fill="url(#warningGrad)" stroke="#E8C57A"/>
+
+<text x="95" y="737" class="cardTitle">
+  Microservices — split by business capability
+</text>
+
+<text x="95" y="758" class="body">
+  Each service owns its data — no shared DB — communication via contracts (REST/gRPC/events)
+</text>
+
+<!-- Microservices diagram -->
+<g transform="translate(95 775)">
+
+  <!-- API Gateway -->
+  <rect x="0" y="0" width="120" height="30" rx="8" fill="#1A4A6B"/>
+  <text x="60" y="20" text-anchor="middle" class="tag">
+    API Gateway
+  </text>
+
+  <!-- Main line -->
+  <line x1="60" y1="30" x2="60" y2="43"
+        stroke="#1A4A6B" stroke-width="2"/>
+
+  <line x1="60" y1="43" x2="570" y2="43"
+        stroke="#1A4A6B" stroke-width="2"/>
+
+  <!-- Orders connection -->
+  <line x1="195" y1="43" x2="195" y2="50"
+        stroke="#1A4A6B" stroke-width="2"/>
+
+  <!-- Payments connection -->
+  <line x1="400" y1="43" x2="400" y2="50"
+        stroke="#1A4A6B" stroke-width="2"/>
+
+  <!-- Inventory connection -->
+  <line x1="570" y1="43" x2="570" y2="50"
+        stroke="#1A4A6B" stroke-width="2"/>
+
+  <!-- Service 1: Orders -->
+  <rect x="125" y="50" width="140" height="28" rx="8"
+        fill="#278B63"/>
+  <text x="195" y="69" text-anchor="middle" class="tag">
+    Orders
+  </text>
+
+  <rect x="125" y="80" width="140" height="18" rx="4"
+        fill="#E8F4EE"/>
+  <text x="195" y="93" text-anchor="middle" class="small">
+    orders DB
+  </text>
+
+  <!-- Service 2: Payments -->
+  <rect x="330" y="50" width="140" height="28" rx="8"
+        fill="#278B63"/>
+  <text x="400" y="69" text-anchor="middle" class="tag">
+    Payments
+  </text>
+
+  <rect x="330" y="80" width="140" height="18" rx="4"
+        fill="#E8F4EE"/>
+  <text x="400" y="93" text-anchor="middle" class="small">
+    payments DB
+  </text>
+
+  <!-- Service 3: Inventory -->
+  <rect x="500" y="50" width="140" height="28" rx="8"
+        fill="#278B63"/>
+  <text x="570" y="69" text-anchor="middle" class="tag">
+    Inventory
+  </text>
+
+  <rect x="500" y="80" width="140" height="18" rx="4"
+        fill="#E8F4EE"/>
+  <text x="570" y="93" text-anchor="middle" class="small">
+    inventory DB
+  </text>
+
+</g>
+
+
+  <!-- ════════════ BLOQUE 5: ERRORES COMUNES ════════════ -->
+  <rect x="70" y="870" width="690" height="80" rx="16" fill="#FDF2F2" stroke="#E8A0A0"/>
+  <text x="95" y="897" class="cardTitle" fill="#B91C1C;">Common mistakes</text>
+  <text x="95" y="920" class="body">X Splitting by technical layer ("UI service", "DB service") instead of by capability</text>
+  <text x="95" y="940" class="body">X Sharing a database between services → distributed monolith</text>
+
+  <!-- ════════════ COLUMNA DERECHA: DECISIÓN Y ADR ════════════ -->
+  <rect x="820" y="175" width="740" height="680" rx="24" fill="url(#sessionGrad)" stroke="#B9D9EA" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="864" cy="225" r="25" fill="#1A4A6B"/>
+  <text x="864" y="232" text-anchor="middle" style="font:700 20px Inter,Segoe UI,Arial,sans-serif;fill:#FFFFFF;">2</text>
+  <text x="905" y="220" class="sectionTitle">Architectural Decision</text>
+  <text x="905" y="248" class="sectionSub">Justify, document, move forward</text>
+
+  <!-- ADR -->
+  <rect x="850" y="280" width="680" height="200" rx="16" fill="#FFFFFF" stroke="#C7DDE9" filter="url(#shadowSmall)"/>
+  <text x="875" y="310" class="cardTitle">ADR — Architecture Decision Record</text>
+  <text x="875" y="335" class="body">Format: adr-NNN.md</text>
+  
+  <g transform="translate(875 350)">
+    <rect x="0" y="0" width="310" height="32" rx="6" fill="#F0F7FC"/>
+    <text x="15" y="21" style="font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">Context</text>
+    <text x="80" y="21" class="small">Forces and constraints</text>
+
+    <rect x="0" y="40" width="310" height="32" rx="6" fill="#F0F7FC"/>
+    <text x="15" y="61" style="font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">Decision</text>
+    <text x="80" y="61" class="small">What is chosen</text>
+
+    <rect x="0" y="80" width="310" height="32" rx="6" fill="#F0F7FC"/>
+    <text x="15" y="101" style="font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">Alternatives</text>
+    <text x="95" y="101" class="small">Rejected + reason</text>
+
+    <rect x="325" y="0" width="310" height="32" rx="6" fill="#F0F7FC"/>
+    <text x="340" y="21" style="font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">Consequences</text>
+    <text x="420" y="21" class="small">Benefits + costs</text>
+
+    <rect x="325" y="40" width="310" height="72" rx="6" fill="#FFF7E8"/>
+    <text x="340" y="63" style="font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#B8730E;">Subsequent change</text>
+    <text x="340" y="85" class="small">New ADR that replaces the previous one</text>
+    <text x="340" y="103" class="small">(history is preserved)</text>
+  </g>
+
+  <!-- Decisión final -->
+  <rect x="850" y="500" width="680" height="110" rx="16" fill="#E2EDF6" stroke="#8CBFD3"/>
+  <text x="875" y="530" class="cardTitle">Make the decision</text>
+  <text x="875" y="555" class="body">Microservice if it meets BOTH conditions:</text>
+  <g transform="translate(875 572)">
+    <rect x="0" y="0" width="280" height="36" rx="10" fill="#FFFFFF" stroke="#8CBFD3"/>
+    <text x="140" y="24" text-anchor="middle" class="chip">Real boundary (bounded context)</text>
+    <text x="295" y="24" style="font:700 20px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">+</text>
+    <rect x="315" y="0" width="280" height="36" rx="10" fill="#FFFFFF" stroke="#8CBFD3"/>
+    <text x="455" y="24" text-anchor="middle" class="chip">Real need to scale/deploy</text>
+    <text x="610" y="24" style="font:700 20px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">→</text>
+    <rect x="630" y="0" width="60" height="36" rx="10" fill="#1A4A6B"/>
+    <text x="660" y="24" text-anchor="middle" class="tag">Extract</text>
+  </g>
+
+  <!-- Principio clave -->
+  <rect x="850" y="630" width="680" height="60" rx="16" fill="#F5F9FC" stroke="#C7DDE9"/>
+  <text x="875" y="657" style="font:700 16px Inter,Segoe UI,Arial,sans-serif;fill:#1A4A6B;">Key principle</text>
+  <text x="875" y="680" class="body">Split for a reason, not for fashion. If there is no real boundary + scaling need → modular monolith.</text>
+
+  <!-- Advertencia final -->
+  <rect x="850" y="710" width="680" height="145" rx="16" fill="#FFF7E8" stroke="#E8C57A"/>
+  <text x="875" y="740" class="cardTitle">The trap that kills projects</text>
+  <text x="875" y="765" class="body" style="font-weight:600;">Distributed monolith</text>
+  <text x="875" y="788" class="body">You split into services, but they share a database and must be deployed together.</text>
+  <text x="875" y="810" class="body">You paid the price of the network and kept all the coupling.</text>
+  <text x="875" y="832" class="small">If services cannot be deployed independently, they are not microservices.</text>
+
+  <!-- ════════════ PARTE INFERIOR: FLUJO RESUMEN ════════════ -->
+  <rect x="40" y="965" width="1520" height="120" rx="24" fill="#FFFFFF" stroke="#D5DEE7" stroke-width="2" filter="url(#shadow)"/>
+  <text x="800" y="1002" text-anchor="middle" class="sectionTitle">Architectural decision flow</text>
+
+  <g transform="translate(100 1025)">
+    <rect x="0" y="0" width="190" height="44" rx="12" fill="#1A4A6B"/>
+    <text x="95" y="27" text-anchor="middle" class="flowTitle">1. Understand the domain</text>
+    <line x1="190" y1="22" x2="235" y2="22" stroke="#64748B" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="245" y="0" width="190" height="44" rx="12" fill="#1A4A6B"/>
+    <text x="340" y="27" text-anchor="middle" class="flowTitle">2. Define boundaries</text>
+    <line x1="435" y1="22" x2="480" y2="22" stroke="#64748B" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="490" y="0" width="190" height="44" rx="12" fill="#4A7C9B"/>
+    <text x="585" y="27" text-anchor="middle" class="flowTitle">3. Compare styles</text>
+    <line x1="680" y1="22" x2="725" y2="22" stroke="#64748B" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="735" y="0" width="190" height="44" rx="12" fill="#278B63"/>
+    <text x="830" y="27" text-anchor="middle" class="flowTitle">4. Make decision</text>
+    <line x1="925" y1="22" x2="970" y2="22" stroke="#64748B" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="980" y="0" width="190" height="44" rx="12" fill="#B8730E"/>
+    <text x="1075" y="27" text-anchor="middle" class="flowTitle">5. Document ADR</text>
+    <line x1="1170" y1="22" x2="1215" y2="22" stroke="#64748B" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="1225" y="0" width="160" height="44" rx="12" fill="#0F2940"/>
+    <text x="1305" y="27" text-anchor="middle" class="flowTitle">6. Backlog</text>
+  </g>
+
+  <!-- Pie de página -->
+  <rect x="0" y="1085" width="1600" height="65" fill="#0F2940"/>
+  <text x="80" y="1117" class="footerTitle">Principle: split by capability, not by technical layer</text>
+  <text x="80" y="1140" class="footerBody">A good architecture makes boundaries, contracts, trade-offs and reasons for decisions explicit.</text>
+  <text x="1515" y="1128" text-anchor="end" style="font:600 13px Inter,Segoe UI,Arial,sans-serif;fill:#B9CEDD;">Source: OVA CORHUILA · Week 2 · Distributed Architectures</text>
+</svg>
