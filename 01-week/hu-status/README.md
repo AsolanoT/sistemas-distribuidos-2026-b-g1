@@ -4,7 +4,7 @@
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
 - FULL_NAME: Angel Gustavo Solano Trujillo
 - GITHUB_USER: AsolanoT
-- TEAM: Group - PRJ-GESTION-VENTAS-V1
+- TEAM: Group - SynkroTech SAS
 - SPRINT_GOAL: Convert the sales management product brief into a set of functional and non-functional requirements and a preliminary hexagonal microservices architecture (Clients, Products, Sales, Reports).
 <!-- CONFIG-END -->
 

@@ -1,11 +1,11 @@
 
-# Weekly status - Week 01
+# Weekly status - Week 02
 
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
 - FULL_NAME: Angel Gustavo Solano Trujillo
 - GITHUB_USER: AsolanoT
-- TEAM: Group - PRJ-GESTION-VENTAS-V1
-- SPRINT_GOAL: Convert the sales management product brief into a set of functional and non-functional requirements and a preliminary hexagonal microservices architecture (Clients, Products, Sales, Reports).
+- TEAM: Group - SynkroTech SAS
+- SPRINT_GOAL: Define and document the initial architecture decision (ADR-001) for the sales management system.
 <!-- CONFIG-END -->
 
 ## Team Members
@@ -21,22 +21,23 @@
 | HU ID | Title | Status (todo/doing/done) | Evidence (PR or commit URL) |
 |---|---|---|---|
 | HU-ARQ-001 | Define functional and non-functional requirements for the sales management system and create the preliminary architecture | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/52529468ff56c3625791a0c35281cedaab25828a |
-| HU-ADR-02  |  Formalize the Architecture Decision | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/52529468ff56c3625791a0c35281cedaab25828a |
+| HU-ADR-02  |  Formalize the Architecture Decision | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/02-week/hu-status/adr-001-architecture.md |
 
 ## 2. My individual contribution
-- I wrote the Requirements section (RF-01 to RF-10, RNF-01 to RNF-07) covering clients, products, sales, reports, and JWT authentication for the sales management system.
-- I defined the preliminary architecture: 4 independent microservices (Clients and Sales in Java/Spring Boot, Products and Reports in Go), each with its own PostgreSQL database, exposed through a React frontend.
-- I specified the hexagonal layer scheme (Ports and Adapters) to apply within each microservice: domain, application (use cases/ports), and infrastructure (REST controllers, PostgreSQL repositories, HTTP clients).
-- I described the service communication strategy: synchronous REST/HTTP for the initial phase (Sales → Clients, Sales → Products, Reports → Sales).
+- I wrote the Decision section of ADR-001, formalizing the initial architecture: 4 independent microservices under hexagonal architecture, each with its own PostgreSQL database.
+- I defined Auth (Java/Spring Boot) as the service responsible for issuing and validating JWT (RS256, asymmetric signing) and managing roles.
+- I specified Clients (Java/Spring Boot), Products (Go), and Sales (Go) — the latter absorbing Reports as an internal module instead of a standalone service.
+- I established the inter-service communication strategy: synchronous REST calls (Sales → Clients, Sales → Products), with local JWT validation via public key in each service, avoiding a call to Auth on every request.
 
 ## 3. Blockers and risks
-- There is not yet a shared folder template (domain/application/infrastructure) for Java and Go, so consistency across services is not guaranteed until it is defined.
-- The choice between synchronous HTTP calls and event-based communication for the Reports service is still pending and depends on available time after the main services are running.
+- The public/private key distribution and rotation mechanism for JWT validation across the 3 non-Auth services has not been implemented or tested yet.
+- Sales concentrates more responsibility than ideal (orchestrates Clients, Products, and Reports), which could become a bottleneck as the service grows in complexity.
+- The synchronous REST communication between services introduces temporal coupling; a Products outage would block Sales creation until a fallback strategy is defined.
 
 ## 4. Plan for next week
-- Agree on and publish the base hexagonal folder template for Java (Spring Boot) and Go.
-- Configure repositories for the 4 services and their databases.
-- Start implementing the Clients service (domain + basic CRUD), since it has the lowest risk.
+- Implement and test the JWT public key distribution mechanism between Auth and the other 3 services.
+- Define the Port that isolates the Reports module inside Sales (HU-ARQ-01), so it can be extracted independently in the future without breaking other modules.
+- Support structuring the `docs` repository with the `adr/`, `architecture/`, and `pdr/` folders agreed on for this sprint.
 
 ## 5. Compliance self-check
 - [ ] Conventional Commits - `type(scope): summary`
@@ -47,4 +48,4 @@
 - [x] No secrets; configuration via environment variables
 
 ## 6. Evidence links
-- Contribution to Requirements and Architecture: [`pdr.md`](./pdr.md)
+- Contribution to Architecture Decision: [`adr-001-architecture.md`](./adr-001-architecture.md)
