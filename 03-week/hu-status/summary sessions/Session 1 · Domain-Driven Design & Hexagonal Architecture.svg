@@ -1,0 +1,272 @@
+<svg width="1920" height="1200" viewBox="0 0 1920 1200" xmlns="http://www.w3.org/2000/svg">
+<title>Domain-Driven Design and Hexagonal Architecture</title>
+<desc>Support diagram for a university presentation on tactical DDD (Value Object, Entity, Aggregate, Domain Event) and hexagonal architecture (ports and adapters), including the dependency rule, an anemic-model example, and common mistakes.</desc>
+
+<defs>
+  <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+  </marker>
+  <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/>
+  </marker>
+  <marker id="arrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+  </marker>
+  <marker id="arrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+  </marker>
+  <style>
+    .card { transition: transform 0.15s ease, filter 0.15s ease; }
+    .card:hover { transform: translateY(-4px); filter: drop-shadow(0 8px 14px rgba(15,23,42,0.18)); }
+    .chip:hover .chipBg { stroke-width: 2.5; }
+    text { font-family: 'Segoe UI', Arial, sans-serif; }
+    .mono { font-family: 'Consolas','Menlo',monospace; }
+  </style>
+</defs>
+
+<rect x="0" y="0" width="1920" height="1200" fill="#f6f8fb"/>
+
+<!-- HEADER -->
+<g>
+  <title>Header</title>
+  <text x="960" y="58" text-anchor="middle" font-size="46" font-weight="700" fill="#0f172a">Domain-Driven Design &amp; Hexagonal Architecture</text>
+  <text x="960" y="92" text-anchor="middle" font-size="21" fill="#64748b">A pure domain isolated behind ports and adapters — this semester's two tactical disciplines</text>
+
+  <g font-size="15.5" fill="#1e3a5f">
+    <rect x="150" y="108" width="330" height="38" rx="19" fill="#eaf1fd" stroke="#c7d9f7"/>
+    <text x="315" y="132" text-anchor="middle" font-weight="600">1. Model with tactical DDD</text>
+
+    <rect x="500" y="108" width="380" height="38" rx="19" fill="#eaf1fd" stroke="#c7d9f7"/>
+    <text x="690" y="132" text-anchor="middle" font-weight="600">2. Apply hexagonal architecture</text>
+
+    <rect x="900" y="108" width="380" height="38" rx="19" fill="#eaf1fd" stroke="#c7d9f7"/>
+    <text x="1090" y="132" text-anchor="middle" font-weight="600">3. Keep domain free of I/O</text>
+
+    <rect x="1300" y="108" width="470" height="38" rx="19" fill="#eaf1fd" stroke="#c7d9f7"/>
+    <text x="1535" y="132" text-anchor="middle" font-weight="600">4. Recognize boundary violations</text>
+  </g>
+
+  <line x1="80" y1="162" x2="1840" y2="162" stroke="#dbe3ee" stroke-width="2"/>
+</g>
+
+<!-- NOTE STRIP -->
+<g>
+  <title>Why model the domain</title>
+  <rect x="80" y="178" width="1760" height="54" rx="10" fill="#eaf1fd" stroke="#c7d9f7"/>
+  <circle cx="112" cy="205" r="14" fill="#2563eb"/>
+  <text x="112" y="211" text-anchor="middle" font-size="16" fill="#ffffff" font-weight="700">i</text>
+  <text x="140" y="211" font-size="17.5" fill="#1e3a5f">
+    <tspan font-weight="700">The hard complexity is the BUSINESS, not the plumbing.</tspan>
+    <tspan> DDD protects it in a pure domain with a ubiquitous language — shared by code, tests and conversation.</tspan>
+  </text>
+</g>
+
+<!-- ROW 1 : LEFT - HEXAGONAL DIAGRAM -->
+<g>
+  <title>Hexagonal architecture: ports and adapters</title>
+  <text x="90" y="272" font-size="26" font-weight="700" fill="#0f172a">The hexagon: ports &amp; adapters</text>
+
+  <!-- inbound adapter -->
+  <g class="card">
+    <title>Inbound adapter</title>
+    <rect x="90" y="360" width="200" height="110" rx="10" fill="#2563eb"/>
+    <text x="190" y="410" text-anchor="middle" font-size="19" fill="#ffffff" font-weight="700">HTTP Controller</text>
+    <text x="190" y="434" text-anchor="middle" font-size="14.5" fill="#dbeafe">inbound adapter</text>
+  </g>
+  <text x="190" y="500" text-anchor="middle" font-size="15" fill="#2563eb" font-weight="600">Inbound: drive the app</text>
+
+  <!-- hexagon -->
+  <polygon points="325,415 400,305 550,305 625,415 550,525 400,525"
+           fill="#1e3a5f" stroke="#0f172a" stroke-width="2"/>
+  <text x="475" y="405" text-anchor="middle" font-size="21" fill="#ffffff" font-weight="700">Domain +</text>
+  <text x="475" y="432" text-anchor="middle" font-size="18" fill="#cbd5e1">use cases</text>
+  <text x="305" y="345" text-anchor="middle" font-size="14" fill="#334155" font-weight="600">port in</text>
+  <text x="652" y="345" text-anchor="middle" font-size="14" fill="#334155" font-weight="600">port out</text>
+
+  <line x1="290" y1="415" x2="320" y2="415" stroke="#2563eb" stroke-width="3.5" marker-end="url(#arrowBlue)"/>
+  <line x1="630" y1="415" x2="675" y2="415" stroke="#7c3aed" stroke-width="3.5" marker-end="url(#arrowPurple)"/>
+
+  <!-- outbound adapter -->
+  <g class="card">
+    <title>Outbound adapter</title>
+    <rect x="680" y="360" width="200" height="110" rx="10" fill="#7c3aed"/>
+    <text x="780" y="410" text-anchor="middle" font-size="19" fill="#ffffff" font-weight="700">DB Adapter</text>
+    <text x="780" y="434" text-anchor="middle" font-size="14.5" fill="#ede9fe">outbound adapter</text>
+  </g>
+  <text x="780" y="500" text-anchor="middle" font-size="15" fill="#7c3aed" font-weight="600">Outbound: are driven by it</text>
+
+  <!-- dependency rule -->
+  <rect x="90" y="535" width="790" height="66" rx="10" fill="#ffffff" stroke="#dbe3ee"/>
+  <text x="485" y="562" text-anchor="middle" font-size="16.5" font-weight="700" fill="#0f172a">Dependency rule</text>
+  <text x="485" y="586" text-anchor="middle" font-size="16" fill="#334155">adapters → application → domain</text>
+  <g>
+    <line x1="700" y1="568" x2="670" y2="568" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+    <text x="735" y="573" font-size="13.5" fill="#dc2626" font-weight="700">never reverse</text>
+  </g>
+</g>
+
+<!-- ROW 1: RIGHT - TACTICAL DDD BLOCKS -->
+<g>
+  <title>Tactical DDD building blocks</title>
+  <text x="980" y="272" font-size="26" font-weight="700" fill="#0f172a">Tactical DDD building blocks</text>
+
+  <!-- Card: Value Object -->
+  <g class="card">
+    <title>Value Object</title>
+    <rect x="980" y="300" width="410" height="150" rx="12" fill="#ffffff" stroke="#dbe3ee" stroke-width="1.5"/>
+    <polygon points="1010,325 1024,339 1010,353 996,339" fill="#0ea5e9"/>
+    <text x="1042" y="345" font-size="20" font-weight="700" fill="#0f172a">Value Object</text>
+    <text x="1000" y="373" font-size="15.5" fill="#334155">• No identity</text>
+    <text x="1000" y="395" font-size="15.5" fill="#334155">• Equality by value</text>
+    <text x="1000" y="417" font-size="15.5" fill="#334155">• Immutable</text>
+    <rect x="1000" y="426" width="180" height="24" rx="12" fill="#e0f2fe"/>
+    <text x="1090" y="443" text-anchor="middle" font-size="13" fill="#075985" font-weight="600">Money · Address</text>
+  </g>
+
+  <!-- Card: Entity -->
+  <g class="card">
+    <title>Entity</title>
+    <rect x="1440" y="300" width="410" height="150" rx="12" fill="#ffffff" stroke="#dbe3ee" stroke-width="1.5"/>
+    <circle cx="1470" cy="336" r="13" fill="none" stroke="#2563eb" stroke-width="3"/>
+    <circle cx="1470" cy="336" r="4" fill="#2563eb"/>
+    <text x="1500" y="343" font-size="20" font-weight="700" fill="#0f172a">Entity</text>
+    <text x="1460" y="373" font-size="15.5" fill="#334155">• Has identity</text>
+    <text x="1460" y="395" font-size="15.5" fill="#334155">• Persists through change</text>
+    <rect x="1460" y="410" width="200" height="24" rx="12" fill="#dbeafe"/>
+    <text x="1560" y="427" text-anchor="middle" font-size="13" fill="#1e3a8a" font-weight="600">Order · Customer</text>
+  </g>
+
+  <!-- Card: Aggregate -->
+  <g class="card">
+    <title>Aggregate root</title>
+    <rect x="980" y="470" width="410" height="150" rx="12" fill="#fff8ec" stroke="#f0c869" stroke-width="1.5"/>
+    <circle cx="1010" cy="503" r="6" fill="#94a3b8"/>
+    <circle cx="1028" cy="512" r="6" fill="#94a3b8"/>
+    <circle cx="1016" cy="524" r="9" fill="#d97706" stroke="#7c4a03" stroke-width="1.5"/>
+    <text x="1042" y="515" font-size="19" font-weight="700" fill="#0f172a">Aggregate (root)</text>
+    <text x="1000" y="545" font-size="15" fill="#334155">• Only consistency boundary</text>
+    <text x="1000" y="565" font-size="15" fill="#334155">• Holds entities + value objects</text>
+    <text x="1000" y="585" font-size="15" fill="#334155">• Repository = port; saves the whole</text>
+  </g>
+
+  <!-- Card: Domain Event -->
+  <g class="card">
+    <title>Domain Event</title>
+    <rect x="1440" y="470" width="410" height="150" rx="12" fill="#ffffff" stroke="#dbe3ee" stroke-width="1.5"/>
+    <polygon points="1466,493 1478,493 1472,508 1482,508 1462,532 1468,513 1458,513" fill="#f59e0b"/>
+    <text x="1500" y="513" font-size="20" font-weight="700" fill="#0f172a">Domain Event</text>
+    <text x="1460" y="543" font-size="15.5" fill="#334155">• Immutable, past tense</text>
+    <text x="1460" y="565" font-size="15.5" fill="#334155">• Currency between contexts</text>
+    <rect x="1460" y="580" width="220" height="24" rx="12" fill="#fef3c7"/>
+    <text x="1570" y="597" text-anchor="middle" font-size="13" fill="#92400e" font-weight="600">"OrderConfirmed"</text>
+  </g>
+</g>
+
+<!-- ROW 2: LEFT - CLEAN RULE -->
+<g>
+  <title>Rule: the domain imports nothing from infrastructure</title>
+  <text x="90" y="672" font-size="26" font-weight="700" fill="#0f172a">The rule that keeps it clean</text>
+
+  <!-- blocked infra visual -->
+  <rect x="90" y="700" width="350" height="220" rx="12" fill="#ffffff" stroke="#dbe3ee" stroke-width="1.5"/>
+  <rect x="115" y="800" width="300" height="90" rx="8" fill="#1e3a5f"/>
+  <text x="265" y="840" text-anchor="middle" font-size="18" fill="#ffffff" font-weight="700">domain/</text>
+  <text x="265" y="862" text-anchor="middle" font-size="13" fill="#cbd5e1">zero infrastructure imports</text>
+
+  <g font-size="13.5" fill="#7f1d1d" font-weight="600">
+    <rect x="115" y="716" width="86" height="30" rx="15" fill="#fdecec" stroke="#f3b4b4"/>
+    <text x="158" y="736" text-anchor="middle">JPA / ORM</text>
+    <rect x="211" y="716" width="60" height="30" rx="15" fill="#fdecec" stroke="#f3b4b4"/>
+    <text x="241" y="736" text-anchor="middle">pgx</text>
+    <rect x="281" y="716" width="128" height="30" rx="15" fill="#fdecec" stroke="#f3b4b4"/>
+    <text x="345" y="736" text-anchor="middle">HTTP types</text>
+  </g>
+  <line x1="158" y1="746" x2="200" y2="796" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="241" y1="746" x2="255" y2="796" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="345" y1="746" x2="310" y2="796" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3"/>
+  <circle cx="265" cy="778" r="16" fill="#dc2626"/>
+  <text x="265" y="784" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="700">✕</text>
+
+  <!-- code snippet -->
+  <rect x="470" y="700" width="460" height="220" rx="12" fill="#0f172a"/>
+  <text class="mono" x="488" y="728" font-size="12.5" fill="#64748b">// pure domain</text>
+  <text class="mono" x="488" y="748" font-size="12.5" fill="#7dd3fc">package domain.orders;</text>
+  <text class="mono" x="488" y="772" font-size="12.5" fill="#64748b">// the PORT</text>
+  <text class="mono" x="488" y="792" font-size="12.5" fill="#a5b4fc">interface OrderRepository {</text>
+  <text class="mono" x="488" y="812" font-size="12.5" fill="#e2e8f0">&#160;&#160;Optional&lt;Order&gt; byId(id);</text>
+  <text class="mono" x="488" y="832" font-size="12.5" fill="#e2e8f0">&#160;&#160;void save(Order order);</text>
+  <text class="mono" x="488" y="850" font-size="11.5" fill="#64748b">&#160;&#160;// saves the whole aggregate</text>
+  <text class="mono" x="488" y="872" font-size="12.5" fill="#a5b4fc">}</text>
+  <text x="488" y="902" font-size="13" fill="#cbd5e1">Repository = interface in the domain,</text>
+  <text x="488" y="918" font-size="13" fill="#cbd5e1">implemented in infrastructure.</text>
+</g>
+
+<!-- ROW 2: RIGHT - ANEMIC MODEL SCENARIO -->
+<g>
+  <title>Scenario: the anemic model</title>
+  <text x="980" y="672" font-size="26" font-weight="700" fill="#0f172a">A path you will face: the anemic model</text>
+
+  <rect x="980" y="700" width="850" height="90" rx="10" fill="#fdecec" stroke="#f3b4b4" stroke-width="1.5"/>
+  <text x="1002" y="723" font-size="16.5" font-weight="700" fill="#7f1d1d">Problem</text>
+  <text x="1002" y="746" font-size="15" fill="#7f1d1d">• Order as public getters/setters; rules live in services and controllers</text>
+  <text x="1002" y="768" font-size="15" fill="#7f1d1d">• The same rule duplicated in 3 places — one copy is wrong</text>
+
+  <line x1="1405" y1="792" x2="1405" y2="822" stroke="#475569" stroke-width="3" marker-end="url(#arrowGray)"/>
+  <text x="1440" y="812" font-size="15" fill="#334155" font-weight="700">Fix</text>
+
+  <rect x="980" y="828" width="850" height="90" rx="10" fill="#eafaf0" stroke="#a9e3bf" stroke-width="1.5"/>
+  <text x="1002" y="851" font-size="16.5" font-weight="700" fill="#14532d">Fix</text>
+  <text x="1002" y="874" font-size="15" fill="#14532d">• order.confirm() throws if empty; fields become private</text>
+  <text x="1002" y="896" font-size="15" fill="#14532d">• Invariants move into the aggregate; the service just orchestrates</text>
+
+  <text x="980" y="943" font-size="15.5" fill="#334155" font-style="italic">The domain becomes the single source of truth — other services trust it.</text>
+</g>
+
+<!-- ROW 3: COMMON MISTAKES -->
+<g>
+  <title>Common mistakes</title>
+  <text x="90" y="982" font-size="22" font-weight="700" fill="#0f172a">Common mistakes</text>
+
+  <g class="chip">
+    <title>Anemic domain</title>
+    <rect class="chipBg" x="90" y="998" width="420" height="56" rx="10" fill="#ffffff" stroke="#f3b4b4" stroke-width="1.5"/>
+    <polygon points="112,1030 122,1012 132,1030" fill="#dc2626"/>
+    <text x="122" y="1027" text-anchor="middle" font-size="11" fill="#ffffff" font-weight="700">!</text>
+    <text x="145" y="1031" font-size="14.5" fill="#334155">Anemic domain: data with no behavior</text>
+  </g>
+
+  <g class="chip">
+    <title>Infrastructure leaking into domain/</title>
+    <rect class="chipBg" x="530" y="998" width="420" height="56" rx="10" fill="#ffffff" stroke="#f3b4b4" stroke-width="1.5"/>
+    <polygon points="552,1030 562,1012 572,1030" fill="#dc2626"/>
+    <text x="562" y="1027" text-anchor="middle" font-size="11" fill="#ffffff" font-weight="700">!</text>
+    <text x="585" y="1031" font-size="14.5" fill="#334155">Infra types leaking into domain/ (JPA/ORM/HTTP)</text>
+  </g>
+
+  <g class="chip">
+    <title>Aggregates poorly sized</title>
+    <rect class="chipBg" x="970" y="998" width="420" height="56" rx="10" fill="#ffffff" stroke="#f3b4b4" stroke-width="1.5"/>
+    <polygon points="992,1030 1002,1012 1012,1030" fill="#dc2626"/>
+    <text x="1002" y="1027" text-anchor="middle" font-size="11" fill="#ffffff" font-weight="700">!</text>
+    <text x="1025" y="1031" font-size="14.5" fill="#334155">Aggregates too big or too small</text>
+  </g>
+
+  <g class="chip">
+    <title>Mutating children without going through the root</title>
+    <rect class="chipBg" x="1410" y="998" width="420" height="56" rx="10" fill="#ffffff" stroke="#f3b4b4" stroke-width="1.5"/>
+    <polygon points="1432,1030 1442,1012 1452,1030" fill="#dc2626"/>
+    <text x="1442" y="1027" text-anchor="middle" font-size="11" fill="#ffffff" font-weight="700">!</text>
+    <text x="1465" y="1031" font-size="13.5" fill="#334155">Mutating a child, bypassing the root</text>
+  </g>
+</g>
+
+<!-- KEY TAKEAWAY -->
+<g>
+  <title>Key takeaway</title>
+  <rect x="80" y="1075" width="1760" height="105" rx="14" fill="#0f172a"/>
+  <text x="960" y="1115" text-anchor="middle" font-size="19" font-weight="700" fill="#7dd3fc">KEY TAKEAWAY</text>
+  <text x="960" y="1148" text-anchor="middle" font-size="18" fill="#e2e8f0">The domain doesn't know about the outside world: dependencies always point inward —</text>
+  <text x="960" y="1170" text-anchor="middle" font-size="18" fill="#e2e8f0">adapters → application → domain, never the reverse.</text>
+</g>
+
+</svg>

@@ -1,0 +1,228 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="aBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+    <marker id="aRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+    <marker id="aGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16a34a"/></marker>
+    <marker id="aOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ea580c"/></marker>
+    <marker id="aGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+  </defs>
+
+  <!-- BACKGROUND -->
+  <rect x="0" y="0" width="1920" height="1080" fill="#f5f7fb"/>
+
+  <!-- HEADER -->
+  <rect x="0" y="0" width="1920" height="150" fill="#10233f"/>
+  <text x="60" y="60" fill="#93c5fd" font-size="18" font-weight="bold" letter-spacing="2">WEEK 3 · SESSION 2 · PLANNING</text>
+  <text x="60" y="108" fill="#ffffff" font-size="42" font-weight="bold">Service design, data ownership and contracts</text>
+  <text x="60" y="136" fill="#cbd5e1" font-size="20">From bounded contexts to concrete services: who owns what, what each one promises, how they talk without leaking</text>
+
+  <!-- ===================== ROW 1 ===================== -->
+
+  <!-- CELL 1,1 — OWNERSHIP -->
+  <g transform="translate(60,170)">
+    <rect x="0" y="0" width="580" height="345" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="0" y="0" width="580" height="7" rx="3" fill="#2563eb"/>
+    <circle cx="42" cy="46" r="24" fill="#2563eb"/>
+    <text x="42" y="54" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="bold">1</text>
+    <text x="78" y="42" fill="#10233f" font-size="23" font-weight="bold">One owner per data</text>
+    <text x="78" y="64" fill="#64748b" font-size="14" font-style="italic">The golden rule of service design</text>
+    <line x1="20" y1="78" x2="560" y2="78" stroke="#e2e8f0" stroke-width="2"/>
+
+    <text x="290" y="96" text-anchor="middle" fill="#334155" font-size="11" font-weight="bold">GET /stock/{id}  (contract)</text>
+    <rect x="20" y="100" width="240" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="140" y="130" text-anchor="middle" fill="#10233f" font-size="16" font-weight="bold">Orders service</text>
+    <rect x="320" y="100" width="240" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="440" y="130" text-anchor="middle" fill="#10233f" font-size="16" font-weight="bold">Inventory service</text>
+    <line x1="262" y1="125" x2="318" y2="125" stroke="#2563eb" stroke-width="2.5" marker-end="url(#aBlue)"/>
+
+    <path d="M140,150 L140,183" stroke="#2563eb" stroke-width="2.5" marker-end="url(#aBlue)"/>
+    <path d="M440,150 L440,183" stroke="#2563eb" stroke-width="2.5" marker-end="url(#aBlue)"/>
+    <ellipse cx="140" cy="187" rx="45" ry="10" fill="#eef2ff" stroke="#2563eb"/>
+    <rect x="95" y="187" width="90" height="40" fill="#eef2ff" stroke="#2563eb" stroke-width="1.5"/>
+    <ellipse cx="140" cy="227" rx="45" ry="10" fill="#eef2ff" stroke="#2563eb"/>
+    <line x1="95" y1="187" x2="95" y2="227" stroke="#2563eb"/>
+    <line x1="185" y1="187" x2="185" y2="227" stroke="#2563eb"/>
+    <text x="140" y="253" text-anchor="middle" fill="#334155" font-size="13" font-weight="bold">orders db</text>
+
+    <ellipse cx="440" cy="187" rx="45" ry="10" fill="#eef2ff" stroke="#2563eb"/>
+    <rect x="395" y="187" width="90" height="40" fill="#eef2ff" stroke="#2563eb" stroke-width="1.5"/>
+    <ellipse cx="440" cy="227" rx="45" ry="10" fill="#eef2ff" stroke="#2563eb"/>
+    <line x1="395" y1="187" x2="395" y2="227" stroke="#2563eb"/>
+    <line x1="485" y1="187" x2="485" y2="227" stroke="#2563eb"/>
+    <text x="440" y="253" text-anchor="middle" fill="#334155" font-size="13" font-weight="bold">inventory db</text>
+
+    <path d="M215,150 C 300,175 340,175 400,187" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" fill="none" marker-end="url(#aRed)"/>
+    <text x="300" y="172" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">✗ no direct DB reads</text>
+
+    <text x="290" y="322" text-anchor="middle" fill="#334155" font-size="14" font-style="italic">Others ask via contract, never read your DB</text>
+  </g>
+
+  <!-- CELL 1,2 — CONTRACTS -->
+  <g transform="translate(670,170)">
+    <rect x="0" y="0" width="580" height="345" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="0" y="0" width="580" height="7" rx="3" fill="#0d9488"/>
+    <circle cx="42" cy="46" r="24" fill="#0d9488"/>
+    <text x="42" y="54" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="bold">2</text>
+    <text x="78" y="42" fill="#10233f" font-size="23" font-weight="bold">The contract is the promise</text>
+    <text x="78" y="64" fill="#64748b" font-size="14" font-style="italic">Method, request, response and errors — versioned</text>
+    <line x1="20" y1="78" x2="560" y2="78" stroke="#e2e8f0" stroke-width="2"/>
+
+    <rect x="20" y="95" width="540" height="100" rx="8" fill="#0f172a"/>
+    <text x="35" y="118" fill="#5eead4" font-size="13" font-weight="bold">SYNC · REST / gRPC</text>
+    <text x="35" y="142" fill="#e2e8f0" font-size="14" font-family="Consolas, Menlo, monospace">GET /api/v1/stock/{sku}</text>
+    <text x="35" y="163" fill="#86efac" font-size="14" font-family="Consolas, Menlo, monospace">200 → {"{"} available: 42 {"}"}</text>
+    <text x="35" y="184" fill="#fca5a5" font-size="14" font-family="Consolas, Menlo, monospace">404 → {"{"} error: NOT_FOUND {"}"}</text>
+
+    <rect x="20" y="205" width="540" height="65" rx="8" fill="#0f172a"/>
+    <text x="35" y="228" fill="#99f6e4" font-size="13" font-weight="bold">ASYNC · DOMAIN EVENT</text>
+    <text x="35" y="252" fill="#e2e8f0" font-size="14" font-family="Consolas, Menlo, monospace">StockReserved → others subscribe</text>
+
+    <text x="290" y="298" text-anchor="middle" fill="#0d9488" font-size="14" font-style="italic" font-weight="bold">Sync = need a decision now</text>
+    <text x="290" y="320" text-anchor="middle" fill="#0d9488" font-size="14" font-style="italic" font-weight="bold">Async = no answer needed right away</text>
+  </g>
+
+  <!-- CELL 1,3 — ACL -->
+  <g transform="translate(1280,170)">
+    <rect x="0" y="0" width="580" height="345" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="0" y="0" width="580" height="7" rx="3" fill="#ea580c"/>
+    <circle cx="42" cy="46" r="24" fill="#ea580c"/>
+    <text x="42" y="54" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="bold">3</text>
+    <text x="78" y="42" fill="#10233f" font-size="23" font-weight="bold">Anti-Corruption Layer</text>
+    <text x="78" y="64" fill="#64748b" font-size="14" font-style="italic">Protects your model from external models</text>
+    <line x1="20" y1="78" x2="560" y2="78" stroke="#e2e8f0" stroke-width="2"/>
+
+    <rect x="15" y="140" width="150" height="85" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="90" y="168" text-anchor="middle" fill="#334155" font-size="13" font-weight="bold">External /</text>
+    <text x="90" y="185" text-anchor="middle" fill="#334155" font-size="13" font-weight="bold">legacy system</text>
+    <text x="90" y="210" text-anchor="middle" fill="#dc2626" font-size="13" font-family="Consolas, Menlo, monospace">cust_nm</text>
+
+    <line x1="165" y1="182" x2="222" y2="182" stroke="#64748b" stroke-width="2.5" marker-end="url(#aGray)"/>
+
+    <rect x="225" y="128" width="130" height="110" rx="10" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+    <text x="290" y="175" text-anchor="middle" fill="#9a3412" font-size="20" font-weight="bold">ACL</text>
+    <text x="290" y="196" text-anchor="middle" fill="#9a3412" font-size="12">(translator)</text>
+
+    <line x1="358" y1="182" x2="412" y2="182" stroke="#64748b" stroke-width="2.5" marker-end="url(#aGray)"/>
+
+    <rect x="415" y="140" width="150" height="85" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="490" y="168" text-anchor="middle" fill="#10233f" font-size="13" font-weight="bold">Your domain</text>
+    <text x="490" y="185" text-anchor="middle" fill="#10233f" font-size="13" font-weight="bold">(Orders)</text>
+    <text x="490" y="210" text-anchor="middle" fill="#16a34a" font-size="13" font-family="Consolas, Menlo, monospace">customerName</text>
+
+    <text x="290" y="262" text-anchor="middle" fill="#334155" font-size="15" font-family="Consolas, Menlo, monospace">cust_nm  →  customerName</text>
+    <text x="290" y="292" text-anchor="middle" fill="#64748b" font-size="14" font-style="italic">Their quirks die inside the ACL</text>
+  </g>
+
+  <!-- ===================== ROW 2 ===================== -->
+
+  <!-- CELL 2,1 — VERTICAL SLICE -->
+  <g transform="translate(60,545)">
+    <rect x="0" y="0" width="580" height="345" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="0" y="0" width="580" height="7" rx="3" fill="#16a34a"/>
+    <circle cx="42" cy="46" r="24" fill="#16a34a"/>
+    <text x="42" y="54" text-anchor="middle" fill="#ffffff" font-size="22" font-weight="bold">4</text>
+    <text x="78" y="42" fill="#10233f" font-size="23" font-weight="bold">Vertical slice for MVP 1</text>
+    <text x="78" y="64" fill="#64748b" font-size="14" font-style="italic">End to end, not by horizontal layers</text>
+    <line x1="20" y1="78" x2="560" y2="78" stroke="#e2e8f0" stroke-width="2"/>
+
+    <rect x="20" y="100" width="240" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="140" y="125" text-anchor="middle" fill="#14532d" font-size="14" font-weight="bold">UI / API</text>
+    <line x1="140" y1="140" x2="140" y2="150" stroke="#16a34a" stroke-width="2" marker-end="url(#aGreen)"/>
+
+    <rect x="20" y="152" width="240" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="140" y="177" text-anchor="middle" fill="#14532d" font-size="14" font-weight="bold">Use case</text>
+    <line x1="140" y1="192" x2="140" y2="202" stroke="#16a34a" stroke-width="2" marker-end="url(#aGreen)"/>
+
+    <rect x="20" y="204" width="240" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="140" y="229" text-anchor="middle" fill="#14532d" font-size="14" font-weight="bold">Domain</text>
+    <line x1="140" y1="244" x2="140" y2="254" stroke="#16a34a" stroke-width="2" marker-end="url(#aGreen)"/>
+
+    <rect x="20" y="256" width="240" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="140" y="281" text-anchor="middle" fill="#14532d" font-size="14" font-weight="bold">Data</text>
+
+    <text x="140" y="320" text-anchor="middle" fill="#16a34a" font-size="13" font-style="italic" font-weight="bold">Demoable end to end</text>
+
+    <rect x="300" y="95" width="260" height="235" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="310" y="120" fill="#10233f" font-size="15" font-weight="bold">MVP 1 example</text>
+    <text x="310" y="140" fill="#475569" font-size="12.5" font-style="italic">"Customer orders an</text>
+    <text x="310" y="156" fill="#475569" font-size="12.5" font-style="italic">in-stock item"</text>
+    <line x1="310" y1="168" x2="548" y2="168" stroke="#e2e8f0"/>
+    <text x="310" y="192" fill="#334155" font-size="13">• Create Order (aggregate)</text>
+    <text x="310" y="216" fill="#334155" font-size="13">• POST /orders</text>
+    <text x="310" y="240" fill="#334155" font-size="13">• GET /stock (sync)</text>
+    <text x="310" y="264" fill="#334155" font-size="13">• Persist → 201</text>
+    <text x="310" y="296" fill="#64748b" font-size="12" font-style="italic">Each story: testable</text>
+    <text x="310" y="313" fill="#64748b" font-size="12" font-style="italic">acceptance criteria</text>
+  </g>
+
+  <!-- CELL 2,2 — SCENARIO -->
+  <g transform="translate(670,545)">
+    <rect x="0" y="0" width="580" height="345" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="0" y="0" width="580" height="7" rx="3" fill="#dc2626"/>
+    <circle cx="42" cy="46" r="24" fill="#dc2626"/>
+    <text x="42" y="52" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="bold">⚠</text>
+    <text x="78" y="42" fill="#10233f" font-size="21" font-weight="bold">Real scenario: same data,</text>
+    <text x="78" y="64" fill="#10233f" font-size="21" font-weight="bold">2 services</text>
+    <line x1="20" y1="80" x2="560" y2="80" stroke="#e2e8f0" stroke-width="2"/>
+
+    <text x="20" y="102" fill="#334155" font-size="14" font-weight="bold">Orders and Marketing both need the customer's email</text>
+
+    <rect x="20" y="112" width="540" height="55" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="32" y="136" fill="#7f1d1d" font-size="13.5" font-weight="bold">✗ Shared "customers" table</text>
+    <text x="32" y="156" fill="#7f1d1d" font-size="12.5">→ couples both services forever</text>
+
+    <rect x="20" y="180" width="540" height="92" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="32" y="203" fill="#14532d" font-size="13.5" font-weight="bold">✓ Customers = single owner of the data</text>
+    <text x="32" y="222" fill="#14532d" font-size="12.5">   exposes it via a contract</text>
+    <text x="32" y="243" fill="#14532d" font-size="13.5" font-weight="bold">✓ Marketing keeps a minimal copy</text>
+    <text x="32" y="262" fill="#14532d" font-size="12.5" font-family="Consolas, Menlo, monospace">   event: CustomerRegistered</text>
+
+    <text x="290" y="300" text-anchor="middle" fill="#7c2d12" font-size="13.5" font-style="italic" font-weight="bold">Duplication with a clear owner &gt; a shared table</text>
+    <text x="290" y="320" text-anchor="middle" fill="#7c2d12" font-size="13.5" font-style="italic" font-weight="bold">Decide the owner now → record it in an ADR</text>
+  </g>
+
+  <!-- CELL 2,3 — COMMON MISTAKES -->
+  <g transform="translate(1280,545)">
+    <rect x="0" y="0" width="580" height="345" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="0" y="0" width="580" height="7" rx="3" fill="#dc2626"/>
+    <circle cx="42" cy="46" r="24" fill="#dc2626"/>
+    <text x="42" y="53" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="bold">!</text>
+    <text x="78" y="42" fill="#10233f" font-size="23" font-weight="bold">Common mistakes</text>
+    <text x="78" y="64" fill="#64748b" font-size="14" font-style="italic">What to avoid when planning</text>
+    <line x1="20" y1="78" x2="560" y2="78" stroke="#e2e8f0" stroke-width="2"/>
+
+    <g>
+      <path d="M40,102 L52,124 L28,124 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="40" y="121" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">!</text>
+      <text x="65" y="118" fill="#334155" font-size="15">Two services writing the same table</text>
+    </g>
+    <g>
+      <path d="M40,162 L52,184 L28,184 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="40" y="181" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">!</text>
+      <text x="65" y="178" fill="#334155" font-size="15">Contracts without errors or versions</text>
+    </g>
+    <g>
+      <path d="M40,222 L52,244 L28,244 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="40" y="241" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">!</text>
+      <text x="65" y="234" fill="#334155" font-size="15">Leaking an external model</text>
+      <text x="65" y="252" fill="#334155" font-size="15">→ no ACL in place</text>
+    </g>
+    <g>
+      <path d="M40,282 L52,304 L28,304 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="40" y="301" text-anchor="middle" fill="#dc2626" font-size="12" font-weight="bold">!</text>
+      <text x="65" y="294" fill="#334155" font-size="15">Horizontal slices:</text>
+      <text x="65" y="312" fill="#334155" font-size="15">nothing demoable at sprint review</text>
+    </g>
+  </g>
+
+  <!-- ===================== KEY TAKEAWAY ===================== -->
+  <g transform="translate(60,915)">
+    <rect x="0" y="0" width="1800" height="140" rx="18" fill="#10233f"/>
+    <rect x="0" y="0" width="10" height="140" rx="5" fill="#fbbf24"/>
+    <text x="45" y="40" fill="#fbbf24" font-size="16" font-weight="bold" letter-spacing="2">KEY TAKEAWAY</text>
+    <text x="900" y="72" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="bold">ONE data = ONE owner</text>
+    <text x="900" y="112" text-anchor="middle" fill="#cbd5e1" font-size="21">Everyone else asks via contract (API or event) — never reads another service's database</text>
+  </g>
+
+</svg>
