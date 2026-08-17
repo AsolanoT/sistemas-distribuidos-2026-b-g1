@@ -8,6 +8,12 @@
 - SPRINT_GOAL: Define and document the initial architecture decision (ADR-001) for the sales management system.
 <!-- CONFIG-END -->
 
+## Project Board
+
+| Board Name          | URL                                              |
+| -------------------- | ------------------------------------------------ |
+| SynkroTech - Sprint  | https://github.com/users/AsolanoT/projects/4     |
+
 ## Team Members
 
 | Full Name                          | GitHub User                                                 |
