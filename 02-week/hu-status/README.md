@@ -21,6 +21,7 @@
 | HU ID | Title | Status (todo/doing/done) | Evidence (PR or commit URL) |
 |---|---|---|---|
 | HU-ARQ-001 | Define functional and non-functional requirements for the sales management system and create the preliminary architecture | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/52529468ff56c3625791a0c35281cedaab25828a |
+| HU-ADR-02  |  Formalize the Architecture Decision | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/52529468ff56c3625791a0c35281cedaab25828a |
 
 ## 2. My individual contribution
 - I wrote the Requirements section (RF-01 to RF-10, RNF-01 to RNF-07) covering clients, products, sales, reports, and JWT authentication for the sales management system.
