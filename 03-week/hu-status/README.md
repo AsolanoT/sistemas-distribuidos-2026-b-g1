@@ -5,11 +5,27 @@
 # Weekly Status - Week 03
 
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
-- FULL_NAME:
-- GITHUB_USER:
-- TEAM:
-- SPRINT_GOAL:
+- FULL_NAME: Angel Gustavo Solano Trujillo
+- GITHUB_USER: AsolanoT
+- TEAM: Group - SynkroTech SAS
+- SPRINT_GOAL: 
 <!-- CONFIG-END -->
+
+## Project Board
+
+| Board Name          | URL                                              |
+| -------------------- | ------------------------------------------------ |
+| SynkroTech - Sprint  | https://github.com/users/AsolanoT/projects/4     |
+
+## Team Members
+
+| Full Name                          | GitHub User                                                 |
+| ----------------------------       | ------------------------------------------                  |
+| Sergio Andres Ordoñez Diaz         | https://github.com/SergioAndres17                           |
+| Fredman Santiago Plazas Artunduaga | https://github.com/SantiagoPlazas2005                       |
+| Jordan Ramirez Gallego             | https://github.com/JordanRG420                              |
+| Angel Gustavo Solano Trujillo      |  https://github.com/AsolanoT                                |
+
 
 ## 1. User stories worked this week
 | HU ID | Title | Status (todo/doing/done) | Evidence (PR or commit URL) |
