@@ -1,7 +1,7 @@
 # Individual Contribution to the PDR
 ## Sales Management System for a Store
 
-**project_key:** PRJ-GESTION-VENTAS-V1
+**project_key:** synkro-tech
 **Member:** Angel Gustavo Solano Trujillo
 **Assigned points:** Requirements and Architecture
 **Responsibility:** Explain what the system must do and how it will be built.

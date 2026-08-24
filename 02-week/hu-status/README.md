@@ -4,7 +4,7 @@
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
 - FULL_NAME: Angel Gustavo Solano Trujillo
 - GITHUB_USER: AsolanoT
-- TEAM: Group - SynkroTech SAS
+- TEAM: synkro-tech
 - SPRINT_GOAL: Define and document the initial architecture decision (ADR-001) for the sales management system.
 <!-- CONFIG-END -->
 
@@ -12,7 +12,7 @@
 
 | Board Name          | URL                                              |
 | -------------------- | ------------------------------------------------ |
-| SynkroTech - Sprint  | https://github.com/users/AsolanoT/projects/4     |
+| SynkroTech - Sprint  |      |
 
 ## Team Members
 
@@ -26,7 +26,6 @@
 ## 1. User stories worked on this week
 | HU ID | Title | Status (todo/doing/done) | Evidence (PR or commit URL) |
 |---|---|---|---|
-| HU-PDR-001 | Define functional and non-functional requirements for the sales management system and create the preliminary architecture | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/01-week/hu-status/pdr.md |
 | HU-ADR-02  |  Formalize the Architecture Decision | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/02-week/hu-status/adr-001-architecture.md |
 
 ## 2. My individual contribution

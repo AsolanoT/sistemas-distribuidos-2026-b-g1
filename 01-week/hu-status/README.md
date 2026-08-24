@@ -20,7 +20,7 @@
 ## 1. User stories worked on this week
 | HU ID | Title | Status (todo/doing/done) | Evidence (PR or commit URL) |
 |---|---|---|---|
-| HU-PDR-001 | Define functional and non-functional requirements for the sales management system and create the preliminary architecture | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/01-week/hu-status/pdr.md |
+| HU-PDR-002 | Define functional and non-functional requirements for the sales management system and create the preliminary architecture | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/01-week/hu-status/pdr.md |
 
 ## 2. My individual contribution
 - I wrote the Requirements section (RF-01 to RF-10, RNF-01 to RNF-07) covering clients, products, sales, reports, and JWT authentication for the sales management system.
