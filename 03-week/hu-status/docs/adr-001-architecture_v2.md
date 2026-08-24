@@ -1,150 +1,175 @@
-# ADR-001: Arquitectura del Sistema de Gestión de Ventas — SynkroTech SAS
+# ADR-001: Sales Management System Architecture, SynkroTech SAS
 
-Estado: Aceptado
-Fecha: 2026-08
+**Status:** Accepted
 
----
-
-## Contexto
-
-SynkroTech SAS necesita centralizar la gestión de clientes, productos, inventario y ventas, actualmente dispersa en herramientas manuales. El análisis de bounded contexts identificó 4 contextos de negocio con bajo acoplamiento entre sí: **Autenticación y Usuarios**, **Clientes**, **Productos e Inventario** y **Ventas** (este último incluye Reportes, por ser parte del mismo contexto de negocio).
-
-El curso de Sistemas Distribuidos exige, como requisito , una arquitectura distribuida compuesta por:
-- 4 repositorios de backend (Java y Go).
-- 4 repositorios de frontend.
-- **1 repositorio de base de datos**, con una única base de datos lógica compartida por los 4 microservicios.
-- 1 repositorio de documentación (`docs`), sin código — fuente de verdad de arquitectura, ADR y backlog.
-
+**Date:** 2026-08
 
 ---
 
-## Decisión
+## Context
 
-### Estilo de arquitectura elegido
+SynkroTech SAS needs to centralize the management of customers, products, inventory, and sales, which are currently scattered across manual tools. The bounded context analysis identified 4 business contexts with low coupling between them: **Authentication and Users**, **Customers**, **Products and Inventory**, and **Sales**. The latter includes Reports because they are part of the same business context.
 
-**Microservicios independientes bajo arquitectura hexagonal (Puertos y Adaptadores)**, uno por cada bounded context identificado, comunicados vía REST/HTTP, con persistencia sobre **una única base de datos física** organizada en esquemas independientes por servicio.
+The Distributed Systems course requires, as an architectural requirement, a distributed architecture composed of:
 
-### 1. Los 4 microservicios
+* 4 backend repositories, using Java and Go.
+* 4 frontend repositories.
+* **1 database repository**, with a single logical database shared by the 4 microservices.
+* 1 documentation repository (`docs`), with no code, serving as the source of truth for architecture, ADRs, and backlog.
 
-| Servicio | Tecnología | Responsabilidad |
-|---|---|---|
-| **Auth** | Java (Spring Boot) | Registro/login de usuarios del sistema, emisión y validación de JWT, gestión de roles y permisos |
-| **Clientes** | Java (Spring Boot) | Registro, actualización, búsqueda y desactivación de clientes de SynkroTech SAS |
-| **Productos** | Go | Catálogo de productos, categorías y control de stock/inventario |
-| **Ventas** | Go | Registro de ventas y su detalle, orquestación con Clientes y Productos, y generación de reportes (diarios, mensuales, top-productos) |
+---
 
-### 2. Base de datos: una sola instancia, un esquema por servicio
+## Decision
 
-Se usa **una única instancia física de PostgreSQL** (un solo repositorio de base de datos), con **un esquema (`schema`) independiente por microservicio**:
+### Selected Architecture Style
 
+**Independent microservices using Hexagonal Architecture (Ports and Adapters)**, one for each identified bounded context, communicating through REST/HTTP, with persistence on **a single physical database** organized into independent schemas per service.
+
+### 1. The 4 Microservices
+
+| Service       | Technology         | Responsibility                                                                                                                                           |
+| ------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Auth**      | Java (Spring Boot) | System user registration/login, JWT issuance and validation, role and permission management                                                              |
+| **Customers** | Java (Spring Boot) | Registration, updating, searching, and deactivation of SynkroTech SAS customers                                                                          |
+| **Products**  | Go                 | Product catalog, categories, and stock/inventory management                                                                                              |
+| **Sales**     | Go                 | Sales and sales detail registration, orchestration with Customers and Products, and report generation, including daily, monthly, and top-product reports |
+
+### 2. Database: One Instance, One Schema per Service
+
+The system uses **a single physical PostgreSQL instance** as the only database repository, with **one independent schema per microservice**:
+
+```text
+PostgreSQL Instance (1 physical instance)
+
+└── Database: synkrotech_db
+
+    ├── schema: auth        → tables: users, refresh_tokens
+
+    ├── schema: customers   → table: customers
+
+    ├── schema: products    → tables: products, categories
+
+    └── schema: sales       → tables: sales, sale_details, sales_summary
 ```
-Instancia PostgreSQL (1 sola)
-└── Base de datos: synkrotech_db
-    ├── schema: auth        → tablas: usuarios, refresh_tokens
-    ├── schema: clientes    → tabla: clientes
-    ├── schema: productos   → tablas: productos, categorias
-    └── schema: ventas      → tablas: ventas, detalle_venta, resumen_ventas
-```
 
-**Mecanismo de aislamiento (esto es lo que hace que siga siendo "microservicios" y no un monolito de datos):**
+**Isolation mechanism, which ensures that this remains a microservices architecture rather than a data monolith:**
 
-- Cada microservicio se conecta con un **usuario de base de datos distinto** (`auth_user`, `clientes_user`, `productos_user`, `ventas_user`), con permisos (`GRANT`) únicamente sobre su propio esquema. Ningún servicio tiene permisos de lectura/escritura sobre el esquema de otro.
-- Cada servicio define su `search_path` al esquema propio, y gestiona sus propias migraciones (Flyway en Java, `golang-migrate` en Go) sin conocer las del resto.
-- **No hay llaves foráneas reales entre esquemas.** Los campos `cliente_id` (en Ventas) y `producto_id` (en Ventas) no son FK — se validan mediante llamadas HTTP a los servicios de Clientes y Productos respectivamente, igual que si las bases fueran físicamente distintas.
+* Each microservice connects using a **different database user** (`auth_user`, `customers_user`, `products_user`, `sales_user`), with `GRANT` permissions restricted exclusively to its own schema. No service has read or write permissions on another service's schema.
 
-### 3. Patrón arquitectónico interno (arquitectura hexagonal)
+* Each service defines its `search_path` to its own schema and manages its own migrations, using Flyway for Java and `golang-migrate` for Go, without depending on the migrations of the other services.
 
-Cada microservicio se organiza en 3 capas:
+* **There are no actual foreign keys between schemas.** The `customer_id` field in Sales and the `product_id` field in Sales are not foreign keys. They are validated through HTTP calls to the Customers and Products services respectively, just as they would be if the databases were physically separate.
 
-- **Dominio:** entidades y reglas de negocio puras, sin dependencias de frameworks externos.
-- **Aplicación (casos de uso):** orquesta la lógica de negocio y define **puertos** — interfaces que declaran lo que el dominio necesita o expone.
-- **Infraestructura (adaptadores):**
-  - *Adaptadores de entrada:* controladores REST.
-  - *Adaptadores de salida:* repositorios (persistencia en el esquema propio de PostgreSQL) y clientes HTTP para consumir otros servicios.
+### 3. Internal Architectural Pattern, Hexagonal Architecture
 
-### 4. Diagrama de arquitectura
+Each microservice is organized into 3 layers:
 
-![Diagrama de SynkroTech](adr-001-architecture_v2.jpg)
+* **Domain:** pure business entities and business rules, with no dependencies on external frameworks.
 
-### 5. Comunicación entre servicios
+* **Application, use cases:** orchestrates business logic and defines **ports**, which are interfaces declaring what the domain needs or exposes.
 
-- **Ventas → Clientes:** validar existencia del cliente antes de crear una venta.
-- **Ventas → Productos:** validar stock y precio, y actualizar stock tras la venta.
-- **Clientes, Productos, Ventas → Auth:** validación local del JWT (verificación de firma con clave pública de Auth), sin llamada síncrona por cada solicitud.
-- Fase avanzada (opcional): comunicación asíncrona vía eventos (RabbitMQ) para desacoplar aún más.
+* **Infrastructure, adapters:**
 
-### 6. Auth, JWT y roles
+  * **Inbound adapters:** REST controllers.
+  * **Outbound adapters:** repositories, responsible for persistence in the service's own PostgreSQL schema, and HTTP clients used to communicate with other services.
 
-Auth es el único servicio que emite tokens JWT (algoritmo RS256). Los demás solo los validan localmente con la clave pública.
+### 4. Architecture Diagram
 
-**Flujo:** login → Auth valida credenciales → firma JWT con `sub`, `roles`, `permisos`, `iat`, `exp` → el frontend envía el token en `Authorization: Bearer <token>` en cada solicitud → cada servicio valida localmente → si expira, se usa el `refresh_token` contra Auth.
+![SynkroTech Architecture Diagram](adr-001-architecture_v2.jpg)
 
-| Rol | Permisos |
-|---|---|
-| **ADMIN** | Acceso total: usuarios/roles, clientes, productos, ventas y reportes |
-| **VENDEDOR** | Gestiona clientes, crea ventas, consulta stock, consulta reportes de sus propias ventas |
-| **INVENTARIO** | Gestiona productos, categorías y stock; sin acceso a clientes, ventas ni reportes |
+### 5. Communication Between Services
 
-### 7. Modelo de datos por esquema
+* **Sales → Customers:** validates that the customer exists before creating a sale.
 
-**`auth`** — `usuarios` (usuario_id, nombre, correo, password_hash, rol, fecha_registro, activo), `refresh_tokens` (token_id, usuario_id FK, token, fecha_expiracion, activo).
+* **Sales → Products:** validates stock and price and updates stock after the sale.
 
-**`clientes`** — `clientes` (cliente_id, nombre, documento_identidad, correo, telefono, direccion, fecha_registro, activo).
+* **Customers, Products, Sales → Auth:** locally validate the JWT by verifying its signature using Auth's public key, without making a synchronous request to Auth for every request.
 
-**`productos`** — `productos` (producto_id, nombre, precio, stock, categoria_id FK, activo), `categorias` (categoria_id, nombre, activo).
+* **Advanced phase, optional:** asynchronous communication through events using RabbitMQ to further decouple the services.
 
-**`ventas`** — `ventas` (venta_id, cliente_id ref. externa, fecha, total, activo), `detalle_venta` (detalle_id, venta_id FK, producto_id ref. externa, cantidad, precio_unitario, subtotal, activo), `resumen_ventas` (fecha, total_ventas_dia, total_ventas_mes, producto_id, cantidad_vendida, activo).
+### 6. Auth, JWT, and Roles
 
-Todos los registros usan borrado lógico (`activo` booleano) en vez de eliminación física, para preservar trazabilidad.
+Auth is the only service responsible for issuing JWT tokens, using the RS256 algorithm. The other services only validate the tokens locally using Auth's public key.
 
-### 8. APIs principales
+**Flow:** login → Auth validates credentials → signs JWT containing `sub`, `roles`, `permissions`, `iat`, and `exp` → the frontend sends the token through `Authorization: Bearer <token>` with each request → each service validates the token locally → when the access token expires, the `refresh_token` is sent to Auth.
 
-| Servicio | Endpoint | Método | Descripción |
-|---|---|---|---|
-| Auth | `/api/auth/register` | POST | Registrar usuario del sistema |
-| Auth | `/api/auth/login` | POST | Iniciar sesión y obtener JWT |
-| Auth | `/api/auth/refresh` | POST | Renovar access token |
-| Clientes | `/api/clientes` | POST | Registrar cliente |
-| Clientes | `/api/clientes/{id}` | GET/PUT/DELETE | Consultar/actualizar/eliminar cliente |
-| Productos | `/api/productos` | POST | Registrar producto |
-| Productos | `/api/productos/{id}/stock` | PATCH | Actualizar stock |
-| Ventas | `/api/ventas` | POST | Crear venta |
-| Ventas | `/api/ventas/{id}` | GET | Consultar detalle de venta |
-| Ventas | `/api/ventas/reportes/diario` \| `/mensual` \| `/top-productos` | GET | Reportes |
+| Role          | Permissions                                                                           |
+| ------------- | ------------------------------------------------------------------------------------- |
+| **ADMIN**     | Full access: users/roles, customers, products, sales, and reports                     |
+| **SALES**     | Manages customers, creates sales, checks stock, and views reports for their own sales |
+| **INVENTORY** | Manages products, categories, and stock; no access to customers, sales, or reports    |
 
-Todas las rutas, excepto `/api/auth/register` y `/api/auth/login`, requieren `Authorization: Bearer <token>`.
+### 7. Data Model per Schema
 
----
+**`auth`**: `users` (`user_id`, `name`, `email`, `password_hash`, `role`, `registration_date`, `active`), `refresh_tokens` (`token_id`, `user_id` FK, `token`, `expiration_date`, `active`).
 
-## Alternativas consideradas
+**`customers`**: `customers` (`customer_id`, `name`, `identity_document`, `email`, `phone`, `address`, `registration_date`, `active`).
 
-**(a) 4 bases de datos físicamente independientes (una por microservicio)** — rechazado: no cumple el requisito del curso de una única base de datos lógica; además, para el volumen actual de SynkroTech SAS, mantener 4 instancias separadas añade complejidad operativa sin beneficio real.
+**`products`**: `products` (`product_id`, `name`, `price`, `stock`, `category_id` FK, `active`), `categories` (`category_id`, `name`, `active`).
 
-**(b) 5 microservicios completos** (Auth, Clientes, Productos, Ventas y Reportes como servicios independientes) — rechazado: excede el límite de 4 repos backend; Reportes no es un bounded context distinto de Ventas (ver context-map), por lo que separarlo violaría el principio de que cada servicio representa un contexto de negocio real, no una división arbitraria.
+**`sales`**: `sales` (`sale_id`, `customer_id` external reference, `date`, `total`, `active`), `sale_details` (`detail_id`, `sale_id` FK, `product_id` external reference, `quantity`, `unit_price`, `subtotal`, `active`), `sales_summary` (`date`, `daily_sales_total`, `monthly_sales_total`, `product_id`, `quantity_sold`, `active`).
 
-**(c) Monolito modular** — rechazado: no satisface el objetivo pedagógico del curso (comunicación entre servicios distribuidos, múltiples lenguajes, múltiples repos).
+All records use **soft deletion** through the `active` boolean field instead of physical deletion, in order to preserve traceability.
 
-**(d) Auth embebido dentro de Clientes** (sin servicio propio) — rechazado: mezcla dos bounded contexts distintos (usuarios internos del sistema vs. clientes compradores), complicando la gestión de roles/permisos.
+### 8. Main APIs
+
+| Service   | Endpoint                                                  | Method         | Description                       |
+| --------- | --------------------------------------------------------- | -------------- | --------------------------------- |
+| Auth      | `/api/auth/register`                                      | POST           | Register a system user            |
+| Auth      | `/api/auth/login`                                         | POST           | Log in and obtain a JWT           |
+| Auth      | `/api/auth/refresh`                                       | POST           | Refresh the access token          |
+| Customers | `/api/customers`                                          | POST           | Register a customer               |
+| Customers | `/api/customers/{id}`                                     | GET/PUT/DELETE | Retrieve/update/delete a customer |
+| Products  | `/api/products`                                           | POST           | Register a product                |
+| Products  | `/api/products/{id}/stock`                                | PATCH          | Update stock                      |
+| Sales     | `/api/sales`                                              | POST           | Create a sale                     |
+| Sales     | `/api/sales/{id}`                                         | GET            | Retrieve sale details             |
+| Sales     | `/api/sales/reports/daily` / `/monthly` / `/top-products` | GET            | Reports                           |
+
+All routes, except `/api/auth/register` and `/api/auth/login`, require `Authorization: Bearer <token>`.
 
 ---
 
-## Consecuencias
+## Alternatives Considered
 
-**Positivas:**
-+ Separación clara de responsabilidades por bounded context, respaldada por un análisis de dominio (no solo por la restricción de repos).
-+ Cumple el requisito de una única base de datos lógica sin sacrificar la independencia real de datos entre servicios.
-+ Balance de 2 servicios en Java / 2 en Go, cumpliendo el requisito del curso.
-+ Auth centralizado simplifica la gestión de roles y seguridad.
+**(a) 4 physically independent databases, one per microservice:** rejected because it does not comply with the course requirement of a single logical database. Additionally, for SynkroTech SAS's current volume, maintaining 4 separate database instances introduces operational complexity without providing a significant real benefit.
 
-**Negativas:**
-- El aislamiento entre esquemas depende de la correcta configuración de permisos de base de datos (`GRANT`); un error de configuración podría romper el aislamiento sin que se note de inmediato.
-- Ventas concentra más responsabilidad de la ideal (orquesta Clientes, Productos, y genera reportes).
-- La comunicación síncrona entre servicios introduce acoplamiento temporal (si Productos cae, Ventas no puede crear ventas).
-- No hay transacciones ACID entre servicios; se requiere manejo explícito de consistencia eventual.
-- Al compartir una sola instancia física de PostgreSQL, un problema de rendimiento o caída de esa instancia afecta a los 4 microservicios simultáneamente (punto único de falla a nivel de infraestructura, aunque los datos permanezcan lógicamente aislados).
+**(b) 5 complete microservices, Auth, Customers, Products, Sales, and Reports as independent services:** rejected because it exceeds the limit of 4 backend repositories. Reports is not a separate bounded context from Sales, as established in the context map. Therefore, separating it would violate the principle that each service should represent a real business context rather than an arbitrary technical division.
+
+**(c) Modular monolith:** rejected because it does not satisfy the course's educational objective, which includes communication between distributed services, multiple programming languages, and multiple repositories.
+
+**(d) Embedded Auth inside Customers, without a dedicated service:** rejected because it mixes two distinct bounded contexts, internal system users and purchasing customers, making role and permission management more difficult.
 
 ---
 
-## Regla de inmutabilidad
+## Consequences
 
-Este ADR, una vez aceptado, **no se modifica**. Cualquier cambio a esta decisión de arquitectura debe documentarse en un nuevo archivo (`adr-002-*.md`) que referencie explícitamente a ADR-001 como el registro que reemplaza, indicando qué cambió y por qué.
+### Positive
+
+* Clear separation of responsibilities by bounded context, supported by domain analysis rather than simply by the repository constraint.
+
+* Complies with the requirement for a single logical database without sacrificing actual data independence between services.
+
+* Balanced distribution of 2 services in Java and 2 in Go, complying with the course requirements.
+
+* Centralized Auth simplifies role and security management.
+
+### Negative
+
+* Isolation between schemas depends on the correct configuration of database permissions through `GRANT`. A configuration error could break the intended isolation without being immediately detected.
+
+* Sales concentrates more responsibility than ideal because it orchestrates Customers and Products and also generates reports.
+
+* Synchronous communication between services introduces temporal coupling. If Products is unavailable, Sales cannot create sales.
+
+* There are no ACID transactions across services. Explicit handling of eventual consistency is therefore required.
+
+* Because all 4 microservices share a single physical PostgreSQL instance, a performance problem or outage affecting that instance will affect all 4 microservices simultaneously. This represents a single point of failure at the infrastructure level, even though the data remains logically isolated.
+
+---
+
+## Immutability Rule
+
+Once this ADR has been accepted, **it must not be modified**.
+
+Any change to this architectural decision must be documented in a new file, such as `adr-002-*.md`, which must explicitly reference ADR-001 as the decision being replaced. The new ADR must indicate **what changed and why**.

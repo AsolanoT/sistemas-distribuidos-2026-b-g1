@@ -1,158 +1,161 @@
-# PDR — Documento de Revisión de Diseño Preliminar
-## Sistema de Gestión de Ventas — SynkroTech SAS
+# PDR, Preliminary Design Review Document
 
-**Versión:** 1.0
+## Sales Management System, SynkroTech SAS
 
-**Fecha:** Agosto 2026
+**Version:** 1.0
 
-**Materia:** Sistemas Distribuidos 
+**Date:** August 2026
 
-**Tipo de documento:** Preliminary — for review and approval 
+**Subject:** Distributed Systems
+
+**Document type:** Preliminary, for review and approval
 
 ---
 
 ## Team Members
 
-| Full Name | GitHub User |
-|------------|------------|
-| Sergio Andres Ordoñez Diaz | https://github.com/SergioAndres17 |
-| Fredman Santiago Plazas Artunduaga | https://github.com/SantiagoPlazas2005 |
-| Jordan Ramirez Gallego | https://github.com/JordanRG420 |
-| Angel Gustavo Solano Trujillo | https://github.com/AsolanoT |
+| Full Name                          | GitHub User                                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| Sergio Andres Ordoñez Diaz         | [https://github.com/SergioAndres17](https://github.com/SergioAndres17)         |
+| Fredman Santiago Plazas Artunduaga | [https://github.com/SantiagoPlazas2005](https://github.com/SantiagoPlazas2005) |
+| Jordan Ramirez Gallego             | [https://github.com/JordanRG420](https://github.com/JordanRG420)               |
+| Angel Gustavo Solano Trujillo      | [https://github.com/AsolanoT](https://github.com/AsolanoT)                     |
 
 ---
 
-## 00 — Contexto inicial
+## 00, Initial Context
 
-**SynkroTech SAS** es una empresa mediana dedicada a la comercialización de productos tecnológicos y accesorios electrónicos: computadores, portátiles, periféricos, componentes, dispositivos de almacenamiento y equipos de conectividad.
+**SynkroTech SAS** is a medium-sized company dedicated to the commercialization of technology products and electronic accessories, including computers, laptops, peripherals, components, storage devices, and connectivity equipment.
 
-Debido al crecimiento de las ventas y al aumento de referencias en su catálogo, la empresa necesita una solución que le permita administrar de manera centralizada la información de clientes, productos, inventario y transacciones comerciales.
+Due to sales growth and the increasing number of products in its catalog, the company needs a solution that allows it to centrally manage customer, product, inventory, and commercial transaction information.
 
-Actualmente, el control de ventas y existencias se realiza mediante herramientas dispersas y procesos manuales (hojas de cálculo, registros físicos, sistemas aislados), lo que dificulta conocer con precisión la disponibilidad de productos, el historial de compras de los clientes y el rendimiento de las ventas.
-
----
-
-## 01 — Necesidades y problemas
-
-### 1.1 Necesidad central
-
-Contar con un sistema que centralice clientes, productos y ventas, automatice cálculos y control de stock, mantenga trazabilidad de las transacciones y provea reportes útiles para la gestión comercial y administrativa de SynkroTech SAS, todo bajo un esquema de acceso seguro.
-
-### 1.2 Problemas identificados
-
-- Dificultad para conocer en tiempo real la disponibilidad de productos en inventario.
-- Falta de trazabilidad del historial de compras por cliente.
-- Cálculos manuales propensos a error en el registro de ventas.
-- Ausencia de reportes consolidados que apoyen decisiones comerciales (ventas por día, por mes, productos más vendidos).
-- Información dispersa entre herramientas no integradas, sin una única fuente de verdad.
-
-### 1.3 Requerimientos funcionales
-
-| ID | Requerimiento |
-|---|---|
-| RF-01 | El sistema debe permitir registrar, actualizar, consultar y desactivar clientes. |
-| RF-02 | El sistema debe permitir registrar, actualizar, consultar y desactivar productos. |
-| RF-03 | El sistema debe permitir organizar los productos por categorías. |
-| RF-04 | El sistema debe controlar el stock disponible de cada producto. |
-| RF-05 | El sistema debe permitir registrar una venta asociando cliente y uno o más productos. |
-| RF-06 | El sistema debe calcular automáticamente el total de una venta a partir del detalle de productos. |
-| RF-07 | El sistema debe descontar el stock automáticamente al registrar una venta. |
-| RF-08 | El sistema debe generar reportes de ventas diarios y mensuales. |
-| RF-09 | El sistema debe generar un reporte de productos más vendidos. |
-| RF-10 | El sistema debe autenticar usuarios y restringir operaciones según su rol (ADMIN, VENDEDOR, INVENTARIO). |
-
-### 1.4 Requerimientos no funcionales
-
-| ID | Requerimiento |
-|---|---|
-| RNF-01 | El sistema debe estar disponible mediante una interfaz web accesible desde navegador. |
-| RNF-02 | Las operaciones sobre datos empresariales deben requerir autenticación mediante JWT. |
-| RNF-03 | El sistema debe permitir que cada componente de negocio (clientes, productos, ventas, autenticación) evolucione de forma independiente. |
-| RNF-04 | El sistema debe mantener trazabilidad de las operaciones (no se eliminan registros físicamente, se desactivan). |
-| RNF-05 | El sistema debe responder a las operaciones críticas (registrar venta, consultar stock) en tiempos razonables para uso comercial diario. |
-| RNF-06 | El sistema debe estar preparado para crecer en volumen de catálogo y transacciones sin rediseño mayor. |
-| RNF-07 | El sistema debe interoperar entre sus componentes mediante interfaces estándar (API REST). |
+Currently, sales and inventory control are managed through scattered tools and manual processes, such as spreadsheets, physical records, and isolated systems. This makes it difficult to accurately determine product availability, customer purchase history, and sales performance.
 
 ---
 
-## 02 — Procesos actuales / Flujo esperado
+## 01, Needs and Problems
 
-### Proceso actual (manual)
+### 1.1 Central Need
 
-1. Un vendedor recibe al cliente y consulta la disponibilidad de un producto de forma manual (revisión física o en una hoja de cálculo desactualizada).
-2. Se registra la venta en un cuaderno o archivo aislado, sin conexión con el inventario.
-3. El stock no se actualiza automáticamente; se corrige manualmente, a veces días después.
-4. No existe un reporte consolidado; para saber cuánto se vendió en un periodo, alguien debe revisar y sumar manualmente distintas fuentes.
+Have a system that centralizes customers, products, and sales, automates calculations and stock control, maintains transaction traceability, and provides useful reports for the commercial and administrative management of SynkroTech SAS, all under a secure access model.
 
-### Flujo esperado (con el sistema)
+### 1.2 Identified Problems
 
-1. El usuario del sistema (vendedor, inventario o admin) inicia sesión y el sistema valida su rol.
-2. El vendedor busca al cliente (o lo registra si es nuevo) y selecciona los productos a vender.
-3. El sistema valida en tiempo real la disponibilidad de stock antes de confirmar la venta.
-4. Al confirmar, el sistema calcula el total, descuenta el stock automáticamente y registra la transacción con trazabilidad completa.
-5. En cualquier momento, un usuario autorizado puede consultar reportes de ventas diarios, mensuales o de productos más vendidos, generados a partir de datos reales y actualizados.
+* Difficulty determining real-time product availability in inventory.
+* Lack of traceability of each customer's purchase history.
+* Manual calculations that are prone to errors when recording sales.
+* Lack of consolidated reports to support business decisions, such as daily sales, monthly sales, and best-selling products.
+* Information scattered across non-integrated tools, without a single source of truth.
+
+### 1.3 Functional Requirements
+
+| ID    | Requirement                                                                                                   |
+| ----- | ------------------------------------------------------------------------------------------------------------- |
+| RF-01 | The system must allow users to register, update, view, and deactivate customers.                              |
+| RF-02 | The system must allow users to register, update, view, and deactivate products.                               |
+| RF-03 | The system must allow products to be organized by category.                                                   |
+| RF-04 | The system must control the available stock of each product.                                                  |
+| RF-05 | The system must allow users to register a sale by associating a customer with one or more products.           |
+| RF-06 | The system must automatically calculate the total amount of a sale based on the product details.              |
+| RF-07 | The system must automatically deduct stock when a sale is registered.                                         |
+| RF-08 | The system must generate daily and monthly sales reports.                                                     |
+| RF-09 | The system must generate a report of the best-selling products.                                               |
+| RF-10 | The system must authenticate users and restrict operations according to their role (ADMIN, SALES, INVENTORY). |
+
+### 1.4 Non-Functional Requirements
+
+| ID     | Requirement                                                                                                                                          |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RNF-01 | The system must be available through a web interface accessible from a browser.                                                                      |
+| RNF-02 | Operations involving business data must require authentication using JWT.                                                                            |
+| RNF-03 | The system must allow each business component, customers, products, sales, and authentication, to evolve independently.                              |
+| RNF-04 | The system must maintain operation traceability. Records must not be physically deleted; instead, they must be deactivated.                          |
+| RNF-05 | The system must respond to critical operations, such as registering a sale and checking stock, within reasonable time frames for daily business use. |
+| RNF-06 | The system must be prepared to grow in catalog and transaction volume without requiring a major redesign.                                            |
+| RNF-07 | The system must interoperate between its components through standard interfaces (REST API).                                                          |
+
+---
+
+## 02, Current Processes / Expected Flow
+
+### Current Process, Manual
+
+1. A salesperson assists the customer and manually checks product availability, either through a physical inspection or an outdated spreadsheet.
+2. The sale is recorded in a notebook or isolated file, without any connection to the inventory.
+3. Stock is not updated automatically. It is corrected manually, sometimes days later.
+4. There is no consolidated report. To determine how much was sold during a given period, someone must manually review and add information from different sources.
+
+### Expected Flow, With the System
+
+1. The system user, salesperson, inventory employee, or administrator, logs in and the system validates their role.
+2. The salesperson searches for the customer, or registers the customer if they are new, and selects the products to be sold.
+3. The system validates stock availability in real time before confirming the sale.
+4. Once the sale is confirmed, the system calculates the total, automatically deducts the stock, and records the transaction with complete traceability.
+5. At any time, an authorized user can view daily sales, monthly sales, or best-selling product reports generated from real and up-to-date data.
 
 ```mermaid
 flowchart TD
-    A[Usuario inicia sesión] --> B{¿Rol válido?}
-    B -- No --> Z[Acceso denegado]
-    B -- Sí --> C[Vendedor busca al cliente]
-    C --> D{¿Cliente existe?}
-    D -- No --> E[Registrar nuevo cliente]
-    D -- Sí --> F[Seleccionar productos a vender]
+    A[User logs in] --> B{Valid role?}
+    B -- No --> Z[Access denied]
+    B -- Yes --> C[Salesperson searches for customer]
+    C --> D{Does customer exist?}
+    D -- No --> E[Register new customer]
+    D -- Yes --> F[Select products to sell]
     E --> F
-    F --> G{¿Stock disponible?}
-    G -- No --> H[Rechazar producto / ajustar cantidad]
+    F --> G{Stock available?}
+    G -- No --> H[Reject product / adjust quantity]
     H --> F
-    G -- Sí --> I[Confirmar venta]
-    I --> J[Calcular total]
-    J --> K[Descontar stock automáticamente]
-    K --> L[Registrar transacción con trazabilidad]
-    L --> M[(Datos disponibles para reportes)]
-    M --> N[Usuario autorizado consulta reportes:<br/>diario / mensual / top productos]
+    G -- Yes --> I[Confirm sale]
+    I --> J[Calculate total]
+    J --> K[Automatically deduct stock]
+    K --> L[Register transaction with traceability]
+    L --> M[(Data available for reports)]
+    M --> N[Authorized user views reports:<br/>daily / monthly / top products]
 ```
 
-### Alcance de la primera versión (MVP)
+### First Version Scope, MVP
 
-**Incluido:**
-- Gestión de clientes, productos, categorías y stock.
-- Registro de ventas con cálculo automático y descuento de inventario.
-- Reportes diarios, mensuales y de productos más vendidos.
-- Autenticación y autorización basada en roles (ADMIN, VENDEDOR, INVENTARIO).
+**Included:**
 
-**Fuera de alcance (por ahora):**
-- Múltiples sucursales o bodegas (se asume una sola sede operativa de SynkroTech SAS).
-- Portal de autoservicio para clientes finales (el sistema es de uso interno).
-- Facturación electrónica ante entidades fiscales.
-- Integración con pasarelas de pago.
-- Devoluciones y garantías (podrían añadirse en una versión posterior).
+* Management of customers, products, categories, and stock.
+* Sales registration with automatic calculation and inventory deduction.
+* Daily, monthly, and best-selling product reports.
+* Role-based authentication and authorization (ADMIN, SALES, INVENTORY).
 
----
+**Out of Scope, For Now:**
 
-## 03 — Preguntas abiertas
-
-| # | Pregunta | Impacto si no se resuelve | Estado |
-|---|---|---|---|
-| 1 | ¿SynkroTech SAS manejará descuentos o promociones sobre productos en el MVP? | Afecta el cálculo de totales en Ventas | Pendiente de validar con el negocio |
-| 2 | ¿Se requiere manejar múltiples métodos de pago (efectivo, tarjeta, transferencia) desde el MVP, o basta con registrar el total de la venta? | Afecta el modelo de datos de `ventas` | Pendiente de validar con el negocio |
-| 3 | ¿Qué pasa si el stock de un producto llega a cero durante el proceso de venta (justo antes de confirmar)? | Afecta el diseño de concurrencia del servicio de Productos | Pendiente de definición técnica |
-| 4 | ¿El rol INVENTARIO necesita ver reportes de ventas, o su alcance es estrictamente productos/stock? | Afecta permisos definidos en Auth | Resuelto — ver sección de roles en `adr/adr-001-architecture.md` (sin acceso a ventas ni reportes) |
-| 5 | ¿Habrá más de una sede/bodega en el futuro cercano (siguiente semestre, no en este MVP)? | Afecta si vale la pena diseñar el modelo de datos pensando en multi-sede desde ya | Pendiente de validar con el negocio |
+* Multiple branches or warehouses. A single operational location for SynkroTech SAS is assumed.
+* Self-service portal for end customers. The system is for internal use.
+* Electronic invoicing with tax authorities.
+* Integration with payment gateways.
+* Returns and warranties. These may be added in a later version.
 
 ---
 
-## 04 — Glosario de negocio
+## 03, Open Questions
 
-| Término | Definición |
-|---|---|
-| **Cliente** | Persona natural o jurídica que compra productos a SynkroTech SAS. |
-| **Producto** | Artículo tecnológico o accesorio electrónico comercializado por SynkroTech SAS (computadores, periféricos, componentes, etc.). |
-| **Categoría** | Agrupación de productos con características comerciales similares (ej. "Portátiles", "Periféricos"). |
-| **Stock** | Cantidad disponible de un producto en el inventario de SynkroTech SAS. |
-| **Venta** | Transacción comercial en la que un cliente adquiere uno o más productos. |
-| **Detalle de venta** | Cada línea de producto asociada a una venta (producto, cantidad, precio unitario). |
-| **Trazabilidad** | Capacidad de rastrear el historial completo de una operación (quién, cuándo, qué se hizo). |
-| **Reporte de ventas** | Información agregada sobre las ventas realizadas en un periodo (día, mes) o sobre los productos más vendidos. |
-| **Usuario del sistema** | Empleado de SynkroTech SAS (administrador, vendedor o personal de inventario) que inicia sesión para operar el sistema. Distinto de "cliente". |
-| **Rol** | Categoría asignada a un usuario del sistema (ADMIN, VENDEDOR, INVENTARIO) que determina qué operaciones puede realizar. |
-| **MVP (Minimum Viable Product)** | Primera versión funcional del sistema, con el alcance mínimo necesario para ser útil al negocio. |
+| # | Question                                                                                                                                                       | Impact if Unresolved                                                                        | Status                                                                                               |
+| - | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| 1 | Will SynkroTech SAS manage discounts or promotions on products in the MVP?                                                                                     | Affects the calculation of totals in Sales                                                  | Pending business validation                                                                          |
+| 2 | Is it necessary to support multiple payment methods, such as cash, card, and bank transfer, from the MVP, or is it sufficient to record the total sale amount? | Affects the `sales` data model                                                              | Pending business validation                                                                          |
+| 3 | What happens if the stock of a product reaches zero during the sales process, immediately before confirmation?                                                 | Affects the concurrency design of the Products service                                      | Pending technical definition                                                                         |
+| 4 | Does the INVENTORY role need access to sales reports, or is its scope strictly limited to products and stock?                                                  | Affects permissions defined in Auth                                                         | Resolved, see the roles section in `adr/adr-001-architecture.md`, with no access to sales or reports |
+| 5 | Will there be more than one branch or warehouse in the near future, next semester, but not in this MVP?                                                        | Affects whether the data model should be designed for multiple locations from the beginning | Pending business validation                                                                          |
+
+---
+
+## 04, Business Glossary
+
+| Term                             | Definition                                                                                                                                                           |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Customer**                     | An individual or legal entity that purchases products from SynkroTech SAS.                                                                                           |
+| **Product**                      | A technology product or electronic accessory commercialized by SynkroTech SAS, such as computers, peripherals, components, and others.                               |
+| **Category**                     | A grouping of products with similar commercial characteristics, for example, "Laptops" or "Peripherals".                                                             |
+| **Stock**                        | The quantity of a product currently available in SynkroTech SAS's inventory.                                                                                         |
+| **Sale**                         | A commercial transaction in which a customer purchases one or more products.                                                                                         |
+| **Sale Detail**                  | Each product line associated with a sale, including product, quantity, and unit price.                                                                               |
+| **Traceability**                 | The ability to track the complete history of an operation, including who performed it, when it occurred, and what was done.                                          |
+| **Sales Report**                 | Aggregated information about sales made during a specific period, such as a day or month, or information about the best-selling products.                            |
+| **System User**                  | An employee of SynkroTech SAS, such as an administrator, salesperson, or inventory employee, who logs in to operate the system. This is different from a "customer". |
+| **Role**                         | A category assigned to a system user, such as ADMIN, SALES, or INVENTORY, that determines which operations the user is allowed to perform.                           |
+| **MVP (Minimum Viable Product)** | The first functional version of the system, with the minimum scope necessary to provide value to the business.                                                       |
