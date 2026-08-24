@@ -122,5 +122,5 @@
 - [x] No secrets; config via environment variables
 
 ## 6. Evidence links
-- Corrected business PDR: [`01_PDR_negocio_v1.md`](./01_PDR_negocio_v1.md)
-- Corrected ADR-001 (single logical database): [`adr-001-architecture_v1.md`](./adr-001-architecture_v1.md)
+- Corrected business PDR: [`01_PDR_negocio_v1.md`](./docs/01_PDR_negocio_v1.md)
+- Corrected ADR-001 (single logical database): [`adr-001-architecture_v1.md`](./docs/adr-001-architecture_v1.md)

@@ -64,7 +64,7 @@ Cada microservicio se organiza en 3 capas:
 
 ### 4. Diagrama de arquitectura
 
-![Diagrama de SynkroTech](adr-001-architecture_v1.jpg)
+![Diagrama de SynkroTech](adr-001-architecture_v2.jpg)
 
 ### 5. Comunicación entre servicios
 
