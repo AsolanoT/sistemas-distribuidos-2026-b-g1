@@ -22,6 +22,16 @@ main        ← Production. Merge from qa only. Always stable.
 - All 4 backend repositories, all frontend repositories, and the database repository follow this same `main/qa/dev/feat-fix-chore-hotfix` scheme.
 - `dev` feeds the Development environment; `qa` feeds the Staging environment; `main` feeds Production (if it comes to exist).
 
+### Exception: the `docs` repository
+
+The `docs` repository **does NOT follow the `main/qa/dev` flow**. Only the `main` branch exists — no `qa`, `dev`, or intermediate `feat/*` branches.
+
+**How to contribute:** each team member works from their own fork's `main` branch and opens a Pull Request directly against the base repository's `main` (`code-corhuila/synkro-docs` or the team's repo).
+
+**Why this exception exists:** documentation must always be readable from `main` without ambiguity. If intermediate branches (`dev`, `qa`) existed, anyone reading the documentation (a team member, the instructor, an evaluator) would risk seeing outdated information by looking at the wrong branch, or not knowing which branch holds the current version. With a single branch, `main` is always the sole source of truth, no exceptions.
+
+**What stays the same as in the other repos:** each task (TASK or SPIKE) should go in a separate PR when possible, with at least 1 reviewer and green CI before merging — the only difference is the target branch.
+
 ---
 
 ## Branch naming format
