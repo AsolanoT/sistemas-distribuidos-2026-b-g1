@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200">
+<rect x="0" y="0" width="1920" height="1200" fill="#F7F5EF"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#5A6072"/>
+</marker>
+<marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#33449E"/>
+</marker>
+<marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#1F7A54"/>
+</marker>
+<marker id="arrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#B33A3A"/>
+</marker>
+</defs>
+<text x="960.0" y="76.0" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="middle">Building a Service: Layers and the Walking Skeleton</text>
+<text x="960.0" y="110.0" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500" font-style="normal" fill="#6B6F7B" text-anchor="middle">Week 4 · Session 1  —  from architecture to running code</text>
+<line x1="60.0" y1="130.0" x2="1860.0" y2="130.0" stroke="#DDD9CC" stroke-width="2"/>
+<rect x="60.0" y="150.0" width="580.0" height="490.0" rx="22" ry="22" fill="#FFFFFF" stroke="#E3E1D8" stroke-width="2"/>
+<rect x="670.0" y="150.0" width="580.0" height="490.0" rx="22" ry="22" fill="#FFFFFF" stroke="#E3E1D8" stroke-width="2"/>
+<rect x="1280.0" y="150.0" width="580.0" height="490.0" rx="22" ry="22" fill="#FFFFFF" stroke="#E3E1D8" stroke-width="2"/>
+<circle cx="94.0" cy="184.0" r="20" fill="#33449E"/>
+<text x="94.0" y="191.2" font-family="Georgia, serif" font-size="21.0" font-weight="800" font-style="normal" fill="white" text-anchor="middle">1</text>
+<text x="130.0" y="191.0" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Organize by Layers</text>
+<text x="130.0" y="212.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="500" font-style="normal" fill="#6B6F7B" text-anchor="start">(hexagonal architecture)</text>
+<rect x="90.0" y="242.0" width="520.0" height="358.0" rx="20" ry="20" fill="#EEF1FC" stroke="#33449E" stroke-width="2"/>
+<text x="350.0" y="272.0" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="800" font-style="normal" fill="#243B8C" text-anchor="middle">adapters/</text>
+<text x="350.0" y="292.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="500" font-style="normal" fill="#3A4A9E" text-anchor="middle">in/: http, messaging   ·   out/: persistence, clients</text>
+<rect x="145.0" y="338.0" width="410.0" height="208.0" rx="18" ry="18" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<text x="350.0" y="364.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="800" font-style="normal" fill="#155C3F" text-anchor="middle">application/</text>
+<text x="350.0" y="383.0" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="500" font-style="normal" fill="#1F6B49" text-anchor="middle">use-cases — orchestrate the domain</text>
+<rect x="200.0" y="404.0" width="300.0" height="112.0" rx="16" ry="16" fill="#FDECC8" stroke="#C9820A" stroke-width="2"/>
+<text x="350.0" y="446.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" font-style="normal" fill="#8A5A0A" text-anchor="middle">domain/</text>
+<text x="350.0" y="466.0" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="500" font-style="normal" fill="#6B4A08" text-anchor="middle">entities · VOs · ports</text>
+<text x="350.0" y="483.0" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="500" font-style="italic" fill="#8A7550" text-anchor="middle">(pure — no frameworks)</text>
+<text x="350.0" y="626.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" font-style="italic" fill="#5B5F6B" text-anchor="middle">dependencies always point inward →  domain/</text>
+<circle cx="704.0" cy="184.0" r="20" fill="#B85C1E"/>
+<text x="704.0" y="191.2" font-family="Georgia, serif" font-size="21.0" font-weight="800" font-style="normal" fill="white" text-anchor="middle">2</text>
+<text x="740.0" y="191.0" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">A Request's Journey</text>
+<text x="740.0" y="212.0" font-family="Arial, Helvetica, sans-serif" font-size="14.5" font-weight="500" font-style="normal" fill="#6B6F7B" text-anchor="start">one concrete call, layer by layer</text>
+<rect x="710.0" y="242.0" width="500.0" height="66.0" rx="14" ry="14" fill="#EEF1FC" stroke="#33449E" stroke-width="2"/>
+<text x="736.0" y="269.0" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">HTTP Controller</text>
+<text x="736.0" y="291.0" font-family="Courier New, monospace" font-size="13.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">POST /orders</text>
+<line x1="960.0" y1="312.0" x2="960.0" y2="332.0" stroke="#8A8F9C" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="710.0" y="336.0" width="500.0" height="66.0" rx="14" ry="14" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<text x="736.0" y="363.0" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Use Case</text>
+<text x="736.0" y="385.0" font-family="Courier New, monospace" font-size="13.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">ConfirmOrder</text>
+<line x1="960.0" y1="406.0" x2="960.0" y2="426.0" stroke="#8A8F9C" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="710.0" y="430.0" width="500.0" height="66.0" rx="14" ry="14" fill="#FDECC8" stroke="#C9820A" stroke-width="2"/>
+<text x="736.0" y="457.0" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Domain Rule</text>
+<text x="736.0" y="479.0" font-family="Courier New, monospace" font-size="13.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">order.confirm()</text>
+<line x1="960.0" y1="500.0" x2="960.0" y2="520.0" stroke="#8A8F9C" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="710.0" y="524.0" width="500.0" height="66.0" rx="14" ry="14" fill="#FBEADB" stroke="#B85C1E" stroke-width="2"/>
+<text x="736.0" y="551.0" font-family="Arial, Helvetica, sans-serif" font-size="16.5" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Outbound Port → DB</text>
+<text x="736.0" y="573.0" font-family="Courier New, monospace" font-size="13.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">OrderRepository.save()</text>
+<text x="960.0" y="624.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" font-style="italic" fill="#6B6F7B" text-anchor="middle">each layer only knows its neighbor, through ports</text>
+<circle cx="1314.0" cy="184.0" r="20" fill="#1F7A54"/>
+<text x="1314.0" y="191.2" font-family="Georgia, serif" font-size="21.0" font-weight="800" font-style="normal" fill="white" text-anchor="middle">3</text>
+<text x="1350.0" y="191.0" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Wire at the Composition</text>
+<text x="1350.0" y="216.0" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Root (DIP)</text>
+<rect x="1320.0" y="245.0" width="500.0" height="58.0" rx="14" ry="14" fill="#EAE4F6" stroke="#5B4B8A" stroke-width="2"/>
+<text x="1570.0" y="269.0" font-family="Arial, Helvetica, sans-serif" font-size="15.5" font-weight="800" font-style="normal" fill="#3E3266" text-anchor="middle">Composition Root</text>
+<text x="1570.0" y="289.0" font-family="Courier New, monospace" font-size="12" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="middle">( main / config )</text>
+<line x1="1570.0" y1="307.0" x2="1570.0" y2="329.0" stroke="#5B4B8A" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1320.0" y="333.0" width="500.0" height="54.0" rx="12" ry="12" fill="#EEF1FC" stroke="#33449E" stroke-width="2"/>
+<text x="1342.0" y="355.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Concrete adapter</text>
+<text x="1342.0" y="373.0" font-family="Courier New, monospace" font-size="11.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">PostgresOrderRepository</text>
+<line x1="1570.0" y1="390.0" x2="1570.0" y2="402.0" stroke="#8A8F9C" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1320.0" y="405.0" width="500.0" height="54.0" rx="12" ry="12" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<text x="1342.0" y="427.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Use case</text>
+<text x="1342.0" y="445.0" font-family="Courier New, monospace" font-size="11.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">ConfirmOrder( repo )</text>
+<line x1="1570.0" y1="462.0" x2="1570.0" y2="474.0" stroke="#8A8F9C" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1320.0" y="477.0" width="500.0" height="54.0" rx="12" ry="12" fill="#FBEADB" stroke="#B85C1E" stroke-width="2"/>
+<text x="1342.0" y="499.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Inbound adapter</text>
+<text x="1342.0" y="517.0" font-family="Courier New, monospace" font-size="11.5" font-weight="500" font-style="normal" fill="#4A4F5C" text-anchor="start">OrderController( useCase )</text>
+<rect x="1320.0" y="549.0" width="500.0" height="52.0" rx="12" ry="12" fill="#FBE4E4" stroke="#B33A3A" stroke-width="1.8"/>
+<text x="1342.0" y="570.0" font-family="Arial, Helvetica, sans-serif" font-size="12.3" font-weight="800" font-style="normal" fill="#8C2A2A" text-anchor="start">Nothing inside the domain calls  new PostgresRepo()</text>
+<text x="1342.0" y="588.0" font-family="Arial, Helvetica, sans-serif" font-size="10.9" font-weight="500" font-style="normal" fill="#8C2A2A" text-anchor="start">in tests: swap in an in-memory adapter — the core never changes</text>
+<rect x="60.0" y="670.0" width="580.0" height="330.0" rx="22" ry="22" fill="#FFFFFF" stroke="#E3E1D8" stroke-width="2"/>
+<rect x="670.0" y="670.0" width="1190.0" height="330.0" rx="22" ry="22" fill="#FFFFFF" stroke="#E3E1D8" stroke-width="2"/>
+<circle cx="94.0" cy="704.0" r="20" fill="#1F7A54"/>
+<text x="94.0" y="711.2" font-family="Georgia, serif" font-size="21.0" font-weight="800" font-style="normal" fill="white" text-anchor="middle">4</text>
+<text x="130.0" y="711.0" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">The Walking Skeleton</text>
+<text x="100.0" y="752.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="600" font-style="normal" fill="#3A3F4B" text-anchor="start">the thinnest slice that runs</text>
+<text x="100.0" y="770.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="600" font-style="normal" fill="#3A3F4B" text-anchor="start">end to end — even if it does almost nothing</text>
+<rect x="96.0" y="820.0" width="118.0" height="60.0" rx="12" ry="12" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<text x="155.0" y="855.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" font-style="normal" fill="#155C3F" text-anchor="middle">HTTP</text>
+<rect x="238.0" y="820.0" width="118.0" height="60.0" rx="12" ry="12" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<text x="297.0" y="846.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" font-style="normal" fill="#155C3F" text-anchor="middle">Use</text>
+<text x="297.0" y="864.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="800" font-style="normal" fill="#155C3F" text-anchor="middle">case</text>
+<line x1="220.0" y1="850.0" x2="234.0" y2="850.0" stroke="#1F7A54" stroke-width="3" marker-end="url(#arrowGreen)"/>
+<rect x="380.0" y="820.0" width="118.0" height="60.0" rx="12" ry="12" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<text x="439.0" y="855.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" font-style="normal" fill="#155C3F" text-anchor="middle">Domain</text>
+<line x1="362.0" y1="850.0" x2="376.0" y2="850.0" stroke="#1F7A54" stroke-width="3" marker-end="url(#arrowGreen)"/>
+<line x1="502.0" y1="850.0" x2="518.0" y2="850.0" stroke="#1F7A54" stroke-width="3" marker-end="url(#arrowGreen)"/>
+<ellipse cx="567.0" cy="817.0" rx="45.0" ry="12" fill="#D8F0E4" stroke="#1F7A54" stroke-width="2"/>
+<rect x="522.0" y="817.0" width="90.0" height="66.0" fill="#D8F0E4" stroke="none"/>
+<line x1="522.0" y1="817.0" x2="522.0" y2="883.0" stroke="#1F7A54" stroke-width="2"/>
+<line x1="612.0" y1="817.0" x2="612.0" y2="883.0" stroke="#1F7A54" stroke-width="2"/>
+<path d="M 522.0 883.0 A 45.0 12 0 0 0 612.0 883.0" fill="none" stroke="#1F7A54" stroke-width="2"/>
+<text x="567.0" y="855.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="800" font-style="normal" fill="#155C3F" text-anchor="middle">Real DB</text>
+<rect x="96.0" y="914.0" width="508.0" height="88.0" rx="12" ry="12" fill="#FDECC8" stroke="#C9820A" stroke-width="1.8"/>
+<text x="116.0" y="940.0" font-family="Arial, Helvetica, sans-serif" font-size="13.5" font-weight="800" font-style="normal" fill="#8A5A0A" text-anchor="start">The real Definition of Done:</text>
+<text x="116.0" y="961.0" font-family="Arial, Helvetica, sans-serif" font-size="12.3" font-weight="500" font-style="normal" fill="#6B4A08" text-anchor="start">the service starts against a real DB and answers</text>
+<text x="116.0" y="979.0" font-family="Arial, Helvetica, sans-serif" font-size="12.3" font-weight="500" font-style="normal" fill="#6B4A08" text-anchor="start">one request from day 1 — not just "it compiles"</text>
+<circle cx="704.0" cy="704.0" r="20" fill="#B33A3A"/>
+<text x="704.0" y="711.2" font-family="Georgia, serif" font-size="21.0" font-weight="800" font-style="normal" fill="white" text-anchor="middle">5</text>
+<text x="740.0" y="711.0" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">A Path You Will Face: the "Big Bang"</text>
+<text x="740.0" y="732.0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="500" font-style="normal" fill="#6B6F7B" text-anchor="start">a team builds each layer separately and only integrates at the end</text>
+<rect x="710.0" y="742.0" width="40.0" height="24.0" rx="7" ry="7" fill="#B33A3A"/>
+<text x="730.0" y="759.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="800" font-style="normal" fill="#FFFFFF" text-anchor="middle">NO</text>
+<text x="760.0" y="760.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" font-style="normal" fill="#B33A3A" text-anchor="start">The "big bang" approach</text>
+<rect x="710.0" y="774.0" width="327.0" height="46.0" rx="8" ry="8" fill="#F0D6D6" stroke="#B33A3A" stroke-width="1.6"/>
+<text x="873.5" y="802.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="700" font-style="normal" fill="#7A2323" text-anchor="middle">Domain — 3 weeks</text>
+<rect x="1043.0" y="774.0" width="216.0" height="46.0" rx="8" ry="8" fill="#F0D6D6" stroke="#B33A3A" stroke-width="1.6"/>
+<text x="1151.0" y="802.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="700" font-style="normal" fill="#7A2323" text-anchor="middle">DB — 2 weeks</text>
+<rect x="1265.0" y="774.0" width="127.2" height="46.0" rx="8" ry="8" fill="#F0D6D6" stroke="#B33A3A" stroke-width="1.6"/>
+<text x="1328.6" y="802.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="700" font-style="normal" fill="#7A2323" text-anchor="middle">HTTP — 1 week</text>
+<rect x="1398.2" y="774.0" width="415.8" height="46.0" rx="8" ry="8" fill="#E9B9B9" stroke="#B33A3A" stroke-width="1.6"/>
+<text x="1606.1" y="802.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="700" font-style="normal" fill="#7A2323" text-anchor="middle">Integrate everything (last week)</text>
+<text x="1834.0" y="802.0" font-family="Arial, Helvetica, sans-serif" font-size="1" font-weight="400" font-style="normal" fill="#1F2430" text-anchor="start"></text>
+<text x="710.0" y="846.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" font-style="italic" fill="#B33A3A" text-anchor="start">result: nothing runs end to end for the demo</text>
+<rect x="710.0" y="852.0" width="54.0" height="24.0" rx="7" ry="7" fill="#1F7A54"/>
+<text x="737.0" y="869.0" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="800" font-style="normal" fill="#FFFFFF" text-anchor="middle">YES</text>
+<text x="774.0" y="870.0" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="800" font-style="normal" fill="#1F7A54" text-anchor="start">Walking skeleton first</text>
+<rect x="710.0" y="884.0" width="371.4" height="46.0" rx="8" ry="8" fill="#CDEBDC" stroke="#1F7A54" stroke-width="1.6"/>
+<text x="895.7" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11.6" font-weight="700" font-style="normal" fill="#155C3F" text-anchor="middle">Day 1: GET /health + 1 persisted entity</text>
+<rect x="1087.4" y="884.0" width="238.2" height="46.0" rx="8" ry="8" fill="#CDEBDC" stroke="#1F7A54" stroke-width="1.6"/>
+<text x="1206.5" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11.6" font-weight="700" font-style="normal" fill="#155C3F" text-anchor="middle">Continuous integration</text>
+<rect x="1331.6" y="884.0" width="260.4" height="46.0" rx="8" ry="8" fill="#CDEBDC" stroke="#1F7A54" stroke-width="1.6"/>
+<text x="1461.8" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11.6" font-weight="700" font-style="normal" fill="#155C3F" text-anchor="middle">Grows in vertical slices</text>
+<rect x="1598.0" y="884.0" width="216.0" height="46.0" rx="8" ry="8" fill="#A9DCC0" stroke="#1F7A54" stroke-width="1.6"/>
+<text x="1706.0" y="912.0" font-family="Arial, Helvetica, sans-serif" font-size="11.6" font-weight="700" font-style="normal" fill="#155C3F" text-anchor="middle">Always demo-ready</text>
+<text x="710.0" y="956.0" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" font-style="italic" fill="#1F7A54" text-anchor="start">the pain of integrating daily is small; at the end of the project it sinks the release</text>
+<circle cx="82.0" cy="1026.0" r="18" fill="#5B4B8A"/>
+<text x="82.0" y="1032.5" font-family="Georgia, serif" font-size="18.900000000000002" font-weight="800" font-style="normal" fill="white" text-anchor="middle">6</text>
+<text x="112.0" y="1032.0" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="800" font-style="normal" fill="#1F2430" text-anchor="start">Common mistakes that sink the architecture</text>
+<rect x="60.0" y="1060.0" width="432.0" height="100.0" rx="14" ry="14" fill="#EAE4F6" stroke="#5B4B8A" stroke-width="1.8"/>
+<text x="78.0" y="1088.0" font-family="Arial, Helvetica, sans-serif" font-size="13.8" font-weight="800" font-style="normal" fill="#3E3266" text-anchor="start">new Concrete() inside the use case</text>
+<text x="78.0" y="1110.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">breaks DIP and makes tests</text>
+<text x="78.0" y="1128.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">impossible to isolate</text>
+<rect x="516.0" y="1060.0" width="432.0" height="100.0" rx="14" ry="14" fill="#EAE4F6" stroke="#5B4B8A" stroke-width="1.8"/>
+<text x="534.0" y="1088.0" font-family="Arial, Helvetica, sans-serif" font-size="13.8" font-weight="800" font-style="normal" fill="#3E3266" text-anchor="start">Everything in one file</text>
+<text x="534.0" y="1110.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">invisible architecture; 300+ line</text>
+<text x="534.0" y="1128.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">"monolith" files</text>
+<rect x="972.0" y="1060.0" width="432.0" height="100.0" rx="14" ry="14" fill="#EAE4F6" stroke="#5B4B8A" stroke-width="1.8"/>
+<text x="990.0" y="1088.0" font-family="Arial, Helvetica, sans-serif" font-size="13.8" font-weight="800" font-style="normal" fill="#3E3266" text-anchor="start">Building layers in isolation</text>
+<text x="990.0" y="1110.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">integrating only at the end = "big</text>
+<text x="990.0" y="1128.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">bang" risk</text>
+<rect x="1428.0" y="1060.0" width="432.0" height="100.0" rx="14" ry="14" fill="#EAE4F6" stroke="#5B4B8A" stroke-width="1.8"/>
+<text x="1446.0" y="1088.0" font-family="Arial, Helvetica, sans-serif" font-size="13.8" font-weight="800" font-style="normal" fill="#3E3266" text-anchor="start">A service that only "compiles"</text>
+<text x="1446.0" y="1110.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">never actually ran against a real</text>
+<text x="1446.0" y="1128.0" font-family="Arial, Helvetica, sans-serif" font-size="11.8" font-weight="500" font-style="normal" fill="#5B4B8A" text-anchor="start">database</text>
+</svg>
