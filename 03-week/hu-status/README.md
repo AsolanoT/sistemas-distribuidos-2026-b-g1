@@ -32,9 +32,9 @@
 |---|---|---|---|
 | HU-PDR-06 | Correct section 01 - Needs and problems (functional/non-functional requirements) in the business PDR | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/03-week/hu-status/docs/01_PDR_negocio_v2.md |
 | HU-ADR-06 (B) | Correct ADR-001: move from 4 independent databases to a single logical database with one schema per service | done | https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/03-week/hu-status/docs/adr-001-architecture_v2.md |
-| HU-DOM-02 | Model entities, aggregates, invariants, and the identifier strategy (UUID) | done | http |
-| HU-DOCS-08 | Define language, structure, and ownership rules for documentation | done | https |
-| HU-DOCS-09 | Define the per-microservice documentation standard | done | https |
+| HU-DOM-02 | Model entities, aggregates, invariants, and the identifier strategy (UUID) | done | https://github.com/code-corhuila/synkro-docs/blob/main/02-domain/entities-and-rules.md |
+| HU-DOCS-08 | Define language, structure, and ownership rules for documentation | done | https://github.com/code-corhuila/synkro-docs/blob/main/00-governance/documentation-rules.md |
+| HU-DOCS-09 | Define the per-microservice documentation standard | done | https://github.com/code-corhuila/synkro-docs/blob/main/00-governance/microservices-documentation.md |
 
 ## 2. My individual contribution
 
