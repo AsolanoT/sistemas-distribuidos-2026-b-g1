@@ -15,7 +15,7 @@
 | Current sprint | Sprint 3 — Week 3 of the project (16 weeks total) |
 | Estimated capacity | No point estimation yet (see note below) |
 
-> **Note:** during Sprint 0 (weeks 1-2, discovery documentation) the team worked with `TASK` (business documentation tasks) and `SPIKE` (research/architecture decisions), without story-point estimation, since these were not real product user stories. Point estimation (see scale below) starts once real product HUs exist, i.e. when code implementation begins.
+> **Note:** The team uses **HU (User Story) as the only work item type**, without distinguishing Task/Spike/HU — this includes both product features and documentation/research tasks (PDR, ADR, context map, governance, etc.). Point estimation (see scale below) starts once real product feature HUs (code) exist; it does not apply to documentation HUs.
 
 ---
 
@@ -99,8 +99,8 @@
 
 | Sprint | Items completed | Notes |
 |--------|----------------------|-------|
-| Sprint 0 (weeks 1-2) | 8 TASK/SPIKE | Discovery documentation (PDR, ADR-001) |
-| Sprint 3 (week 3) | 6 TASK/SPIKE | PDR/ADR correction + context-map creation |
+| Sprint 0 (weeks 1-2) | 8 HU | Discovery documentation (PDR, ADR-001) |
+| Sprint 3 (week 3) | 22 HU | PDR/ADR correction + context map + populating `00-governance`, `01-context`, and `02-domain` |
 | Average | — | Will be calculated once implementation starts (story points) |
 
 ---
