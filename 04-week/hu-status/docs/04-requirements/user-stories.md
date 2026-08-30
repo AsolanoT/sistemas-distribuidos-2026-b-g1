@@ -296,6 +296,58 @@ Scenario 4: Pending note gets resolved
 
 ---
 
+### HU-DOCS-13 — Formalize the MVP Backlog and Non-Functional Requirements {#HU-DOCS-13}
+
+**Epic:** EP-001
+
+> **As** the Product Owner (course instructor) and the team
+> **I want** `04-requirements/user-stories.md` (10–15 MVP user stories) and `04-requirements/non-functional.md` (NFRs with measurable metrics) filled in
+> **so that** the backlog and the MVP's quality level are made explicit, and the NFR IDs already referenced in other documents (NFR-03, NFR-04, NFR-07) finally get a real, measurable definition instead of remaining loose references
+
+**Acceptance Criteria:**
+
+```gherkin
+Scenario 1: User stories formalize what's already decided, not invented from scratch
+  Given the MVP scope already fixed in 01-context/scope.md, and the
+        concrete flows already built in the MVP monolith (HU-ARQ-02, HU-FE-01)
+  When  user-stories.md is filled in
+  Then  it must contain 10–15 user stories in the _template-hu.md
+        format, each traceable to an item already present in scope.md's
+        "MVP Scope" table
+  And   no story introduces functionality outside that table
+
+Scenario 2: Non-functional requirements get real, measurable definitions
+  Given NFR-03, NFR-04, and NFR-07 are already mentioned by ID in
+        01-context/overview.md but were never formally defined
+  When  non-functional.md is filled in
+  Then  each of those three IDs gets a complete definition with a
+        measurable metric (per _template-nfr.md)
+  And   any additional NFR the team identifies is added with its own ID
+
+Scenario 3: Each user story is mapped to a responsible service
+  Given the 4 bounded contexts already fixed in 02-domain/domain-map.md
+  When  each user story is written
+  Then  it must state which of Auth/Customers/Products/Sales is
+        responsible, consistent with 09-microservices/service-catalog.md
+```
+
+**Definition of Done:**
+- [ ] Both files are consistent with `01-context/scope.md`, `02-domain/domain-map.md`, and `09-microservices/service-catalog.md`
+- [ ] No user story contradicts an acceptance criterion already implemented in the MVP monolith (HU-ARQ-02 / HU-FE-01)
+- [ ] Reviewed and approved by at least one other team member
+
+| Field | Value |
+|-------|-------|
+| Story Points | 8 |
+| Priority | Should Have |
+| Target sprint | Sprint 4 |
+| Assigned to | Fredman Santiago Plazas Artunduaga + Angel Gustavo Solano Trujillo |
+| Status | Ready |
+| Dependencies | HU-DOCS-12 (problem-framing/vision must exist first — already done) |
+| Affected service(s) | N/A (product/requirements definition, cross-cutting) |
+
+---
+
 ## Rules for writing HUs
 
 ### 1. The role matters
