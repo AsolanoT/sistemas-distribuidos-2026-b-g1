@@ -60,7 +60,7 @@ Have a system that centralizes customers, products, and sales, automates calcula
 | RF-07 | The system must automatically deduct stock when a sale is registered.                                         |
 | RF-08 | The system must generate daily and monthly sales reports.                                                     |
 | RF-09 | The system must generate a report of the best-selling products.                                               |
-| RF-10 | The system must authenticate users and restrict operations according to their role (ADMIN, SALES, INVENTORY). |
+| RF-10 | The system must authenticate users and restrict operations according to their role (ADMIN, SALESPERSON, INVENTORY). |
 
 ### 1.4 Non-Functional Requirements
 

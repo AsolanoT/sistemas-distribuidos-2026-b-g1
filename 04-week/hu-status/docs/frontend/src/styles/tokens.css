@@ -1,0 +1,31 @@
+/* Approved in the Figma style guide: "SynkroTech — MVP UI Draft" > Style guide. */
+:root {
+  --color-ink: #1B2430;           /* primary text */
+  --color-canvas: #F5F7FA;        /* page bg / sidebar panel */
+  --color-primary-steel: #2F5D8A; /* nav, links, secondary buttons */
+  --color-accent-copper: #C97C3D; /* primary action buttons — one per screen */
+  --color-success: #2E8B67;       /* in-stock state */
+  --color-error: #C1443C;         /* out-of-stock / rejected state */
+
+  /* Derived from the approved palette — surfaces, borders and muted text the
+     style guide does not name, kept in one place so they stay consistent. */
+  --color-surface: #FFFFFF;
+  --color-border: #DFE5EC;
+  --color-border-strong: #C4CEDA;
+  --color-muted: #64748B;
+  --color-steel-soft: rgba(47, 93, 138, 0.10);
+  --color-copper-soft: rgba(201, 124, 61, 0.12);
+  --color-success-soft: rgba(46, 139, 103, 0.12);
+  --color-error-soft: rgba(193, 68, 60, 0.12);
+
+  --font-heading: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', ui-monospace, monospace;
+
+  --radius: 8px;
+  --radius-sm: 5px;
+  --shadow-card: 0 1px 2px rgba(27, 36, 48, 0.06), 0 1px 3px rgba(27, 36, 48, 0.04);
+  --shadow-pop: 0 10px 30px rgba(27, 36, 48, 0.18);
+
+  --sidebar-width: 244px;
+}

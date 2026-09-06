@@ -1,0 +1,252 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="5" refY="8" orient="auto">
+      <path d="M0,0 L10,0 L5,10 Z" fill="#7c3aed"/>
+    </marker>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000000" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1920" height="1200" fill="#f7f6f2"/>
+  <rect x="0" y="0" width="1920" height="10" fill="#1e293b"/>
+
+  <!-- HEADER -->
+  <text x="960" y="66" font-size="50" font-weight="800" fill="#111827" text-anchor="middle">Release Day: Shipping MVP 1</text>
+  <text x="960" y="104" font-size="24" fill="#6b7280" text-anchor="middle">Closing Corte 1 &#183; Week 5 &#183; Session 2 &#183; Distributed Systems</text>
+  <line x1="660" y1="128" x2="1260" y2="128" stroke="#e5e7eb" stroke-width="2"/>
+
+  <!-- ============ ROW 1 ============ -->
+
+  <!-- BOX: What is a release -->
+  <g filter="url(#soft)">
+    <rect x="40" y="160" width="580" height="300" rx="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  </g>
+  <rect x="40" y="160" width="10" height="300" rx="5" fill="#2563eb"/>
+  <text x="80" y="197" font-size="27" font-weight="700" fill="#1e293b">What is a release?</text>
+  <text x="80" y="228" font-size="20" fill="#374151">
+    <tspan x="80" dy="0">A release (MVP) is a versioned,</tspan>
+    <tspan x="80" dy="26">running slice of the product that</tspan>
+    <tspan x="80" dy="26">meets its acceptance criteria and</tspan>
+    <tspan x="80" dy="26">could be deployed by an outsider.</tspan>
+    <tspan x="80" dy="26" font-weight="700" fill="#1e293b">It's not a demo of intentions:</tspan>
+    <tspan x="80" dy="24" font-weight="700" fill="#1e293b">it is real, working software.</tspan>
+  </text>
+  <line x1="80" y1="378" x2="580" y2="378" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="80" y="403" font-size="17.5" fill="#4b5563">
+    <tspan x="80" dy="0"><tspan font-weight="700" fill="#2563eb">Example:</tspan> it's like handing over a car:</tspan>
+    <tspan x="80" dy="22">it's not enough that it starts in the shop;</tspan>
+    <tspan x="80" dy="22">it must drive and brake for the customer,</tspan>
+  </text>
+
+  <!-- BOX: Pipeline -->
+  <g filter="url(#soft)">
+    <rect x="660" y="160" width="580" height="300" rx="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  </g>
+  <rect x="660" y="160" width="10" height="300" rx="5" fill="#7c3aed"/>
+  <text x="700" y="197" font-size="27" font-weight="700" fill="#1e293b">Promoting the increment</text>
+
+  <!-- node develop -->
+  <rect x="700" y="207" width="220" height="34" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="810" y="229" font-size="18" font-weight="700" fill="#3730a3" text-anchor="middle">develop</text>
+  <line x1="810" y1="241" x2="810" y2="274" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrowDown)"/>
+  <text x="940" y="262" font-size="15.5" fill="#4b5563">
+    <tspan x="940" dy="0">merge each HU</tspan>
+    <tspan x="940" dy="18">(hu-xxx-dev)</tspan>
+  </text>
+
+  <!-- node qa -->
+  <rect x="700" y="274" width="220" height="34" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="810" y="296" font-size="18" font-weight="700" fill="#3730a3" text-anchor="middle">qa</text>
+  <line x1="810" y1="308" x2="810" y2="341" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrowDown)"/>
+  <text x="940" y="329" font-size="15.5" fill="#4b5563">
+    <tspan x="940" dy="0">integrate</tspan>
+    <tspan x="940" dy="18">+ verify</tspan>
+  </text>
+
+  <!-- node main -->
+  <rect x="700" y="341" width="220" height="34" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="810" y="363" font-size="18" font-weight="700" fill="#3730a3" text-anchor="middle">main</text>
+  <line x1="810" y1="375" x2="810" y2="408" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrowDown)"/>
+  <text x="940" y="396" font-size="15.5" fill="#4b5563">
+    <tspan x="940" dy="0">version gets</tspan>
+    <tspan x="940" dy="18">tagged</tspan>
+  </text>
+
+  <!-- node tag -->
+  <rect x="700" y="408" width="220" height="36" rx="8" fill="#7c3aed"/>
+  <text x="810" y="431" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">tag v1.0.0 = MVP 1</text>
+
+  <!-- BOX: DoD checklist -->
+  <g filter="url(#soft)">
+    <rect x="1280" y="160" width="580" height="300" rx="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  </g>
+  <rect x="1280" y="160" width="10" height="300" rx="5" fill="#16a34a"/>
+  <text x="1320" y="197" font-size="26" font-weight="700" fill="#1e293b">Checklist &#183; Definition of Done</text>
+
+  <g font-size="18.5" fill="#374151">
+    <circle cx="1330" cy="223" r="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <path d="M1325,223 l3,4 l7,-8" stroke="#16a34a" stroke-width="2.2" fill="none"/>
+    <text x="1348" y="229">All acceptance criteria met</text>
+
+    <circle cx="1330" cy="265" r="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <path d="M1325,265 l3,4 l7,-8" stroke="#16a34a" stroke-width="2.2" fill="none"/>
+    <text x="1348" y="271">Unit + integration tests green</text>
+
+    <circle cx="1330" cy="307" r="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <path d="M1325,307 l3,4 l7,-8" stroke="#16a34a" stroke-width="2.2" fill="none"/>
+    <text x="1348" y="313"><tspan font-family="monospace" font-size="16">docker compose up</tspan> with real DB</text>
+
+    <circle cx="1330" cy="349" r="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <path d="M1325,349 l3,4 l7,-8" stroke="#16a34a" stroke-width="2.2" fill="none"/>
+    <text x="1348" y="355">Happy path and error path (e.g. 409)</text>
+
+    <circle cx="1330" cy="391" r="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <path d="M1325,391 l3,4 l7,-8" stroke="#16a34a" stroke-width="2.2" fill="none"/>
+    <text x="1348" y="397">No secrets &#8212; config via env vars</text>
+
+    <circle cx="1330" cy="433" r="9" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <path d="M1325,433 l3,4 l7,-8" stroke="#16a34a" stroke-width="2.2" fill="none"/>
+    <text x="1348" y="439">README + ADR + tag + CHANGELOG</text>
+  </g>
+
+  <!-- ============ ROW 2 ============ -->
+
+  <!-- BOX: Demo -->
+  <g filter="url(#soft)">
+    <rect x="40" y="500" width="580" height="300" rx="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  </g>
+  <rect x="40" y="500" width="10" height="300" rx="5" fill="#ea580c"/>
+  <text x="80" y="537" font-size="27" font-weight="700" fill="#1e293b">Demo: working software</text>
+  <text x="80" y="565" font-size="18.5" fill="#374151">
+    <tspan x="80" dy="0">The demo shows the system running,</tspan>
+    <tspan x="80" dy="24">hitting the sprint goal end to end &#8212;</tspan>
+    <tspan x="80" dy="24">never slides of what was planned.</tspan>
+  </text>
+  <line x1="80" y1="633" x2="580" y2="633" stroke="#e5e7eb" stroke-width="1.5"/>
+  <g font-size="18.5" fill="#374151">
+    <circle cx="90" cy="660" r="12" fill="#ffedd5"/>
+    <text x="90" y="665" font-size="14" font-weight="700" fill="#ea580c" text-anchor="middle">1</text>
+    <text x="112" y="666">Call the API</text>
+
+    <circle cx="90" cy="694" r="12" fill="#ffedd5"/>
+    <text x="90" y="699" font-size="14" font-weight="700" fill="#ea580c" text-anchor="middle">2</text>
+    <text x="112" y="700">See the data persist in the real DB</text>
+
+    <circle cx="90" cy="728" r="12" fill="#ffedd5"/>
+    <text x="90" y="733" font-size="14" font-weight="700" fill="#ea580c" text-anchor="middle">3</text>
+    <text x="112" y="734">Trigger the key error (out-of-stock &#8594; 409)</text>
+  </g>
+  <text x="80" y="772" font-size="16.5" fill="#6b7280">
+    <tspan x="80" dy="0">Everyone can explain what was built, why</tspan>
+    <tspan x="80" dy="21">(pointing to the ADR), and what's next.</tspan>
+  </text>
+
+  <!-- BOX: Retro -->
+  <g filter="url(#soft)">
+    <rect x="660" y="500" width="580" height="300" rx="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  </g>
+  <rect x="660" y="500" width="10" height="300" rx="5" fill="#0ea5e9"/>
+  <text x="700" y="537" font-size="27" font-weight="700" fill="#1e293b">Retrospective &#8594; Next Corte</text>
+
+  <!-- Keep -->
+  <rect x="700" y="558" width="170" height="30" rx="15" fill="#16a34a"/>
+  <text x="785" y="578" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">KEEP</text>
+  <text x="785" y="612" font-size="16.5" fill="#374151" text-anchor="middle">
+    <tspan x="785" dy="0">Walking skeleton</tspan>
+    <tspan x="785" dy="21">from day one</tspan>
+  </text>
+
+  <!-- Drop -->
+  <rect x="890" y="558" width="170" height="30" rx="15" fill="#dc2626"/>
+  <text x="975" y="578" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">DROP</text>
+  <text x="975" y="612" font-size="16.5" fill="#374151" text-anchor="middle">
+    <tspan x="975" dy="0">Big tasks</tspan>
+    <tspan x="975" dy="21">(over 1 day)</tspan>
+  </text>
+
+  <!-- Try -->
+  <rect x="1080" y="558" width="170" height="30" rx="15" fill="#2563eb"/>
+  <text x="1165" y="578" font-size="16" font-weight="700" fill="#ffffff" text-anchor="middle">TRY</text>
+  <text x="1165" y="612" font-size="16.5" fill="#374151" text-anchor="middle">
+    <tspan x="1165" dy="0">Contract tests</tspan>
+    <tspan x="1165" dy="21">in the CI pipeline</tspan>
+  </text>
+
+  <line x1="700" y1="668" x2="1250" y2="668" stroke="#e5e7eb" stroke-width="1.5"/>
+  <text x="700" y="700" font-size="18" fill="#374151">
+    <tspan x="700" dy="0">Each "Try" becomes a backlog item</tspan>
+    <tspan x="700" dy="26">for the next Corte &#8212; re-estimated,</tspan>
+    <tspan x="700" dy="26">not just moved over.</tspan>
+  </text>
+
+  <!-- BOX: Evaluation -->
+  <g filter="url(#soft)">
+    <rect x="1280" y="500" width="580" height="300" rx="18" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+  </g>
+  <rect x="1280" y="500" width="10" height="300" rx="5" fill="#0d9488"/>
+  <text x="1320" y="537" font-size="27" font-weight="700" fill="#1e293b">How MVP 1 is evaluated</text>
+
+  <!-- 2x2 grid -->
+  <rect x="1320" y="565" width="255" height="95" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+  <text x="1340" y="592" font-size="18" font-weight="700" fill="#0f766e">Functionality</text>
+  <text x="1340" y="614" font-size="15.5" fill="#374151">Does it meet the</text>
+  <text x="1340" y="632" font-size="15.5" fill="#374151">sprint goal (demo)?</text>
+
+  <rect x="1585" y="565" width="255" height="95" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+  <text x="1605" y="592" font-size="18" font-weight="700" fill="#0f766e">Code quality</text>
+  <text x="1605" y="614" font-size="15.5" fill="#374151">Clean Code,</text>
+  <text x="1605" y="632" font-size="15.5" fill="#374151">automated tests</text>
+
+  <rect x="1320" y="670" width="255" height="95" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+  <text x="1340" y="697" font-size="18" font-weight="700" fill="#0f766e">Architecture</text>
+  <text x="1340" y="719" font-size="15.5" fill="#374151">DDD / hexagonal</text>
+  <text x="1340" y="737" font-size="15.5" fill="#374151">boundaries respected</text>
+
+  <rect x="1585" y="670" width="255" height="95" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.3"/>
+  <text x="1605" y="697" font-size="18" font-weight="700" fill="#0f766e">Scrum compliance</text>
+  <text x="1605" y="719" font-size="15.5" fill="#374151">Backlog, HU,</text>
+  <text x="1605" y="737" font-size="15.5" fill="#374151">ceremonies &#183; hu-status</text>
+
+  <!-- ============ ROW 3: Common mistakes ============ -->
+  <g filter="url(#soft)">
+    <rect x="40" y="840" width="1840" height="320" rx="18" fill="#fff5f5" stroke="#fecaca" stroke-width="1.5"/>
+  </g>
+  <rect x="40" y="840" width="10" height="320" rx="5" fill="#dc2626"/>
+  <text x="80" y="882" font-size="28" font-weight="800" fill="#7f1d1d">Common mistakes &#8212; this is NOT a release</text>
+
+  <!-- card 1 -->
+  <rect x="70" y="910" width="855" height="110" rx="14" fill="#ffffff" stroke="#fca5a5" stroke-width="1.3"/>
+  <circle cx="110" cy="948" r="16" fill="#fee2e2"/>
+  <text x="110" y="954" font-size="18" font-weight="800" fill="#dc2626" text-anchor="middle">&#10005;</text>
+  <text x="140" y="943" font-size="19.5" font-weight="700" fill="#1e293b">Calling it "released" with a red pipeline</text>
+  <text x="140" y="968" font-size="17" fill="#4b5563">or a service that won't start.</text>
+
+  <!-- card 2 -->
+  <rect x="955" y="910" width="855" height="110" rx="14" fill="#ffffff" stroke="#fca5a5" stroke-width="1.3"/>
+  <circle cx="995" cy="948" r="16" fill="#fee2e2"/>
+  <text x="995" y="954" font-size="18" font-weight="800" fill="#dc2626" text-anchor="middle">&#10005;</text>
+  <text x="1025" y="943" font-size="19.5" font-weight="700" fill="#1e293b">Demoing slides instead of the</text>
+  <text x="1025" y="968" font-size="17" fill="#4b5563">running system.</text>
+
+  <!-- card 3 -->
+  <rect x="70" y="1040" width="855" height="110" rx="14" fill="#ffffff" stroke="#fca5a5" stroke-width="1.3"/>
+  <circle cx="110" cy="1078" r="16" fill="#fee2e2"/>
+  <text x="110" y="1084" font-size="18" font-weight="800" fill="#dc2626" text-anchor="middle">&#10005;</text>
+  <text x="140" y="1073" font-size="19.5" font-weight="700" fill="#1e293b">No version tag / no CHANGELOG</text>
+  <text x="140" y="1098" font-size="17" fill="#4b5563">&#8594; the release isn't reproducible.</text>
+
+  <!-- card 4 -->
+  <rect x="955" y="1040" width="855" height="110" rx="14" fill="#ffffff" stroke="#fca5a5" stroke-width="1.3"/>
+  <circle cx="995" cy="1078" r="16" fill="#fee2e2"/>
+  <text x="995" y="1084" font-size="18" font-weight="800" fill="#dc2626" text-anchor="middle">&#10005;</text>
+  <text x="1025" y="1073" font-size="19.5" font-weight="700" fill="#1e293b">Skipping the retro</text>
+  <text x="1025" y="1098" font-size="17" fill="#4b5563">&#8594; the same pain returns next Corte.</text>
+
+  <!-- FOOTER -->
+  <text x="1880" y="1188" font-size="15" fill="#9ca3af" text-anchor="end">Software Architecture &#183; Distributed Systems</text>
+  <text x="40" y="1188" font-size="15" fill="#9ca3af">"MVP" reduces scope, not standards.</text>
+</svg>

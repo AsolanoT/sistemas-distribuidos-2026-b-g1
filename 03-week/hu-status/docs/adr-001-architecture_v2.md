@@ -96,7 +96,7 @@ Auth is the only service responsible for issuing JWT tokens, using the RS256 alg
 | Role          | Permissions                                                                           |
 | ------------- | ------------------------------------------------------------------------------------- |
 | **ADMIN**     | Full access: users/roles, customers, products, sales, and reports                     |
-| **SALES**     | Manages customers, creates sales, checks stock, and views reports for their own sales |
+| **SALESPERSON**     | Manages customers, creates sales, checks stock, and views reports for their own sales |
 | **INVENTORY** | Manages products, categories, and stock; no access to customers, sales, or reports    |
 
 ### 7. Data Model per Schema
