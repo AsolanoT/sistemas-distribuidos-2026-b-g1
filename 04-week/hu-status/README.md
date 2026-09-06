@@ -69,6 +69,6 @@
 - [x] No secrets; config via environment variables
 
 ## 6. Evidence links
-- Frontend mockup repo: [`mvp-synkro-tech/frontend`](https://github.com/AsolanoT/mvp-synkro-tech/tree/main/frontend)
+- Frontend mockup repo: [`mvp-synkro-tech/frontend`](./frontend/README.md)
 - User stories backlog (HU-FE-01 and HU-DOCS-13 entries): [`user-stories.md`](./docs/04-requirements/user-stories.md)
 - Non-functional requirements: [`non-functional.md`](./docs/04-requirements/non-functional.md)
