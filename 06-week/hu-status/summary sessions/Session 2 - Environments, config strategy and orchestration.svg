@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Visual summary: develop, qa and prod environments; 12-factor configuration; branch model per environment; MVP 2 orchestration stories; config drift scenario; common mistakes">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/>
+    </marker>
+  </defs>
+  <style>
+    .bg { fill: #F1F5F9; }
+    .panel { fill: #FFFFFF; stroke: #E2E8F0; stroke-width: 2; }
+    .headtext { fill: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: 700; }
+    .title { fill: #0F172A; font-family: 'Segoe UI', Arial, sans-serif; font-size: 46px; font-weight: 800; text-anchor: middle; }
+    .subtitle { fill: #475569; font-family: 'Segoe UI', Arial, sans-serif; font-size: 22px; text-anchor: middle; }
+    .boxlabel { font-family: 'Segoe UI', Arial, sans-serif; font-size: 21px; font-weight: 700; text-anchor: middle; }
+    .boxsub { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+    .arrowlabel { fill: #334155; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 600; text-anchor: middle; }
+    .caption { fill: #475569; font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-style: italic; text-anchor: middle; }
+    .body16 { fill: #1E293B; font-family: 'Segoe UI', Arial, sans-serif; font-size: 16.5px; }
+    .th { fill: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; font-weight: 700; text-anchor: middle; }
+    .td { fill: #1E293B; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14.5px; text-anchor: middle; }
+    .flowpill { font-family: 'Consolas', monospace; font-size: 15px; font-weight: 700; text-anchor: middle; }
+    .flownote { fill: #1E293B; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+    .heading19 { font-family: 'Segoe UI', Arial, sans-serif; font-size: 19px; font-weight: 700; }
+    .bullet { fill: #1E293B; font-family: 'Segoe UI', Arial, sans-serif; font-size: 15.5px; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1920" height="1080"/>
+
+  <!-- HEADER -->
+  <text class="title" x="960" y="70">Session 2: Environments, Configuration &amp; Orchestration</text>
+  <text class="subtitle" x="960" y="108">Sprint 2 — from walking skeleton to integrated system · slicing MVP 2 orchestration work</text>
+
+  <!-- ============ PANEL 1 (row1,col1): Same artifact, different config ============ -->
+  <g>
+    <rect class="panel" x="40" y="165" width="908" height="279" rx="16"/>
+    <rect x="40" y="165" width="908" height="50" rx="16" fill="#4F46E5"/>
+    <rect x="40" y="199" width="908" height="16" fill="#4F46E5"/>
+    <text class="headtext" x="64" y="197">1. Same artifact, different configuration</text>
+
+    <rect x="64" y="240" width="210" height="80" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2"/>
+    <text class="boxlabel" x="169" y="272" fill="#3730A3">develop</text>
+    <text class="boxsub" x="169" y="296" fill="#4338CA">fast, disposable</text>
+
+    <rect x="389" y="240" width="210" height="80" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2"/>
+    <text class="boxlabel" x="494" y="272" fill="#3730A3">qa</text>
+    <text class="boxsub" x="494" y="296" fill="#4338CA">production-like</text>
+
+    <rect x="714" y="240" width="210" height="80" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2"/>
+    <text class="boxlabel" x="819" y="272" fill="#3730A3">prod</text>
+    <text class="boxsub" x="819" y="296" fill="#4338CA">real users</text>
+
+    <line x1="278" y1="280" x2="385" y2="280" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text class="arrowlabel" x="331" y="266">promote</text>
+    <line x1="603" y1="280" x2="710" y2="280" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text class="arrowlabel" x="656" y="266">promote</text>
+
+    <text class="caption" x="494" y="365">Built once; only the configuration changes.</text>
+    <text class="caption" x="494" y="388">Promoting = running the same tested artifact with the next environment's config.</text>
+  </g>
+
+  <!-- ============ PANEL 2 (row1,col2): Config & secrets 12-factor ============ -->
+  <g>
+    <rect class="panel" x="972" y="165" width="908" height="279" rx="16"/>
+    <rect x="972" y="165" width="908" height="50" rx="16" fill="#7C3AED"/>
+    <rect x="972" y="199" width="908" height="16" fill="#7C3AED"/>
+    <text class="headtext" x="996" y="197">2. Config &amp; secrets (12-factor)</text>
+
+    <!-- table: cols at 996,1196,1416,1636,1856 ; rows header 232-262, then 262-292,292-322,322-352 -->
+    <rect x="996" y="232" width="860" height="120" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="996" y="232" width="860" height="30" fill="#7C3AED"/>
+    <line x1="996" y1="262" x2="1856" y2="262" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="996" y1="292" x2="1856" y2="292" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="996" y1="322" x2="1856" y2="322" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="1196" y1="232" x2="1196" y2="352" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="1416" y1="232" x2="1416" y2="352" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="1636" y1="232" x2="1636" y2="352" stroke="#CBD5E1" stroke-width="1"/>
+
+    <text class="th" x="1096" y="252">Variable</text>
+    <text class="th" x="1306" y="252">develop</text>
+    <text class="th" x="1526" y="252">qa</text>
+    <text class="th" x="1746" y="252">prod</text>
+
+    <text class="td" x="1096" y="282" font-weight="700">DB_URL</text>
+    <text class="td" x="1306" y="282">db:5432/app_dev</text>
+    <text class="td" x="1526" y="282">qa-db/app_qa</text>
+    <text class="td" x="1746" y="282">prod-db/app</text>
+
+    <text class="td" x="1096" y="312" font-weight="700">LOG_LEVEL</text>
+    <text class="td" x="1306" y="312">debug</text>
+    <text class="td" x="1526" y="312">info</text>
+    <text class="td" x="1746" y="312">warn</text>
+
+    <text class="td" x="1096" y="342" font-weight="700">JWT_SECRET</text>
+    <text class="td" x="1306" y="342">(dev secret)</text>
+    <text class="td" x="1526" y="342">(qa secret)</text>
+    <text class="td" x="1746" y="342">(vault)</text>
+
+    <text class="caption" x="1426" y="382">Config lives in the environment, not the code: no "if (env == prod)".</text>
+    <text class="caption" x="1426" y="406">Secrets never in git. A new environment = new values, not a code change.</text>
+  </g>
+
+  <!-- ============ PANEL 3 (row2,col1): Branch model ↔ environment ============ -->
+  <g>
+    <rect class="panel" x="40" y="468" width="908" height="279" rx="16"/>
+    <rect x="40" y="468" width="908" height="50" rx="16" fill="#0D9488"/>
+    <rect x="40" y="502" width="908" height="16" fill="#0D9488"/>
+    <text class="headtext" x="64" y="501">3. Branch model ↔ environment</text>
+
+    <!-- row1 y-center 568 -->
+    <rect x="64" y="550" width="170" height="36" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text class="flowpill" x="149" y="573" fill="#0F766E">hu-xxx-dev</text>
+    <line x1="234" y1="568" x2="279" y2="568" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="279" y="550" width="190" height="36" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text class="flowpill" x="374" y="573" fill="#0F766E">PR → develop</text>
+    <line x1="469" y1="568" x2="514" y2="568" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="514" y="550" width="290" height="36" rx="8" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <text class="flownote" x="659" y="573">build &amp; run in develop</text>
+
+    <!-- row2 y-center 623 -->
+    <rect x="64" y="605" width="170" height="36" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text class="flowpill" x="149" y="628" fill="#0F766E">hu-xxx-qa</text>
+    <line x1="234" y1="623" x2="279" y2="623" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="279" y="605" width="190" height="36" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text class="flowpill" x="374" y="628" fill="#0F766E">PR → qa</text>
+    <line x1="469" y1="623" x2="514" y2="623" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="514" y="605" width="290" height="36" rx="8" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <text class="flownote" x="659" y="628">build &amp; run in qa</text>
+
+    <!-- row3 y-center 678 -->
+    <rect x="64" y="660" width="170" height="36" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text class="flowpill" x="149" y="683" fill="#0F766E">hu-xxx-main</text>
+    <line x1="234" y1="678" x2="279" y2="678" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="279" y="660" width="190" height="36" rx="8" fill="#F0FDFA" stroke="#0D9488" stroke-width="2"/>
+    <text class="flowpill" x="374" y="683" fill="#0F766E">PR → main</text>
+    <line x1="469" y1="678" x2="514" y2="678" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="514" y="660" width="290" height="36" rx="8" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <text class="flownote" x="659" y="683">build &amp; run in prod</text>
+
+    <text class="caption" x="494" y="726">A change reaches prod only after passing through qa: never a direct hotfix to main.</text>
+  </g>
+
+  <!-- ============ PANEL 4 (row2,col2): MVP2 stories ============ -->
+  <g>
+    <rect class="panel" x="972" y="468" width="908" height="279" rx="16"/>
+    <rect x="972" y="468" width="908" height="50" rx="16" fill="#D97706"/>
+    <rect x="972" y="502" width="908" height="16" fill="#D97706"/>
+    <text class="headtext" x="996" y="501">4. MVP 2 stories (orchestration)</text>
+
+    <text class="heading19" x="996" y="545" fill="#92400E">Stories with testable acceptance criteria:</text>
+
+    <circle cx="1006" cy="592" r="12" fill="#D97706"/>
+    <text x="1006" y="597" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">✓</text>
+    <text class="bullet" x="1030" y="597">A single "docker compose up", gated by health checks on every service</text>
+
+    <circle cx="1006" cy="647" r="12" fill="#D97706"/>
+    <text x="1006" y="652" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">✓</text>
+    <text class="bullet" x="1030" y="652">Every service reads its config from the environment (no hard-coded values)</text>
+
+    <circle cx="1006" cy="702" r="12" fill="#D97706"/>
+    <text x="1006" y="707" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700">✓</text>
+    <text class="bullet" x="1030" y="707">qa runs the same images as develop, with qa config</text>
+  </g>
+
+  <!-- ============ PANEL 5 (row3,col1): Real scenario - drift ============ -->
+  <g>
+    <rect class="panel" x="40" y="771" width="908" height="279" rx="16"/>
+    <rect x="40" y="771" width="908" height="50" rx="16" fill="#DC2626"/>
+    <rect x="40" y="805" width="908" height="16" fill="#DC2626"/>
+    <text class="headtext" x="64" y="804">5. Real scenario: config drift</text>
+
+    <text class="heading19" x="494" y="848" fill="#B91C1C" text-anchor="middle">⚠ Works in develop, breaks in qa</text>
+
+    <text class="heading19" x="64" y="882" fill="#DC2626">Problem</text>
+    <text class="bullet" x="64" y="905">• Hardcoded database URL: localhost:5432</text>
+    <text class="bullet" x="64" y="929">• Different variable name between services:</text>
+    <text class="bullet" x="80" y="951">DATABASE_URL (orders) vs DB_URL (the rest)</text>
+
+    <line x1="450" y1="918" x2="518" y2="918" stroke="#16A34A" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+    <text class="arrowlabel" x="484" y="904" fill="#16A34A">fix</text>
+
+    <text class="heading19" x="534" y="882" fill="#15803D">Solution</text>
+    <text class="bullet" x="534" y="905">• One shared set of variable names,</text>
+    <text class="bullet" x="550" y="926">the same across every service</text>
+    <text class="bullet" x="534" y="950">• Validate required variables at startup</text>
+    <text class="bullet" x="550" y="971">(fail fast, clear message)</text>
+    <text class="bullet" x="534" y="995">• .env.example checked into the repo</text>
+
+    <text class="caption" x="494" y="1015">Hours lost over a small detail: config drift is a top cause</text>
+    <text class="caption" x="494" y="1036">of "works on dev, dies in production".</text>
+  </g>
+
+  <!-- ============ PANEL 6 (row3,col2): Common mistakes ============ -->
+  <g>
+    <rect class="panel" x="972" y="771" width="908" height="279" rx="16"/>
+    <rect x="972" y="771" width="908" height="50" rx="16" fill="#475569"/>
+    <rect x="972" y="805" width="908" height="16" fill="#475569"/>
+    <text class="headtext" x="996" y="804">6. Common mistakes</text>
+
+    <circle cx="1006" cy="850" r="12" fill="#475569"/>
+    <text x="1006" y="855" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">✗</text>
+    <text class="bullet" x="1030" y="855">Rebuilding a different image per environment (should be: build once, promote)</text>
+
+    <circle cx="1006" cy="900" r="12" fill="#475569"/>
+    <text x="1006" y="905" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">✗</text>
+    <text class="bullet" x="1030" y="905">Inconsistent environment variable names across services</text>
+
+    <circle cx="1006" cy="950" r="12" fill="#475569"/>
+    <text x="1006" y="955" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">✗</text>
+    <text class="bullet" x="1030" y="955">Secrets committed to git or copied into the image</text>
+
+    <circle cx="1006" cy="1000" r="12" fill="#475569"/>
+    <text x="1006" y="1005" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">✗</text>
+    <text class="bullet" x="1030" y="1005">No .env.example, no config validation at startup</text>
+  </g>
+
+</svg>
