@@ -1,0 +1,47 @@
+/* Crimson Circuit — Light Theme (design-system.md, Corte 1) */
+:root {
+  /* Primary — navy and brick red */
+  --color-primary-50:  #FDECE4;
+  --color-primary-100: #F0D8CC;
+  --color-primary-300: #C65A3B;   /* large text / icons only */
+  --color-primary-500: #B51A28;   /* buttons, links, active nav */
+  --color-primary-700: #931623;   /* hover / pressed */
+  --color-primary-900: #641A2E;   /* secondary button text/border */
+
+  /* Ink and canvas */
+  --color-ink: #161E2F;
+  --color-canvas: #FFF9F6;
+  --color-surface: #FFFFFF;
+  --color-border: #E8DDD6;
+  --color-border-strong: #D4C4B8;
+  --color-muted: #7C645E;
+
+  /* Semantic */
+  --color-success: #1A855D;
+  --color-success-soft: #E7F7EF;
+  --color-warning: #A86716;
+  --color-warning-soft: #FDF1E2;
+  --color-error: #D73768;
+  --color-error-soft: #FDE9EF;
+
+  /* Derived */
+  --color-primary-soft: rgba(181, 26, 40, 0.10);
+  --color-steel-soft: var(--color-primary-soft);  /* alias for existing refs in global.css */
+  --color-primary-steel: var(--color-primary-500); /* alias for existing refs */
+  --color-accent-copper: var(--color-primary-500); /* alias for existing refs */
+  --color-copper-soft: var(--color-primary-soft);  /* alias for existing refs */
+  --color-error-soft-border: rgba(215, 55, 104, 0.3);
+
+  /* Typography */
+  --font-heading: 'Big Shoulders Display', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', ui-monospace, monospace;
+
+  /* Shape */
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow-card: 0 2px 6px rgba(181, 26, 40, 0.08);
+  --shadow-pop: 0 6px 18px rgba(181, 26, 40, 0.14), 0 2px 5px rgba(22, 30, 47, 0.06);
+
+  --sidebar-width: 244px;
+}
