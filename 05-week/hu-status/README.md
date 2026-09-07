@@ -8,7 +8,7 @@
 - FULL_NAME: Angel Gustavo Solano Trujillo
 - GITHUB_USER: AsolanoT
 - TEAM: Group - synkro-tech
-- SPRINT_GOAL: Close the professor's S00/S06/S12 rubric feedback, formally answer the professor's HU-01 (Technology Stack Selection) and HU-02 (Project Discovery) by auditing existing documentation before writing anything new, and open the Corte 1 MVP build in the dedicated `synkro-tech` repository.
+- SPRINT_GOAL: Close the professor's S00/S06/S12 rubric feedback, formally answer the professor's HU-01 (Technology Stack Selection) and HU-02 (Project Discovery) by auditing existing documentation before writing anything new, and deliver the Corte 1 MVP in the dedicated `synkro-tech` repository.
 <!-- CONFIG-END -->
 
 ## Docs Repository
@@ -31,80 +31,95 @@
 | HU ID | Title | Status (todo/doing/done) | Evidence (PR or commit URL) |
 |---|---|---|---|
 | HU-DOCS-17 | Discovery: market research + HU-02 traceability | done | `03-product/problem-framing.md`, `04-requirements/traceability-matrix.md` |
-| HU-DOCS-22 | `overview.md` refinement: final consolidation and diagram | doing | `01-context/overview.md`, "Alternatives Considered" |
-| HU-FE-02 | Frontend: configuration and refinement of the monolithic MVP | todo | repo `synkro-tech` (frontend) |
+| HU-DOCS-22 | `overview.md` refinement: final consolidation and diagram | done | `01-context/overview.md`, "Alternatives Considered" |
+| HU-FE-02 | Frontend: configuration and refinement of the monolithic MVP | done | repo `synkro-tech` (frontend) |
+| HU-ARQ-08 | QA and merge of the Corte 1 MVP to `main` (with @SergioAndres17) | done | repo `synkro-tech` (`main`) + `docs/12-ux-ui/mvp-synkro-tech/` |
 
 ## 2. My individual contribution
 
 **Context:** the professor's HU-02 (Discovery) has 10 tasks across 4
 blocks. Before writing anything, I mapped all 10 against the existing repo
-and found 7 were already answered elsewhere — this HU only had to produce
-what genuinely didn't exist yet, plus the evidence trail for the rest.
+and found 7 were already answered elsewhere. Later in the sprint I moved
+into closing HU-01's stack consolidation and, at the end, into building
+and shipping the Corte 1 frontend.
 
 **HU-DOCS-17 — Market research and HU-02 traceability:**
-- I researched two real point-of-sale/inventory products used by SMEs —
+- Researched two real point-of-sale/inventory products used by SMEs —
   Alegra and Loyverse POS — verifying real figures for each (40,000+
   Colombian SMEs for Alegra; 1M+ businesses in 170 countries for Loyverse)
-  rather than estimating them, and added the comparison as a new section 9
-  in `03-product/problem-framing.md` without touching the sections the
-  professor already graded.
-- For the traceability requirement, I found `04-requirements/traceability-matrix.md`
-  already exists as a template purpose-built for exactly this kind of
-  mapping (requirement → evidence). I used that file instead of creating a
-  new one, adding a dedicated "HU-02 → Repository Traceability" section
-  listing all 10 tasks and where each is already resolved.
-- Conclusion from the market research: neither product organizes
-  permissions around SynkroTech's strict 3-role model (ADMIN, SALESPERSON,
-  INVENTORY), and neither needs to solve the 4-microservice architecture
-  problem that's this project's actual academic goal — the business
-  problem is already market-validated, what this project adds is the
-  distributed-architecture "how."
+  rather than estimating them, and added the comparison as section 9 in
+  `03-product/problem-framing.md` without touching already-graded content.
+- Found `04-requirements/traceability-matrix.md` already exists as a
+  template purpose-built for exactly this mapping. Used that file instead
+  of creating a new one, adding a dedicated "HU-02 → Repository
+  Traceability" section listing all 10 tasks and where each is resolved.
 
-**HU-DOCS-22 — Final stack consolidation and diagram (in progress):**
-- I consolidated the three subsections written by Fredman (Frontend),
-  Sergio (Backend), and Jordan (Database) into a single "Alternatives
-  Considered" section, placed immediately after `overview.md`'s existing
-  "Technology Stack" table — without editing that table, since it's
-  already graded 🟢.
-- I built the technology architecture diagram in Mermaid, embedded
-  directly in the markdown so it renders natively on GitHub without an
-  external image file, showing the 4 microservices, PostgreSQL schema
+**HU-DOCS-22 — Final stack consolidation and diagram:**
+- Consolidated the three subsections written by Fredman (Frontend), Sergio
+  (Backend), and Jordan (Database) into a single "Alternatives Considered"
+  section in `overview.md`, placed after the already-graded "Technology
+  Stack" table without editing it.
+- Built the technology architecture diagram in Mermaid, embedded directly
+  in the markdown, showing the 4 microservices, PostgreSQL schema
   isolation, and the JWT local-validation pattern from ADR-001.
-- While reviewing what's already uploaded, I found a paste error: the
-  Frontend subsection currently shows a stray table row instead of the
-  actual text. This is now the main open item on this HU before it can be
-  marked done.
+- Found and fixed a paste error in the already-uploaded Frontend
+  subsection (a stray table row instead of the real text) before closing
+  this HU.
+
+**HU-FE-02 — Frontend configuration (Corte 1 MVP):**
+- Replaced `tokens.css` with the Crimson Circuit light theme approved in
+  `design-system.md` — full token set (primary scale, semantic colors,
+  typography, radii, shadows).
+- Switched typography to Big Shoulders Display (h1/h2, weight 900,
+  uppercase) and IBM Plex Sans (body), loaded via Google Fonts.
+- Updated the login screen's radial gradient to the new primary red, and
+  verified with a repo-wide search that no hardcoded color from the old
+  blue/copper palette remained anywhere in the codebase.
+- Aligned the frontend's customer fields with Sergio's `identity_document`
+  rename on the backend.
+- One known, non-blocking defect: the sidebar/login logo's CSS rule wasn't
+  fully updated for an `<img>` element (still sized/styled like the old
+  text-box placeholder), so it currently renders slightly distorted.
+  Tracked as an immediate follow-up fix, not a merge blocker.
+
+**HU-ARQ-08 — QA and merge to `main` (joint with Sergio):**
+- Validated `develop → qa → main`: full customer/product/category/sales
+  CRUD, sale registration with stock validation, role-based navigation for
+  all 3 roles, soft delete throughout.
+- After merging, synced the final backend + frontend into
+  `docs/12-ux-ui/mvp-synkro-tech/` per the professor's instruction — the
+  project has no `05-release/` folder, so this is the actual delivery
+  location, not a GitHub Release.
 
 ## 3. Blockers and risks
 
-- The `overview.md` Frontend-subsection paste error needs fixing before
-  the professor reviews HU-01's response — I'm treating this as the
-  priority open item for next session, ahead of anything else on
-  HU-DOCS-22.
-- HU-FE-02 hasn't started; it depends on Sergio's HU-ARQ-07 backend
-  configuration and on Fredman's Figma wireframes (HU-DOCS-18) being far
-  enough along to build real screens against, not just descriptions.
+- The logo CSS defect noted above needs a quick fix (`.brand-mark` sized
+  and styled for an image, not a text box) before the next visual review —
+  scheduled as the first thing to fix next session, in both `synkro-tech`
+  and its synced copy in `docs`.
+- Corte 1's Authentication (simulated login) and Sales Reports (not
+  populated) are explicitly documented as pending full-MVP scope in
+  `scope.md` — not gaps in this delivery, but real work for a later Corte.
 
 ## 4. Plan for next week
 
-- Fix the Frontend subsection in `overview.md` and close HU-DOCS-22.
-- Start HU-FE-02 once HU-ARQ-07 has a running backend to connect to;
-  implement the light theme only from `design-system.md` (Crimson
-  Circuit), leaving dark theme for Corte 2 as already agreed with Jordan.
+- Apply the logo CSS fix and re-sync `12-ux-ui/mvp-synkro-tech/`.
+- Publish the team's consolidated response to HU-01, HU-02, and HU-03 in
+  the professor's GitHub issues, with links to the verified evidence.
 - Confirm with the whole team, in the Weekly, that everyone knows and
-  validates the consolidated stack documented in `overview.md` — that's
-  an explicit acceptance criterion of HU-DOCS-22, not something I can
-  check off alone.
+  validates the consolidated stack in `overview.md` — the one acceptance
+  criterion that needs a live confirmation, not just a commit.
 
 ## 5. Compliance self-check
-- [ ] Conventional Commits - `type(scope): summary`
-- [x] Per-environment HU branch + PR to that environment — not applicable to `docs` repo (no branches, direct commit to `main` per `documentation-rules.md`)
+- [x] Conventional Commits - `type(scope): summary`
+- [x] Per-environment HU branch + PR to that environment — `develop → qa → main` followed in `synkro-tech`; direct commit to `main` for `docs` per `documentation-rules.md`
 - [x] Testable acceptance criteria
-- [ ] Tests added/updated (unit / integration) — not applicable, documentation-only HUs
-- [ ] DDD / hexagonal boundaries respected (domain has no I/O) — not applicable, documentation-only HUs
+- [x] Tests added/updated (unit / integration)
+- [x] DDD / hexagonal boundaries respected (domain has no I/O) — not applicable to this Corte 1 monolith spike; hexagonal boundaries are ADR-001's target-architecture scope
 - [x] No secrets; config via environment variables
 
 ## 6. Evidence links
 - Market research: [`problem-framing.md`](./docs/problem-framing.md), section 9
 - HU-02 traceability: [`traceability-matrix.md`](./docs/traceability-matrix.md), "HU-02 (Discovery) → Repository Traceability"
-- Stack consolidation and diagram (in progress): [`overview.md`](./docs/overview.md), "Alternatives Considered"
+- Stack consolidation and diagram: [`overview.md`](./docs/overview.md), "Alternatives Considered"
+- Corte 1 MVP frontend: [`synkro-tech`](https://github.com/code-corhuila/synkro-tech) (`main`)
