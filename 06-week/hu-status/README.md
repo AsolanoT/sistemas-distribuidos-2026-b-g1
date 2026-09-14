@@ -111,7 +111,7 @@ gap ADR-001 left open.
 - [x] No secrets; config via environment variables — deployment.md documents `JWT_PUBLIC_KEY` and DB credentials as env vars only, no real secrets committed
 
 ## 6. Evidence links
-- ADR-001 publication: [`ADR-001-architecture.md`](./05-architecture/decisions/records/ADR-001-architecture.md)
-- Deployment topology: [`deployment.md`](./05-architecture/deployment.md)
-- Security threat model: [`security-threat-model.md`](./05-architecture/security-threat-model.md)
-- ADR-002: [`ADR-002-sale-authorship-traceability.md`](./05-architecture/decisions/records/ADR-002-sale-authorship-traceability.md)
+- ADR-001 publication: [`ADR-001-architecture.md`](./docs/ADR-001-architecture.md)
+- Deployment topology: [`deployment.md`](./docs/deployment.md)
+- Security threat model: [`security-threat-model.md`](./docs/security-threat-model.md)
+- ADR-002: [`ADR-002-sale-authorship-traceability.md`](./docs/ADR-002-sale-authorship-traceability.md)
