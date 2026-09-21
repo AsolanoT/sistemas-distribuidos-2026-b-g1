@@ -100,6 +100,6 @@
 
 - ADR-003: [`ADR-003-gateway-saga-async.md`](./docs/ADR-003-gateway-saga-async.md)
 - Architecture overview: [`overview.md`](./docs/overview.md)
-- Pattern guide: [`pattern-guide.md`](https://github.com/code-corhuila/synkro-docs/blob/main/05-architecture/pattern-guide.md)
+- Pattern guide: [`pattern-guide.md`](./docs/pattern-guide.md)
 - Deployment: [`deployment.md`](https://github.com/code-corhuila/synkro-docs/blob/main/05-architecture/deployment.md)
 - Navigation map (HU-DOCS-25): [`navigation-map.md`](https://github.com/code-corhuila/synkro-docs/blob/main/01-context/navigation-map.md)
