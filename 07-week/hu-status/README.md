@@ -24,6 +24,7 @@
 | Sergio Andres Ordoñez Diaz         | https://github.com/SergioAndres17         |
 | Fredman Santiago Plazas Artunduaga | https://github.com/SantiagoPlazas2005     |
 | Jordan Ramirez Gallego             | https://github.com/JordanRG420            |
+| Angel Gustavo Solano Trujillo      |  https://github.com/AsolanoT              |
 
 ## 1. User stories worked this week
 
