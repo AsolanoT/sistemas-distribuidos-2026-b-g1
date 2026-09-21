@@ -47,6 +47,13 @@ The internal breakdown belongs to Level 2 (§3 below).
 
 **External integrations:** none. The system is self-contained and does not depend on external providers in this version (see `01-context/scope.md` → External Integrations).
 
+**Also available in draw.io:** this diagram is also maintained as
+`08-uml/diagrams/source/c4-01-context.drawio`, added for visual quality
+(see `08-uml/diagram-index.md` for why both versions exist). **Update
+both in the same PR** when this diagram changes — this Mermaid version
+is the original and stays authoritative, but the draw.io copy must not
+be allowed to drift from it.
+
 ---
 
 ## 3. C4 Diagram — Level 2: Containers
@@ -136,6 +143,13 @@ graph TB
     class GATEWAY,WORKFLOW,WORKER gwBox
     class RABBITMQ brokerBox
 ```
+
+**Also available in draw.io:** this diagram is also maintained as
+`08-uml/diagrams/source/c4-02-containers.drawio`, added for visual
+quality (see `08-uml/diagram-index.md` for why both versions exist).
+**Update both in the same PR** when this diagram changes — this Mermaid
+version is the original and stays authoritative, but the draw.io copy
+must not be allowed to drift from it.
 
 ---
 
