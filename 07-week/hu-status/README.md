@@ -7,7 +7,7 @@
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
 - FULL_NAME: Angel Gustavo Solano Trujillo
 - GITHUB_USER: AsolanoT
-- TEAM: Group - synkro-tech
+- TEAM: Group 10 - synkro-tech
 - SPRINT_GOAL: Close the documentation gap left by ADR-003's ripple effects across 05-architecture/, 09-microservices/, and 06-data/, and close HU-DOCS-25/26 by fixing FR/NFR identifiers and disconnecting the repository from the external PDR.
 <!-- CONFIG-END -->
 

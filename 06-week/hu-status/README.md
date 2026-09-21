@@ -7,7 +7,7 @@
 <!-- CONFIG-START - must match your profile repo (username/username) CONFIG -->
 - FULL_NAME: Angel Gustavo Solano Trujillo
 - GITHUB_USER: AsolanoT
-- TEAM: Group - synkro-tech
+- TEAM: Group 10 - synkro-tech
 - SPRINT_GOAL: Close the architecture documentation gap in `05-architecture/` by delivering HU-04 (ADR-001 publication, architectural overview, distributed-pattern evaluation, deployment topology, security threat model, and ADR-002 for sale-authorship traceability), and begin HU-05 (unify FR/NFR requirement identifiers and disconnect the repository from the external PDR).
 <!-- CONFIG-END -->
 
@@ -24,6 +24,7 @@
 | Sergio Andres Ordoñez Diaz         | https://github.com/SergioAndres17                           |
 | Fredman Santiago Plazas Artunduaga | https://github.com/SantiagoPlazas2005                       |
 | Jordan Ramirez Gallego             | https://github.com/JordanRG420                              |
+| Angel Gustavo Solano Trujillo      |  https://github.com/AsolanoT                                |
 
 ## 1. User stories worked this week
 
