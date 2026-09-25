@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" font-family="Segoe UI, Roboto, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+    <filter id="sh" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1200" fill="#f1f5f9"/>
+
+  <!-- ============ TITLE ============ -->
+  <rect x="40" y="48" width="150" height="44" rx="22" fill="#0f172a"/>
+  <text x="115" y="77" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">Session 1</text>
+  <text x="960" y="84" text-anchor="middle" font-size="44" font-weight="800" fill="#0f172a">Agile &amp; DevOps for Distributed Teams</text>
+  <text x="960" y="126" text-anchor="middle" font-size="21" fill="#475569">The team must run like a well-built distributed system: <tspan font-weight="700" fill="#0f172a">clear ownership · small batches · fast feedback</tspan></text>
+
+  <!-- ============ PANEL 1: SCRUM ============ -->
+  <g filter="url(#sh)"><rect x="40" y="165" width="900" height="405" rx="18" fill="#ffffff"/></g>
+  <rect x="40" y="165" width="900" height="8" rx="4" fill="#2563eb"/>
+  <text x="70" y="212" font-size="26" font-weight="800" fill="#1e3a8a">1 · Scrum: the sprint cycle</text>
+
+  <!-- boxes -->
+  <rect x="70" y="270" width="180" height="100" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="160" y="310" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a8a">Product Backlog</text>
+  <text x="160" y="338" text-anchor="middle" font-size="15" fill="#334155">everything wanted,</text>
+  <text x="160" y="358" text-anchor="middle" font-size="15" fill="#334155">prioritized</text>
+
+  <rect x="290" y="270" width="180" height="100" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="380" y="310" text-anchor="middle" font-size="19" font-weight="700" fill="#1e3a8a">Sprint Backlog</text>
+  <text x="380" y="338" text-anchor="middle" font-size="15" fill="#334155">what we'll do</text>
+  <text x="380" y="358" text-anchor="middle" font-size="15" fill="#334155">this week</text>
+
+  <rect x="510" y="270" width="180" height="100" rx="14" fill="#2563eb"/>
+  <text x="600" y="310" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">Sprint</text>
+  <text x="600" y="338" text-anchor="middle" font-size="15" fill="#e0e7ff">1 fixed week</text>
+  <text x="600" y="358" text-anchor="middle" font-size="15" fill="#e0e7ff">↻ daily sync</text>
+
+  <rect x="730" y="270" width="180" height="100" rx="14" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="820" y="310" text-anchor="middle" font-size="19" font-weight="700" fill="#14532d">Increment</text>
+  <text x="820" y="338" text-anchor="middle" font-size="15" fill="#334155">working software</text>
+  <text x="820" y="358" text-anchor="middle" font-size="15" fill="#334155">(demo)</text>
+
+  <!-- arrows -->
+  <line x1="252" y1="320" x2="287" y2="320" stroke="#475569" stroke-width="3" marker-end="url(#arr)"/>
+  <line x1="472" y1="320" x2="507" y2="320" stroke="#475569" stroke-width="3" marker-end="url(#arr)"/>
+  <line x1="692" y1="320" x2="727" y2="320" stroke="#475569" stroke-width="3" marker-end="url(#arr)"/>
+  <text x="270" y="257" text-anchor="middle" font-size="15" font-weight="700" fill="#475569">Planning</text>
+  <text x="490" y="257" text-anchor="middle" font-size="15" font-weight="700" fill="#475569">Build</text>
+  <text x="710" y="257" text-anchor="middle" font-size="15" font-weight="700" fill="#475569">Review</text>
+
+  <!-- retro -->
+  <path d="M820,372 L820,405 L380,405 L380,376" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrBlue)"/>
+  <text x="600" y="436" text-anchor="middle" font-size="18" font-weight="700" fill="#2563eb">Retrospective → improves the next sprint</text>
+
+  <!-- roles -->
+  <rect x="70" y="458" width="270" height="88" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="205" y="492" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Product Owner</text>
+  <text x="205" y="522" text-anchor="middle" font-size="16" fill="#475569">What, and in what order?</text>
+
+  <rect x="355" y="458" width="270" height="88" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="490" y="492" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Scrum Master</text>
+  <text x="490" y="522" text-anchor="middle" font-size="16" fill="#475569">Guards the process, removes blockers</text>
+
+  <rect x="640" y="458" width="270" height="88" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="775" y="492" text-anchor="middle" font-size="19" font-weight="700" fill="#0f172a">Team</text>
+  <text x="775" y="522" text-anchor="middle" font-size="16" fill="#475569">How? They build it</text>
+
+  <!-- ============ PANEL 3: DEVOPS ============ -->
+  <g filter="url(#sh)"><rect x="980" y="165" width="900" height="405" rx="18" fill="#ffffff"/></g>
+  <rect x="980" y="165" width="900" height="8" rx="4" fill="#7c3aed"/>
+  <text x="1010" y="212" font-size="26" font-weight="800" fill="#4c1d95">3 · DevOps: "you build it, you run it"</text>
+  <text x="1010" y="242" font-size="17" fill="#475569">No wall between dev and ops · what you learn running it feeds the next Plan</text>
+
+  <!-- infinity -->
+  <path d="M1430,360 C1360,260 1170,260 1170,360 C1170,460 1360,460 1430,360 C1500,260 1690,260 1690,360 C1690,460 1500,460 1430,360 Z"
+        fill="none" stroke="#c4b5fd" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M1430,360 C1360,260 1170,260 1170,360 C1170,460 1360,460 1430,360 C1500,260 1690,260 1690,360 C1690,460 1500,460 1430,360 Z"
+        fill="none" stroke="#7c3aed" stroke-width="3" stroke-dasharray="2 22"/>
+  <text x="1300" y="368" text-anchor="middle" font-size="24" font-weight="800" fill="#6d28d9">DEV</text>
+  <text x="1560" y="368" text-anchor="middle" font-size="24" font-weight="800" fill="#0e7490">OPS</text>
+
+  <!-- cycle labels -->
+  <g font-size="16" font-weight="700" text-anchor="middle">
+    <rect x="1235" y="267" width="90" height="34" rx="17" fill="#7c3aed"/><text x="1280" y="290" fill="#fff">1 Plan</text>
+    <rect x="1102" y="343" width="120" height="34" rx="17" fill="#7c3aed"/><text x="1162" y="366" fill="#fff">2 Build</text>
+    <rect x="1225" y="419" width="110" height="34" rx="17" fill="#7c3aed"/><text x="1280" y="442" fill="#fff">3 Test</text>
+    <rect x="1530" y="267" width="100" height="34" rx="17" fill="#0891b2"/><text x="1580" y="290" fill="#fff">4 Release</text>
+    <rect x="1640" y="315" width="130" height="34" rx="17" fill="#0891b2"/><text x="1705" y="338" fill="#fff">5 Deploy</text>
+    <rect x="1650" y="371" width="110" height="34" rx="17" fill="#0891b2"/><text x="1705" y="394" fill="#fff">6 Operate</text>
+    <rect x="1515" y="419" width="130" height="34" rx="17" fill="#0891b2"/><text x="1580" y="442" fill="#fff">7 Monitor</text>
+  </g>
+
+  <!-- pillars -->
+  <g font-size="17" text-anchor="middle">
+    <rect x="1010" y="486" width="270" height="60" rx="12" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="1145" y="512" font-weight="700" fill="#4c1d95">Automated CI/CD</text>
+    <text x="1145" y="535" font-size="15" fill="#475569">small, frequent releases</text>
+    <rect x="1295" y="486" width="270" height="60" rx="12" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="1430" y="512" font-weight="700" fill="#4c1d95">Monitoring + on-call</text>
+    <text x="1430" y="535" font-size="15" fill="#475569">team owns its service's uptime</text>
+    <rect x="1580" y="486" width="270" height="60" rx="12" fill="#f5f3ff" stroke="#c4b5fd"/>
+    <text x="1715" y="512" font-weight="700" fill="#4c1d95">Blameless learning</text>
+    <text x="1715" y="535" font-size="15" fill="#475569">culture over tools</text>
+  </g>
+
+  <!-- ============ PANEL 2: USER STORY ============ -->
+  <g filter="url(#sh)"><rect x="40" y="600" width="600" height="330" rx="18" fill="#ffffff"/></g>
+  <rect x="40" y="600" width="600" height="8" rx="4" fill="#d97706"/>
+  <text x="65" y="645" font-size="26" font-weight="800" fill="#78350f">2 · A good user story</text>
+  <rect x="60" y="660" width="560" height="42" rx="10" fill="#fef3c7"/>
+  <text x="340" y="688" text-anchor="middle" font-size="18" font-style="italic" fill="#78350f">As a <tspan font-weight="700">[role]</tspan>, I want <tspan font-weight="700">[action]</tspan>, so that <tspan font-weight="700">[benefit]</tspan></text>
+  <text x="65" y="737" font-size="17" fill="#0f172a"><tspan font-weight="800" fill="#b45309">HU-021</tspan> · As a customer, I want to place an</text>
+  <text x="65" y="761" font-size="17" fill="#0f172a">order for an in-stock item, so I can buy it.</text>
+  <g font-size="16" fill="#0f172a">
+    <text x="75" y="796"><tspan fill="#16a34a" font-weight="800">✔ AC1</tspan>  POST /orders (in stock) → 201 + orderId</text>
+    <text x="75" y="823"><tspan fill="#16a34a" font-weight="800">✔ AC2</tspan>  Out of stock → 409 OUT_OF_STOCK</text>
+    <text x="75" y="850"><tspan fill="#16a34a" font-weight="800">✔ AC3</tspan>  Order saved → GET /orders/{id}</text>
+  </g>
+  <text x="65" y="886" font-size="16" font-weight="700" fill="#b91c1c">No testable criteria (Yes/No) → it's a wish, not work</text>
+  <text x="65" y="911" font-size="16" fill="#475569">Prioritize with <tspan font-weight="700">MoSCoW</tspan> · size with <tspan font-weight="700">story points</tspan> · split if too big</text>
+
+  <!-- ============ PANEL 4: COORDINATION ============ -->
+  <g filter="url(#sh)"><rect x="660" y="600" width="600" height="330" rx="18" fill="#ffffff"/></g>
+  <rect x="660" y="600" width="600" height="8" rx="4" fill="#16a34a"/>
+  <text x="685" y="645" font-size="26" font-weight="800" fill="#14532d">4 · Coordinating a distributed team</text>
+  <text x="685" y="672" font-size="17" fill="#475569">The team mirrors the system it builds</text>
+
+  <g>
+    <rect x="680" y="688" width="275" height="108" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+    <circle cx="712" cy="722" r="18" fill="#16a34a"/><text x="712" y="729" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">1</text>
+    <text x="740" y="729" font-size="19" font-weight="700" fill="#14532d">Clear ownership</text>
+    <text x="700" y="764" font-size="16" fill="#334155">Every service/repo has an</text>
+    <text x="700" y="785" font-size="16" fill="#334155">owner (RACI matrix)</text>
+
+    <rect x="965" y="688" width="275" height="108" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+    <circle cx="997" cy="722" r="18" fill="#16a34a"/><text x="997" y="729" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">2</text>
+    <text x="1025" y="729" font-size="19" font-weight="700" fill="#14532d">Small batches</text>
+    <text x="985" y="764" font-size="16" fill="#334155">Short-lived branches,</text>
+    <text x="985" y="785" font-size="16" fill="#334155">frequent PRs</text>
+
+    <rect x="680" y="808" width="275" height="108" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+    <circle cx="712" cy="842" r="18" fill="#16a34a"/><text x="712" y="849" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">3</text>
+    <text x="740" y="849" font-size="19" font-weight="700" fill="#14532d">Fast feedback</text>
+    <text x="700" y="884" font-size="16" fill="#334155">CI runs on every PR:</text>
+    <text x="700" y="905" font-size="16" fill="#334155">continuous integration</text>
+
+    <rect x="965" y="808" width="275" height="108" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+    <circle cx="997" cy="842" r="18" fill="#16a34a"/><text x="997" y="849" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">4</text>
+    <text x="1025" y="849" font-size="19" font-weight="700" fill="#14532d">Write it down</text>
+    <text x="985" y="884" font-size="16" fill="#334155">ADRs, PRs, the board:</text>
+    <text x="985" y="905" font-size="16" fill="#334155">no one is a blocker</text>
+  </g>
+
+  <!-- ============ PANEL 5: METRICS ============ -->
+  <g filter="url(#sh)"><rect x="1280" y="600" width="600" height="330" rx="18" fill="#ffffff"/></g>
+  <rect x="1280" y="600" width="600" height="8" rx="4" fill="#0891b2"/>
+  <text x="1305" y="645" font-size="26" font-weight="800" fill="#164e63">5 · Flow metrics</text>
+  <text x="1305" y="672" font-size="17" fill="#475569">Measure flow, not how busy people look</text>
+
+  <g font-size="16">
+    <rect x="1300" y="688" width="150" height="32" rx="8" fill="#0891b2"/>
+    <text x="1375" y="710" text-anchor="middle" font-weight="700" fill="#fff">WIP</text>
+    <text x="1465" y="710" fill="#0f172a">Work in progress: <tspan font-weight="700">finish before starting</tspan></text>
+
+    <rect x="1300" y="728" width="150" height="32" rx="8" fill="#0891b2"/>
+    <text x="1375" y="750" text-anchor="middle" font-weight="700" fill="#fff">Lead time</text>
+    <text x="1465" y="750" fill="#0f172a">Idea → done</text>
+
+    <rect x="1300" y="768" width="150" height="32" rx="8" fill="#0891b2"/>
+    <text x="1375" y="790" text-anchor="middle" font-weight="700" fill="#fff">Cycle time</text>
+    <text x="1465" y="790" fill="#0f172a">Started → done</text>
+
+    <rect x="1300" y="808" width="150" height="32" rx="8" fill="#0891b2"/>
+    <text x="1375" y="830" text-anchor="middle" font-weight="700" fill="#fff">Throughput</text>
+    <text x="1465" y="830" fill="#0f172a">Stories finished per sprint</text>
+  </g>
+
+  <!-- alert -->
+  <rect x="1300" y="852" width="560" height="64" rx="12" fill="#fef2f2" stroke="#fca5a5"/>
+  <line x1="1318" y1="904" x2="1398" y2="904" stroke="#cbd5e1" stroke-width="2"/>
+  <polyline points="1320,900 1345,890 1370,876 1396,862" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <polyline points="1320,864 1345,874 1370,888 1396,898" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <text x="1415" y="878" font-size="16" font-weight="700" fill="#0f172a"><tspan fill="#dc2626">WIP ↑</tspan>  +  <tspan fill="#2563eb">Throughput ↓</tspan>  = warning sign</text>
+  <text x="1415" y="902" font-size="16" font-style="italic" fill="#7f1d1d">"Everyone's busy, nothing ships"</text>
+
+  <!-- ============ PANEL 6: EXAMPLE ============ -->
+  <g filter="url(#sh)"><rect x="40" y="955" width="1220" height="210" rx="18" fill="#ffffff"/></g>
+  <rect x="40" y="955" width="1220" height="8" rx="4" fill="#ea580c"/>
+  <text x="65" y="998" font-size="24" font-weight="800" fill="#7c2d12">6 · A real scenario: the hero and the bottleneck</text>
+  <text x="1235" y="998" text-anchor="end" font-size="20" font-weight="800" fill="#16a34a">Sustainable flow &gt; heroics</text>
+
+  <rect x="60" y="1015" width="530" height="135" rx="12" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="80" y="1045" font-size="19" font-weight="800" fill="#c2410c">✗ The problem</text>
+  <g font-size="16" fill="#0f172a">
+    <text x="80" y="1075">• One teammate takes 8 stories "to go faster"</text>
+    <text x="80" y="1102">• At sprint end, 3 sit half-done</text>
+    <text x="80" y="1129">• Only they understand that code → bottleneck</text>
+  </g>
+
+  <line x1="600" y1="1082" x2="660" y2="1082" stroke="#475569" stroke-width="4" marker-end="url(#arr)"/>
+
+  <rect x="670" y="1015" width="570" height="135" rx="12" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="690" y="1045" font-size="19" font-weight="800" fill="#15803d">✔ The fix</text>
+  <g font-size="16" fill="#0f172a">
+    <text x="690" y="1080"><tspan font-weight="800" fill="#15803d">①</tspan> WIP limit: 2 per person</text>
+    <text x="985" y="1080"><tspan font-weight="800" fill="#15803d">②</tspan> Pair on risky items</text>
+    <text x="690" y="1120"><tspan font-weight="800" fill="#15803d">③</tspan> Require PRs: spread knowledge</text>
+    <text x="985" y="1120"><tspan font-weight="800" fill="#15803d">④</tspan> Split stories smaller</text>
+  </g>
+
+  <!-- ============ PANEL 7: MISTAKES ============ -->
+  <g filter="url(#sh)"><rect x="1280" y="955" width="600" height="210" rx="18" fill="#ffffff"/></g>
+  <rect x="1280" y="955" width="600" height="8" rx="4" fill="#dc2626"/>
+  <text x="1305" y="998" font-size="24" font-weight="800" fill="#7f1d1d">7 · Common mistakes</text>
+  <g font-size="17" fill="#0f172a">
+    <text x="1305" y="1040"><tspan fill="#dc2626" font-weight="800">✗</tspan>  Stories without testable acceptance criteria</text>
+    <text x="1305" y="1072"><tspan fill="#dc2626" font-weight="800">✗</tspan>  No WIP limit: lots started, little finished</text>
+    <text x="1305" y="1104"><tspan fill="#dc2626" font-weight="800">✗</tspan>  "Ops is someone else's job"</text>
+    <text x="1305" y="1136"><tspan fill="#dc2626" font-weight="800">✗</tspan>  Knowledge trapped in one head</text>
+  </g>
+</svg>
