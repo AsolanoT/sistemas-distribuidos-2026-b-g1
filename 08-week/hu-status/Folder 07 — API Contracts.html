@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SynkroTech — Folder 07: API Contracts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16213a;
+    --ink-soft: #4a5570;
+    --paper: #f7f5f0;
+    --paper-raised: #ffffff;
+    --line: #dcd8cd;
+    --accent: #b8862f;
+    --accent-soft: #f3e6cc;
+    --teal: #1f5c5c;
+    --teal-soft: #e2efee;
+    --amber-warn: #8a4a1c;
+    --amber-warn-bg: #fbe9d7;
+    --radius: 14px;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #eef0f6;
+      --ink-soft: #a9b2c8;
+      --paper: #12151f;
+      --paper-raised: #1a1e2b;
+      --line: #2a2f40;
+      --accent: #e0b45f;
+      --accent-soft: #3a3120;
+      --teal: #6fbcbc;
+      --teal-soft: #16302f;
+      --amber-warn: #e8a26b;
+      --amber-warn-bg: #3a2716;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #eef0f6;
+    --ink-soft: #a9b2c8;
+    --paper: #12151f;
+    --paper-raised: #1a1e2b;
+    --line: #2a2f40;
+    --accent: #e0b45f;
+    --accent-soft: #3a3120;
+    --teal: #6fbcbc;
+    --teal-soft: #16302f;
+    --amber-warn: #e8a26b;
+    --amber-warn-bg: #3a2716;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  h1, h2, h3, .display {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 48px 28px 72px;
+  }
+  header.hero {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  header.hero h1 {
+    font-size: clamp(30px, 5vw, 44px);
+    margin: 4px 0 6px;
+    line-height: 1.08;
+  }
+  header.hero p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0;
+  }
+  section { margin-bottom: 52px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-head h2 { font-size: 22px; margin: 0; }
+  .section-head .count {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .card h3 {
+    font-size: 15.5px;
+    margin: 0 0 6px;
+    font-family: "Public Sans", sans-serif;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--teal-soft);
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .badge.done::before { content: "✓"; }
+  .badge.pending { background: var(--accent-soft); color: var(--accent); }
+  .badge.pending::before { content: "○"; }
+
+  .decision {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .decision:last-child { border-bottom: none; }
+  .decision .num {
+    font-family: "Fraunces", serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 30px;
+  }
+  .decision h3 { font-size: 15.5px; margin: 0 0 4px; font-family: "Public Sans", sans-serif; font-weight: 700; }
+  .decision p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+  table.endpoints {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  table.endpoints thead th {
+    text-align: left;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  table.endpoints td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.endpoints tr:last-child td { border-bottom: none; }
+  .method {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .m-get { background: var(--teal-soft); color: var(--teal); }
+  .m-post { background: var(--accent-soft); color: var(--accent); }
+  .m-patch { background: #e6e0f5; color: #5a3fa0; }
+  :root[data-theme="dark"] .m-patch, @media (prefers-color-scheme: dark) { }
+  .m-put { background: #e0e8f5; color: #2a5aa0; }
+  .m-delete { background: #f5dede; color: #a03030; }
+  code.path {
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+  .svc-tag { font-size: 12px; color: var(--ink-soft); }
+
+  .table-scroll { overflow-x: auto; }
+
+  .flag-list { display: flex; flex-direction: column; gap: 12px; }
+  .flag {
+    display: flex;
+    gap: 12px;
+    background: var(--amber-warn-bg);
+    border: 1px solid color-mix(in srgb, var(--amber-warn) 35%, transparent);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .flag .icon { font-size: 18px; line-height: 1.3; color: var(--amber-warn); }
+  .flag h3 { margin: 0 0 3px; font-size: 14.5px; color: var(--amber-warn); font-family: "Public Sans", sans-serif; font-weight: 700; }
+  .flag p { margin: 0; font-size: 13.5px; color: var(--ink); opacity: 0.85; }
+
+  .next-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .next-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14.5px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .next-list .tag {
+    font-family: ui-monospace, monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 7px;
+    border-radius: 5px;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 32px 18px 56px; }
+    table.endpoints { font-size: 12.5px; }
+    table.endpoints thead { display: none; }
+    table.endpoints, table.endpoints tbody, table.endpoints tr, table.endpoints td { display: block; width: 100%; }
+    table.endpoints tr { border-bottom: 1px solid var(--line); padding: 10px 14px; }
+    table.endpoints td { border: none; padding: 3px 0; }
+    table.endpoints td:before {
+      content: attr(data-label);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: block;
+      margin-bottom: 2px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">SynkroTech SAS · Sprint 8 · HU-09</span>
+    <h1>Folder 07 — API Contracts</h1>
+    <p>Summary of the progress made this week: REST standards, authentication strategy, and the 6 OpenAPI contracts that formalize how the system services communicate before code implementation begins.</p>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <h2>What was done</h2>
+      <span class="count">6 of 6 deliverables — HU-09 complete</span>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>REST Guidelines <span class="badge done">Done</span></h3>
+        <p>Naming conventions, pagination, response codes, and the project error catalog.</p>
+      </div>
+      <div class="card">
+        <h3>Authentication Strategy <span class="badge done">Done</span></h3>
+        <p>JWT + Gateway model, role-based authorization table for the 11 actual endpoints.</p>
+      </div>
+      <div class="card">
+        <h3>auth-service.yaml <span class="badge done">Done</span></h3>
+        <p>Registration, login, and token renewal.</p>
+      </div>
+      <div class="card">
+        <h3>customers-service.yaml <span class="badge done">Done</span></h3>
+        <p>Customer registration and lookup, with soft deletion.</p>
+      </div>
+      <div class="card">
+        <h3>products-service.yaml <span class="badge done">Done</span></h3>
+        <p>Product registration and stock reservation/release.</p>
+      </div>
+      <div class="card">
+        <h3>sales-service.yaml <span class="badge done">Done</span></h3>
+        <p>Sales lookup and 3 reports (daily, monthly, top products).</p>
+      </div>
+      <div class="card">
+        <h3>synkro-workflow.yaml <span class="badge done">Done</span></h3>
+        <p>The only actual external endpoint for registering a sale — orchestrates the complete Saga.</p>
+      </div>
+      <div class="card">
+        <h3>_shared.yaml <span class="badge done">Done</span></h3>
+        <p>Reusable schemas: errors, pagination, security.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Decisions made</h2>
+    </div>
+    <div class="card" style="padding: 6px 20px;">
+      <div class="decision">
+        <span class="num">01</span>
+        <div>
+          <h3>No version in the URL</h3>
+          <p>Keep <code class="path">/api/customers</code>, not <code class="path">/api/v1/customers</code> — every existing document already uses this format; versioning now would break traceability with what has already been approved.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <span class="num">02</span>
+        <div>
+          <h3>The Gateway validates the JWT only once</h3>
+          <p>The 4 domain services no longer validate the token — they trust the <code class="path">X-User-Id</code> / <code class="path">X-User-Roles</code> headers forwarded by the Gateway (ADR-003 §2).</p>
+        </div>
+      </div>
+      <div class="decision">
+        <span class="num">03</span>
+        <div>
+          <h3>Sale registration is now internal</h3>
+          <p><code class="path">POST /api/sales</code> is no longer called directly by the frontend — it is called by <code class="path">synkro-workflow</code> as step 3 of the Saga, after validating the customer and reserving stock.</p>
+        </div>
+      </div>
+      <div class="decision">
+        <span class="num">04</span>
+        <div>
+          <h3>Stock reservation and release share the same mechanism</h3>
+          <p>Inventory (manual adjustment) and the Saga (reservation/compensation) use the same 2 operations — the business rule (stock can never be negative) is identical regardless of who calls.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Documented endpoints</h2>
+      <span class="count">11 actual routes · 5 services</span>
+    </div>
+    <div class="table-scroll">
+      <table class="endpoints">
+        <thead>
+          <tr><th>Service</th><th>Method</th><th>Path</th><th>Function</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-label="Servicio" class="svc-tag">Auth</td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/auth/register</code></td><td data-label="Función">Create account (public)</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Auth</td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/auth/login</code></td><td data-label="Función">Authenticate (public)</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Auth</td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/auth/refresh</code></td><td data-label="Función">Renew token</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Customers</td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/customers</code></td><td data-label="Función">Register customer</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Customers</td><td data-label="Método"><span class="method m-get">GET/PUT/DEL</span></td><td data-label="Ruta"><code class="path">/api/customers/{id}</code></td><td data-label="Función">View / edit / deactivate</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Products</td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/products</code></td><td data-label="Función">Register product</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Products</td><td data-label="Método"><span class="method m-patch">PATCH</span></td><td data-label="Ruta"><code class="path">/api/products/{id}/stock</code></td><td data-label="Función">Reserve / release stock</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Sales</td><td data-label="Método"><span class="method m-get">GET</span></td><td data-label="Ruta"><code class="path">/api/sales/{id}</code></td><td data-label="Función">View sale (own sales, if seller)</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Sales</td><td data-label="Método"><span class="method m-get">GET</span></td><td data-label="Ruta"><code class="path">/api/sales/reports/*</code></td><td data-label="Función">Daily / monthly / top products reports</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Sales <em>(interno)</em></td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/sales</code></td><td data-label="Función">Register sale — only called by the Saga</td></tr>
+          <tr><td data-label="Servicio" class="svc-tag">Workflow</td><td data-label="Método"><span class="method m-post">POST</span></td><td data-label="Ruta"><code class="path">/api/sales</code></td><td data-label="Función">Actual frontend entry point — orchestrates the Saga</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>What is next</h2>
+    </div>
+    <ul class="next-list">
+      <li><span class="tag">HU-DOCS-42</span> Write ADR-004: formalize 3 decisions that remained pending during this week (date filters in reports, customer search, category management).</li>
+      <li><span class="tag">HU-DOCS-41</span> Correct <code class="path">security-policy.md</code> and <code class="path">cross-cutting.md</code> — they still describe the security model from before ADR-003.</li>
+      <li><span class="tag">HU-ARQ-16</span> Move the Java example from <code class="path">hexagonal-architecture.md</code> to its own appendix.</li>
+      <li><span class="tag">Sprint 9</span> Confirm the technology stack for <code class="path">synkro-workflow</code> / <code class="path">synkro-worker</code> so code implementation can begin.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Blockers and gaps found</h2>
+    </div>
+    <div class="flag-list">
+      <div class="flag">
+        <span class="icon">⚠</span>
+        <div>
+          <h3>synkro-workflow / synkro-worker stack not defined</h3>
+          <p>It does not block the contracts already written (OpenAPI describes the interface, not the implementation), but it does block starting development of those 2 services.</p>
+        </div>
+      </div>
+      <div class="flag">
+        <span class="icon">⚠</span>
+        <div>
+          <h3>There is no way to search for a customer by document</h3>
+          <p>The data model assumes it ("point of sale lookup"), but ADR-001 did not define that endpoint. Decision pending — resolved in ADR-004.</p>
+        </div>
+      </div>
+      <div class="flag">
+        <span class="icon">⚠</span>
+        <div>
+          <h3>There is no endpoint to create product categories</h3>
+          <p>It is assumed that the categories already exist in the database. Same pending solution — ADR-004.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>SynkroTech SAS — Sales Management System</span>
+    <span>Documentation generated from ADR-001, ADR-002, ADR-003, and entities-and-rules.md</span>
+  </footer>
+
+</div>
+</body>
+</html>
