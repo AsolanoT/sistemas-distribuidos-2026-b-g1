@@ -1,0 +1,328 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect x="0" y="0" width="1920" height="1080" fill="#f8fafc"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="110" fill="#1e3a5f"/>
+  <text x="960" y="50" text-anchor="middle" fill="#ffffff" font-size="38" font-weight="700">Planning: Story Mapping, Estimation &amp; MVP 2 Commitment</text>
+  <text x="960" y="85" text-anchor="middle" fill="#cbd5e1" font-size="18">Session 2 · Sprint 2 — Story Mapping · Relative Estimation · Cross-Service Dependencies · Realistic Commitment</text>
+
+  <!-- ============ PANEL 1: STORY MAPPING ============ -->
+  <g>
+    <rect x="40" y="130" width="445" height="640" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect x="40" y="130" width="8" height="640" rx="4" fill="#2563eb"/>
+    <circle cx="85" cy="170" r="20" fill="#2563eb"/>
+    <text x="85" y="177" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">1</text>
+    <text x="120" y="178" fill="#1e293b" font-size="21" font-weight="700">Story Map</text>
+
+    <text x="70" y="222" font-size="15.5" fill="#334155">
+      <tspan x="70" dy="0">Lay the user's journey left to right</tspan>
+      <tspan x="70" dy="21">(the "backbone"). Detail and priority</tspan>
+      <tspan x="70" dy="21">go top to bottom.</tspan>
+    </text>
+
+    <!-- Backbone row -->
+    <g font-size="12.5" font-weight="600">
+      <rect x="70" y="330" width="86" height="40" rx="6" fill="#2563eb"/>
+      <text x="113" y="354" text-anchor="middle" fill="#fff">Browse</text>
+      <rect x="170" y="330" width="86" height="40" rx="6" fill="#2563eb"/>
+      <text x="213" y="354" text-anchor="middle" fill="#fff">Order</text>
+      <rect x="270" y="330" width="86" height="40" rx="6" fill="#2563eb"/>
+      <text x="313" y="354" text-anchor="middle" fill="#fff">Pay</text>
+      <rect x="370" y="330" width="86" height="40" rx="6" fill="#2563eb"/>
+      <text x="413" y="354" text-anchor="middle" fill="#fff">Track</text>
+    </g>
+    <!-- arrows -->
+    <g stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)">
+      <line x1="156" y1="350" x2="168" y2="350"/>
+      <line x1="256" y1="350" x2="268" y2="350"/>
+      <line x1="356" y1="350" x2="368" y2="350"/>
+    </g>
+
+    <!-- MVP2 cards -->
+    <g font-size="11.5" font-weight="600">
+      <rect x="70" y="390" width="86" height="46" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="113" y="410" text-anchor="middle" fill="#166534">list</text>
+      <text x="113" y="424" text-anchor="middle" fill="#166534">stock</text>
+
+      <rect x="170" y="390" width="86" height="46" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="213" y="410" text-anchor="middle" fill="#166534">place</text>
+      <text x="213" y="424" text-anchor="middle" fill="#166534">order (MVP1)</text>
+
+      <rect x="270" y="390" width="86" height="46" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="313" y="410" text-anchor="middle" fill="#166534">charge</text>
+      <text x="313" y="424" text-anchor="middle" fill="#166534">(async)</text>
+
+      <rect x="370" y="390" width="86" height="46" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="413" y="410" text-anchor="middle" fill="#166534">order</text>
+      <text x="413" y="424" text-anchor="middle" fill="#166534">status</text>
+    </g>
+
+    <!-- release line -->
+    <line x1="70" y1="452" x2="456" y2="452" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,4"/>
+    <text x="263" y="446" text-anchor="middle" fill="#16a34a" font-size="11.5" font-weight="700" font-style="italic">— release line (ships in MVP 2) —</text>
+
+    <!-- later items -->
+    <g font-size="11" font-weight="600">
+      <rect x="270" y="465" width="86" height="40" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+      <text x="313" y="483" text-anchor="middle" fill="#64748b">discounts</text>
+      <text x="313" y="497" text-anchor="middle" fill="#64748b">(later)</text>
+
+      <rect x="370" y="465" width="86" height="40" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+      <text x="413" y="483" text-anchor="middle" fill="#64748b">notif.</text>
+      <text x="413" y="497" text-anchor="middle" fill="#64748b">(later)</text>
+    </g>
+
+    <text x="70" y="545" font-size="14" font-style="italic" fill="#64748b">
+      <tspan x="70" dy="0">Above the line = MVP 2. Below = waits.</tspan>
+      <tspan x="70" dy="20">The slice stays end-to-end usable, not</tspan>
+      <tspan x="70" dy="20">a pile of loose features.</tspan>
+    </text>
+
+    <!-- Example box -->
+    <rect x="70" y="620" width="386" height="120" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="85" y="642" font-size="13" font-weight="700" fill="#1d4ed8">Simple example</text>
+    <text x="85" y="663" font-size="13" fill="#1e40af">
+      <tspan x="85" dy="0">Like planning a trip: first the whole</tspan>
+      <tspan x="85" dy="18">itinerary (arrive, sleep, eat, come</tspan>
+      <tspan x="85" dy="18">back), then you decide which extras</tspan>
+      <tspan x="85" dy="18">make it into the first trip.</tspan>
+    </text>
+  </g>
+
+  <!-- ============ PANEL 2: ESTIMATION ============ -->
+  <g>
+    <rect x="505" y="130" width="445" height="640" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect x="505" y="130" width="8" height="640" rx="4" fill="#d97706"/>
+    <circle cx="550" cy="170" r="20" fill="#d97706"/>
+    <text x="550" y="177" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">2</text>
+    <text x="585" y="178" fill="#1e293b" font-size="21" font-weight="700">Estimate Relatively</text>
+
+    <text x="535" y="222" font-size="15.5" fill="#334155">
+      <tspan x="535" dy="0">Not in hours. Story points on a</tspan>
+      <tspan x="535" dy="21">Fibonacci-ish scale measure size,</tspan>
+      <tspan x="535" dy="21">complexity and uncertainty together.</tspan>
+    </text>
+    <text x="535" y="300" font-size="15.5" fill="#334155">
+      <tspan x="535" dy="0">Planning poker: everyone reveals at</tspan>
+      <tspan x="535" dy="21">once; discussing the outliers is</tspan>
+      <tspan x="535" dy="21">where the real value is.</tspan>
+    </text>
+
+    <!-- fibonacci chips -->
+    <g font-size="16" font-weight="700" text-anchor="middle">
+      <circle cx="560" cy="410" r="26" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="560" y="416" fill="#1e3a8a">1</text>
+      <circle cx="620" cy="410" r="26" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="620" y="416" fill="#1e3a8a">2</text>
+      <circle cx="680" cy="410" r="26" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="680" y="416" fill="#1e3a8a">3</text>
+      <circle cx="740" cy="410" r="26" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+      <text x="740" y="416" fill="#1e3a8a">5</text>
+      <circle cx="800" cy="410" r="26" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+      <text x="800" y="416" fill="#92400e">8</text>
+      <circle cx="860" cy="410" r="26" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+      <text x="860" y="416" fill="#991b1b">13</text>
+    </g>
+    <text x="800" y="450" text-anchor="middle" font-size="20" fill="#dc2626">⚠</text>
+
+    <rect x="535" y="470" width="386" height="60" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="550" y="490" font-size="13.5" font-weight="700" fill="#b91c1c">
+      <tspan x="550" dy="0">8+ is a smell:</tspan>
+      <tspan x="550" dy="19">split it before you commit to it!</tspan>
+    </text>
+
+    <rect x="535" y="550" width="386" height="90" rx="8" fill="#fffbeb" stroke="#fde68a"/>
+    <text x="550" y="572" font-size="13" font-weight="700" fill="#92400e">Velocity</text>
+    <text x="550" y="592" font-size="13" fill="#78350f">
+      <tspan x="550" dy="0">Points completed per sprint, to</tspan>
+      <tspan x="550" dy="18">forecast — never as a target you</tspan>
+      <tspan x="550" dy="18">chase or game.</tspan>
+    </text>
+
+    <rect x="535" y="660" width="386" height="80" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="550" y="682" font-size="13" font-weight="700" fill="#1d4ed8">Simple example</text>
+    <text x="550" y="702" font-size="13" fill="#1e40af">
+      <tspan x="550" dy="0">"Is it a 3 or an 8?" isn't about hours,</tspan>
+      <tspan x="550" dy="18">it's "how big and weird does it feel?"</tspan>
+    </text>
+  </g>
+
+  <!-- ============ PANEL 3: DEPENDENCIES ============ -->
+  <g>
+    <rect x="970" y="130" width="445" height="640" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect x="970" y="130" width="8" height="640" rx="4" fill="#7c3aed"/>
+    <circle cx="1015" cy="170" r="20" fill="#7c3aed"/>
+    <text x="1015" y="177" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">3</text>
+    <text x="1050" y="178" fill="#1e293b" font-size="21" font-weight="700">Cross-Service Dependencies</text>
+
+    <text x="1000" y="222" font-size="15.5" fill="#334155">
+      <tspan x="1000" dy="0">In a multi-service product, stories</tspan>
+      <tspan x="1000" dy="21">depend on each other across teams</tspan>
+      <tspan x="1000" dy="21">(Orders needs Inventory's</tspan>
+      <tspan x="1000" dy="21">GET /stock).</tspan>
+    </text>
+
+    <!-- two services deadlock diagram -->
+    <rect x="1000" y="345" width="160" height="70" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="1080" y="385" text-anchor="middle" font-size="13.5" font-weight="700" fill="#5b21b6">
+      <tspan x="1080" dy="-6">Orders</tspan>
+      <tspan x="1080" dy="16">service</tspan>
+    </text>
+    <rect x="1225" y="345" width="160" height="70" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="1305" y="385" text-anchor="middle" font-size="13.5" font-weight="700" fill="#5b21b6">
+      <tspan x="1305" dy="-6">Inventory</tspan>
+      <tspan x="1305" dy="16">service</tspan>
+    </text>
+    <path d="M 1160 362 L 1223 362" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+    <path d="M 1223 398 L 1160 398" stroke="#dc2626" stroke-width="2" marker-end="url(#arrowRed)"/>
+    <text x="1192" y="440" text-anchor="middle" font-size="12" font-weight="700" fill="#dc2626">🔒 classic deadlock: each waits on the other</text>
+
+    <rect x="1000" y="465" width="386" height="110" rx="8" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="1015" y="488" font-size="14" font-weight="700" fill="#166534">Fix: contract first</text>
+    <text x="1015" y="510" font-size="13.5" fill="#166534">
+      <tspan x="1015" dy="0">Agree the API now, mock it, and</tspan>
+      <tspan x="1015" dy="19">build both sides against that mock</tspan>
+      <tspan x="1015" dy="19">— nobody has to wait.</tspan>
+    </text>
+
+    <rect x="1000" y="600" width="386" height="140" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="1015" y="622" font-size="13" font-weight="700" fill="#1d4ed8">Simple example</text>
+    <text x="1015" y="643" font-size="13" fill="#1e40af">
+      <tspan x="1015" dy="0">Like two people at a revolving door,</tspan>
+      <tspan x="1015" dy="18">each waiting for the other to push</tspan>
+      <tspan x="1015" dy="18">first: nobody moves until someone</tspan>
+      <tspan x="1015" dy="18">decides who goes first (the</tspan>
+      <tspan x="1015" dy="18">contract).</tspan>
+    </text>
+  </g>
+
+  <!-- ============ PANEL 4: COMMITMENT ============ -->
+  <g>
+    <rect x="1435" y="130" width="445" height="640" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect x="1435" y="130" width="8" height="640" rx="4" fill="#059669"/>
+    <circle cx="1480" cy="170" r="20" fill="#059669"/>
+    <text x="1480" y="177" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">4</text>
+    <text x="1515" y="178" fill="#1e293b" font-size="21" font-weight="700">Commit Realistically</text>
+
+    <text x="1465" y="222" font-size="15.5" fill="#334155">
+      <tspan x="1465" dy="0">Commit only what fits your real</tspan>
+      <tspan x="1465" dy="21">velocity — the "Musts" that serve</tspan>
+      <tspan x="1465" dy="21">the sprint goal — plus a small</tspan>
+      <tspan x="1465" dy="21">buffer for the unknown.</tspan>
+    </text>
+
+    <!-- bar comparison -->
+    <text x="1465" y="345" font-size="13" font-weight="600" fill="#166534">Real velocity: 25 pts</text>
+    <rect x="1465" y="352" width="200" height="26" rx="5" fill="#a7f3d0" stroke="#059669"/>
+    <text x="1465" y="400" font-size="13" font-weight="600" fill="#b91c1c">Committed: 40 pts ⚠</text>
+    <rect x="1465" y="407" width="320" height="26" rx="5" fill="#fecaca" stroke="#dc2626"/>
+    <line x1="1665" y1="345" x2="1665" y2="440" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="1665" y="452" text-anchor="middle" font-size="10.5" fill="#059669">real limit</text>
+
+    <text x="1465" y="490" font-size="14.5" fill="#334155">
+      <tspan x="1465" dy="0">Leftover Should/Could stays in the</tspan>
+      <tspan x="1465" dy="20">backlog, not in the sprint.</tspan>
+    </text>
+
+    <rect x="1465" y="535" width="386" height="65" rx="8" fill="#fef2f2" stroke="#fca5a5"/>
+    <text x="1480" y="558" font-size="13.5" font-weight="700" fill="#b91c1c">
+      <tspan x="1480" dy="0">Overcommitting is the #1 reason</tspan>
+      <tspan x="1480" dy="19">sprints fail.</tspan>
+    </text>
+
+    <rect x="1465" y="620" width="386" height="120" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="1480" y="642" font-size="13" font-weight="700" fill="#1d4ed8">Simple example</text>
+    <text x="1480" y="663" font-size="13" fill="#1e40af">
+      <tspan x="1480" dy="0">Like packing a suitcase: better to</tspan>
+      <tspan x="1480" dy="18">pack the essentials and have it</tspan>
+      <tspan x="1480" dy="18">close well than to force everything</tspan>
+      <tspan x="1480" dy="18">in and have it burst mid-trip.</tspan>
+    </text>
+  </g>
+
+  <!-- ============ BOTTOM LEFT: SCENARIO ============ -->
+  <g>
+    <rect x="40" y="800" width="1150" height="260" rx="14" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+    <text x="65" y="835" font-size="21" font-weight="700" fill="#991b1b">⚠ 5. A Path You Will Face in Real Life</text>
+
+    <rect x="65" y="855" width="330" height="175" rx="8" fill="#ffffff" stroke="#f87171"/>
+    <text x="80" y="878" font-size="13.5" font-weight="700" fill="#b91c1c">Optimism + hidden dependency</text>
+    <text x="80" y="900" font-size="13" fill="#334155">
+      <tspan x="80" dy="0">The team commits 40 points</tspan>
+      <tspan x="80" dy="18">(they've never done more than</tspan>
+      <tspan x="80" dy="18">25) and assume Payments'</tspan>
+      <tspan x="80" dy="18">webhook "will be ready".</tspan>
+    </text>
+
+    <path d="M 400 940 L 435 940" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+
+    <rect x="440" y="855" width="330" height="175" rx="8" fill="#ffffff" stroke="#f87171"/>
+    <text x="455" y="878" font-size="13.5" font-weight="700" fill="#b91c1c">Day 4: the sprint collapses</text>
+    <text x="455" y="900" font-size="13" fill="#334155">
+      <tspan x="455" dy="0">The webhook isn't ready. Half</tspan>
+      <tspan x="455" dy="18">the stories are blocked. The</tspan>
+      <tspan x="455" dy="18">team doesn't deliver the</tspan>
+      <tspan x="455" dy="18">sprint goal.</tspan>
+    </text>
+
+    <path d="M 775 940 L 810 940" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+    <rect x="815" y="855" width="330" height="175" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="830" y="878" font-size="13.5" font-weight="700" fill="#166534">The fix</text>
+    <text x="830" y="900" font-size="13" fill="#166534">
+      <tspan x="830" dy="0">Commit near your real velocity.</tspan>
+      <tspan x="830" dy="18">Agree the contract now and</tspan>
+      <tspan x="830" dy="18">build against a mock. Make</tspan>
+      <tspan x="830" dy="18">the dependency itself a</tspan>
+      <tspan x="830" dy="18">tracked story with an owner</tspan>
+      <tspan x="830" dy="18">and a due date.</tspan>
+    </text>
+  </g>
+
+  <!-- ============ BOTTOM RIGHT: COMMON MISTAKES ============ -->
+  <g>
+    <rect x="1210" y="800" width="670" height="260" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect x="1210" y="800" width="8" height="260" rx="4" fill="#475569"/>
+    <text x="1240" y="835" font-size="21" font-weight="700" fill="#1e293b">6. Common Mistakes</text>
+
+    <g font-size="14.5" fill="#334155">
+      <text x="1240" y="868" font-size="16" fill="#dc2626">✗</text>
+      <text x="1262" y="868">
+        <tspan x="1262" dy="0">Estimating in hours and treating them</tspan>
+        <tspan x="1262" dy="19">as commitments.</tspan>
+      </text>
+
+      <text x="1240" y="920" font-size="16" fill="#dc2626">✗</text>
+      <text x="1262" y="920">
+        <tspan x="1262" dy="0">Ignoring cross-service dependencies</tspan>
+        <tspan x="1262" dy="19">until they block the sprint.</tspan>
+      </text>
+
+      <text x="1240" y="972" font-size="16" fill="#dc2626">✗</text>
+      <text x="1262" y="972">
+        <tspan x="1262" dy="0">Overcommitting far beyond the real</tspan>
+        <tspan x="1262" dy="19">velocity.</tspan>
+      </text>
+
+      <text x="1240" y="1024" font-size="16" fill="#dc2626">✗</text>
+      <text x="1262" y="1024">
+        <tspan x="1262" dy="0">A feature list with no end-to-end</tspan>
+        <tspan x="1262" dy="19">journey (story map missing).</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Arrow marker defs -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#16a34a"/>
+    </marker>
+  </defs>
+</svg>
