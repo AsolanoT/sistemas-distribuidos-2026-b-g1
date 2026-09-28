@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: SynkroTech Auth Service API
+  version: 1.0.0
+  description: >
+    User registration, login, and JWT issuance/refresh. Issues RS256
+    tokens consumed by synkro-api-gateway (ADR-003 §2) — this service
+    never validates tokens on incoming requests itself, it only issues
+    them.
+
+servers:
+  - url: http://localhost:8081/api/auth
+    description: Local
+
+paths:
+  /register:
+    post:
+      summary: Register a system user
+      tags: [Auth]
+      security: []
+      description: >
+        Public endpoint — no Bearer token required (ADR-001 §8). As
+        written, anyone can create an account with any role, including
+        ADMIN. This is an accepted simplification for the academic MVP,
+        not a production access-control pattern — see
+        07-api/authentication.md, "Note on register being public".
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '_shared.yaml#/components/schemas/Error'
+        '409':
+          description: Email already registered
+          content:
+            application/json:
+              schema:
+                $ref: '_shared.yaml#/components/schemas/Error'
+              example:
+                error: EMAIL_ALREADY_EXISTS
+                message: An account with this email already exists
+
+  /login:
+    post:
+      summary: Authenticate and obtain a JWT pair
+      tags: [Auth]
+      security: []
+      description: Public endpoint — no Bearer token required (ADR-001 §8).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenPair'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '_shared.yaml#/components/schemas/Error'
+              example:
+                error: INVALID_CREDENTIALS
+                message: Invalid email or password
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '_shared.yaml#/components/schemas/Error'
+
+  /refresh:
+    post:
+      summary: Rotate a refresh token for a new access/refresh pair
+      tags: [Auth]
+      security: []
+      description: >
+        Public endpoint in the sense that it requires no Bearer JWT —
+        it authenticates via the refresh token itself, in the body, not
+        via the Authorization header. Rotation is mandatory: the
+        refresh token in the request is invalidated whether or not the
+        call succeeds a second time (07-api/authentication.md,
+        "Refresh token flow").
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken:
+                  type: string
+      responses:
+        '200':
+          description: New token pair issued; the old refresh token is now invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenPair'
+        '401':
+          description: Refresh token invalid, expired, or already used
+          content:
+            application/json:
+              schema:
+                $ref: '_shared.yaml#/components/schemas/Error'
+              example:
+                error: INVALID_REFRESH_TOKEN
+                message: This refresh token has expired or already been used
+
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [name, email, password, role]
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 255
+        password:
+          type: string
+          format: password
+          minLength: 8
+          description: Hashed with bcrypt server-side; never stored or returned in plaintext.
+        role:
+          type: string
+          enum: [ADMIN, SALESPERSON, INVENTORY]
+
+    User:
+      type: object
+      description: >
+        Mirrors auth.users (06-data/models.md) exactly, minus
+        password_hash, which is never returned by any endpoint.
+      properties:
+        userId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum: [ADMIN, SALESPERSON, INVENTORY]
+        registrationDate:
+          type: string
+          format: date-time
+        active:
+          type: boolean
+
+    TokenPair:
+      type: object
+      required: [accessToken, refreshToken, tokenType, expiresIn]
+      properties:
+        accessToken:
+          type: string
+          description: >
+            RS256 JWT. Claims: sub, roles, permissions, iat, exp, jti
+            (07-api/authentication.md, "Token shape").
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+          enum: [Bearer]
+        expiresIn:
+          type: integer
+          description: Access token lifetime in seconds.
+          example: 3600
+        user:
+          $ref: '#/components/schemas/User'
