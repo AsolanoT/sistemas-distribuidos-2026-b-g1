@@ -22,7 +22,7 @@
               / [5%]  \
              /──────────\
             / Integration \
-           /    [25%]      \  ← Adapters against real DB (Testcontainers / dockertest)
+           /    [25%]      \  ← HTTP adapter in memory; persistence adapter on PostgreSQL
           /────────────────\
          /  Contract Tests   \
         /      [20%]          \  ← OpenAPI contract compliance (synkro-products-api.yaml, etc.)
@@ -78,33 +78,30 @@ HTTP, no framework.
 
 ### Folder structure
 
-**Java (3-module Maven, ADR-008):**
+**Java (three Maven modules, ADR-008):**
 
 ```
 synkro-auth-api/
-├── domain/src/test/java/com/synkro/auth/domain/
-│   ├── SystemUserTest.java
-│   └── RefreshTokenTest.java
-├── application/src/test/java/com/synkro/auth/application/
-│   ├── RegisterUserUseCaseTest.java
-│   └── LoginUseCaseTest.java
-└── infrastructure/src/test/java/com/synkro/auth/infrastructure/
-    └── (integration tests — see Tier 2)
+├── auth-core/src/test/java/co/edu/corhuila/synkro/auth/
+│   ├── domain/model/SystemUserTest.java
+│   └── application/usecase/
+│       ├── RegisterUserUseCaseTest.java
+│       └── FakeUserRepository.java                  # hand-written fake of the port
+├── auth-adapters/src/test/java/…/adapter/out/persistence/
+│   └── JdbcUserRepositoryIntegrationTest.java       # Tier 2
+└── auth-app/src/test/java/…/app/
+    └── AuthHttpTest.java                            # Tier 2
 ```
 
-**Go (`cmd/internal/pkg`, ADR-008):**
+**Go:**
 
 ```
 synkro-products-api/
-├── internal/domain/
-│   ├── product_test.go
-│   ├── category_test.go
-│   └── stock_adjustment_test.go
-├── internal/application/
-│   ├── create_product_test.go
-│   └── adjust_stock_test.go
-└── internal/infrastructure/
-    └── (integration tests — see Tier 2)
+├── internal/domain/model/product_test.go
+├── internal/application/usecase/products_test.go    # with a hand-written fake of the ports
+└── internal/adapter/
+    ├── in/httpapi/handler_test.go                   # Tier 2: httptest and the in-memory repository
+    └── out/persistence/postgres_integration_test.go # Tier 2: TEST_DATABASE_URL
 ```
 
 ### Naming conventions
@@ -140,7 +137,7 @@ func TestAdjustStock_RejectsNegativeResult(t *testing.T) { ... }
 **Java (auth domain):**
 
 ```java
-// domain/src/test/java/com/synkro/auth/domain/SystemUserTest.java
+// auth-core/src/test/java/co/edu/corhuila/synkro/auth/domain/model/SystemUserTest.java
 @Test
 void should_reject_creation_when_role_is_SERVICE() {
     assertThatThrownBy(() -> SystemUser.create("Alice", "alice@test.com", "hash", "SERVICE"))
@@ -152,11 +149,10 @@ void should_reject_creation_when_role_is_SERVICE() {
 **Go (products domain):**
 
 ```go
-// internal/domain/product_test.go
+// internal/domain/model/product_test.go
 func TestNewProduct_RejectsZeroPrice(t *testing.T) {
-    _, err := domain.NewProduct("Mouse", 0, categoryID)
-    require.Error(t, err)
-    assert.Contains(t, err.Error(), "price must be positive")
+    _, err := model.NewProduct("p-1", "Mouse", 0, "c-1")
+    require.ErrorIs(t, err, model.ErrPriceNotPositive)
 }
 ```
 
@@ -165,10 +161,10 @@ func TestNewProduct_RejectsZeroPrice(t *testing.T) {
 **Java (auth application):**
 
 ```java
-// application/src/test/java/com/synkro/auth/application/RegisterUserUseCaseTest.java
+// auth-core/src/test/java/co/edu/corhuila/synkro/auth/application/usecase/RegisterUserUseCaseTest.java
 @Test
 void should_hash_password_and_persist_user() {
-    var userRepo = new InMemoryUserRepository();
+    var userRepo = new FakeUserRepository();
     var hasher = new FakePasswordHasher();
     var useCase = new RegisterUserUseCase(userRepo, hasher);
 
@@ -183,65 +179,70 @@ void should_hash_password_and_persist_user() {
 **Go (products application):**
 
 ```go
-// internal/application/create_product_test.go
-func TestCreateProduct_PersistsWithZeroStock(t *testing.T) {
-    repo := fake.NewProductRepository()
-    uc := application.NewCreateProductUseCase(repo)
+// internal/application/usecase/products_test.go
+func TestCreate_ReturnsTheOriginalProductWhenTheKeyIsRepeated(t *testing.T) {
+    uc := NewProducts(newFakeProducts(), &sequentialIDs{})
+    cmd := in.CreateProductCommand{IdempotencyKey: "key-12345", Name: "Mouse", PriceCents: 45_990_00, CategoryID: "c-1"}
 
-    product, err := uc.Execute("Mouse", 4599_00, categoryID)
+    first, _ := uc.Create(context.Background(), cmd)
+    second, err := uc.Create(context.Background(), cmd)
 
     require.NoError(t, err)
-    assert.Equal(t, int64(4599_00), product.PriceCents)
-    assert.Equal(t, 0, product.Stock)
-    assert.True(t, repo.Exists(product.ID))
+    assert.False(t, second.Created)
+    assert.Equal(t, first.ProductID, second.ProductID)
 }
 ```
 
 ---
 
-## Tier 2 — Integration tests
+## Tier 2 — HTTP and integration tests
 
-**Objective:** verify that adapters work correctly with real systems
-(PostgreSQL, HTTP clients).
+**Objective:** verify the adapters. The HTTP adapter is tested in memory; the
+persistence adapter is tested against a real PostgreSQL. A fake repository only
+proves that the fake was called: it does not prove that the SQL is valid, that
+the mapping keeps the types or that the migration exists.
+
+| Level | What it verifies | What it needs |
+|-------|------------------|---------------|
+| HTTP | every variant of `401`, the error envelope and correlation, field validation, idempotent retry, page limit | the server in memory, with the in-memory repository |
+| Integration | round trip, rollback of the idempotency key, update and page | PostgreSQL with the schema of the `-db` repository, through `TEST_DATABASE_URL` |
 
 | Aspect | Java (Spring Boot) | Go |
 |--------|-------------------|-----|
-| Framework | `@SpringBootTest` + Testcontainers | `dockertest` or Testcontainers for Go |
-| Database | Testcontainers PostgreSQL | Same |
+| HTTP tests | `@SpringBootTest(webEnvironment = RANDOM_PORT)` in `<domain>-app`, with the in-memory repository | `net/http/httptest` in `internal/adapter/in/httpapi/` |
+| Integration tests | `<Class>IntegrationTest` in `<domain>-adapters`, enabled only when `TEST_DATABASE_URL` is defined | `postgres_integration_test.go`, skipped with `t.Skip` when `TEST_DATABASE_URL` is empty |
 | Speed | 1–5 s per test | 1–5 s per test |
-| When they run | In CI on every PR | Same |
+| When they run | HTTP: on every push; integration: in CI on every PR, where PostgreSQL and the `-db` migrations are available | Same |
 
 ### What to test
 
+- The HTTP behavior of every service, which is verified by HTTP and not by language: `/health` without a token, `401` for a missing, expired, badly signed or non-RS256 token, the error envelope with the same `traceId` as the received `X-Correlation-Id`, `400` with one `details` entry per invalid field, `201` with `Location` and `200` with the same id on a repeated `Idempotency-Key`, a bounded page (`limit` above 100 is `400`)
 - Repository adapters: CRUD against a real PostgreSQL schema
-- HTTP adapters (controllers): request → response with real Spring context or Go HTTP test server
-- Flyway migrations: the CI rebuild check (drop, rebuild, rollback, rebuild)
+- Flyway migrations: the CI rebuild check (drop, rebuild, rollback, rebuild), in the `-db` repository
 
 ### What NOT to test here
 
 - Domain logic (covered by unit tests)
-- Other services (use mocks or WireMock for outgoing HTTP)
+- Other services: the outgoing client is a port, so it is replaced by a fake
 
 ### Folder structure
 
 **Java:**
 
 ```
-infrastructure/src/test/java/com/synkro/auth/infrastructure/
-├── persistence/
-│   └── SystemUserRepositoryIT.java
-└── web/
-    └── AuthControllerIT.java
+auth-adapters/src/test/java/co/edu/corhuila/synkro/auth/adapter/out/persistence/
+└── JdbcUserRepositoryIntegrationTest.java
+
+auth-app/src/test/java/co/edu/corhuila/synkro/auth/app/
+└── AuthHttpTest.java
 ```
 
 **Go:**
 
 ```
-internal/infrastructure/
-├── persistence/
-│   └── product_repository_test.go    // uses build tag //go:build integration
-└── http/
-    └── product_handler_test.go       // uses httptest.NewServer
+internal/adapter/
+├── in/httpapi/handler_test.go                       // httptest.NewServer + in-memory repository
+└── out/persistence/postgres_integration_test.go     // skipped when TEST_DATABASE_URL is not set
 ```
 
 ### Example — repository integration test
@@ -249,22 +250,17 @@ internal/infrastructure/
 **Java:**
 
 ```java
-// infrastructure/src/test/java/.../SystemUserRepositoryIT.java
-@SpringBootTest
-@Testcontainers
-class SystemUserRepositoryIT {
-    @Container
-    static PostgreSQLContainer<?> pg = new PostgreSQLContainer<>("postgres:16-alpine");
-
-    @Autowired
-    private SystemUserRepository repo;
+// auth-adapters/src/test/java/…/adapter/out/persistence/JdbcUserRepositoryIntegrationTest.java
+@EnabledIfEnvironmentVariable(named = "TEST_DATABASE_URL", matches = ".+")
+class JdbcUserRepositoryIntegrationTest {
 
     @Test
     void should_persist_and_find_by_email() {
-        var user = SystemUser.create("Alice", "alice@test.com", "hash", "ADMIN");
-        repo.save(user);
+        var repository = repositoryOver(System.getenv("TEST_DATABASE_URL")); // JdbcTemplate over that URL (helper omitted)
+        var user = SystemUser.create("Alice", uniqueEmail(), "hash", "ADMIN");
+        repository.save(user);
 
-        var found = repo.findByEmail("alice@test.com");
+        var found = repository.findByEmail(user.email());
         assertThat(found).isPresent();
         assertThat(found.get().role()).isEqualTo("ADMIN");
     }
@@ -274,20 +270,22 @@ class SystemUserRepositoryIT {
 **Go:**
 
 ```go
-// internal/infrastructure/persistence/product_repository_test.go
-//go:build integration
+// internal/adapter/out/persistence/postgres_integration_test.go
+func TestCreateOnce_ReturnsTheOriginalProductWhenTheKeyIsRepeated(t *testing.T) {
+    url := os.Getenv("TEST_DATABASE_URL")
+    if url == "" {
+        t.Skip("TEST_DATABASE_URL is not set")
+    }
+    repo := NewPostgres(openDB(t, url)) // the schema comes from synkro-products-db (helper omitted)
 
-func TestProductRepository_SaveAndFindByID(t *testing.T) {
-    db := testutil.NewTestDB(t) // starts Testcontainers PostgreSQL
-    repo := persistence.NewProductRepository(db)
-
-    product, _ := domain.NewProduct("Mouse", 4599_00, categoryID)
-    err := repo.Save(context.Background(), product)
+    first, created, err := repo.CreateOnce(context.Background(), "key-12345", newProduct(t))
     require.NoError(t, err)
+    require.True(t, created)
 
-    found, err := repo.FindByID(context.Background(), product.ID)
+    again, created, err := repo.CreateOnce(context.Background(), "key-12345", newProduct(t))
     require.NoError(t, err)
-    assert.Equal(t, "Mouse", found.Name)
+    assert.False(t, created)
+    assert.Equal(t, first, again)
 }
 ```
 
@@ -340,18 +338,19 @@ following `deployment.md` §9.
 ```yaml
 # .github/workflows/ci.yml (simplified)
 jobs:
-  unit-tests:
+  unit-and-http-tests:
     steps:
-      - run: ./mvnw test -pl domain,application    # Java
-      # or: go test ./internal/domain/... ./internal/application/...  # Go
+      - run: mvn -B test        # Java; the integration tests are skipped
+      # or: go test ./...       # Go; the integration tests are skipped
 
   integration-tests:
     services:
       postgres:
         image: postgres:16-alpine
     steps:
-      - run: ./mvnw verify -pl infrastructure      # Java (Testcontainers)
-      # or: go test -tags=integration ./internal/infrastructure/...  # Go
+      - run: # apply the migrations of the -db repository to the CI instance (Flyway runner)
+      - run: TEST_DATABASE_URL=… mvn -B test      # Java
+      # or: TEST_DATABASE_URL=… go test ./...     # Go
 
   contract-tests:
     steps:
@@ -411,29 +410,28 @@ Each service keeps its test fixtures alongside the tests:
 **Java:**
 
 ```
-application/src/test/java/com/synkro/auth/
-├── fake/
-│   ├── InMemoryUserRepository.java      // implements UserRepository port
-│   └── FakePasswordHasher.java          // implements PasswordHasher port
-└── fixture/
-    └── SystemUserFixture.java           // builder for test SystemUser instances
+auth-core/src/test/java/co/edu/corhuila/synkro/auth/application/usecase/
+├── FakeUserRepository.java              // implements the UserRepository port
+├── FakePasswordHasher.java              // implements the PasswordHasher port
+└── SystemUserFixture.java               // builder for test SystemUser instances
 ```
 
 **Go:**
 
 ```
-internal/testutil/
-├── fake_product_repository.go           // implements ProductRepository port
-├── fake_idempotency_store.go
-└── fixtures.go                          // builder functions for test entities
+internal/application/usecase/products_test.go   // fakeProducts and sequentialIDs, next to the test
+internal/adapter/out/persistence/memory.go      // in-memory repository, shared by the HTTP tests
 ```
 
 ### Test database
 
-Integration tests use Testcontainers (Java) or `dockertest` (Go) to
-spin up an ephemeral PostgreSQL instance. The test applies the domain's
-Flyway migrations before each test suite and rolls back between tests.
-No test uses the environment's shared instance.
+Integration tests run against the PostgreSQL that `TEST_DATABASE_URL` points to,
+with the schema created by the migrations of the `-db` repository. In CI it is a
+service container to which the migrations are applied before the tests; locally it
+can be the instance of `synkro-infra` (`deployment.md` §9) or any PostgreSQL with
+that schema. Each test uses its own data (unique values) and no test uses the `qa`
+or `main` instances. Without `TEST_DATABASE_URL`, the integration tests are
+skipped instead of failing.
 
 ### Money in tests
 

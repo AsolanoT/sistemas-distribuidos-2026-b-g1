@@ -91,10 +91,14 @@ They split into two directions:
 
 ## Ports and adapters, in code
 
+> In the examples the package names are shortened (`application`, `postgres`, `domain`). In a
+> repository each folder is its own package (`out`, `usecase`, `persistence`, `model`), as the table
+> in "Where each layer lives in the repository" shows; the comment above each example gives its real file.
+
 A **port** is an interface defined in the Application layer:
 
 ```go
-// application/ports.go
+// internal/application/port/out/ports.go
 package application
 
 type SaleRepository interface {
@@ -105,7 +109,7 @@ type SaleRepository interface {
 An **adapter** implements that port, in the Infrastructure layer:
 
 ```go
-// infrastructure/postgres/sale_repository.go
+// internal/adapter/out/persistence/postgres.go
 package postgres
 
 type PostgresSaleRepository struct {
@@ -141,7 +145,7 @@ one transaction.
 ### 1. Domain — the `Sale` entity with its invariants
 
 ```go
-// domain/sale.go
+// internal/domain/model/sale.go
 package domain
 
 import "errors"
@@ -180,7 +184,7 @@ framework — only the Go standard library's `errors` package.
 ### 2. Application — the use case and the port
 
 ```go
-// application/register_sale.go
+// internal/application/usecase/sales.go
 package application
 
 type RegisterSaleUseCase struct {
@@ -204,7 +208,7 @@ func (uc *RegisterSaleUseCase) Execute(ctx context.Context, cmd RegisterSaleComm
 ### 3. Infrastructure — the inbound adapter (REST) and the outbound adapter (Postgres)
 
 ```go
-// infrastructure/http/sale_controller.go
+// internal/adapter/in/httpapi/handler.go
 package http
 
 func (h *SaleHandler) RegisterSale(w http.ResponseWriter, r *http.Request) {
@@ -227,7 +231,7 @@ func (h *SaleHandler) RegisterSale(w http.ResponseWriter, r *http.Request) {
 ```
 
 ```go
-// infrastructure/postgres/sale_repository.go
+// internal/adapter/out/persistence/postgres.go
 package postgres
 
 func (r *PostgresSaleRepository) Save(ctx context.Context, sale *domain.Sale) error {
@@ -238,7 +242,7 @@ func (r *PostgresSaleRepository) Save(ctx context.Context, sale *domain.Sale) er
     defer tx.Rollback()
 
     if _, err := tx.ExecContext(ctx,
-        `INSERT INTO sales.sale (sale_id, customer_id, created_by, total_cents) VALUES ($1, $2, $3, $4)`,
+        `INSERT INTO sales_schema.sale (sale_id, customer_id, created_by, total_cents) VALUES ($1, $2, $3, $4)`,
         sale.ID, sale.CustomerID, sale.CreatedBy, sale.TotalCents); err != nil {
         return err
     }
@@ -292,68 +296,70 @@ milliseconds — exactly what Pillar 2 requires.
 
 ## Where each layer lives in the repository
 
-The folder layout differs by language, but the dependency rule is the
-same: domain imports nothing external, application imports only domain,
-infrastructure imports both.
+The three layers of this document are folders and, in Java, Maven modules. The
+dependency rule is the same in every language: the domain imports nothing
+external, the application imports only the domain, and the adapters (the
+"infrastructure" layer of this document) import both.
+
+| Layer of this document | Go (`synkro-products-api`) | Java (`synkro-customers-api`) |
+|---|---|---|
+| Domain | `internal/domain/model/` | `customers-core/…/domain/model/` |
+| Application — inbound ports | `internal/application/port/in/` | `customers-core/…/application/port/in/` |
+| Application — outbound ports | `internal/application/port/out/` | `customers-core/…/application/port/out/` |
+| Application — use cases | `internal/application/usecase/` | `customers-core/…/application/usecase/` |
+| Infrastructure — HTTP adapter | `internal/adapter/in/httpapi/` | `customers-adapters/…/adapter/in/http/` |
+| Infrastructure — persistence adapter | `internal/adapter/out/persistence/` | `customers-adapters/…/adapter/out/persistence/` |
+| Composition root | `cmd/products-api/main.go` and `internal/config/` | `customers-app/` |
 
 ### Go (synkro-products-api, synkro-sales-api, synkro-worker)
 
 ```
 synkro-products-api/
-├── cmd/api/main.go                          # composition root
+├── cmd/products-api/main.go                 # composition root
+├── deploy/                                  # compose.yml (declares this service) and Dockerfile
 ├── internal/
-│   ├── domain/                              # entities, VOs, invariants — no imports outside stdlib
-│   │   ├── product.go
-│   │   └── stock_adjustment.go
-│   ├── application/                         # use cases + port interfaces
-│   │   ├── ports.go                         # ProductRepository, IdempotencyStore
-│   │   ├── create_product.go
-│   │   └── adjust_stock.go
-│   └── infrastructure/                      # adapters — the only place that touches I/O
-│       ├── http/                             # inbound: REST handlers
-│       │   └── product_handler.go
-│       ├── persistence/                     # outbound: PostgreSQL
-│       │   └── product_repository.go        # implements application.ProductRepository
-│       └── config/                          # wiring
-│           └── wire.go
-├── deploy/compose.yml                       # migration runner only (ADR-009)
+│   ├── adapter/
+│   │   ├── in/httpapi/                      # inbound: handlers, auth, error envelope, middleware
+│   │   └── out/persistence/                 # outbound: PostgreSQL and in-memory repositories
+│   ├── application/
+│   │   ├── port/in/                         # use case interfaces
+│   │   ├── port/out/                        # repository and id generator interfaces
+│   │   └── usecase/
+│   ├── config/                              # environment variables and explicit limits
+│   └── domain/model/                        # entities, invariants, typed errors
+├── .env.example
 └── go.mod
 ```
 
-### Java — 3-module Maven (synkro-auth-api, synkro-customers-api, synkro-workflow)
+### Java — three Maven modules (synkro-auth-api, synkro-customers-api, synkro-workflow)
 
 ```
-synkro-auth-api/
-├── domain/                                  # Maven module: no Spring dependency
-│   └── src/main/java/com/synkro/auth/domain/
-│       ├── SystemUser.java
-│       └── RefreshToken.java
-├── application/                             # Maven module: depends only on domain
-│   └── src/main/java/com/synkro/auth/application/
-│       ├── ports/
-│       │   ├── UserRepository.java          # interface (outbound port)
-│       │   └── PasswordHasher.java          # interface (outbound port)
-│       └── usecase/
-│           ├── RegisterUserUseCase.java
-│           └── LoginUseCase.java
-├── infrastructure/                          # Maven module: depends on domain + application + Spring
-│   └── src/main/java/com/synkro/auth/infrastructure/
-│       ├── web/
-│       │   └── AuthController.java          # inbound adapter
-│       ├── persistence/
-│       │   └── JdbcUserRepository.java      # implements UserRepository
-│       └── security/
-│           └── BcryptPasswordHasher.java    # implements PasswordHasher
-├── deploy/compose.yml                       # migration runner only (ADR-009)
-└── pom.xml                                  # parent POM with 3 modules
+synkro-customers-api/
+├── customers-core/                          # domain and use cases — NO framework dependency
+│   └── src/main/java/co/edu/corhuila/synkro/customers/
+│       ├── domain/model/                    # Customer, DomainException
+│       └── application/{port/in, port/out, usecase}
+├── customers-adapters/                      # depends on customers-core and on Spring
+│   └── src/main/java/co/edu/corhuila/synkro/customers/adapter/
+│       ├── in/http/                         # controller, filters, error handler
+│       └── out/persistence/                 # JdbcCustomerRepository, InMemoryCustomerRepository
+├── customers-app/                           # Spring Boot application: wires everything together
+├── deploy/                                  # compose.yml (declares this service) and Dockerfile
+└── pom.xml                                  # parent: lists the three modules
 ```
 
-**The domain module's `pom.xml` has no Spring dependency.** A
-`@Service`, `@Entity` or `@Repository` annotation in the domain module
-does not compile — the dependency rule is enforced by the build, not by
-convention (ADR-008).
+**The core module's `pom.xml` declares no framework.** A `@Service`, an `@Entity`
+or a Spring import in the domain or in a use case does not compile — the
+dependency rule is enforced by the build, not by convention. The use case is a
+plain class; `customers-app` creates it.
 
-For Go and Java stack-specific details beyond this mapping, see
+**The `-api` repositories hold no database and no migrations.** `deploy/compose.yml`
+declares the service itself; the PostgreSQL instance belongs to `synkro-infra` and
+the migrations to the `-db` repository (ADR-009, ADR-005 Decision 2).
+
+**The worker and the workflow have the same shape** with another inbound adapter:
+a scheduler for the worker, HTTP for the workflow. For the full trees, the
+libraries, the configuration and a worked example per language, see
 `_stacks/go.md` and `_stacks/java-spring.md`.
 
 ---
@@ -381,14 +387,14 @@ you're building in Java.
 ### Port and adapter
 
 ```java
-// application/port/out/SaleRepository.java
+// <domain>-core/…/application/port/out/SaleRepository.java
 public interface SaleRepository {
     void save(Sale sale);
 }
 ```
 
 ```java
-// infrastructure/persistence/PostgresSaleRepository.java
+// <domain>-adapters/…/adapter/out/persistence/PostgresSaleRepository.java
 @Repository
 public class PostgresSaleRepository implements SaleRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -403,7 +409,7 @@ public class PostgresSaleRepository implements SaleRepository {
 ### 1. Domain — the `Sale` entity
 
 ```java
-// domain/Sale.java
+// <domain>-core/…/domain/model/Sale.java
 public class Sale {
     private final String customerId;
     private final String createdBy;
@@ -438,8 +444,8 @@ public class Sale {
 ### 2. Application — the use case
 
 ```java
-// application/usecase/RegisterSaleUseCase.java
-@Service
+// <domain>-core/…/application/usecase/RegisterSaleUseCase.java
+// No @Service: the core module has no Spring dependency; <domain>-app creates this class.
 public class RegisterSaleUseCase {
     private final SaleRepository repository; // port, not the implementation
 
@@ -458,7 +464,7 @@ public class RegisterSaleUseCase {
 ### 3. Infrastructure — inbound and outbound adapters
 
 ```java
-// infrastructure/rest/SaleController.java
+// <domain>-adapters/…/adapter/in/http/SaleController.java
 @RestController
 @RequestMapping("/api/v1/sales")
 public class SaleController {
@@ -483,7 +489,7 @@ public class SaleController {
 ```
 
 ```java
-// infrastructure/persistence/PostgresSaleRepository.java (full version)
+// <domain>-adapters/…/adapter/out/persistence/PostgresSaleRepository.java (full version)
 @Repository
 public class PostgresSaleRepository implements SaleRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -492,7 +498,7 @@ public class PostgresSaleRepository implements SaleRepository {
     @Transactional
     public void save(Sale sale) {
         jdbcTemplate.update(
-            "INSERT INTO sales.sale (sale_id, customer_id, created_by, total_cents) VALUES (?, ?, ?, ?)",
+            "INSERT INTO sales_schema.sale (sale_id, customer_id, created_by, total_cents) VALUES (?, ?, ?, ?)",
             sale.getId(), sale.getCustomerId(), sale.getCreatedBy(), sale.getTotalCents());
 
         // No outbox write — events are deferred out of the MVP (ADR-007 Decision 5).
