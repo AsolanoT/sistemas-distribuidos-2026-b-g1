@@ -1,74 +1,41 @@
-# Stack-Specific Implementation Guides
+# ADRs — Architecture Decision Records
 
-> The concepts of DDD, hexagonal architecture, TDD and patterns in this repository
-> do not depend on a language. This folder holds the **stack-specific guides**:
-> the real folder structure, the commands, the libraries and code examples of the
-> languages the project uses.
->
-> The main documents tell you the **what and why**; your stack guide tells you the
-> **concrete how**.
+An ADR records one architectural decision: the problem, the options the team really considered, what tipped the decision, what it costs and what it changes. Each ADR is one file in `records/`.
 
----
+## How to create an ADR
 
-## The stacks of this project
+1. Copy `_template-adr.md` to `records/ADR-NNN-short-title.md`, using the next sequential number.
+2. Fill in every section. An ADR needs at least two real options, a dominant criterion and an accepted cost; without the last two it is a statement, not a decision.
+3. Open a `docs/` branch and a PR that contains the ADR and its row in the register below. The whole team reviews it.
+4. While its status is `Proposed`, the ADR can still be edited.
+5. Once `Accepted`, the ADR is never edited. A change is a new ADR that names the sections it replaces in its **Modifies** field, and the register records the link in both directions.
 
-The backend is written in Java and Go (ADR-001); the versions are pinned in
-ADR-008.
+## Statuses
 
-| Stack | Guide | Services that use it |
-|-------|-------|----------------------|
-| Java 21 + Spring Boot 3.5, Maven | [java-spring.md](./java-spring.md) | `synkro-auth-api`, `synkro-customers-api`, `synkro-workflow` |
-| Go | [go.md](./go.md) | `synkro-products-api`, `synkro-sales-api`, `synkro-worker` |
+| Status | Meaning |
+|--------|---------|
+| `Proposed` | Under discussion; it can still be edited |
+| `Accepted` | Approved by the team; immutable from this point on |
+| `Rejected` | Evaluated and discarded; the ADR keeps the reason |
+| `Superseded by ADR-NNN` | Every decision in it has been replaced by a newer ADR |
 
-The gateway is NGINX with declarative configuration and has no guide. The frontend
-(`synkro-front` and the four portals) uses React 19, TypeScript, Vite and Node 22
-LTS (ADR-008); it has no guide yet.
+When a newer ADR replaces only some sections of an older one, the older ADR stays `Accepted`, and the register lists the replaced sections in the **Modified or superseded by** column.
 
-### Guides that do not apply
+## ADR register
 
-`node-typescript.md` and `python-fastapi.md` come from the documentation template.
-No service of this project is written in Node.js or Python, so they are kept only
-as reference and no document of the project relies on them. Their examples use the
-template's domain, not SynkroTech's.
+| ID | Title | Status | Date | Modifies | Modified or superseded by | Builds on / Context |
+|----|-------|--------|------|----------|---------------------------|---------------------|
+| [ADR-001](records/ADR-001-architecture.md) | Sales Management System Architecture | Accepted | 2026-08 | — | §2 → ADR-005 → ADR-009; §5 → ADR-003; §6 → ADR-003; §7 → ADR-002, ADR-005; §8 → ADR-004 | — |
+| [ADR-002](records/ADR-002-sale-authorship-traceability.md) | Sale Authorship Traceability and `sales_summary` Status | Accepted | 2026-09 | ADR-001 §7 | Source of `created_by` → ADR-006; "Resolution of `sales_summary`" → ADR-005 | — |
+| [ADR-003](records/ADR-003-gateway-saga-async.md) | API Gateway, Saga Workflow, and Async Messaging Adoption | Accepted | 2026-09 | ADR-001 §5, §6 | Decision 1 (gateway scope), Decision 2 → ADR-006; Decision 1 (routing…), Decisions 3, 4, 5 → ADR-007 | — |
+| [ADR-004](records/ADR-004-api-contract-extensions.md) | API Contract Extensions | Accepted | 2026-09-28 | ADR-001 §8: catalog → extended; stock `PATCH` → replaced | — | ADR-006, ADR-007, ADR-008 |
+| [ADR-005](records/ADR-005-data-isolation-per-domain.md) | Data Isolation and Data Model per Domain | Accepted | 2026-09-26 | ADR-001 §2, §7; ADR-002 "Resolution of `sales_summary`" | Decision 1 → ADR-009 | — |
+| [ADR-006](records/ADR-006-token-validation-per-service.md) | Token Validation in Every Service and Service Credentials | Accepted | 2026-09-27 | ADR-003 Decisions 1 and 2; ADR-002 (source of `created_by`) | — | — |
+| [ADR-007](records/ADR-007-persistent-saga-and-scheduled-work.md) | Persistent Saga Execution and Scheduled Work | Accepted | 2026-09-27 | ADR-003 Decisions 1, 3, 4 and 5 | Decision 1 (own instance) → ADR-009 | — |
+| [ADR-008](records/ADR-008-cross-cutting-stack.md) | Technology Stack of the Cross-Cutting Repositories | Accepted | 2026-09-27 | None | — | ADR-001 (versions), ADR-003 (stack gap) |
+| [ADR-009](records/ADR-009-shared-instance-schema-per-domain.md) | Shared Instance with Schema-per-Domain Isolation | Accepted | 2026-09-28 | ADR-005 Decision 1; ADR-007 Decision 1 (own instance) | — | ADR-005 (reassessed trade-off), ADR-007 (workflow store) |
+| [ADR-010](records/ADR-010-sales-on-mongodb.md) | Sales Domain on MongoDB | Accepted | 2026-10-03 | ADR-005 Decisions 2, 3 and 4 (Sales only); ADR-009 (`sales_schema`; repository name `synkro-infra`); ADR-008 version table ("Databases and migrations") | — | ADR-002 (live report aggregation, unchanged), ADR-007 (saga and frozen prices) |
+| [ADR-011](records/ADR-011-angular-customers-portal.md) | Angular Customers Portal in the React Host | Proposed | 2026-10 | ADR-008 Decision 4 (every portal in React as a Module Federation remote) and its "Frontend" version row; ADR-001 (single frontend framework) | — | ADR-006 (session and token validation) |
+| [ADR-012](records/ADR-012-instance-bootstrap-and-environments.md) | Instance Bootstrap, Service Users and Environment Files | Proposed | 2026-10 | ADR-009 (init script that creates schemas and roles; per-domain connection credentials); ADR-005 Decision 2 (extended: migration history per domain and rebuild check) | — | ADR-010 (Sales leaves the shared instance), ADR-007 (`workflow_schema`) |
 
----
-
-## How to use these guides
-
-1. Find your service in the table above and open its guide.
-2. Use the folder structure of the guide to create or read the repository: it is the
-   structure expected for a `-api`, with the worker and the workflow as variants.
-3. The code examples of the main documents (hexagonal architecture, TDD, patterns)
-   are conceptual; the guide shows them with the real packages and names.
-4. The detail of each service (responsibility, port, schema, contract) is in
-   `09-microservices/service-catalog.md`.
-
----
-
-## The example domain
-
-The Go guide uses the **Products** catalog (`Product`, `StockAdjustment`) and the
-Java guide uses **Customers** (`Customer`), both taken from
-`02-domain/entities-and-rules.md`. The patterns are the same for the other
-services; only the entities and their invariants change.
-
----
-
-## What each stack guide contains
-
-- **Folder structure** of the microservice in that language, and where each layer lives
-- **Dependencies** per layer (domain, application, adapters), and which ones are fixed by a decision
-- **Configuration** through environment variables and the explicit limits
-- **Code example** of a domain entity, its ports, a use case, an adapter and a test written first
-- **Variant** for the other service of the same language (the worker or the workflow)
-- **Commands** for development, tests and build
-- **Naming conventions** of the language
-
----
-
-## Correlations
-
-- Hexagonal architecture → `05-architecture/hexagonal-architecture.md`
-- Testing strategy → `11-quality/testing-strategy.md`
-- Technology decisions → `05-architecture/decisions/records/ADR-008-cross-cutting-stack.md`
-- Service catalog → `09-microservices/service-catalog.md`
+Every new ADR adds its own row in the same PR, and updates the **Modified or superseded by** cell of each ADR it modifies.
