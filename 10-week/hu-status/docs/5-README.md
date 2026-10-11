@@ -38,7 +38,7 @@ When a newer ADR replaces only some sections of an older one, the older ADR stay
 | [ADR-011](records/ADR-011-angular-customers-portal.md) | Angular Customers Portal in the React Host | Accepted | 2026-10-03 | ADR-008 Decision 4 (every portal in React as a Module Federation remote) and its "Frontend" version row; ADR-001 §1 (single frontend framework) | — | ADR-006 (session and token validation) |
 | [ADR-012](records/ADR-012-instance-bootstrap-and-environments.md) | Instance Bootstrap, Service Users and Environment Files | Accepted | 2026-10-03 | ADR-009 (init script that creates schemas and roles; per-domain connection credentials); ADR-005 Decision 2 (extended: migration history per domain, rebuild check) | — | ADR-010 (Sales leaves the shared instance; repository renamed to `synkro-infra-postgres`), ADR-007 (`workflow_schema`) |
 | [ADR-013](records/ADR-013-identity-as-cross-cutting-security.md) | Identity Service as the Cross-Cutting Security Service | Proposed | — | — | — | ADR-006 (private key holder, token validation in every service), ADR-001 (identity and roles) |
-
-| [ADR-014](records/ADR-014-admin-only-registration-and-initial-administrator.md) | Admin-Only User Registration and Initial Administrator Creation | Accepted | See accepted record | ADR-001 §8 (registration visibility only) | — | ADR-004, ADR-006, ADR-009, ADR-012 |
+| [ADR-014](records/ADR-014-admin-only-registration-and-initial-administrator.md) | Admin-Only User Registration and Initial Administrator Creation | Accepted | 2026-10-10 | ADR-001 §8 (registration visibility only) | — | ADR-004, ADR-006, ADR-009, ADR-012 |
 
 Every new ADR adds its own row in the same PR, and updates the **Modified or superseded by** cell of each ADR it modifies.
+

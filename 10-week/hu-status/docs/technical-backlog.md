@@ -128,8 +128,13 @@
 | **Priority** | High before real operation |
 | **Status** | Pending decision; no recovery procedure or implementation claimed |
 
-The ADR-014 downstream updates are prepared under HU-DOCS-91; this package does
-not claim team approval of any additional documentation deferral.
+The ADR-014 downstream design documentation was merged through
+[PR #220](https://github.com/code-corhuila/synkro-docs/pull/220), which closed
+[HU-ARQ-27 — #219](https://github.com/code-corhuila/synkro-docs/issues/219).
+[HU-DOCS-91 — #221](https://github.com/code-corhuila/synkro-docs/issues/221)
+reconciles the remaining catalog and tracking records; that design alignment is
+not deferred. TD-009 remains pending and outside HU-DOCS-91. Neither documentation
+story supplies recovery implementation, schema migrations or executed Auth tests.
 
 ---
 
@@ -148,3 +153,4 @@ not claim team approval of any additional documentation deferral.
 - Planned evolution → `05-architecture/overview.md` §9
 - Architecture decisions that originated these items → ADR-005, ADR-006, ADR-007, ADR-009, ADR-010, ADR-011
 - Pattern evaluation → `05-architecture/pattern-guide.md`
+

@@ -66,17 +66,20 @@ automated tests and is not counted.
 
 ## ADR-014 design-to-verification traceability
 
-| Requirement | Decision / HU | Design artifact | Planned verification | Implementation status |
+Design documentation was merged through [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220), which closed [HU-ARQ-27 — #219](https://github.com/code-corhuila/synkro-docs/issues/219).
+[HU-DOCS-91 — #221](https://github.com/code-corhuila/synkro-docs/issues/221) reconciles the catalog, index and tracking statements; it does not deliver the design alignment a second time.
+
+| Requirement | Decision / design delivery | Design artifact | Planned verification | Implementation status |
 |---|---|---|---|---|
-| FR-010, NFR-004 | ADR-014 Decision 1; HU-ARQ-27; HU-DOCS-91 | Auth contract, authentication strategy, User creation rule | AUTH-REG-01/02/03; AUTH-UI-01 | Accepted design; code-story refinement and execution evidence pending |
-| NFR-005, NFR-009 | ADR-014 Decision 1; HU-DOCS-91 | user_creation_audit specification, security policy, observability | AUTH-REG-04; AUTH-AUDIT-01 | Schema/adapters/tests not supplied by this docs change |
-| FR-010, NFR-004, NFR-009 | ADR-014 Decision 2; HU-DOCS-91 | initialization runbook, reserved lock key, deployment sequence | AUTH-INIT-01/02/03 | CLI and real PostgreSQL test evidence pending |
+| FR-010, NFR-004 | ADR-014 Decision 1; [HU-ARQ-27](https://github.com/code-corhuila/synkro-docs/issues/219); [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220) | Auth contract, authentication strategy, User creation rule | AUTH-REG-01/02/03; AUTH-UI-01 | Design documentation merged; code-story refinement and execution evidence pending |
+| NFR-005, NFR-009 | ADR-014 Decision 1; [HU-ARQ-27](https://github.com/code-corhuila/synkro-docs/issues/219); [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220) | user_creation_audit specification, security policy, observability | AUTH-REG-04; AUTH-AUDIT-01 | Design documentation merged; schema/adapters/test execution evidence pending |
+| FR-010, NFR-004, NFR-009 | ADR-014 Decision 2; [HU-ARQ-27](https://github.com/code-corhuila/synkro-docs/issues/219); [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220) | initialization runbook, reserved lock key, deployment sequence | AUTH-INIT-01/02/03 | Design documentation merged; CLI and real PostgreSQL test evidence pending |
 
 Test IDs refer to the planned scenarios in `11-quality/testing-strategy.md`, not
 existing test files. Link the refined implementation HU, first test file and
-actual repository evidence when available; documentation acceptance alone does
-not close FR/NFR → HU → Test → Code. HU-DOCS-91 is the downstream scope named by
-HU-ARQ-27; its live issue link/status must be reconciled before closure.
+actual repository evidence when available; merged design documentation alone
+does not close FR/NFR → HU → Test → Code. The completion of HU-DOCS-91 depends on
+its documentation DoD and its own merged PR, not on executing these future code tests.
 
 ## Inverse traceability: HU → FR
 
@@ -189,3 +192,4 @@ correct place, rather than creating a new document just for this.
 - DoD that determines when an HU is Done → `00-governance/definition-of-done.md`
 - The professor's original user story → HU-02, delivered in the Weekly
 - Detail of each HU-02 piece → `03-product/problem-framing.md`, `01-context/scope.md`, `02-domain/`, `12-ux-ui/`
+

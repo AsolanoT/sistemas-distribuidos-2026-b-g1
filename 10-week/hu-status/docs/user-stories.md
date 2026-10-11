@@ -402,6 +402,51 @@ Scenario 5: Internal modularity without full hexagonal ports
 
 ---
 
+### HU-ARQ-27 — ADR-014: Admin-Only User Registration and Initial Administrator Creation {#HU-ARQ-27}
+
+**Epic:** EP-001
+
+> **As** the development team
+> **I want** to record admin-only user registration, transactional creation attribution and a controlled initial-administrator procedure as an architectural decision
+> **so that** implementation follows one accepted authorization and initialization design.
+
+**Acceptance Criteria:**
+
+```gherkin
+Scenario 1: Accepted decisions and merged documentation are traceable
+  Given ADR-014 is Accepted
+  When a reviewer follows issue #219 and PR #220
+  Then the accepted record and its affected design documents are available on main
+  And the decision index limits the modification of ADR-001 section 8 to registration visibility
+
+Scenario 2: Initialization does not become an administrator recovery path
+  Given an ADMIN account exists, including a deactivated account
+  When the documented initialization existence check is evaluated
+  Then initialization is a no-op
+  And administrator recovery remains a separate pending decision
+```
+
+**Definition of Done:**
+
+- [x] The Accepted ADR-014 record and its affected design documentation are merged through [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220).
+- [x] The accepted record identifies the decisions, alternatives, dominant criteria, accepted costs and consequences.
+- [x] [Issue #219](https://github.com/code-corhuila/synkro-docs/issues/219) is closed, and the accepted record identifies the development-team reviewers.
+
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Priority | Must Have |
+| Assigned to | Angel Gustavo Solano Trujillo (`@AsolanoT`) |
+| Status | Done |
+| Dependencies | ADR-001, ADR-004, ADR-006, ADR-009, ADR-012 |
+| Affected service(s) | Auth design in `synkro-docs`; no production-code delivery claimed |
+| Issue | [HU-ARQ-27 — #219](https://github.com/code-corhuila/synkro-docs/issues/219) |
+| Delivery evidence | [Merged PR #220](https://github.com/code-corhuila/synkro-docs/pull/220) |
+
+**Technical notes:** [ADR-014](../05-architecture/decisions/records/ADR-014-admin-only-registration-and-initial-administrator.md) is the decision source. PR #220 also merged the contract, security, domain, data, deployment, operations, UX and planned-test alignment. [HU-DOCS-91](https://github.com/code-corhuila/synkro-docs/issues/221) reconciles the remaining catalog and tracking records; it does not repeat that alignment.
+
+---
+
 ### HU-FE-01 — Interactive MVP Walkthrough — Sales Management System {#HU-FE-01}
 
 **Epic:** EP-002
@@ -585,28 +630,74 @@ Scenario 3: Each user story is mapped to a responsible service
 
 ---
 
-## ADR-014 documentation alignment
+### HU-DOCS-91 — Reconcile ADR-014 Documentation Tracking and User Story Catalog {#HU-DOCS-91}
 
-| HU | Scope | Status / evidence |
-|---|---|---|
-| [HU-ARQ-27](https://github.com/code-corhuila/synkro-docs/issues/219) | Record ADR-014 and its index relationships | Decision accepted by the team; repository completion is not inferred from acceptance |
-| HU-DOCS-91 | Align the affected contracts, security/domain/data design, operations, UX and planned tests | Documentation package prepared; review and merge pending; live issue linkage remains to be reconciled |
+**Epic:** EP-001
 
-HU-ARQ-27 explicitly assigns downstream documentation to HU-DOCS-91.
-This update does not rewrite historical cut totals or mark unverified stories Done.
+> **As** the development team
+> **I want** to reconcile the user-story catalog, decision index and traceability records with the ADR-014 documentation already merged
+> **so that** reviewers and implementers can distinguish completed design documentation from pending implementation and administrator recovery work.
 
-As the development team, we want the documentation and Auth contract aligned with
-accepted ADR-014, so that implementation starts from one consistent authorization,
-attribution and initial-administrator procedure.
+**Acceptance Criteria:**
 
-**Documentation acceptance scenarios:**
-- Happy path: a reviewer traces ADMIN registration, transactional attribution and controlled initialization consistently through the contract, model, runbook and verification plan.
-- Error path: a reviewer finds 401/403 behavior, audit rollback, inactive-ADMIN no-op and recovery exclusion without a public initialization endpoint or a claimed lifetime guarantee.
+```gherkin
+Scenario 1: Catalog and documentation evidence agree
+  Given HU-ARQ-27 is closed and PR #220 is merged
+  When a reviewer follows the ARQ and DOCS catalog entries
+  Then both stories use the existing catalog structure and their actual issue links
+  And the merged design alignment is attributed to PR #220
+  And HU-DOCS-91 identifies only the remaining documentation reconciliation
 
-**Deliverable:** the affected Markdown/YAML files in English, with planned tests
-and pending implementation clearly identified. Implementation stories must refine
-the AUTH verification scenarios in `11-quality/testing-strategy.md` before code;
-this documentation story does not claim tests or migrations have run.
+Scenario 2: Misleading completion statements are rejected
+  Given a tracking statement describes merged design documents as pending
+        or planned Auth tests as executed
+  When the documentation review is performed
+  Then the inconsistency is corrected before HU-DOCS-91 can be closed
+  And planned implementation evidence and administrator recovery remain pending
+
+Scenario 3: The historical PR scope is corrected
+  Given PR #220 included the ADR and its affected documentation
+  When its description is reconciled
+  Then the summary identifies the documentation already merged
+  And the scope identifies only the remaining reconciliation in HU-DOCS-91
+
+Scenario 4: Accepted decisions remain intact
+  Given ADR-014 is Accepted
+  When the decision index is corrected
+  Then its date is 2026-10-10 and its status remains Accepted
+  And accepted ADR records and historical cut totals remain unchanged
+```
+
+**Definition of Done:**
+
+Apply the [documentation DoD](../00-governance/definition-of-done.md).
+
+- [ ] Catalog entries follow the existing structure, with no blank sections or unresolved placeholders.
+- [ ] Corrections are limited to the catalog and tracking sections identified in issue #221; approved historical content and accepted ADR records remain unchanged.
+- [ ] Existing design definitions are referenced instead of duplicated.
+- [ ] The corrected documents are consistent with ADR-014, the domain rules and the Auth contract.
+- [ ] The description of PR #220 accurately states its merged scope.
+- [ ] Documentation verification results are recorded without claiming implementation tests or migrations have run.
+- [ ] At least one other team member has reviewed the changes, required approval from `ariel5253` is obtained, and applicable checks and review conversations are resolved.
+- [ ] The English documentation and completed catalog record are published to `main`.
+- [ ] Issue #221, this catalog entry and the board agree on the actual completion state.
+
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Priority | Must Have |
+| Assigned to | Angel Gustavo Solano Trujillo (`@AsolanoT`) |
+| Status | In progress — documentation prepared; review and merge pending |
+| Dependencies | [HU-ARQ-27 — #219](https://github.com/code-corhuila/synkro-docs/issues/219), closed; [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220), merged |
+| Affected service(s) | `synkro-docs` documentation tracking; no production-code changes |
+| Issue | [HU-DOCS-91 — #221](https://github.com/code-corhuila/synkro-docs/issues/221) |
+| Branch | `docs/reconcile-adr-014-documentation-tracking` |
+
+**Technical notes:** Changes are limited to this catalog, the ADR-014 section in `traceability-matrix.md`, the decision index date, the ADR-014 tracking statement in `technical-backlog.md`, and the DOCS/ARQ next-ID counters in `agile-conventions.md`. The PR #220 description is corrected separately as GitHub metadata. Planned Auth test IDs remain design references, and TD-009 administrator recovery is outside this story.
+
+**Deliverable:** the five corrected Markdown files merged into `main`, an accurate PR #220 description, and linked documentation-review evidence.
+
+---
 
 ## Rules for writing HUs
 
@@ -679,3 +770,4 @@ Scenario 1: [name]
 - Non-functional requirements → `04-requirements/non-functional.md`
 - Traceability matrix → `04-requirements/traceability-matrix.md`
 - API contracts derived from these HUs → `07-api/contracts/openapi/`
+
