@@ -56,7 +56,18 @@ own **States** entry only says what is specific to it.
 
 ---
 
-## Screen: Login (user picker)
+## Screen: Production Login
+
+**Route:** `/login` · **Access:** public · **Owner:** `synkro-auth-portal`; the host routes and loads it without a session.
+
+- Email and password fields have labels and accessible validation messages. The submit button is disabled while pending; credentials are sent through the host-owned authentication operation, not a portal-owned client.
+- Success establishes the host session and returns to the requested authorized local route or default dashboard. The portal does not store tokens.
+- Login `401`: show “Correo o contraseña incorrectos”, clear the password and remain on the form. Do not refresh, retry automatically or reveal account existence.
+- Network/service failure: show “No se pudo iniciar sesión. Inténtalo de nuevo.” Rate limiting follows the supplied wait; the next login submission is explicit.
+- Auth remote load failure uses the host's unavailable notice; the surrounding layout remains usable.
+- Session expiration/recovery belongs to [Browser session](../07-api/authentication.md#browser-session), not to this component. Implementation and a production design frame remain pending.
+
+## Screen: Login (user picker) — Historical MVP
 
 **Target route:** `/login` · **Current MVP route:** none (shown
 conditionally, no route of its own) · **Access:** public
@@ -355,3 +366,4 @@ contract in this document.
 - Angular Customers portal → `05-architecture/decisions/records/ADR-011-angular-customers-portal.md`
 - Frontend screen-state rules (loading, error, empty, data as a cross-cutting pattern) → `_stacks/frontend.md`
 - Real implementation → `synkro-tech` repo, `src/features/`
+

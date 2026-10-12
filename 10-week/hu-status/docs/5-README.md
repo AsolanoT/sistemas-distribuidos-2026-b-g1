@@ -21,6 +21,10 @@ An ADR records one architectural decision: the problem, the options the team rea
 
 When a newer ADR replaces only some sections of an older one, the older ADR stays `Accepted`, and the register lists the replaced sections in the **Modified or superseded by** column.
 
+## Unregistered policy proposals
+
+The [browser renewal policy proposal](../../07-api/authentication.md#renewal-policy-proposal-and-decision-status) is documented in the existing authentication strategy under HU-DOCS-93. It is not an ADR and is not Accepted; [TD-010](../../15-project-control/technical-backlog.md#td-010--formalize-the-browser-renewal-policy) tracks future formalization and ratification. It assigns no ADR or ARQ identifier and changes no accepted record or relationship in the register below.
+
 ## ADR register
 
 | ID | Title | Status | Date | Modifies | Modified or superseded by | Builds on / Context |
@@ -41,4 +45,5 @@ When a newer ADR replaces only some sections of an older one, the older ADR stay
 | [ADR-014](records/ADR-014-admin-only-registration-and-initial-administrator.md) | Admin-Only User Registration and Initial Administrator Creation | Accepted | 2026-10-10 | ADR-001 §8 (registration visibility only) | — | ADR-004, ADR-006, ADR-009, ADR-012 |
 
 Every new ADR adds its own row in the same PR, and updates the **Modified or superseded by** cell of each ADR it modifies.
+
 

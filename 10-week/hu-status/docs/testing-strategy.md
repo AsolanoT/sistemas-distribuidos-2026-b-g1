@@ -440,7 +440,7 @@ Angular.
 
 ### What the host's tests cover
 
-- **`apiClient`:** every outgoing call carries a fresh `X-Correlation-Id` and the gateway address from configuration; a `401` response closes the session; a request past its timeout fails as a `TIMEOUT` error; every failed response is mapped to one message, decided in exactly one place.
+- **`apiClient`:** every outgoing call carries a fresh `X-Correlation-Id` and the configured gateway address; protected calls use the session gate and a protected `401` closes the session without refresh-and-replay. Public login/refresh use operation-specific outcomes. Requests past their timeout fail as `TIMEOUT`; errors are mapped in one place.
 - **Session:** no session redirects a protected route to sign-in and returns to the original route afterward; in `develop`, pasting a valid development token starts a session with its `sub` and `role`, and an expired or malformed one is rejected with no session created.
 - **Remote isolation:** a portal whose remote entry file fails to load renders `RemoteBoundary`'s "not available" notice, and the rest of the host's layout keeps working — exercised with a mocked failing `import()`, not a real stopped portal server.
 
@@ -450,6 +450,37 @@ against a running backend service and never against the `develop`
 mock-server profile described in `deployment.md` §10 — that profile is
 for manual and visual verification while a backend doesn't exist yet,
 not for the automated test suite.
+
+### Planned production login and session scenarios
+
+These are design scenarios for HU-DOCS-92, not executed tests. The renewal margin and coordination policy remain [proposed guidance](../07-api/authentication.md#renewal-policy-proposal-and-decision-status) pending TD-010; the existing ADRs do not ratify those parameters. Write them before implementation using simulated HTTP, a controllable clock and simulated visibility/focus events. Run portal UI checks against the host capability fake; run token/refresh coordination checks in the host suite.
+
+| ID | Required verification |
+|---|---|
+| FE-AUTH-01 | Auth portal login success uses the host operation; tokens stay in the host; navigation returns to an authorized local destination. |
+| FE-AUTH-02 | Login `401` shows generic credentials error and clears the password; refresh count is zero, login is not retried, no session is created. |
+| FE-SESSION-01 | More than 60 seconds before `exp`: no refresh. At or below 60 seconds: renew before protected dispatch; success replaces both tokens and schedules the next check. |
+| FE-SESSION-02 | Simulate a suppressed background timer and return to visible/focus with near-expired or expired access token: refresh gates protected work. Without refresh credentials, require login. |
+| FE-SESSION-03 | Concurrent timer, focus and request triggers share exactly one refresh; successful waiters use the replacement token. No cross-tab guarantee is claimed. |
+| FE-SESSION-04 | Refresh `401` clears session/storage and requires login without recursion; protected `401` ends the session without refresh or request replay; `403` keeps the session and shows access denied. |
+| FE-SESSION-05 | Logout during login/refresh invalidates the old generation; late responses do not restore tokens, session or timers. |
+| FE-SESSION-06 | Login network/`5xx`/`429` is not a credential error; respect rate-limit wait. Indeterminate refresh failure gates protected work and does not blindly reuse a rotating token. |
+| FE-SESSION-07 | Reload with only a refresh credential restores through the host; absent/rejected credentials require login. Browser `exp` checks do not replace service-side validation. |
+
+### Planned backend Auth credential lifecycle scenarios
+
+These complement the frontend scenarios; they are planned tests, not execution evidence. Follow the Auth contract and accepted security constraints; [TD-011](../15-project-control/technical-backlog.md#td-011--clarify-reuse-detection-and-stateless-jwt-revocation) must settle any broader revocation assumption before a test asserts that behavior.
+
+| ID | Required verification / boundary |
+|---|---|
+| AUTH-REFRESH-01 | Successful public refresh consumes the old credential and issues one new pair; only a credential hash is persisted. No authorization header is required for refresh. |
+| AUTH-REFRESH-02 | Invalid, expired or already-used refresh credentials return 401 UNAUTHORIZED without exposing account existence or raw persistence details. |
+| AUTH-REFRESH-03 | A used credential is recognized as reuse, not physically discarded before security lookup. Assert the accepted server-side invalidation scope once TD-011 is resolved; do not invent token families or an access-JWT denylist. |
+| AUTH-LOGOUT-01 | An authenticated human logs out with the submitted refresh credential: 200, invalidation and repeat no-op; the access JWT expires normally rather than being immediately revoked. |
+| AUTH-LOGOUT-02 | Missing/invalid caller authentication gives 401; a SERVICE caller gives 403. Preserve the existing contract's allowed human roles. |
+| AUTH-SECRETS-01 | Credential hashes never appear in response bodies; passwords, hashes and tokens do not appear in logs/audit evidence. Token strings may appear only in the documented successful token-issuance response fields. |
+
+Future code HUs must provide test-file and run evidence. Real persistence checks belong in the Auth database integration tier; this story supplies neither migrations nor production code.
 
 ### No fixed data in production code
 
@@ -694,3 +725,4 @@ Do not count mock serialization or sequential calls as concurrency evidence.
 Verify no password/hash/token/raw payload leaks and operator attribution for
 initialization. Historical-role loss is an operational recovery boundary, not a
 lifetime lock guarantee. Existing coverage thresholds remain unchanged.
+

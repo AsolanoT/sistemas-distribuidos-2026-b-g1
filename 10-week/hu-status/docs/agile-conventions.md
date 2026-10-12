@@ -91,7 +91,7 @@ Every story is `HU-<PREFIX>-NN`. Each prefix has one sequence shared by the whol
 
 | Prefix | Scope | Next number |
 |--------|-------|-------------|
-| `DOCS` | Documents of `synkro-docs` | 92 |
+| `DOCS` | Documents of `synkro-docs` | 94 |
 | `ARQ` | Architecture decisions (ADR) and their spikes | 28 |
 | `PDR`, `ADR`, `DOM` | Discovery stories of Cut 1; closed, no new numbers | — |
 | `AUTH` | Auth domain: `synkro-auth-db`, `synkro-auth-api`, `synkro-auth-portal` | 03 |
@@ -103,6 +103,25 @@ Every story is `HU-<PREFIX>-NN`. Each prefix has one sequence shared by the whol
 | `GTW` | `synkro-api-gateway` | 02 |
 | `WKF` | `synkro-workflow` | 02 |
 | `WRK` | `synkro-worker` | 02 |
+
+### Identifier reconciliation after HU-DOCS-92 creation
+
+This is the single repository register for the reconciled identifiers below. The verification record references this register rather than maintaining a second ledger.
+
+| Assigned ID | Issue | Work |
+|---|---|---|
+| HU-DOCS-89 | [#207](https://github.com/code-corhuila/synkro-docs/issues/207) | Products portal stories in traceability. |
+| HU-DOCS-90 | [#215](https://github.com/code-corhuila/synkro-docs/issues/215) | Modal/button tokens and API wording. |
+| HU-DOCS-91 | [#221](https://github.com/code-corhuila/synkro-docs/issues/221) | ADR-014 tracking reconciliation. |
+| HU-DOCS-92 | [#223](https://github.com/code-corhuila/synkro-docs/issues/223) | Production login ownership/session documentation. |
+| HU-DOCS-93 | [#227](https://github.com/code-corhuila/synkro-docs/issues/227) | Auth reconciliation and policy-proposal traceability using existing documents. |
+| HU-ARQ-27 | [#219](https://github.com/code-corhuila/synkro-docs/issues/219) | ADR-014. |
+
+**Assignment and next-number rules:** a proposal is a candidate story without a created issue assigning its internal ID. An ID is assigned (consumed) when such an issue exists, regardless of whether its work is open, in progress, closed or cancelled; assigned IDs are never reused. `Next number` is the next unassigned number in that prefix sequence, not the next completed story.
+
+The prior DOCS 89→92 correction reconciled three existing issues, not three stories delivered in PR #222. Creation of #223 assigned DOCS-92; creation of #227 now assigns DOCS-93, so the next DOCS number is 94. ARQ remains 28; no ARQ issue or ADR record is created by this documentation reconciliation. Reconcile this register and the counter when another issue assigns an ID.
+
+**Lifecycle authority:** the linked GitHub issue is authoritative for its current open/closed state. A PR's `Closes #223` is an instruction to close the issue when that PR merges into main; it does not declare completion before merge. This register tracks assignment, not a duplicate lifecycle status. The catalog and board must follow actual review and merge evidence.
 
 **Why the prefixes mix languages:** `AUTH`, `CLI`, `PRO` and `VEN` were
 fixed by the course's own norm before this project defined this table —
@@ -172,3 +191,4 @@ A story belongs to the prefix of the repository it changes. A code pull request 
 - Definition of Done → `00-governance/definition-of-done.md`
 - Risk management → `15-project-control/risks.md`
 - Technical debt backlog → `15-project-control/technical-backlog.md`
+

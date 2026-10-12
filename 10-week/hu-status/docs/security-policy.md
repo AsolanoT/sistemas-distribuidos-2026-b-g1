@@ -39,7 +39,8 @@
 - Stored in `auth_schema.refresh_token` (hash, not plaintext)
 - Mandatory rotation on every use (one refresh token = one-time use)
 - Invalidated on logout and password change
-- ALL active tokens are invalidated if the use of a revoked token is detected
+- ALL active tokens are invalidated if the use of a revoked token is detected.
+- This is a broad security requirement, not proof of immediate JWT revocation. The Auth logout contract leaves issued access tokens valid until expiration; [TD-011](../15-project-control/technical-backlog.md#td-011--clarify-reuse-detection-and-stateless-jwt-revocation) tracks reconciliation of the affected token classes and enforcement boundary. No denylist or runtime Auth lookup is adopted here.
 
 ### Service Tokens
 
@@ -200,3 +201,4 @@ These controls are accepted design requirements; implementation and verification
 - Sales domain on MongoDB, document validator → ADR-010
 - Instance bootstrap, service users, administrator-only migrations → ADR-012
 - Tokens, RBAC per resource and browser session → `07-api/authentication.md`
+

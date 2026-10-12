@@ -78,10 +78,48 @@ token, never with a person's (ADR-006).
 ## Browser session
 
 - The access token lives **in memory** and is sent as `Authorization: Bearer <token>`; the refresh token lives in `sessionStorage`. No cookie carries a credential, so CORS does not allow credentials.
-- The session and the only HTTP client live in `synkro-front`; portals use them and never keep a token of their own. A `401` ends the session.
-- The residual risk (a script injected in the page could read the tokens) is mitigated by the 1-hour access token, refresh rotation with reuse detection and the Content Security Policy. Moving the refresh token to an `httpOnly` cookie is recorded as a future improvement in `15-project-control/technical-backlog.md`.
+- The session and the only HTTP client live in `synkro-front`; portals use them and never keep a token of their own. A protected-operation `401` ends the session; login and refresh have the distinct outcomes below.
+- The residual risk (a script injected in the page could read the tokens) is mitigated by the 1-hour access token, refresh rotation with reuse detection and the Content Security Policy. An `httpOnly` cookie is a future storage option requiring its own security and contract decision; this documentation does not adopt it.
 
 ---
+
+### Production login ownership
+
+`synkro-auth-portal` owns the credential form at `/login`; the host routes and loads that screen without requiring a session. The portal invokes a host-owned authentication operation with the credentials and receives only the user/session outcome or a normalized error. The host uses its shared client for the public login request, consumes the token pair and owns storage, renewal and session notifications. No portal creates a client, stores tokens or manages refresh timers. Development sign-in is temporary; the historical MVP picker is not production login.
+
+### Renewal policy proposal and decision status
+
+**Status: Proposed guidance, not an Accepted ADR.** HU-DOCS-92 documented the policy below; merging its documentation did not establish an architectural acceptance record. [ADR-006](../05-architecture/decisions/records/ADR-006-token-validation-per-service.md) constrains service-side validation, [ADR-008 Decision 4](../05-architecture/decisions/records/ADR-008-cross-cutting-stack.md) assigns the shared client/session to the host, and [ADR-011](../05-architecture/decisions/records/ADR-011-angular-customers-portal.md) preserves that ownership across frameworks. None selects a 60-second renewal margin.
+
+- **Context:** access credentials expire, background timers may be delayed, and refresh rotation makes duplicate or indeterminate renewals unsafe.
+- **Option A:** do not renew proactively; expiration ends the session and requires login. Simpler coordination, but interrupts valid user work more often.
+- **Option B — proposed:** host-managed proactive renewal, tab-reactivation checks and one in-flight refresh per host session. It reduces avoidable interruptions but needs timing, cancellation and rotation-failure handling.
+- **Dominant criterion:** preserve one credential owner while reducing expiration interruptions without automatically replaying a protected operation after a received 401.
+- **Cost if adopted:** more host state and tests, earlier refresh calls, and a fresh sign-in when rotation outcome is indeterminate. The 60-second margin is a design choice, not a bound on network or scheduling delay.
+- **Consequences:** the host implements coordination; portals only consume its capabilities; lifetimes, storage and service validation stay unchanged. Cross-tab coordination and immediate JWT revocation are not introduced.
+- **Formalization:** [TD-010](../15-project-control/technical-backlog.md#td-010--formalize-the-browser-renewal-policy) tracks team ratification and a future standalone ADR. HU-DOCS-93 uses existing documents only: it assigns no ADR identifier, creates no ADR file and does not turn this proposal into an accepted decision. Confirm or revise it before relying on it as accepted architecture.
+
+### Host-managed renewal and tab recovery
+
+- **Renewal margin:** 60 seconds before access-token `exp`. This exceeds the shared client's 10-second request timeout and allows scheduling/network delay without changing the one-hour token lifetime. The timer is an optimization, not the sole expiration check.
+- At session start, after successful renewal, before each protected request, and when the document returns to visible or the window regains focus, the host checks expiration. With more than 60 seconds remaining, it proceeds without refresh; otherwise it renews before releasing protected work. Missing access-token memory after reload can be restored through the existing refresh credential. Without a usable refresh credential, require login.
+- Reading `exp` only schedules client behavior; it does not authenticate a token. Services still validate signature, expiration and authorization locally (ADR-006).
+- One in-flight refresh is shared by all callers in the same host session, including simultaneous timer, focus and request triggers. Login/refresh bypass the protected-request gate, preventing recursion. This coordination does not claim cross-tab synchronization.
+- On success, the host replaces both credentials, updates the session and schedules the next check. On logout, it clears storage and timers, invalidates the local session generation and releases waiting work as cancelled; late login/refresh responses from an older generation cannot restore it.
+- On refresh `401`, clear the session and require login. Do not refresh recursively or replay the protected request after a received `401`; renewal is proactive.
+- On network/timeout or refresh service failure, stop the renewal attempt and report unavailability, not invalid credentials. Do not blindly resubmit the same rotating refresh token: the server may have committed rotation before the response was lost. Protected work remains gated; an indeterminate rotation requires a fresh sign-in rather than an automatic refresh loop.
+- Without a session, protected routes redirect to `/login`; after successful login, return only to a local route authorized for the user, or the role's default landing route.
+
+### Authentication outcomes by operation
+
+| Operation / result | Host and portal behavior |
+|---|---|
+| Login succeeds | Host consumes the token pair, establishes the session and navigates to the authorized destination. |
+| Login `401 UNAUTHORIZED` | Show “Correo o contraseña incorrectos” without revealing whether the email exists; clear the password, create no session, and do not refresh or retry automatically. |
+| Login network failure, `5xx` or `429` | Show service unavailability or the rate-limit wait; do not label it a credential error. Respect `Retry-After` where supplied; a new login attempt is explicit. |
+| Refresh `401 UNAUTHORIZED` | End the session and require login; no recursive refresh. |
+| Protected operation `401` | End the session and return to login; no refresh-and-replay. |
+| Protected operation `403` | Show access denied; keep the session, with no refresh, role switching or automatic retry. |
 
 ## RBAC — Roles and permissions
 
@@ -144,8 +182,8 @@ operation in its use case, because only the service knows its own rules.
 
 Both follow the common error envelope in `07-api/guidelines.md`:
 
-**401 — token missing, expired, malformed or with an invalid signature**
-(the gateway for a missing header; the service for everything else):
+**401 — missing/invalid authentication, wrong login credentials or invalid refresh token**
+(the gateway for a missing header on protected routes; Auth for login/refresh rejection; the receiving service for invalid protected credentials). The example below is for a protected operation; browser outcomes are defined above:
 ```json
 {
   "error": "UNAUTHORIZED",
@@ -168,14 +206,16 @@ Both follow the common error envelope in `07-api/guidelines.md`:
 
 ## Refresh token flow
 
-- Stored in `auth.refresh_token` (hash, not plaintext)
+- Stored in `auth_schema.refresh_token` (hash, not plaintext); fields and lifecycle semantics are defined in `06-data/models.md` and `06-data/data-dictionary.md`.
 - **Mandatory rotation on every use**: one refresh token = one use;
   `POST /api/v1/auth/refresh` invalidates the used token and issues a new one
 - Invalidated on logout and on password change
 - If a revoked token's use is detected, **all** of the user's active
-  tokens are invalidated (a signal of token theft)
+  tokens are invalidated (a signal of token theft). The scope/effect of that broad requirement needs the reconciliation recorded in TD-011 below.
 
 ---
+
+**Revocation boundary:** the Auth logout contract explicitly invalidates the submitted refresh credential, is idempotent and leaves an already-issued access JWT valid until expiration (at most one hour). Local session clearing does not revoke a signed JWT in receiving services. The broader reuse-detection requirement must not be read as an implemented immediate-revocation mechanism; [TD-011](../15-project-control/technical-backlog.md#td-011--clarify-reuse-detection-and-stateless-jwt-revocation) records the remaining decision scope.
 
 ## Correlations
 
@@ -186,3 +226,4 @@ Both follow the common error envelope in `07-api/guidelines.md`:
 - Service tokens and keys per environment → `05-architecture/deployment.md` §6
 - General security policy → `00-governance/security-policy.md`
 - Standard error format → `07-api/guidelines.md`
+

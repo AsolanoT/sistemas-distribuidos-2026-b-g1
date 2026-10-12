@@ -630,6 +630,66 @@ Scenario 3: Each user story is mapped to a responsible service
 
 ---
 
+### HU-DOCS-89 — Add the Products Portal Stories to the Traceability Matrix {#HU-DOCS-89}
+
+**Epic:** EP-001
+> **As** the development team
+> **I want** record Products portal delivery in requirements traceability
+> **so that** reviewers can distinguish real Products coverage from remaining Sales gaps.
+
+**Acceptance Criteria:**
+```gherkin
+Scenario 1: Documented delivery
+  Given the story scope recorded in issue #207
+  When its documentation evidence is reviewed
+  Then HU-PRO-11 and HU-PRO-12 are traced and Products is distinguished from Sales
+Scenario 2: Incorrect documentation is rejected
+  Given outdated or misleading descriptions
+  When they are compared with the story criteria
+  Then Products is not incorrectly described as a simulated service
+```
+
+**Definition of Done:** Apply the [documentation DoD](../00-governance/definition-of-done.md); the linked issue is the historical review record. Its closed state is recorded here without inventing additional test execution.
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Assigned to | `@SantiagoPlazas2005` |
+| Status | Closed — historical issue record |
+| Issue | [HU-DOCS-89 — #207](https://github.com/code-corhuila/synkro-docs/issues/207) |
+| Delivery scope | Products traceability in `04-requirements/traceability-matrix.md` |
+
+---
+
+### HU-DOCS-90 — Clarify Modal and Button Tokens, Fix Sale Amount Validation Wording {#HU-DOCS-90}
+
+**Epic:** EP-001
+> **As** the development team
+> **I want** clarify modal/button tokens and the Products/Sales contract descriptions
+> **so that** developers implement documented UI and amount-validation behavior.
+
+**Acceptance Criteria:**
+```gherkin
+Scenario 1: Documented delivery
+  Given the story scope recorded in issue #215
+  When its documentation evidence is reviewed
+  Then modal/button guidance and API descriptions match the issue scope
+Scenario 2: Incorrect documentation is rejected
+  Given outdated or misleading descriptions
+  When they are compared with the story criteria
+  Then sale amounts are not incorrectly documented as caller-supplied values
+```
+
+**Definition of Done:** Apply the [documentation DoD](../00-governance/definition-of-done.md); the linked issue is the historical review record. Its closed state is recorded here without inventing additional test execution.
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Assigned to | `@JordanRG420` |
+| Status | Closed — historical issue record |
+| Issue | [HU-DOCS-90 — #215](https://github.com/code-corhuila/synkro-docs/issues/215) |
+| Delivery scope | Modal/button tokens in `12-ux-ui/design-system.md` and Products/Sales API wording |
+
+---
+
 ### HU-DOCS-91 — Reconcile ADR-014 Documentation Tracking and User Story Catalog {#HU-DOCS-91}
 
 **Epic:** EP-001
@@ -687,15 +747,125 @@ Apply the [documentation DoD](../00-governance/definition-of-done.md).
 | Story Points | Not applicable — documentation story |
 | Priority | Must Have |
 | Assigned to | Angel Gustavo Solano Trujillo (`@AsolanoT`) |
-| Status | In progress — documentation prepared; review and merge pending |
+| Status | Merged through PR #222; review-evidence corrections tracked in HU-DOCS-92 |
 | Dependencies | [HU-ARQ-27 — #219](https://github.com/code-corhuila/synkro-docs/issues/219), closed; [PR #220](https://github.com/code-corhuila/synkro-docs/pull/220), merged |
 | Affected service(s) | `synkro-docs` documentation tracking; no production-code changes |
 | Issue | [HU-DOCS-91 — #221](https://github.com/code-corhuila/synkro-docs/issues/221) |
 | Branch | `docs/reconcile-adr-014-documentation-tracking` |
+| Merged delivery | [PR #222](https://github.com/code-corhuila/synkro-docs/pull/222) |
+| Evidence follow-up | [HU-DOCS-92 — #223](https://github.com/code-corhuila/synkro-docs/issues/223); [verification record](../15-project-control/documentation-verification.md) |
 
 **Technical notes:** Changes are limited to this catalog, the ADR-014 section in `traceability-matrix.md`, the decision index date, the ADR-014 tracking statement in `technical-backlog.md`, and the DOCS/ARQ next-ID counters in `agile-conventions.md`. The PR #220 description is corrected separately as GitHub metadata. Planned Auth test IDs remain design references, and TD-009 administrator recovery is outside this story.
 
 **Deliverable:** the five corrected Markdown files merged into `main`, an accurate PR #220 description, and linked documentation-review evidence.
+
+---
+
+### HU-DOCS-92 — Align Login Ownership and Frontend Session Lifecycle Documentation {#HU-DOCS-92}
+
+**Epic:** EP-001
+> **As** the development team
+> **I want** production login ownership and host-managed session behavior documented consistently
+> **so that** implementation avoids duplicated token handling and incorrect login or refresh retries.
+
+**Acceptance Criteria:**
+```gherkin
+Scenario 1: Login and renewal follow the shared host policy
+  Given the production Auth portal and host design
+  When login succeeds or renewal is due before protected work
+  Then only the host consumes tokens and coordinates one in-flight refresh
+  And tab reactivation checks expiration before releasing protected requests
+Scenario 2: Authentication failures do not cause retry loops
+  Given a login 401, refresh rejection, protected 401 or forbidden response
+  When the corresponding operation outcome is handled
+  Then login 401 shows a credential error without refresh
+  And refresh rejection or protected 401 ends the session without replay
+  And 403 keeps the session and shows access denied
+Scenario 3: Review evidence and identifiers remain traceable
+  Given the closed DOCS-89, DOCS-90 and DOCS-91 issues and open issue #223
+  When the catalog and verification evidence are followed
+  Then each consumed ID has an issue link and the next DOCS number is 93
+  And the PR #222 report-link and cross-cutting-scope corrections are explicit
+```
+
+**Definition of Done:** Apply the [documentation DoD](../00-governance/definition-of-done.md).
+- [ ] Affected English sections are complete, consistent and reference shared definitions.
+- [ ] Production design is distinguished from historical prototypes; accepted ADRs and API contracts are preserved.
+- [ ] Planned frontend scenarios and the 60-second renewal margin are concrete; no implementation execution is claimed.
+- [ ] [Verification evidence](../15-project-control/documentation-verification.md) is linked from the PR descriptions; PR #222/#220 metadata corrections are applied.
+- [ ] Teammate review, required `ariel5253` approval, applicable checks and review conversations are complete.
+- [ ] The reviewed documentation and completed catalog record are merged into main; issue #223 and the board reflect that actual state.
+
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Priority | Must Have |
+| Assigned to | Angel Gustavo Solano Trujillo (`@AsolanoT`) |
+| Status | Merged through PR #225; issue #223 closed; policy formalization tracked in HU-DOCS-93 |
+| Dependencies | ADR-006, ADR-008, ADR-011; [merged PR #222](https://github.com/code-corhuila/synkro-docs/pull/222) |
+| Issue | [HU-DOCS-92 — #223](https://github.com/code-corhuila/synkro-docs/issues/223) |
+| Branch | `docs/align-frontend-session-and-login-docs` |
+| Merged delivery | [PR #225](https://github.com/code-corhuila/synkro-docs/pull/225) |
+
+**Technical notes:** Frontend lifecycle is specified in `07-api/authentication.md`; verification scenarios are FE-AUTH-01/02 and FE-SESSION-01 through 07. This story also adds missing historical DOCS-89/90 catalog records and retrospective evidence for PR #222. The initial HU-DOCS-91 report was not linked in that PR; this follow-up does not claim it was.
+**Deliverable:** the aligned authentication, frontend, UX, planned-test and tracking documents, linked verification evidence and accurate historical PR descriptions.
+
+---
+
+### HU-DOCS-93 — Reconcile Auth Documentation and Session Decision Traceability {#HU-DOCS-93}
+
+**Epic:** EP-001
+> **As** the development team
+> **I want** Auth references, session-policy status and verification records reconciled
+> **so that** implementation follows consistent documentation without treating a proposal as an accepted decision or a planned test as execution evidence.
+
+**Acceptance Criteria:**
+```gherkin
+Scenario 1: Existing documents contain a traceable proposal
+  Given this delivery is restricted to Markdown files already in the repository
+  When a reviewer follows the browser renewal policy
+  Then authentication.md records its Proposed status, options, criterion and costs
+  And TD-010 identifies future standalone ADR formalization and team ratification
+  And no new ADR file, identifier or Accepted status is claimed
+Scenario 2: Auth references agree
+  Given the existing Auth model and contract
+  When the dictionary, schema references and API guidance are checked
+  Then the refresh credential is hash-only in auth_schema
+  And URLs compose the server base and path without duplicating api/v1
+Scenario 3: Unsupported revocation claims are rejected
+  Given the logout contract leaves issued access JWTs valid until expiration
+  When a proposed test assumes immediate JWT invalidation
+  Then that assumption is identified as the TD-011 scope decision
+  And no denylist, token-family table or runtime Auth lookup is invented
+Scenario 4: Dated evidence remains historical
+  Given an earlier verification entry
+  When later work corrects or extends its findings
+  Then the original entry remains identifiable
+  And the new dated entry identifies its baseline, scope and correction relationship
+```
+
+**Definition of Done:** Apply the [documentation DoD](../00-governance/definition-of-done.md).
+- [ ] Existing affected sections are complete, consistent and reference shared definitions.
+- [ ] Proposed policy status and TD-010/TD-011 boundaries are explicit; accepted ADRs, contracts and persistence structures remain unchanged.
+- [ ] Planned backend scenarios are distinct from frontend scenarios and have no fabricated execution evidence.
+- [ ] Historical verification content is retained under an explicit maintenance policy; new evidence has stable links.
+- [ ] Issue #227 reflects the existing-files-only scope in place of its original new-ADR deliverable.
+- [ ] Teammate review, required `ariel5253` approval, applicable checks and review conversations are complete.
+- [ ] Reviewed English documentation and the completion record are merged into main; issue and board reflect the actual state.
+
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Priority | Must Have |
+| Assigned to | Angel Gustavo Solano Trujillo (`@AsolanoT`) |
+| Status | In progress — documentation prepared; review and merge pending |
+| Issue | [HU-DOCS-93 — #227](https://github.com/code-corhuila/synkro-docs/issues/227) |
+| Dependencies | [HU-DOCS-92 — #223](https://github.com/code-corhuila/synkro-docs/issues/223), closed; [PR #225](https://github.com/code-corhuila/synkro-docs/pull/225), merged |
+| Branch | `docs/clear-auth-documentation-debt` |
+| Affected service(s) | Auth documentation and project verification records; no production-code delivery |
+
+**Technical notes:** The revised scope uses existing files only. The renewal proposal lives in `07-api/authentication.md`; it is not a numbered ADR. The decision index points to the proposal and TD-010 rather than registering a nonexistent record. TD-011 records the reuse/revocation scope gap. The catalog does not claim either pending decision is resolved.
+**Deliverable:** corrections to existing Auth, quality, UX, governance and project-control Markdown files, with [dated verification evidence](../15-project-control/documentation-verification.md#hu-docs-93-verification-entry--2026-10-11).
 
 ---
 

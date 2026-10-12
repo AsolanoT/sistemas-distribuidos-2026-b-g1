@@ -81,6 +81,21 @@ actual repository evidence when available; merged design documentation alone
 does not close FR/NFR → HU → Test → Code. The completion of HU-DOCS-91 depends on
 its documentation DoD and its own merged PR, not on executing these future code tests.
 
+## Frontend session design-to-verification traceability
+
+| Requirements | Documentation HU | Design sources | Planned verification | Implementation evidence |
+|---|---|---|---|---|
+| FR-010, NFR-004 | [HU-DOCS-92 — #223](https://github.com/code-corhuila/synkro-docs/issues/223) | Browser session, frontend guide, navigation map and wireframes | FE-AUTH-01/02; FE-SESSION-01 through FE-SESSION-07 in `11-quality/testing-strategy.md` | Pending refined code-story links, test files and execution evidence; this documentation change does not close implementation traceability. |
+
+The prior development-token stories remain historical scope; these production scenarios are planned additions, not evidence that their code has been delivered.
+
+## Auth documentation reconciliation and remaining decision gaps
+
+| Requirements | Documentation HU | Design / planned verification | Evidence boundary |
+|---|---|---|---|
+| FR-010, NFR-004, NFR-009 | [HU-DOCS-93 — #227](https://github.com/code-corhuila/synkro-docs/issues/227) | Auth schema/dictionary/guidelines; AUTH-REFRESH-01/02/03, AUTH-LOGOUT-01/02 and AUTH-SECRETS-01 in `testing-strategy.md` | Planned tests; refined code HU, actual test files and run evidence pending. |
+| FR-010, NFR-004 | [HU-DOCS-93 — #227](https://github.com/code-corhuila/synkro-docs/issues/227) | [Renewal proposal](../07-api/authentication.md#renewal-policy-proposal-and-decision-status); FE-SESSION scenarios | Proposed guidance only; no standalone ADR or accepted-policy claim. TD-010 formalization and TD-011 revocation scope remain pending. |
+
 ## Inverse traceability: HU → FR
 
 | HU | Title | FR(s) it implements | Sprint/Week |

@@ -206,6 +206,7 @@ END
 $$;
 
 -- 03_dcl/01_grants/V009__grants.sql
+-- Base example for the original Auth tables; audit grants are a separate exception below.
 GRANT USAGE ON SCHEMA auth_schema TO auth_reader, auth_writer;
 GRANT SELECT ON ALL TABLES IN SCHEMA auth_schema TO auth_reader;
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA auth_schema TO auth_writer;
@@ -214,6 +215,7 @@ GRANT auth_writer TO "${app_user}";
 
 - `system_user.role` never takes `SERVICE`: that role exists only inside service tokens (ADR-006).
 - `idempotency_key` protects both creations of this domain, user registration and service-token issuance, so it stores the type and the identifier of the resource, like Products (principle 7). A retried issuance finds its key, reads the token's metadata from `service_token` and returns it without the token (ADR-004 Decision 7).
+- `refresh_token.token` is a stored credential hash, not a plaintext bearer credential. `active = false` records invalidation; `active = true` alone does not establish validity without checking `expiration_date`. Retain invalidated records for reuse detection; normal authentication and security lookup have different purposes. [Data dictionary](data-dictionary.md#auth-refresh-credential-semantics) defines the fields.
 - `service_token` keeps only metadata: the service it was issued to, its permissions and its dates, so an issuance can be confirmed and its expiry tracked. The signed token is shown once and lives only in the `SERVICE_TOKEN` secret (ADR-006); it is never stored.
 
 ```mermaid
@@ -615,3 +617,4 @@ CREATE INDEX idx_saga_instance_running ON workflow_schema.saga_instance (created
 - Instance bootstrap, service users and per-domain migration history → ADR-012
 - Roles used in `system_user.role` → `00-governance/security-policy.md`
 - Deployment of both instances (PostgreSQL and MongoDB) and each store's migration runner → `05-architecture/deployment.md`
+

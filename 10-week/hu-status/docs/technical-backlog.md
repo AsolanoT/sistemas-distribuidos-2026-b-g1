@@ -138,6 +138,34 @@ story supplies recovery implementation, schema migrations or executed Auth tests
 
 ---
 
+### TD-010 — Formalize the browser renewal policy
+
+| Field | Value |
+|---|---|
+| **ID** | TD-010 |
+| **Description** | Ratify or revise the existing proposal for host-managed proactive renewal, its margin and coordination; create a standalone ADR when new record files are in scope. No ADR identifier is assigned by HU-DOCS-93. |
+| **Reference** | [Renewal policy proposal](../07-api/authentication.md#renewal-policy-proposal-and-decision-status); HU-DOCS-93 uses existing Markdown files only. |
+| **Impact if not resolved** | Developers may mistake the merged proposal for an accepted architectural decision. |
+| **Trigger to pick up** | Before relying on this policy as accepted architecture for production implementation. |
+| **Owner / priority** | Development team / High before implementation |
+| **Status** | Pending architectural formalization and team ratification; documentation proposal recorded, not accepted |
+
+---
+
+### TD-011 — Clarify reuse detection and stateless JWT revocation
+
+| Field | Value |
+|---|---|
+| **ID** | TD-011 |
+| **Description** | Reconcile the broad requirement to invalidate all active tokens after refresh reuse with local stateless JWT validation and the logout contract's explicitly non-revocable access token. Define the affected token classes and enforcement boundary without inventing a denylist, token family or service lookup. |
+| **Reference** | [Refresh flow and revocation boundary](../07-api/authentication.md#refresh-token-flow), security policy, Auth logout/refresh contract. |
+| **Impact if not resolved** | Tests or implementations may promise immediate rejection of an already-issued JWT without an adopted mechanism. |
+| **Trigger to pick up** | Before implementation tests assert broad revocation effects. |
+| **Owner / priority** | Development team / High before security implementation |
+| **Status** | Pending scope decision; no new revocation mechanism or schema claimed |
+
+---
+
 ## Resolved items
 
 | ID | Description | Resolved in | Date |
@@ -153,4 +181,5 @@ story supplies recovery implementation, schema migrations or executed Auth tests
 - Planned evolution → `05-architecture/overview.md` §9
 - Architecture decisions that originated these items → ADR-005, ADR-006, ADR-007, ADR-009, ADR-010, ADR-011
 - Pattern evaluation → `05-architecture/pattern-guide.md`
+
 

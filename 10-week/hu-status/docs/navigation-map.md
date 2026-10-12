@@ -29,7 +29,7 @@ ADR-001's split is realized.
 ## Frontend route structure
 
 ```
-/login                          → Credentials → auth service issues a JWT (RS256). Host-owned; its development sign-in only works in the Local/Development deployment environment (10-devops/environments.md) — not a statement about the git branch of the same name
+/login                          → Auth portal credential screen; host owns routing/loading/session. Auth issues RS256 tokens; development sign-in is temporary (ADR-008 Decision 4).
 /dashboard                      → Landing screen, content scoped by role (ADMIN, SALESPERSON, INVENTORY). Host-owned
 /customers                      → Customer list + create/edit (role: ADMIN, SALESPERSON)
 /products                       → Product & category catalogue, stock edit (role: ADMIN, INVENTORY)
@@ -87,11 +87,13 @@ allowed to see):
 
 | Owner | What it owns | Why |
 |---|---|---|
-| **Host** (`synkro-front`) | `/login` (development sign-in — a runtime restriction to the Local/Development deployment environment, `10-devops/environments.md`, not a git-branch rule), `/dashboard` (route and layout), route-not-found, remote loading and isolation for every portal | These are cross-domain or pre-domain concerns: there is no single domain whose API answers "what should the dashboard show," and nobody is signed in yet at `/login` |
+| **Host** (`synkro-front`) | Public `/login` route (a URL, not a Git branch or an environment selector) and Auth remote loading; `/dashboard` route/layout; session, guards, shared HTTP client, navigation, route-not-found and remote isolation | Shared platform behavior; the production credential screen belongs to Auth. Development sign-in remains temporary. |
 | **`synkro-customers-portal`** (Angular, ADR-011) | `/customers` | Mounted inside the host as a custom element; see `_stacks/frontend.md` |
 | **`synkro-products-portal`** (React) | `/products` (catalogue and categories), `/stock` (read-only lookup), `/stock-alerts` | All three read or write `synkro-products-api`; categories are a section inside `/products`, not a separate route — the contract's `/products/categories` endpoints are called from the same screen |
 | **`synkro-sales-portal`** (React) | `/sales` (history **and** the new-sale form — no separate route for registration), `/sales/{id}` | Both read `synkro-sales-api`; the new-sale form embedded in `/sales` also reads Customers and Products through the host's client (see Flow 1) |
-| **`synkro-auth-portal`** (React) | `/users`, `/service-tokens` | Both call `synkro-auth-api`. This portal is built last (ADR-008 Decision 4); until it exists, these two screens are not available, and identity itself is covered by the host's development sign-in |
+| **`synkro-auth-portal`** (React) | Production `/login` screen, `/users`, `/service-tokens` | Owns Auth UI, using the host's authentication operation and shared client. Until it exists, development identity remains provisional (ADR-008 Decision 4). |
+
+The temporary development-sign-in restriction concerns the Local/Development deployment environment; Git promotion rules are separate. See [Flow 2](#flow-2--authentication) for that distinction. The production login screen still belongs to the Auth portal.
 
 ### Dashboard ownership
 
@@ -105,7 +107,7 @@ allowed to see):
 
 | Screen | Route | Component | Portal | Framework | Minimum role | Target microservice (ADR-001, ADR-010) | MVP status (Corte 1, `synkro-tech`) |
 |--------|-------|-----------|--------|-----------|--------------|-------------------------------|---------------------------------------|
-| Login | `/login` | `LoginScreen` | Host | React | Public | auth | Not implemented as designed — see MVP note above |
+| Login | `/login` | `LoginScreen` | `synkro-auth-portal` (host routes/loads) | React | Public | auth | Not implemented as designed — see MVP note above |
 | Dashboard | `/dashboard` | `DashboardPage` | Host (composes portal widgets) | React | ADMIN, SALESPERSON, INVENTORY | — (cross-service aggregation, role-scoped) | Implemented for ADMIN only, as `/summary`. Not implemented for SALESPERSON/INVENTORY |
 | Customers | `/customers` | `CustomersPage` | `synkro-customers-portal` | **Angular** | ADMIN, SALESPERSON | customers | Implemented on the monolith |
 | Products | `/products` | `ProductsPage` | `synkro-products-portal` | React | ADMIN, INVENTORY | products | Implemented on the monolith |
@@ -218,27 +220,15 @@ synkro-workflow starts the register-sale saga (ADR-007 Decision 2):
 
 ### Flow 2 — Authentication
 
-```
-Login (/login)
-    │
-    ▼ Enter credentials, submit
-Auth service validates credentials
-    │
-    ├── Valid ──► Issues a JWT (RS256), frontend stores it and attaches it
-    │             to every subsequent request; user lands on their default
-    │             module (see table above)
-    │
-    └── Invalid ► Inline error on the login form, credentials cleared,
-                  no redirect
-    │
-    ▼ On every later request
-Every service that receives requests validates the JWT locally with the shared public key (ADR-006) — no call back to synkro-auth-api per request. The gateway checks that a credential is present but does not validate it.
-    │
-    ├── Valid, not expired ──► Request proceeds
-    │
-    └── Expired / invalid ───► 401 → frontend clears the session and
-                                returns to /login
-```
+1. The host mounts the Auth portal's public `/login` screen; the portal collects credentials.
+2. The host-owned authentication operation uses the shared client to call public login and consumes the token pair on success. Navigate to the requested authorized local route or `/dashboard`.
+3. Login `401` shows a generic credential error, clears the password and creates no session; it triggers neither refresh nor automatic retry.
+4. The host schedules renewal and checks session readiness before protected requests and on tab reactivation; all triggers share one in-flight refresh.
+5. Each receiving service validates the JWT locally; the gateway checks credential presence on protected routes (ADR-006).
+6. Refresh rejection or a protected-operation `401` ends the session without refresh-and-replay. A `403` shows access denied without ending the session.
+7. Network/service failures show unavailability. Refresh response loss is not blindly retried because rotation may already have committed.
+
+Timing, storage and concurrency rules are defined once in [Browser session](../07-api/authentication.md#browser-session).
 
 This is the target design and what `HU-AUTH-NN` will build: the auth microservice, RS256 key handling, and the services' local validation. Until then, `/login` is the host's development sign-in — available only when running the Local/Development deployment environment, not a rule about which git branch the code is on (`10-devops/environments.md`, ADR-008 Decision 4) — not this flow.
 
@@ -336,7 +326,7 @@ operator identity is requested from the browser.
 
 | Rule | Description |
 |------|--------------|
-| Authentication | Any route redirects to `/login` if there is no valid JWT or it has expired |
+| Authentication | Protected routes use the host's session gate; missing/failed session restoration redirects to `/login`. `/login` remains public; expiration first follows the proactive renewal policy. |
 | Authorization | `RequireModule` checks `canAccess(role, path)`; if the role cannot see that path, it redirects to that role's own default module (see table above) — there is no separate "403 screen" today |
 | Unmatched route | Redirects to the user's default module (`path="*"` in `App.jsx`) rather than a 404 page |
 | Confirmation | Destructive actions (deactivate product/customer) show a confirmation dialog before executing |
@@ -354,3 +344,4 @@ operator identity is requested from the browser.
 - Angular Customers portal, host/portal contract → `05-architecture/decisions/records/ADR-011-angular-customers-portal.md`, `_stacks/frontend.md`
 - Token validation per service → ADR-006
 - Missing list endpoints for Users and Service tokens → `15-project-control/open-questions.md` (HU-DOCS-88)
+

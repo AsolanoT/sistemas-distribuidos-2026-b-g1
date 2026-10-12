@@ -33,6 +33,16 @@
 
 ---
 
+## Auth refresh credential semantics
+
+| Field | Table | Meaning |
+|---|---|---|
+| token_id | refresh_token | Internal row primary key; do not conflate its meaning with the service_token column that represents a service JWT's jti. |
+| expiration_date | refresh_token | Expiration timestamp checked together with lifecycle state; an active flag cannot make an expired credential valid. |
+| active | refresh_token | Invalidation state for rotation/logout and security handling; false does not mean physical removal or exclusion from security lookups needed to detect reuse. |
+
+`token` retains the hash-only meaning in the main dictionary. Types, defaults and constraints remain in [models.md](models.md#domain-auth); no new column or hashing algorithm is selected here.
+
 ## Auth user-creation evidence (ADR-014)
 
 | Field | Table | Meaning / allowed values |
@@ -58,3 +68,4 @@ a business aggregate, initialization marker or message-broker event.
 - Database per domain, minor units and idempotency keys → ADR-005; Sales' document model → ADR-010
 - Stock reservations, stock alerts and the saga store → ADR-007
 - ADR-002 (added `created_by`) → `05-architecture/decisions/records/ADR-002-sale-authorship-traceability.md`
+
