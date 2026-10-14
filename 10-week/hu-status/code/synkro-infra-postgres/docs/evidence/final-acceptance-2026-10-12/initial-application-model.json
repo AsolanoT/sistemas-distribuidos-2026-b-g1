@@ -1,0 +1,10 @@
+{
+  "root_sha": "b17a805a5e377a1e02cace71f43507515e1945c8",
+  "scope": "delivered Auth/Customers application model; NOT full composition",
+  "status": "PASSED",
+  "customers_user": "customers_app",
+  "customers_password_file": "/run/secrets/customers_app_password",
+  "auth_user": "auth_app",
+  "auth_portal_internal": true,
+  "private_signing_key_only_auth": true
+}

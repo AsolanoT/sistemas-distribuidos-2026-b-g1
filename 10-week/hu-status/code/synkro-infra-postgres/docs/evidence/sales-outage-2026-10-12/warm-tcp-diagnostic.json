@@ -1,0 +1,50 @@
+{
+  "host_sha": "a1fecc671ada1384dcaeeec5f59dff3c13a35e26",
+  "acceptance_client_seconds": 15,
+  "scope": "outage timing diagnostic; does not relax acceptance deadline",
+  "normal": {
+    "status": 200,
+    "seconds": 0.031
+  },
+  "tcp_samples": [
+    {
+      "elapsed": 2,
+      "syn_sent": 1
+    },
+    {
+      "elapsed": 8,
+      "syn_sent": 1
+    },
+    {
+      "elapsed": 4,
+      "syn_sent": 1
+    }
+  ],
+  "shell_while_waiting": {
+    "status": 200,
+    "seconds": 0.0
+  },
+  "products_while_waiting": {
+    "status": 200,
+    "seconds": 0.047
+  },
+  "unavailable": {
+    "status": "CLIENT_TIMEOUT",
+    "seconds": 15.016
+  },
+  "client_closed_while_connecting": false,
+  "dns_resolution_error": false,
+  "connect_timeout": false,
+  "upstream_timeout": false,
+  "acceptance_deadline_met": false,
+  "after_restart": {
+    "status": 200,
+    "seconds": 0.031
+  },
+  "cleanup": {
+    "status": "PASSED",
+    "fallback_resources_removed": 0,
+    "reason": "Guarded cleanup verified; preexisting resource identities preserved",
+    "snapshots_removed": true
+  }
+}

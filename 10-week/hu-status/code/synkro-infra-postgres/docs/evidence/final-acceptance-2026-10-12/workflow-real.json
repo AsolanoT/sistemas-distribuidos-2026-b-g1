@@ -1,0 +1,75 @@
+{
+  "root_sha": "4a4d976ac57868c2a7e4935ee7820d388e996cc3",
+  "suites": [
+    {
+      "name": "workflow-real-revalidation",
+      "exit_code": 0,
+      "started_at": "2026-10-13T01:11:49.594555+00:00",
+      "status": "PASSED",
+      "reason": "Owning suite completed",
+      "finished_at": "2026-10-13T01:14:00.333396+00:00"
+    }
+  ],
+  "markers": [
+    "Real Auth \u00e2\u2020\u2019 Customers \u00e2\u2020\u2019 Workflow \u00e2\u2020\u2019 Products \u00e2\u2020\u2019 Sales: PASS",
+    "PASS fully real replay: identical saga and no additional effects",
+    "PASS fully real idempotent replay and completed-state restart recovery",
+    "Inactive/missing real Customers: no stock or sale side effects: PASS",
+    "Actual Sales confirmed overflow rejection and Products release compensation: PASS",
+    "PASS real in-flight crash recovery: one reservation and one additional sale",
+    "PASS real public login route, Auth remote delivery, Host to Gateway to actual Auth, wrong-password rejection",
+    "Joint owned resource cleanup: PASS (customers-joint-82602ea026cf4a4abfb9d304367f8b1c)",
+    "PASS actual participant acceptance, replay/recovery and Gateway login; exact pins in root lock",
+    "PASS real effects verified: {\"compensation\": {\"released\": 1, \"sales\": 1, \"stock\": 18}, \"completed\": {\"reserved\": 1, \"sales\": 1, \"stock\": 18}, \"publicLogin\": {\"authAssets\": \"internal-80\", \"gatewayLogin\": 200, \"route\": \"/login\", \"wrongPassword\": 401}, \"recovery\": {\"reservationsForRecoveredSaga\": 1, \"sales\": 2, \"stock\": 17}, \"rejectedCustomers\": {\"reservations\": 1, \"sales\": 1, \"stock\": 18}, \"restartEndpointChanged\": true}"
+  ],
+  "error_categories": [],
+  "joint_effects": {
+    "revisions": {
+      "auth": "04ae6ab92daf474fb5c38ae37842d1690e7584b0",
+      "products": "b6b379b314716e201833be0d854953a69452559f",
+      "sales": "70bdbaba3783bfb974c338b8a460e6e9b7e5c8dd",
+      "workflow": "45aa244251851fda46212c5b6338668daaa683be",
+      "customersDB": "a23ba04f94ff0f150c5bafd9801cc0c6d9e98bd7",
+      "authDB": "5e481dba156db6f2febb00427efba637002d9a0c",
+      "productsDB": "0beae79920d9af83865bdebaf6b316a2b2a57592",
+      "salesDB": "9cfbde7db4bea7bacad70370c60f91f8eb917c04",
+      "customers": "58a0ef9f6fc05b788b2e65002468cd9c14783540"
+    },
+    "effects": {
+      "completed": {
+        "stock": 18,
+        "sales": 1,
+        "reserved": 1
+      },
+      "restartEndpointChanged": true,
+      "rejectedCustomers": {
+        "stock": 18,
+        "sales": 1,
+        "reservations": 1
+      },
+      "compensation": {
+        "stock": 18,
+        "sales": 1,
+        "released": 1
+      },
+      "recovery": {
+        "stock": 17,
+        "sales": 2,
+        "reservationsForRecoveredSaga": 1
+      },
+      "publicLogin": {
+        "route": "/login",
+        "authAssets": "internal-80",
+        "gatewayLogin": 200,
+        "wrongPassword": 401
+      }
+    },
+    "scope": "All actual HTTP/database participants. Products revision retains bearer-shape authentication; this is functional interoperability, not platform security approval."
+  },
+  "cleanup": {
+    "status": "PASSED",
+    "fallback_resources_removed": 0,
+    "reason": "Guarded cleanup verified; preexisting resource identities preserved",
+    "snapshots_removed": true
+  }
+}
