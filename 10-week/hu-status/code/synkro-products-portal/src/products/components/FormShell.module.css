@@ -1,0 +1,73 @@
+/* The panel of every form on the page: a card with the design system's large-panel radius.
+   The host no longer restyles a portal's headings, paragraphs or code, so the
+   form styles its own title, hints and errors. */
+.form {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 36rem;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+}
+
+.title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+/* The inline alert for an error that is not about a single field. */
+.alert {
+  padding: var(--space-3) var(--space-4);
+  border-left: 4px solid var(--color-error-700);
+  border-radius: var(--radius-md);
+  background: var(--color-error-50);
+}
+
+.alertTitle,
+.alertDetail {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.alertTitle {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.alertDetail {
+  color: var(--color-text-primary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+@media (max-width: 30rem) {
+  .form {
+    padding: var(--space-4);
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions > * {
+    width: 100%;
+  }
+}

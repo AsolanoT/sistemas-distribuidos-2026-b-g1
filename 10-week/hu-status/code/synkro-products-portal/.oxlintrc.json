@@ -1,0 +1,18 @@
+{
+  "plugins": ["react", "typescript", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }],
+    "no-restricted-globals": [
+      "error",
+      { "name": "fetch", "message": "Use shell/apiClient: the host owns the single HTTP client." },
+      { "name": "XMLHttpRequest", "message": "Use shell/apiClient: the host owns the single HTTP client." },
+      { "name": "localStorage", "message": "The portal never stores credentials; the host owns the session." },
+      { "name": "sessionStorage", "message": "The portal never stores credentials; the host owns the session." }
+    ],
+    "no-restricted-imports": [
+      "error",
+      { "paths": [{ "name": "axios", "message": "Use shell/apiClient: the host owns the single HTTP client." }] }
+    ]
+  }
+}
