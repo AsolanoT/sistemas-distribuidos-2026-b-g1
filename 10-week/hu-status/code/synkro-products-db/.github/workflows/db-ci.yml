@@ -1,0 +1,327 @@
+name: db-ci
+
+on:
+  push:
+    branches: [develop, qa, main, fix/root-composition-integration]
+  pull_request:
+    branches: [develop, qa, main]
+
+permissions:
+  contents: read
+
+jobs:
+  migration-rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: ci_admin_pw
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      FLYWAY_URL: jdbc:postgresql://localhost:5432/postgres
+      FLYWAY_USER: postgres
+      FLYWAY_PASSWORD: ci_admin_pw
+      PGPASSWORD: ci_admin_pw
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify schema-isolated history contract
+        run: python3 tests/test_history_contract.py
+
+      - name: Install psql
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Simulate bootstrap — create the products_app login role
+        # The real bootstrap script lives in synkro-infra-postgres
+        # (ADR-012 Decision 1), not built yet. This step stands in for it,
+        # in CI only. It is NOT how production bootstrap actually works —
+        # do not copy this step's approach into real infrastructure code.
+        run: |
+          psql -h localhost -U postgres -c \
+            "CREATE ROLE products_app LOGIN PASSWORD 'ci_app_pw';"
+
+      - name: Install Flyway — the same image deploy/compose.yml runs
+        # Flyway stopped publishing the CLI tarball to Maven Central after
+        # 11.8.x, so CI runs the official image through a thin wrapper.
+        # Keep this tag identical to deploy/compose.yml: CI must prove the
+        # exact runner that deploys.
+        run: |
+          docker pull flyway/flyway:11.20.3-alpine
+          # The repository is copied in with `docker cp` rather than
+          # bind-mounted, so the wrapper works whether or not the Docker
+          # daemon can see the job's filesystem (containerized runners, act).
+          sudo tee /usr/local/bin/flyway > /dev/null <<'SH'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          cid=$(docker create --network host \
+            -e FLYWAY_URL -e FLYWAY_USER -e FLYWAY_PASSWORD \
+            flyway/flyway:11.20.3-alpine -workingDirectory=/workspace "$@")
+          trap 'docker rm -f "$cid" > /dev/null' EXIT
+          docker cp -q "$PWD/." "$cid:/workspace"
+          docker start -a "$cid"
+          exit "$(docker inspect -f '{{.State.ExitCode}}' "$cid")"
+          SH
+          sudo chmod +x /usr/local/bin/flyway
+          flyway version
+
+      - name: Migrate from empty — every V migration must be applied
+        # A missing config or location makes Flyway "succeed" with zero
+        # migrations, so success alone proves nothing: count them.
+        run: |
+          flyway -configFiles=flyway.toml migrate
+          expected=$(find 01_ddl 02_dml 03_dcl 04_tcl -name 'V*.sql' | wc -l)
+          applied=$(psql -h localhost -U postgres -d postgres -tAc \
+            "SELECT count(*) FROM products_schema.flyway_schema_history WHERE success AND version IS NOT NULL;")
+          echo "V migrations in repository: $expected, applied: $applied"
+          if [ "$expected" -eq 0 ] || [ "$applied" != "$expected" ]; then
+            echo "Applied migrations do not match the repository"
+            exit 1
+          fi
+
+      - name: Migrate again — must report no migration necessary
+        run: |
+          output=$(flyway -configFiles=flyway.toml migrate)
+          echo "$output"
+          echo "$output" | grep -q "No migration necessary" \
+            || (echo "Second migrate was not a no-op" && exit 1)
+
+      - name: Privilege check — products_app can use products_schema
+        run: |
+          result=$(psql -h localhost -U postgres -d postgres -tAc \
+            "SELECT has_schema_privilege('products_app', 'products_schema', 'USAGE');")
+          if [ "$result" != "t" ]; then
+            echo "products_app lacks USAGE on products_schema"
+            exit 1
+          fi
+
+      - name: Privilege check — products_app's table privileges
+        # Table privileges come only from V003's ALTER DEFAULT PRIVILEGES,
+        # which covers tables created by the role that ran V003. Exactly
+        # SELECT, INSERT, UPDATE on every business table; never DELETE. The migration ledger is administrator-only.
+        run: |
+          result=$(psql -h localhost -U postgres -d postgres -tAc "
+            SELECT string_agg(format('%s %s=%s', t.tablename, p.priv,
+                                     has_table_privilege('products_app', format('%I.%I', t.schemaname, t.tablename), p.priv)), ', '
+                              ORDER BY t.tablename, p.priv)
+            FROM pg_tables t
+            CROSS JOIN (VALUES ('SELECT'), ('INSERT'), ('UPDATE'), ('DELETE')) AS p(priv)
+            WHERE t.schemaname = 'products_schema' AND t.tablename <> 'flyway_schema_history'
+              AND has_table_privilege('products_app', format('%I.%I', t.schemaname, t.tablename), p.priv) <> (p.priv <> 'DELETE');")
+          tables=$(psql -h localhost -U postgres -d postgres -tAc \
+            "SELECT count(*) FROM pg_tables WHERE schemaname = 'products_schema' AND tablename <> 'flyway_schema_history';")
+          echo "Tables in products_schema ($tables): $(psql -h localhost -U postgres -d postgres -tAc \
+            "SELECT string_agg(tablename, ', ' ORDER BY tablename) FROM pg_tables WHERE schemaname = 'products_schema' AND tablename <> 'flyway_schema_history';")"
+          if [ "$tables" -eq 0 ] || [ -n "$result" ]; then
+            echo "products_app has the wrong table privileges: ${result:-no tables to check}"
+            exit 1
+          fi
+
+      - name: Negative-path constraint checks
+        # A rejected INSERT proves nothing by itself: a later NOT NULL column
+        # would make every bad-row INSERT here fail for that reason instead.
+        # Each rejection must carry the expected SQLSTATE and constraint
+        # name, and a valid row must still be accepted (the control).
+        run: |
+          set -euo pipefail
+          PSQL="psql -h localhost -U postgres -d postgres -v ON_ERROR_STOP=1"
+
+          # $1 = SQLSTATE, $2 = constraint name, $3 = SQL that must violate it
+          expect_violation() {
+            local out
+            if out=$($PSQL -v VERBOSITY=verbose -c "$3" 2>&1); then
+              echo "FAIL: accepted, expected $2 ($1) to reject: $3"; exit 1
+            fi
+            if ! grep -q "ERROR:  $1: .*\"$2\"" <<< "$out"; then
+              echo "FAIL: rejected for the wrong reason, expected $2 ($1), got:"
+              echo "$out"; exit 1
+            fi
+            echo "PASS: rejected by $2 ($1)"
+          }
+
+          CAT=11111111-1111-1111-1111-111111111111
+          $PSQL -c "INSERT INTO products_schema.category (category_id, name) VALUES ('$CAT', 'Test Category');"
+
+          # control: a valid product is accepted, so the rejections below
+          # can only come from the value under test
+          $PSQL -c "INSERT INTO products_schema.product (product_id, name, price_cents, category_id) VALUES ('66666666-6666-6666-6666-666666666666', 'Good Product', 1000, '$CAT');"
+          echo "PASS: valid product accepted (control)"
+
+          # price_cents <= 0 must be rejected
+          expect_violation 23514 ck_product_price_positive \
+            "INSERT INTO products_schema.product (product_id, name, price_cents, category_id) VALUES ('22222222-2222-2222-2222-222222222222', 'Bad Product', 0, '$CAT');"
+
+          # negative stock must be rejected
+          expect_violation 23514 ck_product_stock_non_negative \
+            "INSERT INTO products_schema.product (product_id, name, price_cents, stock, category_id) VALUES ('33333333-3333-3333-3333-333333333333', 'Bad Stock', 1000, -1, '$CAT');"
+
+          # duplicate ACTIVE category name must be rejected
+          expect_violation 23505 uq_category_name_active \
+            "INSERT INTO products_schema.category (category_id, name) VALUES ('44444444-4444-4444-4444-444444444444', 'Test Category');"
+
+          # deactivating frees the name for reuse
+          $PSQL -c "UPDATE products_schema.category SET active = false WHERE category_id = '$CAT';"
+          $PSQL -c "INSERT INTO products_schema.category (category_id, name) VALUES ('44444444-4444-4444-4444-444444444444', 'Test Category');"
+          echo "PASS: category name reused after deactivation"
+
+          # product with a nonexistent category_id must be rejected
+          expect_violation 23503 fk_product_category \
+            "INSERT INTO products_schema.product (product_id, name, price_cents, category_id) VALUES ('55555555-5555-5555-5555-555555555555', 'Orphan Product', 1000, '99999999-9999-9999-9999-999999999999');"
+
+          PROD=66666666-6666-6666-6666-666666666666
+          NO_SUCH_ID=99999999-9999-9999-9999-999999999999
+          # adjusted_by is a user in Auth: cross-domain, no FK by design
+          USER_ID=77777777-7777-7777-7777-777777777777
+
+          # stock_adjustment control
+          $PSQL -c "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by) VALUES ('a0000000-0000-0000-0000-000000000001', '$PROD', 5, 'Restock', '$USER_ID');"
+          echo "PASS: valid stock_adjustment accepted (control)"
+
+          expect_violation 23514 ck_stock_adjustment_delta_nonzero \
+            "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by) VALUES ('a0000000-0000-0000-0000-000000000002', '$PROD', 0, 'Restock', '$USER_ID');"
+
+          expect_violation 23514 ck_stock_adjustment_reason_not_empty \
+            "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by) VALUES ('a0000000-0000-0000-0000-000000000003', '$PROD', 5, '', '$USER_ID');"
+
+          expect_violation 23514 ck_stock_adjustment_reason_not_empty \
+            "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by) VALUES ('a0000000-0000-0000-0000-000000000005', '$PROD', 5, '   ', '$USER_ID');"
+
+          # stock_after is nullable (rows predating V017) but never negative
+          $PSQL -c "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by, stock_after) VALUES ('a0000000-0000-0000-0000-000000000006', '$PROD', 5, 'Restock', '$USER_ID', 0);"
+          echo "PASS: valid stock_adjustment with stock_after = 0 accepted (control)"
+
+          expect_violation 23514 ck_stock_adjustment_stock_after_non_negative \
+            "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by, stock_after) VALUES ('a0000000-0000-0000-0000-000000000007', '$PROD', 5, 'Restock', '$USER_ID', -1);"
+
+          expect_violation 23503 fk_stock_adjustment_product \
+            "INSERT INTO products_schema.stock_adjustment (adjustment_id, product_id, delta, reason, adjusted_by) VALUES ('a0000000-0000-0000-0000-000000000004', '$NO_SUCH_ID', 5, 'Restock', '$USER_ID');"
+
+          # stock_reservation control
+          RES=b0000000-0000-0000-0000-000000000001
+          $PSQL -c "INSERT INTO products_schema.stock_reservation (reservation_id, status) VALUES ('$RES', 'RESERVED');"
+          echo "PASS: valid stock_reservation accepted (control)"
+
+          expect_violation 23514 ck_stock_reservation_status \
+            "INSERT INTO products_schema.stock_reservation (reservation_id, status) VALUES ('b0000000-0000-0000-0000-000000000002', 'BOGUS');"
+
+          # released_at is set exactly when RELEASED
+          $PSQL -c "INSERT INTO products_schema.stock_reservation (reservation_id, status, released_at) VALUES ('b0000000-0000-0000-0000-000000000003', 'RELEASED', now());"
+          echo "PASS: valid released stock_reservation accepted (control)"
+
+          expect_violation 23514 ck_stock_reservation_released_at_consistency \
+            "INSERT INTO products_schema.stock_reservation (reservation_id, status, released_at) VALUES ('b0000000-0000-0000-0000-000000000004', 'RESERVED', now());"
+
+          expect_violation 23514 ck_stock_reservation_released_at_consistency \
+            "INSERT INTO products_schema.stock_reservation (reservation_id, status) VALUES ('b0000000-0000-0000-0000-000000000005', 'RELEASED');"
+
+          # stock_reservation_line control
+          $PSQL -c "INSERT INTO products_schema.stock_reservation_line (line_id, reservation_id, product_id, quantity, unit_price_cents) VALUES ('c0000000-0000-0000-0000-000000000001', '$RES', '$PROD', 2, 1000);"
+          echo "PASS: valid stock_reservation_line accepted (control)"
+
+          expect_violation 23514 ck_stock_reservation_line_quantity_positive \
+            "INSERT INTO products_schema.stock_reservation_line (line_id, reservation_id, product_id, quantity, unit_price_cents) VALUES ('c0000000-0000-0000-0000-000000000002', '$RES', '$PROD', 0, 1000);"
+
+          expect_violation 23514 ck_stock_reservation_line_price_positive \
+            "INSERT INTO products_schema.stock_reservation_line (line_id, reservation_id, product_id, quantity, unit_price_cents) VALUES ('c0000000-0000-0000-0000-000000000003', '$RES', '$PROD', 2, 0);"
+
+          expect_violation 23503 fk_stock_reservation_line_reservation \
+            "INSERT INTO products_schema.stock_reservation_line (line_id, reservation_id, product_id, quantity, unit_price_cents) VALUES ('c0000000-0000-0000-0000-000000000004', '$NO_SUCH_ID', '$PROD', 2, 1000);"
+
+          expect_violation 23503 fk_stock_reservation_line_product \
+            "INSERT INTO products_schema.stock_reservation_line (line_id, reservation_id, product_id, quantity, unit_price_cents) VALUES ('c0000000-0000-0000-0000-000000000005', '$RES', '$NO_SUCH_ID', 2, 1000);"
+
+          # idempotency_key controls sit exactly on the length bounds (8 and
+          # 128), so an off-by-one in the CHECK fails a control
+          K8=$(printf 'k%.0s' {1..8})
+          K128=$(printf 'k%.0s' {1..128})
+          $PSQL -c "INSERT INTO products_schema.idempotency_key (idempotency_key, resource_type, resource_id) VALUES ('$K8', 'PRODUCT', '$PROD');"
+          $PSQL -c "INSERT INTO products_schema.idempotency_key (idempotency_key, resource_type, resource_id) VALUES ('$K128', 'STOCK_RESERVATION', '$RES');"
+          echo "PASS: 8- and 128-character idempotency keys accepted (controls)"
+
+          expect_violation 23514 ck_idempotency_key_length \
+            "INSERT INTO products_schema.idempotency_key (idempotency_key, resource_type, resource_id) VALUES ('${K8:1}', 'PRODUCT', '$PROD');"
+
+          expect_violation 23514 ck_idempotency_key_length \
+            "INSERT INTO products_schema.idempotency_key (idempotency_key, resource_type, resource_id) VALUES ('${K128}k', 'PRODUCT', '$PROD');"
+
+          expect_violation 23514 ck_idempotency_key_resource_type \
+            "INSERT INTO products_schema.idempotency_key (idempotency_key, resource_type, resource_id) VALUES ('key-bad-type', 'ORDER', '$PROD');"
+
+          # stock_alert: each bad row breaks exactly one rule. The CHECK cases
+          # run before any OPEN alert exists for $PROD, so the partial unique
+          # index cannot be what rejects them.
+          $PSQL -c "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening, resolved_at) VALUES ('d0000000-0000-0000-0000-000000000001', '$PROD', 'RESOLVED', 3, now());"
+          echo "PASS: valid RESOLVED stock_alert accepted (control)"
+
+          expect_violation 23514 ck_stock_alert_stock_at_opening_non_negative \
+            "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening, resolved_at) VALUES ('d0000000-0000-0000-0000-000000000002', '$PROD', 'RESOLVED', -1, now());"
+
+          # an invalid status must be reported by the status CHECK, not by the
+          # resolved_at consistency CHECK (see V010 for why that matters)
+          expect_violation 23514 ck_stock_alert_status \
+            "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening) VALUES ('d0000000-0000-0000-0000-000000000003', '$PROD', 'BOGUS', 3);"
+
+          expect_violation 23514 ck_stock_alert_resolved_at_consistency \
+            "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening, resolved_at) VALUES ('d0000000-0000-0000-0000-000000000004', '$PROD', 'OPEN', 3, now());"
+
+          expect_violation 23514 ck_stock_alert_resolved_at_consistency \
+            "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening) VALUES ('d0000000-0000-0000-0000-000000000005', '$PROD', 'RESOLVED', 3);"
+
+          expect_violation 23503 fk_stock_alert_product \
+            "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening) VALUES ('d0000000-0000-0000-0000-000000000006', '$NO_SUCH_ID', 'OPEN', 3);"
+
+          $PSQL -c "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening) VALUES ('d0000000-0000-0000-0000-000000000010', '$PROD', 'OPEN', 3);"
+          echo "PASS: valid OPEN stock_alert accepted (control)"
+
+          expect_violation 23505 uq_stock_alert_product_open \
+            "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening) VALUES ('d0000000-0000-0000-0000-000000000011', '$PROD', 'OPEN', 3);"
+
+          # resolving the open alert frees the product for a new OPEN one
+          $PSQL -c "UPDATE products_schema.stock_alert SET status = 'RESOLVED', resolved_at = now() WHERE alert_id = 'd0000000-0000-0000-0000-000000000010';"
+          $PSQL -c "INSERT INTO products_schema.stock_alert (alert_id, product_id, status, stock_at_opening) VALUES ('d0000000-0000-0000-0000-000000000012', '$PROD', 'OPEN', 3);"
+          echo "PASS: new OPEN stock_alert accepted after the previous one was resolved"
+
+          # clean up before the rollback step runs, children before parents
+          $PSQL -c "DELETE FROM products_schema.stock_alert;"
+          $PSQL -c "DELETE FROM products_schema.stock_reservation_line;"
+          $PSQL -c "DELETE FROM products_schema.stock_reservation;"
+          $PSQL -c "DELETE FROM products_schema.stock_adjustment;"
+          $PSQL -c "DELETE FROM products_schema.idempotency_key;"
+          $PSQL -c "DELETE FROM products_schema.product;"
+          $PSQL -c "DELETE FROM products_schema.category;"
+
+      - name: Apply rollbacks, highest version to lowest
+        run: |
+          set -euo pipefail
+          psql -h localhost -U postgres -d postgres -v ON_ERROR_STOP=1 -c "DROP TABLE IF EXISTS products_schema.flyway_schema_history;"
+          find 05_rollbacks -name 'U*.sql' -printf '%f\t%p\n' \
+            | sort -r \
+            | cut -f2 \
+            | while read -r f; do
+                echo "Applying $f"
+                psql -h localhost -U postgres -d postgres -v ON_ERROR_STOP=1 -f "$f"
+              done
+
+      - name: Confirm products_schema and products_writer no longer exist
+        run: |
+          result=$(psql -h localhost -U postgres -d postgres -tAc \
+            "SELECT 1 FROM information_schema.schemata WHERE schema_name = 'products_schema';")
+          if [ -n "$result" ]; then
+            echo "products_schema still exists after applying all rollbacks"
+            exit 1
+          fi
+          result=$(psql -h localhost -U postgres -d postgres -tAc \
+            "SELECT 1 FROM pg_roles WHERE rolname = 'products_writer';")
+          if [ -n "$result" ]; then
+            echo "products_writer still exists after applying all rollbacks"
+            exit 1
+          fi
+
+      - name: Migrate again after disposable reconstruction
+        run: |
+          flyway -configFiles=flyway.toml migrate

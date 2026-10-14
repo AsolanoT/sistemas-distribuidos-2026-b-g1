@@ -97,34 +97,42 @@
 
 ## 6. Evidence links
 
-- ADR-014: `docs/ADR-014-admin-registration-and-initial-admin.md`
-- Gateway routing and behavior: `synkro-api-gateway` (branch `feat/routes-and-gateway-behavior`)
-- Host HTTP client and shell: `synkro-front`
-- Products portal: `synkro-products-portal`
-- `synkro-auth-db` Flyway skeleton: `synkro-auth-db` (branch `feat/migration-skeleton`)
-- `synkro-auth-api` RS256 issuance: `synkro-auth-api` (branch `feat/real-rs256-token-issuance`)
-- Common repository files (HU-INF-01): 17 PRs, one per repository, branch `chore/add-common-repository-files`
-- Open issue tracking GTW-02 closure: https://github.com/code-corhuila/synkro-docs/issues/231
-- 5-README: [`5-README.md`](./docs/5-README.md)
-- 13-README: [`13-README.md`](./docs/13-README.md)
-- ADR-014 admin-only registration and initial administrator: [`ADR-014-admin-only-registration-and-initial-administrator.md`](./docs/ADR-014-admin-only-registration-and-initial-administrator.md)
-- Agile conventions: [`agile-conventions.md`](./docs/agile-conventions.md)
-- Authentication: [`authentication.md`](./docs/authentication.md)
-- Data dictionary: [`data-dictionary.md`](./docs/data-dictionary.md)
-- Deployment: [`deployment.md`](./docs/deployment.md)
-- Documentation verification: [`documentation-verification.md`](./docs/documentation-verification.md)
-- Entities and rules: [`entities-and-rules.md`](./docs/entities-and-rules.md)
-- Frontend: [`frontend.md`](./docs/frontend.md)
-- Guidelines: [`guidelines.md`](./docs/guidelines.md)
-- Initial administrator initialization: [`initial-administrator-initialization.md`](./docs/initial-administrator-initialization.md)
-- Models: [`models.md`](./docs/models.md)
-- Navigation map: [`navigation-map.md`](./docs/navigation-map.md)
-- Observability: [`observability.md`](./docs/observability.md)
-- Security policy: [`security-policy.md`](./docs/security-policy.md)
-- Security threat model: [`security-threat-model.md`](./docs/security-threat-model.md)
-- Synkro auth API: [`synkro-auth-api.yaml`](./docs/synkro-auth-api.yaml)
-- Technical backlog: [`technical-backlog.md`](./docs/technical-backlog.md)
-- Testing strategy: [`testing-strategy.md`](./docs/testing-strategy.md)
-- Traceability matrix: [`traceability-matrix.md`](./docs/traceability-matrix.md)
-- User stories: [`user-stories.md`](./docs/user-stories.md)
-- Wireframes: [`wireframes.md`](./docs/wireframes.md)
+- [Individual commits, dates, user stories and source evidence](./code/week-10-commit-evidence.md)
+- [Complete file list and direct GitHub downloads](./code/file-download-links.md)
+- [Individual commit list (CSV)](./code/commits-originales.csv)
+
+Evidence period: **October 5–12, 2026, inclusive, Colombia time (UTC−05:00)**. The folders below preserve repository-relative paths. Each file index links both the local evidence copy and the original file at an immutable GitHub commit.
+
+| Repository evidence folder | Original commits | Scope | Files and direct downloads |
+|---|---:|---|---|
+| [synkro-api-gateway](./code/synkro-api-gateway/) | 6 | HU-GTW-02 — public login/refresh, protected routes and rate limiting | [File index](./code/synkro-api-gateway/EVIDENCE-INDEX.md) |
+| [synkro-auth-api](./code/synkro-auth-api/) | 15 | HU-AUTH-03 — RS256 token issuance and tests | [File index](./code/synkro-auth-api/EVIDENCE-INDEX.md) |
+| [synkro-auth-db](./code/synkro-auth-db/) | 7 | HU-AUTH-02 — Flyway skeleton; HU-INF-02 migration-history correction | [File index](./code/synkro-auth-db/EVIDENCE-INDEX.md) |
+| [synkro-auth-portal](./code/synkro-auth-portal/) | 2 | HU-FE-08 — federated credential login | [File index](./code/synkro-auth-portal/EVIDENCE-INDEX.md) |
+| [synkro-customers-api](./code/synkro-customers-api/) | 13 | HU-CLI-01 / HU-CLI-03 — service structure, lifecycle, persistence and security | [File index](./code/synkro-customers-api/EVIDENCE-INDEX.md) |
+| [synkro-customers-db](./code/synkro-customers-db/) | 3 | HU-CLI-02 — schema layout and runner verification | [File index](./code/synkro-customers-db/EVIDENCE-INDEX.md) |
+| [synkro-docs](./code/synkro-docs/) | 7 | HU-ARQ-27 / HU-DOCS-91–93 — ADR-014 and aligned documentation; branch convention | [File index](./code/synkro-docs/EVIDENCE-INDEX.md) |
+| [synkro-front](./code/synkro-front/) | 61 | HU-FE-05 / HU-FE-06 / HU-FE-08 — HTTP client, shell and session; integration corrections | [File index](./code/synkro-front/EVIDENCE-INDEX.md) |
+| [synkro-infra-postgres](./code/synkro-infra-postgres/) | 101 | HU-INF-02 — PostgreSQL infrastructure and root composition | [File index](./code/synkro-infra-postgres/EVIDENCE-INDEX.md) |
+| [synkro-products-db](./code/synkro-products-db/) | 2 | HU-INF-02 support — isolated Flyway migration history | [File index](./code/synkro-products-db/EVIDENCE-INDEX.md) |
+| [synkro-products-portal](./code/synkro-products-portal/) | 90 | HU-PRO-11 / HU-PRO-01 / HU-PRO-02 / HU-PRO-12 / HU-PRO-13 — Products portal | [File index](./code/synkro-products-portal/EVIDENCE-INDEX.md) |
+| [synkro-sales-api](./code/synkro-sales-api/) | 6 | HU-INF-02 support — reconcile HTTP runtime and root deployment | [File index](./code/synkro-sales-api/EVIDENCE-INDEX.md) |
+| [synkro-sales-portal](./code/synkro-sales-portal/) | 29 | HU-VEN-11 / HU-VEN-12 — history, registration and composed detail | [File index](./code/synkro-sales-portal/EVIDENCE-INDEX.md) |
+| [synkro-workflow](./code/synkro-workflow/) | 34 | HU-WKF-01 / HU-WKF-03 — service structure and durable orchestration | [File index](./code/synkro-workflow/EVIDENCE-INDEX.md) |
+
+### Key documentation evidence
+
+- [ADR-014 — admin registration and initial administrator](./code/synkro-docs/05-architecture/decisions/records/ADR-014-admin-only-registration-and-initial-administrator.md)
+- [Authentication and session ownership](./code/synkro-docs/07-api/authentication.md)
+- [Auth OpenAPI contract](./code/synkro-docs/07-api/contracts/openapi/synkro-auth-api.yaml)
+- [Traceability matrix](./code/synkro-docs/04-requirements/traceability-matrix.md)
+- [Testing strategy](./code/synkro-docs/11-quality/testing-strategy.md)
+- [Frontend stack and host/portal contract](./code/synkro-docs/_stacks/frontend.md)
+- [Documentation verification](./code/synkro-docs/15-project-control/documentation-verification.md)
+
+### Evidence scope and historical work
+
+- HU-INF-01 and the initial HU-GTW-01 implementation predate the interval in Colombia time; their PR and commit references remain in the individual evidence report as historical context.
+- PRs created after the weekly cutoff may contain in-period commits. Only the in-period commits are counted.
+- File downloads are pinned to in-period source snapshots. CI results, approvals and final acceptance must be checked separately; source evidence does not assert those conditions.
+- [Documentation-copy editorial adjustments](./code/editorial-adjustments.md)

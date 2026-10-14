@@ -1,0 +1,161 @@
+{
+  "url": "https://github.com/code-corhuila/synkro-front/actions/runs/38334353482",
+  "head_sha": "24d53684fece340968b8dccf466177416b1f5169",
+  "event": "workflow_dispatch",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "build",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run check:production-build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "lint",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run lint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "check-common-files",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify root deployment contract",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify common repository files exist",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run coverage",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "coverage_statements": 94.75,
+  "test_files_passed": 46,
+  "real_browser_e2e": "NOT RUN; same-shell navigation is covered by owning component regression",
+  "private_integration": "NOT RUN"
+}

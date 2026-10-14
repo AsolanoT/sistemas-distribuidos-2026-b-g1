@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+/* The host no longer restyles a portal's headings or paragraphs: the page styles its own. */
+.title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-black);
+  letter-spacing: 0.01em;
+  line-height: var(--line-height-tight);
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+/* The list is one card, like the catalogue: the text and the alerts sit on the
+   surface colour, where they measure above 4.5:1 in either theme. */
+.card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 40rem) {
+  .card {
+    padding: var(--space-6);
+  }
+}
+
+.card > :first-child {
+  max-width: 16rem;
+}

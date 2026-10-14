@@ -1,0 +1,17 @@
+services:
+  synkro-customers-api:
+    environment:
+      SPRING_DATASOURCE_URL: ${CUSTOMERS_DATABASE_URL:-jdbc:postgresql://synkro-db:5432/synkro?currentSchema=customers_schema&connectTimeout=5&socketTimeout=60}
+      SPRING_DATASOURCE_USERNAME: customers_app
+      SPRING_DATASOURCE_PASSWORD: ''
+      SPRING_DATASOURCE_PASSWORD_FILE: /run/secrets/customers_app_password
+      JWT_PUBLIC_KEY_FILE: /run/secrets/customers_public_key
+      JWT_PUBLIC_KEY: ''
+    secrets:
+    - customers_app_password
+    - customers_public_key
+secrets:
+  customers_app_password:
+    file: ${CUSTOMERS_APP_PASSWORD_PATH:?set restricted application password path}
+  customers_public_key:
+    file: ${JWT_PUBLIC_KEY_PATH:?set Auth public key path}

@@ -1,0 +1,130 @@
+{
+  "run_id": "run-0c9c6cb5f8f6406aae65dbb71648f8a6",
+  "root_sha": "72c1645f124eaf0245a009af7e8d5a2495d18bab",
+  "lock_sha256": "ea981735c719a4d756100a435335955a838dbf6a09741da1b3017c8ad1ea4c74",
+  "dependencies": [
+    {
+      "name": "synkro-front",
+      "revision": "0e4b8ac7768a1416bdf9513f78a21054e4c22e69",
+      "exact_clean_snapshot": true
+    },
+    {
+      "name": "synkro-auth-portal",
+      "revision": "02e71fcab39a98aa14a082c68957e750c35347c0",
+      "exact_clean_snapshot": true
+    },
+    {
+      "name": "synkro-products-portal",
+      "revision": "31f1dc235e50c69030c60f5d5faca5d2c1786270",
+      "exact_clean_snapshot": true
+    },
+    {
+      "name": "synkro-sales-portal",
+      "revision": "d88babf9cd5a95bd7fb6cbae3a0db642c8df285f",
+      "exact_clean_snapshot": true
+    }
+  ],
+  "scope": "complete delivered portal suite; not full platform acceptance",
+  "suite": {
+    "name": "complete-portals-approved-merge",
+    "status": "PASSED",
+    "exit_code": 0
+  },
+  "harness_exit_code": 1,
+  "evidence_recovery": "Suite passed, helper exited 1 at strict global audit; safe metadata recovered before guarded snapshot cleanup",
+  "markers": [
+    "PASS compiled entry/JavaScript/CSS delivery: http://127.0.0.1:55300/remotes/auth/ {'js': 10, 'css': 1}",
+    "PASS compiled entry/JavaScript/CSS delivery: http://127.0.0.1:55300/remotes/products/ {'js': 8, 'css': 1}",
+    "PASS compiled entry/JavaScript/CSS delivery: http://127.0.0.1:55300/remotes/sales/ {'js': 8, 'css': 1}",
+    "PASS compiled entry/JavaScript/CSS delivery: http://127.0.0.1:55300/remotes/products/ {'js': 8, 'css': 1}",
+    "PASS compiled entry/JavaScript/CSS delivery: http://127.0.0.1:55300/remotes/sales/ {'js': 8, 'css': 1}",
+    "PASS real unavailable Sales gives 502 while shell/Products stay reachable; actual Sales assets recover after restart",
+    "PASS compiled entry/JavaScript/CSS delivery: http://127.0.0.1:49965/ {'js': 8, 'css': 1}",
+    "PASS actual Sales standalone / and prefixed /remotes/sales/ builds",
+    "PASS real host, Products and Sales builds/coverage/model/internal platform/HTTP assets; shell exports preserved",
+    "PASS UI disposable containers/network removed; build images retained as cache"
+  ],
+  "concurrent_fixture_events": [
+    {
+      "utc": "2026-10-13T02:44:53+00:00",
+      "kind": "network",
+      "action": "create",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:44:53+00:00",
+      "kind": "container",
+      "action": "create",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:44:54+00:00",
+      "kind": "network",
+      "action": "connect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:44:56+00:00",
+      "kind": "network",
+      "action": "connect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:45:00+00:00",
+      "kind": "network",
+      "action": "disconnect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:45:01+00:00",
+      "kind": "network",
+      "action": "connect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:45:05+00:00",
+      "kind": "network",
+      "action": "disconnect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:46:41+00:00",
+      "kind": "network",
+      "action": "connect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:46:42+00:00",
+      "kind": "network",
+      "action": "disconnect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:46:42+00:00",
+      "kind": "network",
+      "action": "disconnect",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:46:42+00:00",
+      "kind": "container",
+      "action": "destroy",
+      "resource_family": "concurrent customers-browser fixture"
+    },
+    {
+      "utc": "2026-10-13T02:46:43+00:00",
+      "kind": "network",
+      "action": "destroy",
+      "resource_family": "concurrent customers-browser fixture"
+    }
+  ],
+  "cleanup": {
+    "owned_resources": "PASSED",
+    "owned_resource_residuals": 0,
+    "global_preservation_audit": "FAILED",
+    "reason": "Preexisting resource identity changed; global auditor refused cleanup. Independent Customers browser fixture was created before the suite and destroyed during it; no unrelated resource was removed by this execution.",
+    "snapshots_and_raw_diagnostics_removed": true
+  },
+  "raw_sink_created_at": "2026-10-13T02:45:08.104501+00:00",
+  "finished_at": "2026-10-13T02:50:06.763760+00:00"
+}

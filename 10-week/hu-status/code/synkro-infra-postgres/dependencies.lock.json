@@ -1,0 +1,92 @@
+{
+  "format": 1,
+  "purpose": "Reproducible candidate evidence, not approved production promotion",
+  "documentationRevision": "61056c93e6e0783a9199bf56778e9494739bc458",
+  "repositories": [
+    {
+      "name": "synkro-infra-mongo",
+      "revision": "a19e2d564f938298c057d41ca7a6f6e456e22637",
+      "status": "merged develop: PR #1"
+    },
+    {
+      "name": "synkro-auth-db",
+      "revision": "5e481dba156db6f2febb00427efba637002d9a0c",
+      "status": "approved merged develop: PR #7"
+    },
+    {
+      "name": "synkro-products-db",
+      "revision": "0beae79920d9af83865bdebaf6b316a2b2a57592",
+      "status": "approved merged develop: PR #7"
+    },
+    {
+      "name": "synkro-customers-db",
+      "revision": "a23ba04f94ff0f150c5bafd9801cc0c6d9e98bd7",
+      "status": "approved merged develop: PR #3"
+    },
+    {
+      "name": "synkro-sales-db",
+      "revision": "9cfbde7db4bea7bacad70370c60f91f8eb917c04",
+      "status": "merged develop: PR #5"
+    },
+    {
+      "name": "synkro-auth-api",
+      "revision": "04ae6ab92daf474fb5c38ae37842d1690e7584b0",
+      "status": "merged develop: PR #10"
+    },
+    {
+      "name": "synkro-customers-api",
+      "revision": "58a0ef9f6fc05b788b2e65002468cd9c14783540",
+      "status": "approved merged develop: PR #7"
+    },
+    {
+      "name": "synkro-products-api",
+      "revision": "b6b379b314716e201833be0d854953a69452559f",
+      "status": "published-develop"
+    },
+    {
+      "name": "synkro-sales-api",
+      "revision": "70bdbaba3783bfb974c338b8a460e6e9b7e5c8dd",
+      "status": "approved merged develop: PR #7"
+    },
+    {
+      "name": "synkro-workflow",
+      "revision": "45aa244251851fda46212c5b6338668daaa683be",
+      "status": "approved merged develop: PR #4"
+    },
+    {
+      "name": "synkro-worker",
+      "revision": "7827aa160d34c9ba1f70aa0481b2bf32accb42f0",
+      "status": "published-develop"
+    },
+    {
+      "name": "synkro-api-gateway",
+      "revision": "24a4ab157bb000e152e5e4567f16deb3ebadcf05",
+      "status": "published-develop"
+    },
+    {
+      "name": "synkro-front",
+      "revision": "3d734d39ef15075080704ef3d8b976531e46acd2",
+      "status": "approved merged develop: PR #13 (preserves Sales correction PR #12)"
+    },
+    {
+      "name": "synkro-auth-portal",
+      "revision": "02e71fcab39a98aa14a082c68957e750c35347c0",
+      "status": "approved merged develop: PR #2"
+    },
+    {
+      "name": "synkro-customers-portal",
+      "revision": "1f322bbf19764c074dbb3950f118742a71a669d2",
+      "status": "approved merged develop: PR #2"
+    },
+    {
+      "name": "synkro-products-portal",
+      "revision": "31f1dc235e50c69030c60f5d5faca5d2c1786270",
+      "status": "approved merged develop: PR #9"
+    },
+    {
+      "name": "synkro-sales-portal",
+      "revision": "d88babf9cd5a95bd7fb6cbae3a0db642c8df285f",
+      "status": "approved merged develop: PR #3"
+    }
+  ]
+}

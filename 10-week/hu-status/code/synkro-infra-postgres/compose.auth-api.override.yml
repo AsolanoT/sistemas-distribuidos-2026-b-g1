@@ -1,0 +1,12 @@
+services:
+  synkro-auth-api:
+    environment:
+      SPRING_DATASOURCE_URL: ${AUTH_DATABASE_URL:-jdbc:postgresql://synkro-db:5432/synkro?currentSchema=auth_schema&connectTimeout=5&socketTimeout=60}
+      SPRING_DATASOURCE_USERNAME: auth_app
+      SPRING_DATASOURCE_PASSWORD: ''
+      SPRING_DATASOURCE_PASSWORD_FILE: /run/secrets/auth_app_password
+    secrets:
+    - auth_app_password
+secrets:
+  auth_app_password:
+    file: ${AUTH_APP_PASSWORD_PATH:?set restricted application password path}
