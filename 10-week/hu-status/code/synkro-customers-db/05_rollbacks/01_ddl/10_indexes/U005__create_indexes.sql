@@ -1,1 +1,0 @@
-DROP INDEX customers_schema.idx_idempotency_key_customer_id;

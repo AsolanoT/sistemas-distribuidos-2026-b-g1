@@ -1,4 +1,0 @@
-# Explicit candidate preparation mode; never counts as complete startup.
-include:
-  - ../synkro-infra-mongo/compose.yml
-  - ../synkro-sales-db/deploy/compose.yml

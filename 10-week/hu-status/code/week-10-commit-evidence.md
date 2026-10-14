@@ -1,6 +1,6 @@
 # Week 10 — Individual commit and source evidence
 
-Author: AsolanoT. Period: October 5–12, 2026 inclusive, Colombia time (UTC−05:00).
+Author: AsolanoT. Period: October 5–12, 2026 inclusive, time (UTC−05:00).
 
 **376 original commits across 14 repositories**, including source, tests, configuration and documentation. Merge commits and cherry-picks are excluded from this count. Original authorship is checked independently of PR authorship.
 
@@ -12,7 +12,7 @@ HU-GTW-02 — public login/refresh, protected routes and rate limiting.
 
 [Evidence folder](./synkro-api-gateway/) · [Files and downloads](./synkro-api-gateway/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-api-gateway/commit/1ad3b442ebd023c384941cbc9eea22df4b9bf70d)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-11 12:06 | [7f31503](https://github.com/code-corhuila/synkro-api-gateway/commit/7f31503c1c687cfab4b5a335323869389a234b74) | [#3](https://github.com/code-corhuila/synkro-api-gateway/pull/3) | test(gateway): add failing smoke tests for public login and refresh |
 | 2026-10-11 12:07 | [4eef511](https://github.com/code-corhuila/synkro-api-gateway/commit/4eef5113abb4df363ded22cdc27f958a00e03ef6) | [#3](https://github.com/code-corhuila/synkro-api-gateway/pull/3) | fix(gateway): make login and refresh public, keep register protected |
@@ -27,7 +27,7 @@ HU-AUTH-03 — RS256 token issuance and tests.
 
 [Evidence folder](./synkro-auth-api/) · [Files and downloads](./synkro-auth-api/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-auth-api/commit/5382c244a9121e9da70aa45aac4f28a231a26160)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-06 20:07 | [e69e52a](https://github.com/code-corhuila/synkro-auth-api/commit/e69e52a2dcf235b00a6f7307fa3486a074b765e5) | [#3](https://github.com/code-corhuila/synkro-auth-api/pull/3) | test(domain): add failing tests for SystemUser role validation |
 | 2026-10-06 20:08 | [a1b2884](https://github.com/code-corhuila/synkro-auth-api/commit/a1b2884481207d5d9ba2295fac039f2753991e5a) | [#3](https://github.com/code-corhuila/synkro-auth-api/pull/3) | feat(domain): implement SystemUser |
@@ -51,7 +51,7 @@ HU-AUTH-02 — Flyway skeleton; HU-INF-02 migration-history correction.
 
 [Evidence folder](./synkro-auth-db/) · [Files and downloads](./synkro-auth-db/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-auth-db/commit/f14fb8c0eb14bba6d92d987fcdd0f62eb3050606)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-06 20:00 | [46d38cb](https://github.com/code-corhuila/synkro-auth-db/commit/46d38cb5e03dde2e0032d4a6dea562aaa4f9c503) | [#2](https://github.com/code-corhuila/synkro-auth-db/pull/2) | chore(auth-db): scaffold the migration layout migration tree |
 | 2026-10-06 20:00 | [b51ad55](https://github.com/code-corhuila/synkro-auth-db/commit/b51ad5539288185d0632190ad71ac71e7d3c1d88) | [#2](https://github.com/code-corhuila/synkro-auth-db/pull/2) | feat(auth-db): create auth_schema and the writer role |
@@ -67,7 +67,7 @@ HU-FE-08 — federated credential login.
 
 [Evidence folder](./synkro-auth-portal/) · [Files and downloads](./synkro-auth-portal/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-auth-portal/commit/2e512a60633a6dca45ab3d8b819ad7045cbfd2e9)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-12 16:51 | [2e512a6](https://github.com/code-corhuila/synkro-auth-portal/commit/2e512a60633a6dca45ab3d8b819ad7045cbfd2e9) | [#2](https://github.com/code-corhuila/synkro-auth-portal/pull/2) | feat(auth): deliver federated credential login portal |
 | 2026-10-12 16:51 | [7674ec3](https://github.com/code-corhuila/synkro-auth-portal/commit/7674ec3137274fd48fab488d7252d0506330ab28) | [#2](https://github.com/code-corhuila/synkro-auth-portal/pull/2) | docs(auth): record compiled and real-service login evidence |
@@ -78,7 +78,7 @@ HU-CLI-01 / HU-CLI-03 — service structure, lifecycle, persistence and security
 
 [Evidence folder](./synkro-customers-api/) · [Files and downloads](./synkro-customers-api/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-customers-api/commit/ecc4308105604a89f618907dfa704e739124ee0f)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-05 17:42 | [6b7a9a9](https://github.com/code-corhuila/synkro-customers-api/commit/6b7a9a99ca555b200e3c2934ba03ff2828e15dad) | [#2](https://github.com/code-corhuila/synkro-customers-api/pull/2) | chore(customers-api): scaffold 3-module maven structure |
 | 2026-10-05 17:43 | [adf7365](https://github.com/code-corhuila/synkro-customers-api/commit/adf736507769e0dbfda0794ec668b7d9196952e3) | [#2](https://github.com/code-corhuila/synkro-customers-api/pull/2) | test(health): add failing test for GET /health |
@@ -100,7 +100,7 @@ HU-CLI-02 — schema layout and runner verification.
 
 [Evidence folder](./synkro-customers-db/) · [Files and downloads](./synkro-customers-db/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-customers-db/commit/9d6cc0dc85a3b3cd43eb07e355c500ecb7fc2811)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-12 13:35 | [62e7a22](https://github.com/code-corhuila/synkro-customers-db/commit/62e7a225c9b865cb0a6dda54d09d2134dc2ed72a) | [#3](https://github.com/code-corhuila/synkro-customers-db/pull/3) | test(customers-db): reproduce continuation gaps and prove schema relocation |
 | 2026-10-12 13:44 | [d463787](https://github.com/code-corhuila/synkro-customers-db/commit/d4637877b650f0918ca74b6594c266f8f54e0b56) | [#3](https://github.com/code-corhuila/synkro-customers-db/pull/3) | fix(customers-db): complete schema layout and preflight validation |
@@ -112,7 +112,7 @@ HU-ARQ-27 / HU-DOCS-91–93 — ADR-014 and aligned documentation; branch conven
 
 [Evidence folder](./synkro-docs/) · [Files and downloads](./synkro-docs/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-docs/commit/0b50b2fa369bbcb11c1a915e77c733c6d0d1c4be)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-10 22:13 | [0617dfc](https://github.com/code-corhuila/synkro-docs/commit/0617dfc9b063e67ba7377d8305d32c0a0bd61009) | [#220](https://github.com/code-corhuila/synkro-docs/pull/220) | docs(architecture): add ADR-014 admin-only registration and initial administrator creation |
 | 2026-10-10 22:40 | [155ebb4](https://github.com/code-corhuila/synkro-docs/commit/155ebb49784516be084842686e38f021407b3289) | [#220](https://github.com/code-corhuila/synkro-docs/pull/220) | docs(architecture): add ADR-014 — admin-only registration and initial administrator |
@@ -128,7 +128,7 @@ HU-FE-05 / HU-FE-06 / HU-FE-08 — HTTP client, shell and session; integration c
 
 [Evidence folder](./synkro-front/) · [Files and downloads](./synkro-front/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-front/commit/24d53684fece340968b8dccf466177416b1f5169)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-09 18:23 | [3eeb5c5](https://github.com/code-corhuila/synkro-front/commit/3eeb5c5a5ca351d2ab2971ad0356132c0fd0eac5) | [#4](https://github.com/code-corhuila/synkro-front/pull/4) | test(shell): add failing tests for the exposed api client facade |
 | 2026-10-09 18:23 | [63d1f70](https://github.com/code-corhuila/synkro-front/commit/63d1f706db99bff04055e92bb237b8ceecdf23cf) | [#4](https://github.com/code-corhuila/synkro-front/pull/4) | feat(shell): expose the single http client to remotes |
@@ -198,7 +198,7 @@ HU-INF-02 — PostgreSQL infrastructure and root composition.
 
 [Evidence folder](./synkro-infra-postgres/) · [Files and downloads](./synkro-infra-postgres/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-infra-postgres/commit/66bd143610d3bc6de029589a6925422a3543f58f)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-11 17:57 | [81cba62](https://github.com/code-corhuila/synkro-infra-postgres/commit/81cba6296d6e8f2059cd6aeb991560438a2f5994) | [#2](https://github.com/code-corhuila/synkro-infra-postgres/pull/2) | test(infra): define bootstrap and environment regression checks |
 | 2026-10-11 18:37 | [34a1be0](https://github.com/code-corhuila/synkro-infra-postgres/commit/34a1be002f7e84c9cd9e8fefa0403d9e29e91c15) | [#2](https://github.com/code-corhuila/synkro-infra-postgres/pull/2) | feat(infra): add persistent PostgreSQL and idempotent bootstrap |
@@ -308,7 +308,7 @@ HU-INF-02 support — isolated Flyway migration history.
 
 [Evidence folder](./synkro-products-db/) · [Files and downloads](./synkro-products-db/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-products-db/commit/879f3e9fe80cadc6cd00afdb519cb0d78a0f3588)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-11 18:04 | [0e89611](https://github.com/code-corhuila/synkro-products-db/commit/0e89611690dd41645ea707a8202d370e653a594e) | [#7](https://github.com/code-corhuila/synkro-products-db/pull/7) | test(db): reproduce shared migration history conflict |
 | 2026-10-11 19:06 | [879f3e9](https://github.com/code-corhuila/synkro-products-db/commit/879f3e9fe80cadc6cd00afdb519cb0d78a0f3588) | [#7](https://github.com/code-corhuila/synkro-products-db/pull/7) | fix(db): isolate Flyway history in the domain schema |
@@ -319,7 +319,7 @@ HU-PRO-11 / HU-PRO-01 / HU-PRO-02 / HU-PRO-12 / HU-PRO-13 — Products portal.
 
 [Evidence folder](./synkro-products-portal/) · [Files and downloads](./synkro-products-portal/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-products-portal/commit/b3780d9d8cb9fe28f59ec687393c42c93cfff339)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-09 17:35 | [9c42d16](https://github.com/code-corhuila/synkro-products-portal/commit/9c42d16329501087108fe30e3d36427b6b8317d1) | [#2](https://github.com/code-corhuila/synkro-products-portal/pull/2) | chore(portal): scaffold vite react project pinned to node 22 |
 | 2026-10-09 17:35 | [eb6f5ac](https://github.com/code-corhuila/synkro-products-portal/commit/eb6f5ac2eeaf198c2f52470cbe52faf9fe93ee6c) | [#2](https://github.com/code-corhuila/synkro-products-portal/pull/2) | test(portal): add failing test for exposed remote module |
@@ -418,7 +418,7 @@ HU-INF-02 support — reconcile HTTP runtime and root deployment.
 
 [Evidence folder](./synkro-sales-api/) · [Files and downloads](./synkro-sales-api/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-sales-api/commit/859c8f79a437d5cb1e19cf48a9d124966d221508)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-11 18:52 | [3461eaa](https://github.com/code-corhuila/synkro-sales-api/commit/3461eaa5c38f28e99fa4d0b3265a08ae68e17290) | [#7](https://github.com/code-corhuila/synkro-sales-api/pull/7) | test(deploy): reproduce missing Sales application connection |
 | 2026-10-11 19:07 | [39c9e46](https://github.com/code-corhuila/synkro-sales-api/commit/39c9e464f4c6717766dec027055769d4e44b31b2) | [#7](https://github.com/code-corhuila/synkro-sales-api/pull/7) | fix(deploy): separate Sales application and migration connections |
@@ -433,7 +433,7 @@ HU-VEN-11 / HU-VEN-12 — history, registration and composed detail.
 
 [Evidence folder](./synkro-sales-portal/) · [Files and downloads](./synkro-sales-portal/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-sales-portal/commit/c89448c04f5351b1ab8bc1ddf3f01b0529366311)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-11 22:20 | [f09afe2](https://github.com/code-corhuila/synkro-sales-portal/commit/f09afe28afffd7f62b998a8be6a5b10978437a8c) | [#2](https://github.com/code-corhuila/synkro-sales-portal/pull/2) | test(sales-portal): define federation and shell contract tests |
 | 2026-10-11 22:20 | [131111f](https://github.com/code-corhuila/synkro-sales-portal/commit/131111f200396d402bcfcbb9d88d630fe64ff7ec) | [#2](https://github.com/code-corhuila/synkro-sales-portal/pull/2) | feat(sales-portal): add React remote and host integration |
@@ -471,7 +471,7 @@ HU-WKF-01 / HU-WKF-03 — service structure and durable orchestration.
 
 [Evidence folder](./synkro-workflow/) · [Files and downloads](./synkro-workflow/EVIDENCE-INDEX.md) · [In-period source snapshot](https://github.com/code-corhuila/synkro-workflow/commit/0afd8cde592c3efa5b44b63026001b0c262d4b2b)
 
-| Colombia timestamp | Commit | PR | Change |
+| timestamp | Commit | PR | Change |
 |---|---|---|---|
 | 2026-10-05 13:24 | [87471e6](https://github.com/code-corhuila/synkro-workflow/commit/87471e6216d5260bc3cedf9a57dfdce099c174aa) | [#2](https://github.com/code-corhuila/synkro-workflow/pull/2) | chore(workflow): scaffold 3-module maven structure |
 | 2026-10-05 13:25 | [b0dcc3a](https://github.com/code-corhuila/synkro-workflow/commit/b0dcc3af81d407a5894e177d99349b11e8c6ece5) | [#2](https://github.com/code-corhuila/synkro-workflow/pull/2) | test(health): add failing test for GET /health |
@@ -510,7 +510,7 @@ HU-WKF-01 / HU-WKF-03 — service structure and durable orchestration.
 
 ## Historical context
 
-The 17 initial HU-INF-01 commits and initial HU-GTW-01 implementation predate the interval in Colombia time. These are not included in the 376 original commits above. [HU-GTW-01 PR](https://github.com/code-corhuila/synkro-api-gateway/pull/2).
+The 17 initial HU-INF-01 commits and initial HU-GTW-01 implementation predate the interval in time. These are not included in the 376 original commits above. [HU-GTW-01 PR](https://github.com/code-corhuila/synkro-api-gateway/pull/2).
 
 ## Attribution and limits
 

@@ -1,2 +1,0 @@
-# Immutable DB fixture hashes cover original bytes, including shell line endings.
-tests/fixtures/customers-db/** -text

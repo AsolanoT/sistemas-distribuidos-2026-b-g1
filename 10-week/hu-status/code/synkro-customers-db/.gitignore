@@ -1,8 +1,0 @@
-.env
-*.env
-!*.env.example
-.idea/
-.DS_Store
-*.log
-.test-run/
-secrets/

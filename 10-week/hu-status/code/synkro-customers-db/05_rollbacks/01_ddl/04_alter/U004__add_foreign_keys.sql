@@ -1,1 +1,0 @@
-ALTER TABLE customers_schema.idempotency_key DROP CONSTRAINT fk_idempotency_key_customer;

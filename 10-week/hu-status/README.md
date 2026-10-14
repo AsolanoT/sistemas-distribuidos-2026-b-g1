@@ -98,8 +98,6 @@
 ## 6. Evidence links
 
 - [Individual commits, dates, user stories and source evidence](./code/week-10-commit-evidence.md)
-- [Complete file list and direct GitHub downloads](./code/file-download-links.md)
-- [Individual commit list (CSV)](./code/commits-originales.csv)
 
 Evidence period: **October 5–12, 2026, inclusive, Colombia time (UTC−05:00)**. The folders below preserve repository-relative paths. Each file index links both the local evidence copy and the original file at an immutable GitHub commit.
 
@@ -135,4 +133,3 @@ Evidence period: **October 5–12, 2026, inclusive, Colombia time (UTC−05:00)*
 - HU-INF-01 and the initial HU-GTW-01 implementation predate the interval in Colombia time; their PR and commit references remain in the individual evidence report as historical context.
 - PRs created after the weekly cutoff may contain in-period commits. Only the in-period commits are counted.
 - File downloads are pinned to in-period source snapshots. CI results, approvals and final acceptance must be checked separately; source evidence does not assert those conditions.
-- [Documentation-copy editorial adjustments](./code/editorial-adjustments.md)

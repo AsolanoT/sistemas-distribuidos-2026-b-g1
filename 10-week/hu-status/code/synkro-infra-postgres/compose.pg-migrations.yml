@@ -1,7 +1,0 @@
-# Delivered PostgreSQL domains only; never represents full startup.
-include:
-  - compose.postgres.yml
-  - ../synkro-auth-db/deploy/compose.yml
-  - ../synkro-products-db/deploy/compose.yml
-  - ../synkro-customers-db/deploy/compose.yml
-  - ../synkro-workflow/deploy/compose.yml
