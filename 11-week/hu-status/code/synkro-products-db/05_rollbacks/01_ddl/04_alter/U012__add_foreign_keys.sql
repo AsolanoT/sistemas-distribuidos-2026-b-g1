@@ -1,0 +1,3 @@
+ALTER TABLE products_schema.stock_reservation_line DROP CONSTRAINT IF EXISTS fk_stock_reservation_line_product;
+ALTER TABLE products_schema.stock_reservation_line DROP CONSTRAINT IF EXISTS fk_stock_reservation_line_reservation;
+ALTER TABLE products_schema.stock_adjustment DROP CONSTRAINT IF EXISTS fk_stock_adjustment_product;

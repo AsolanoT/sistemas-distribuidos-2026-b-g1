@@ -1,0 +1,3 @@
+DROP INDEX IF EXISTS products_schema.idx_stock_reservation_line_product_id;
+DROP INDEX IF EXISTS products_schema.idx_stock_reservation_line_reservation_id;
+DROP INDEX IF EXISTS products_schema.idx_stock_adjustment_product_id;
