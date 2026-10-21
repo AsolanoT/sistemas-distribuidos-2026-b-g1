@@ -23,6 +23,10 @@ public record TraceContext(String traceId, String spanId, String parentSpanId,
 
     public String traceparent() { return "00-" + traceId + "-" + spanId + "-" + flags; }
 
+    public TraceContext clientSpan() {
+        return new TraceContext(traceId, randomHex(8), spanId, flags, correlationId);
+    }
+
     static boolean isUuid(Object value) {
         return value instanceof String text && UUID_TEXT.matcher(text).matches();
     }

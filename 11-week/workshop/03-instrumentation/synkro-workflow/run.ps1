@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("test", "package", "run")][string]$Task = "test",
+    [ValidateSet("test", "package", "run", "stub")][string]$Task = "test",
     [switch]$Offline
 )
 $ErrorActionPreference = "Stop"
@@ -8,6 +8,10 @@ if (-not $env:JAVA_HOME) {
         Sort-Object Name -Descending | Select-Object -First 1
     if (-not $jdk) { throw "Install JDK 21 and set JAVA_HOME." }
     $env:JAVA_HOME = $jdk.FullName
+}
+if ($Task -eq "stub") {
+    & (Join-Path $env:JAVA_HOME "bin\java.exe") (Join-Path $PSScriptRoot "src/test/java/co/edu/corhuila/synkro/workflow/fixture/ProductsStub.java")
+    exit $LASTEXITCODE
 }
 if ($Task -eq "run") {
     $jar = Join-Path $PSScriptRoot "target\synkro-workflow-0.1.0-workshop.jar"

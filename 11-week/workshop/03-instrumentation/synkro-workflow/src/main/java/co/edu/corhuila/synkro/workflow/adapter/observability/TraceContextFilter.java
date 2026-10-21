@@ -10,7 +10,12 @@ public final class TraceContextFilter extends OncePerRequestFilter {
     public static final String CONTEXT = TraceContextFilter.class.getName() + ".context";
     private final JsonRequestLogger logger;
 
-    public TraceContextFilter(JsonRequestLogger logger) { this.logger = logger; }
+    private final RequestMetrics metrics;
+    public TraceContextFilter(JsonRequestLogger logger) { this(logger, new RequestMetrics()); }
+    public TraceContextFilter(JsonRequestLogger logger, RequestMetrics metrics) {
+        this.logger = logger;
+        this.metrics = metrics;
+    }
 
     @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                               FilterChain chain) throws ServletException, IOException {
@@ -32,6 +37,8 @@ public final class TraceContextFilter extends OncePerRequestFilter {
             Map<String, Object> fields = new HashMap<>();
             fields.put("outcome", outcome);
             if (completed) fields.put("http_status", status);
+            metrics.observe(request.getMethod(), request.getRequestURI(), status, completed,
+                (System.nanoTime() - started) / 1_000_000_000.0);
             logger.write(context, level, "http.request.completed", "Workflow HTTP request finished",
                 (System.nanoTime() - started) / 1_000_000.0, fields);
         }
