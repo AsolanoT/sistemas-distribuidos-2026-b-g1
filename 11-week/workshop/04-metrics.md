@@ -109,7 +109,7 @@ The estimates below cover only this journey's catalog; additional routes require
 | `synkro-sales-api` | `/api/v1/sales; /health; other` | 3 | 27 | 144 | 2 | 173 |
 
 Each classic histogram label set creates 14 bucket series plus _sum and _count = 16 series. The two unlabelled application gauges each create one series per scrape target.
-Proposed upper bound: 1093 series for five single-instance services in one environment; three identical environments would produce 3279. This conservative Cartesian bound excludes exporter/process metrics and target churn.
+HTTP-only catalog upper bound: 1093 series for five single-instance services in one environment; three identical environments would produce 3279. This conservative Cartesian bound excludes exporter/process metrics and target churn.
 Current CP3 has R=3: its counter allows 27 series and its histogram 3 x 3 x 15 = 135, for at most 162 application series per instance.
 CP3 emits a label set only after observing it, so its actual number can be lower; it implements no saturation gauge.
 
@@ -146,3 +146,19 @@ No saturation query is currently executable against the CP3 exporter. CP4 review
 - [CP3 implementation and evidence](03-instrumentation/HOW-TO-RUN.md).
 - [NFR-001 and NFR-005](https://github.com/code-corhuila/synkro-docs/blob/main/04-requirements/non-functional.md), [deployment](https://github.com/code-corhuila/synkro-docs/blob/main/05-architecture/deployment.md) and [architecture](https://github.com/code-corhuila/synkro-docs/blob/main/05-architecture/overview.md).
 - [Prometheus naming](https://prometheus.io/docs/practices/naming/), [histograms](https://prometheus.io/docs/practices/histograms/) and [query functions](https://prometheus.io/docs/prometheus/latest/querying/functions/).
+
+## CP6 domain-SLI extension (proposed)
+
+HTTP success does not establish sale completion. Add the following contract to the Workflow catalog; it is not exported by CP3.
+
+| Metric name | Type | Label and cardinality | Meaning | Dashboard PromQL |
+|---|---|---|---|---|
+| `synkro_workflow_sale_resolutions_total` | Counter | resolution: 4 values | One classified decision per newly persisted register-sale saga, at its terminal outcome or 10-second deadline | `sum(rate(synkro_workflow_sale_resolutions_total[5m]))` |
+
+Values: completed = COMPLETED within 10 seconds; business_rejected = expected domain rejection safely resolved within 10 seconds; technical_failure = a terminal COMPENSATED result caused by a technical failure, or a FAILED terminal outcome, before the deadline; deadline_exceeded = no qualifying terminal resolution at 10 seconds.
+A compensated technical failure is technical_failure, not business_rejected. A business rejection is good only when any reserved stock has been safely released.
+Persist the classification once per saga in Workflow-owned technical state; export cumulative counts from those decisions. Idempotent HTTP replay, recovery and later completion must not count the saga again or rewrite its original deadline result.
+Only newly accepted/persisted sagas enter this metric; API authentication/validation failures do not. A still-running saga enters when it reaches the deadline rather than disappearing from the denominator.
+All four resolution series must exist at zero before observations. No saga, customer or product IDs are labels.
+This adds 4 series per Workflow instance: HTTP-plus-domain catalog total = 1097 per one-instance environment, or 3291 for three such environments; the preceding HTTP-only estimates remain unchanged.
+[CP6](05-slo.md) defines the SLI and the remaining implementation/measurement requirements.
