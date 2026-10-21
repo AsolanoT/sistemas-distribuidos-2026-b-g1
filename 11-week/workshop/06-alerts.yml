@@ -1,0 +1,40 @@
+groups:
+  - name: synkro-sale-submission-availability
+    interval: 30s
+    rules:
+      - alert: SynkroSaleSubmissionFastBurn
+        expr: |
+          (
+            (sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome="technical_failure"}[1h])) / sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome=~"success|technical_failure"}[1h]))) > (14.4 * 0.005)
+          )
+          and on (environment)
+          (
+            (sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome="technical_failure"}[5m])) / sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome=~"success|technical_failure"}[5m]))) > (14.4 * 0.005)
+          )
+        for: 0m
+        labels:
+          severity: critical
+          team: synkro-tech
+          service: synkro-api-gateway
+          slo: sale-submission-availability
+        annotations:
+          summary: "SynkroTech sale submission is burning above 14.4x its availability budget."
+          runbook_url: "https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/11-week/workshop/07-runbook.md"
+      - alert: SynkroSaleSubmissionSlowBurn
+        expr: |
+          (
+            (sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome="technical_failure"}[6h])) / sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome=~"success|technical_failure"}[6h]))) > (6 * 0.005)
+          )
+          and on (environment)
+          (
+            (sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome="technical_failure"}[30m])) / sum by (environment) (rate(synkro_gateway_requests_total{environment=~"dev|qa|prod",route="/api/v1/sagas/register-sale",method="POST",outcome=~"success|technical_failure"}[30m]))) > (6 * 0.005)
+          )
+        for: 0m
+        labels:
+          severity: warning
+          team: synkro-tech
+          service: synkro-api-gateway
+          slo: sale-submission-availability
+        annotations:
+          summary: "SynkroTech sale submission is burning above 6x its availability budget."
+          runbook_url: "https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/blob/main/11-week/workshop/07-runbook.md"
