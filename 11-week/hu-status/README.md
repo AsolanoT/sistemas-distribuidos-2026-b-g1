@@ -134,3 +134,24 @@ These existing session images are learning material, separate from application v
 - Private execution packages are not copied and application tests were not rerun to prepare this submission.
 - Pending integration, CI, review and acceptance remain pending.
 - Changes are limited to `11-week`; no commit, push or GitHub state change was performed.
+
+## workshop d1
+
+**Date:** October 20, 2026 - Week 11.
+**Workshop:** Observability, SLOs and incident response applied to the SynkroTech project - Delivery 1.
+**Journey:** Register a sale with customer validation and stock reservation through Gateway, Workflow, Customers, Products and Sales.
+
+| Checkpoint | Work completed | Commit evidence |
+|---|---|---|
+| CP0 - Preparation | Created the workshop CONFIG with personal, repository and reflection-document references. | [2bd2c90](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/2bd2c904293dfc9e514dd1c3d1feada67a8f7470) |
+| CP1 - Critical journey | Mapped real service hops and endpoints, the Mermaid sequence, span tree and trace propagation; documented the absence of broker messaging in the MVP. | [6bd375c](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/6bd375c6634f5862aa80dc80279c183e2132c622) |
+| CP2 - Structured logs | Defined common/domain fields, redaction, severity policy and seven JSON examples sharing one trace ID, including timeout and insufficient-stock rejection. | [ea7ecfa](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/ea7ecfad589d08bd5df46bd0571dfa0e3016ec9e) |
+| CP3 - Inbound instrumentation | Built the minimal Java 21/Spring Boot synkro-workflow module, trace-context filter, response headers and CP2-compatible JSON logger. | [c3bd4ef](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/c3bd4efa8d354777d1b2b932530a7bc50dd10b20) |
+| CP3 - Downstream instrumentation | Propagated trace context to the Products stock-reservation endpoint, exposed a request counter and latency histogram at /metrics, and added automated tests and HOW-TO-RUN.md. | [1b631c8](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/1b631c8138393931d04c4b86c7437608917f277f) |
+| CP4 - Metrics catalog | Defined four golden signals for each of the five backend services, dashboard PromQL, label/cardinality budgets and latency buckets, distinguishing implemented metrics from proposals. | [0b8dd15](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/0b8dd15bffb379417a837c9839aa650d559e5468) |
+
+**Recorded validation:** 19 automated tests passed. A local HTTP run confirmed the same trace_id at Workflow and the Products fixture, distinct span IDs, HTTP 201, and counter/histogram output. The fixture changed no real inventory; this is workshop evidence, not acceptance of the production sale saga.
+**Remaining scope:** saturation gauges and the proposed 0.3-second bucket are not implemented in CP3. No live Prometheus dashboard was executed for CP4.
+**CP5:** this section updates the weekly tracking with the published CP0-CP4 commits. Moodle submission is not verified here.
+
+Artifacts: [Workshop CONFIG](../workshop/README.md), [Journey](../workshop/01-journey.md), [Log contract](../workshop/02-log-contract.md), [Instrumentation instructions and actual output](../workshop/03-instrumentation/HOW-TO-RUN.md), [Metrics catalog](../workshop/04-metrics.md).
