@@ -155,3 +155,25 @@ These existing session images are learning material, separate from application v
 **CP5:** this section updates the weekly tracking with the published CP0-CP4 commits. Moodle submission is not verified here.
 
 Artifacts: [Workshop CONFIG](../workshop/README.md), [Journey](../workshop/01-journey.md), [Log contract](../workshop/02-log-contract.md), [Instrumentation instructions and actual output](../workshop/03-instrumentation/HOW-TO-RUN.md), [Metrics catalog](../workshop/04-metrics.md).
+
+
+## workshop d2
+
+**Dates:** October 20-21, 2026 - Week 11, Colombia time (UTC-05:00).
+**Workshop:** Observability, SLOs and incident response applied to the SynkroTech project - Delivery 2.
+**Journey:** Register a sale with customer validation and stock reservation through Gateway, Workflow, Customers, Products and Sales.
+
+| Checkpoint | Work completed | Commit evidence |
+|---|---|---|
+| CP6 - SLIs, SLOs and error budget | Defined availability, response-latency and safe saga-resolution objectives over 30 days; estimated traffic and request/minute budgets; established the 50%, 75% and 100% consumption policy and proposed the domain-resolution metric. | [ea2583d](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/ea2583de037fc9f97a3ba8eb3ed18a4e8ea5454f) |
+| CP7 - Burn-rate alerts | Added fast 14.4x (1h/5m) and slow 6x (6h/30m) availability alerts, environment separation, severity/team labels and runbook links; explained budget impact and rejected cause-only paging. | [41e5179](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/41e517939019ddc2c62ea497203512017a498249) |
+| CP8 - Runbook | Documented PromQL confirmation, trace-based log investigation, three mitigations ordered by risk, proposed response roles, unresolved-saga safeguards and recovery checks supported by the architecture. | [5da3f6b](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/5da3f6b63cd4c0b884725b3378c99f804df290bd) |
+| CP9 - Incident drill and postmortem | Modeled a 3000 ms Products reservation delay affecting 25% of submissions for 40 minutes; included a span tree, four JSON logs, SLI/budget calculations, manual containment and three follow-up user stories in a blameless postmortem. | [75cf166](https://github.com/AsolanoT/sistemas-distribuidos-2026-b-g1/commit/75cf166383aac9ce963a8f2383d4909e089ca6c9) |
+
+**Recorded validation:** CP7 rules passed promtool validation (two rules). CP8's four diagnostic PromQL expressions passed syntax validation. CP9's four JSON logs, shared context, timestamps, span durations and arithmetic were checked locally.
+**Drill finding:** the analytical synchronous profile completes all eight sales; two exceed 300 ms. Incident-cohort latency compliance is 75%, consuming two latency bad events / 10 equivalent working minutes. Availability remains 100%, so neither CP7 availability alert fires.
+**Evidence limits:** the incident is a tabletop model, not an injected fault or production measurement. Its 5-second participant deadline differs from CP3/current Workflow limits; runtime behavior must be tested on the actual deployed profile.
+**Remaining implementation:** production Gateway metrics and the 0.3-second bucket, durable saga-resolution classification, deployed alert evaluation and latency-alert coverage remain proposed. No production acceptance is claimed.
+**CP10:** this section records the published CP6-CP9 evidence. The final implementation plan and reflections belong in the external reflection document; their completion and Moodle submission are not verified here.
+
+Artifacts: [SLOs and budgets](../workshop/05-slo.md), [Alert rules](../workshop/06-alerts.yml), [Alert policy](../workshop/06-alert-policy.md), [Runbook](../workshop/07-runbook.md), [Incident and postmortem](../workshop/08-incident.md). Reflection-document reference: [Workshop CONFIG](../workshop/README.md).
