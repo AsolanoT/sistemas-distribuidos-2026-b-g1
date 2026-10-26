@@ -13,41 +13,41 @@
 
 | Field | Value |
 |-------|-------|
-| **Context** | `Sale.totalCents` is currently defined as exactly the sum of `SaleDetail.subtotalCents`, with no discount field anywhere in the model (`02-domain/entities-and-rules.md`) |
-| **Required for** | Confirming the `Sale` document's fields in `06-data/models.md` — already rewritten for the document model in HU-DOCS-80 (ADR-010) — before `synkro-sales-db`'s first migration |
-| **Who answers** | Product Owner (course instructor) |
-| **Deadline** | Before `synkro-sales-db`'s first migration |
-| **Status** | 🔴 Unanswered |
+| **Context** | Delivered Sale has no discount field; total remains the exact sum of frozen detail subtotals in the domain/contracts. Sales migrations already exist. |
+| **Required for** | Confirming scope before accepting an extension. The former “before first Sales migration” gate expired; it is not still future. Do not silently alter historical migrations or accept discounts through reconciliation. |
+| **Who answers** | PO/instructor; SergioAndres17 coordinates the domain answer and records its link, SantiagoPlazas2005 tracks the gate. |
+| **Deadline** | Replanned for Sprint 12 review; before approving discount scope or claiming PO confirmation. |
+| **Status** | 🔴 Unanswered — current delivered no-discount model remains the baseline, not an inferred PO answer. Closing proof: linked dated PO response and consistent scope/domain/contracts, new decision/migration if required. Reviewed 2026-10-25. |
 
 ### Q-002 — Will multiple payment methods be supported in the MVP?
 
 | Field | Value |
 |-------|-------|
-| **Context** | The current `Sale` entity has no payment-method field at all — the MVP scope (`01-context/scope.md`) never mentions payment capture, only sale registration and stock deduction |
-| **Required for** | The `sale` document's shape in `06-data/models.md` — already rewritten for MongoDB in HU-DOCS-80 (ADR-010) — if the answer is yes |
-| **Who answers** | Product Owner (course instructor) |
-| **Deadline** | Before `synkro-sales-db`'s first migration |
-| **Status** | 🔴 Unanswered |
+| **Context** | Delivered Sale has no payment-method field; payment capture/provider integration is outside the current model. The first Sales migration already happened. |
+| **Required for** | Explicit PO scope confirmation before any payment-field or capture extension; preserve the current contract until that decision. |
+| **Who answers** | PO/instructor; SergioAndres17 coordinates, SantiagoPlazas2005 records the gate. |
+| **Deadline** | Replanned for Sprint 12 review; before approving payment scope or claiming PO confirmation. |
+| **Status** | 🔴 Unanswered — no scope answer is fabricated from implementation/issue closure. Closing proof: linked dated PO response and affected domain/scope/contracts updated through normal review. Reviewed 2026-10-25. |
 
 ### Q-003 — What happens if stock reaches zero during checkout, just before confirmation?
 
 | Field | Value |
 |-------|-------|
-| **Context** | `StockReservation.reserve()` already fails the whole reservation if any line lacks stock (`entities-and-rules.md`), which covers the case where two salespeople reserve the same product at nearly the same instant — PostgreSQL's row-level locking during the `UPDATE` serializes the two requests. What is still open is only the **UX**: what message the salesperson sees when their reservation is rejected for this reason, and whether the frontend should re-check stock live while the form is open |
-| **Required for** | `12-ux-ui/navigation-map.md` Flow 1 — now partially answered: `12-ux-ui/wireframes.md` (HU-DOCS-86) specifies the exact rejection message shown for insufficient stock, naming the failed step. Live re-checking while the form is open is still undecided |
-| **Who answers** | Whoever implements the sales portal, with the Product Owner for the exact wording |
-| **Deadline** | Before the sales portal's UI for Flow 1 is built |
-| **Status** | 🟡 Partially answered — the concurrency problem and the rejection message are solved; only live re-checking remains |
+| **Context** | Real reservation rejects insufficient stock atomically; Sales Portal and Infra browser evidence include reserve-stock failure. DOCS-97 maps actual advisory product reads and confirmed rejection/recovery UI; no continuous stock-polling guarantee is delivered by that form. Accepted ADR-015 separates proven rejection from ambiguous outcomes. No UI preview can guarantee stock at confirmation. |
+| **Required for** | Confirming the optional live re-check UX and mapping exact delivered rejection/recovery behavior; normal inventory changes do not authorize a fresh sale key. |
+| **Who answers** | Sales Portal owner AsolanoT with PO for UX scope/wording; HU-DOCS-97 maps actual flows. |
+| **Deadline** | Sprint 12 review; before promising live availability/re-check behavior. |
+| **Status** | 🟡 Partially answered — reserve failure behavior/evidence exists; live re-check scope remains unconfirmed. Closing proof: explicit UX/PO disposition with real delivered flow evidence. Reviewed 2026-10-25. |
 
 ### Q-004 — Will the `qa` environment actually be provisioned this semester?
 
 | Field | Value |
 |-------|-------|
-| **Context** | `scope.md`'s "Project Environments" table has marked Staging as "Planned — pending a decision" since the project began. The branching model (`develop/qa/main`) and the `qa/*` branch prefix already assume it exists (`git-conventions.md`), but no `qa` PostgreSQL instance, MongoDB instance, or CI job has ever been configured |
-| **Required for** | Whether the team spends time configuring a second environment in `synkro-infra-postgres` and `synkro-infra-mongo`, or treats `qa` as a branch name only, with no running environment behind it, for the rest of the course |
-| **Who answers** | Product Owner (course instructor), based on progress during the second half of the semester |
-| **Deadline** | Before the team plans a sprint around provisioning it |
-| **Status** | 🔴 Unanswered |
+| **Context** | qa branches, environment examples and CI PR/push targets exist. PostgreSQL Infra qa/main remain scaffold; disposable runs do not prove a persistent qa deployment. Project names isolate volumes, while shared platform DNS requires sequential persistent runs on one daemon. |
+| **Required for** | Decide whether/where persistent qa will run, access/data policy, named operator and review schedule; distinguish this from branch promotion. |
+| **Who answers** | PO/instructor; AsolanoT coordinates environment feasibility, SantiagoPlazas2005 records operations. |
+| **Deadline** | Sprint 12 review and before promising a provisioned qa runtime or assigning a rollout date. |
+| **Status** | 🔴 Unanswered — no centrally hosted qa server is established. Closing proof: dated decision plus actual provision/operator/evidence if approved, or explicit bounded branch-only scope. Reviewed 2026-10-25. |
 
 ### Q-005 — Does `synkro-auth-api` satisfy the course's cross-cutting security service requirement, or is a separate repository needed?
 
@@ -56,18 +56,18 @@
 | **Context** | The project accepted ADR-013 Option A on 2026-10-25: Auth remains the cross-cutting identity/token service and no additional repository is created. This is the internal architecture decision; it does not assert that the instructor confirmed the course classification or naming. |
 | **Required for** | External course confirmation only. ADR-013 acceptance is already recorded from the explicit project decision. A later required architecture change must use a new modifying ADR, not edit the Accepted record. |
 | **Who answers** | Course instructor; AsolanoT retrieves and records the separate question/response evidence. |
-| **Deadline** | Before claiming external course confirmation or applying any externally required repository change. |
+| **Deadline** | Sprint 12 review checkpoint; before claiming external course confirmation or applying an externally required repository change. |
 | **Status** | 🟡 Partially answered — project choice accepted; instructor confirmation not recorded. The older #156 closure comment belongs to the earlier Proposed state and is not the new acceptance source. No external approval is fabricated. |
 
 ### Q-006 — Do the Users and Service tokens screens need a "list all" endpoint?
 
 | Field | Value |
 |-------|-------|
-| **Context** | `12-ux-ui/navigation-map.md` (HU-DOCS-86) designed the `/users` and `/service-tokens` screens around what `synkro-auth-api.yaml` actually supports today — creation and lookup by a known ID, with **no endpoint to list every user or every issued token**. The instructor's review bot did not flag this (it flagged three other points in the same PR), so it has not been raised outside this team yet |
-| **Required for** | Deciding whether a browsable administration table is in scope at all, before `synkro-auth-api.yaml` gets a new endpoint added through an ADR-004-style extension |
-| **Who answers** | Product Owner (course instructor), since it is a scope question, not a technical one — the team can build either shape |
-| **Deadline** | Before the `AUTH` prefix's first real stories are refined (the Cut 6 backlog's "next cut" row) |
-| **Status** | 🔴 Unanswered |
+| **Context** | Auth has delivered creation/known-ID lookup; the public contract does not supply list-all user/token endpoints. The prior pre-AUTH-refinement deadline expired. Absence of a review-bot finding is not a PO decision. |
+| **Required for** | Decide whether browsable administrative tables are required before extending API/UI scope. No endpoint is invented by documentation reconciliation. |
+| **Who answers** | PO/instructor; Auth owner and AsolanoT gather the answer; SantiagoPlazas2005 tracks the checkpoint. |
+| **Deadline** | Sprint 12 review; before accepting a list-all scope/API extension. |
+| **Status** | 🔴 Unanswered — closing proof: linked dated PO disposition and consistent scope/navigation/contracts. Supporting create/lookup APIs remain bounded; delivered /users and /service-tokens render placeholders, not administration forms. Reviewed 2026-10-25. |
 
 ---
 

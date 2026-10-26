@@ -234,7 +234,7 @@ object itself carries the already-wired behavior above.
 |---|---|---|
 | Remote loading | `shareStrategy: 'loaded-first'`: a portal downloads only on entering its route | `import()` of the stable entry file, then `customElements.whenDefined('synkro-customers-portal')`, both on entering `/customers/*` |
 | Containment | `RemoteBoundary`: one error boundary per portal | The host stores a failed import in state and re-throws it during render, so the same `RemoteBoundary` catches it |
-| Result | Only that portal's area shows the unavailable notice; the rest of the application keeps working | Same |
+| Result | Only that portal area shows unavailable; other modules remain usable. Current React retry has a known reload limitation | Customers explicit module retry/remount is covered by real author browser evidence |
 
 With Module Federation's default strategy (`version-first`), the host
 would download **every** remote at startup to compare versions — a
@@ -244,28 +244,21 @@ construction, since it is only imported on entering its own route.
 
 ---
 
-## Internal routing inside the Angular portal — open, not solved
+## Internal routing inside the Angular portal — delivered evidence and remaining limits
 
-ADR-011 flags this explicitly: the Angular router's initial navigation
-under the host-owned base path (`/customers/*`), a deep link to an inner
-route, and the interaction with the host's history on Back are not
-guaranteed by Angular's defaults when bootstrapping outside the ordinary
-`bootstrapApplication` flow. This must be verified — and, if needed,
-fixed with an explicit base-href or initial-navigation strategy — as part
-of the acceptance criteria of `synkro-customers-portal`'s first routed
-screens, not assumed because the mounting mechanism works.
+The original routing risk is no longer supported only by a mounting spike. Delivered Customers has four routes and a fresh application/router per mount. Host owns browser history; the v1 navigate capability drives inner transitions, while Customers synchronizes the current path without a competing browser-history write. Application generation/destruction and AbortSignal guards reject late replies after replacement/unmount.
+
+The [route/evidence map](../12-ux-ui/navigation-map.md#customers-routing-evidence-and-r-008) names current Host/portal SHAs, owner route/bootstrap tests and real-browser R8 root 217dacf3577b2ec12a4e838b655bf0bea527f561. It reports initial login return, new/detail/edit journey, detail refresh and list↔detail Back/Forward. Edit deep refresh and every lifecycle permutation are not inferred from those checks. Infra adapted locked owner snapshots and TCP readiness; source/unit tests are not newly executed browser evidence. R-008 is mitigated within that scope, with independent current-root review still required; full Infra acceptance remains separate.
 
 ---
 
 ## Development sign-in
 
-Exists only in `synkro-front`, only in `develop`. A pasted development
-token starts a session the same way for every portal — React or Angular
-— because a portal never handles a token itself; it only ever receives
-`contract.session.user()` already resolved. The development sign-in
-never reaches `main`; it is replaced once `synkro-auth-portal` is real.
+Real Auth Login and Host authentication are delivered. The guarded VITE_DEV_SIGN_IN path remains development tooling; root examples set it false and non-dev activation is refused by the candidate configuration. A promoted source branch containing guarded tooling is not permission to use simulated identity in qa/main. Portals receive token-free identity/capabilities, never bearer ownership. [Authentication](../07-api/authentication.md) and [deployment](../05-architecture/deployment.md) own lifecycle/configuration rules.
 
 ---
+
+Delivered UI inventory: Auth Login; Customers four routes; Products three views with category/catalog/stock dialogs; Sales registration/history/detail. Host dashboard and Auth administration remain placeholders; reporting UI and Worker business automation remain unfinished. See [navigation](../12-ux-ui/navigation-map.md) and [wireframes](../12-ux-ui/wireframes.md) for states, metadata failure, cancellation and evidence.
 
 ## Versions
 

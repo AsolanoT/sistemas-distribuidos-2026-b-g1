@@ -18,7 +18,7 @@
 | Cut 6 | Sprint 10-11 (assigned first-code-delivery stories) | 16 | 16 | 1 | 15 |
 | Cut 7 | Week 10 (Products Portal completion) | 3 | 3 | 0 | 3 |
 | Cut 8 | Additional implementation delivery; no calendar redistribution | 39 | 39 | 0 | 39 |
-| Cut 9 | Sprint 12 — Week 12 (documentation and architecture reconciliation) | 5 | 5 | 3 | 2 |
+| Cut 9 | Sprint 12 — Week 12 (documentation and architecture reconciliation) | 5 | 5 | 1 | 4 |
 
 > *In progress* counts open assigned HUs, started or not. The implementation
 > snapshot contains 58 assigned issues: 57 closed and HU-INF-02/#239 open.
@@ -324,9 +324,9 @@ The table retains the original estimates as planning data. Its 16 assigned issue
 |---|---|---|---|
 | [HU-DOCS-94 / #252](https://github.com/code-corhuila/synkro-docs/issues/252) | JordanRG420 | Closed; merged PR #257 | Identifier register, FR/NFR and implementation traceability, current governance and evidence index |
 | [HU-DOCS-95 / #253](https://github.com/code-corhuila/synkro-docs/issues/253) | SergioAndres17 | Closed; merged PR #258; architecture acceptance remains separate | Domain/data/public-contract reconciliation |
-| [HU-ARQ-28 / #254](https://github.com/code-corhuila/synkro-docs/issues/254) | AsolanoT | Open; ADR-013/015/016/017 accepted by explicit project decision, PR pending | ADR-015 saga, ADR-016 Host lifecycle, ADR-017 token classes; integration boundary without waiver |
-| [HU-DOCS-96 / #255](https://github.com/code-corhuila/synkro-docs/issues/255) | SantiagoPlazas2005 | Open; no delivery claimed here | Actual deployment/runbooks/release/control |
-| [HU-DOCS-97 / #256](https://github.com/code-corhuila/synkro-docs/issues/256) | AsolanoT | Open; no delivery claimed here | Service catalog, portal flows and architecture views |
+| [HU-ARQ-28 / #254](https://github.com/code-corhuila/synkro-docs/issues/254) | AsolanoT | Done — #254 closed; merged PR #259, main d43e1cf; accepted decisions with implementation/external gates separate | ADR-015 saga, ADR-016 Host lifecycle, ADR-017 token classes; integration boundary without waiver |
+| [HU-DOCS-96 / #255](https://github.com/code-corhuila/synkro-docs/issues/255) | SantiagoPlazas2005 | Done — #255 closed; merged PR #260, main 5419a76c | Actual deployment/runbooks/release/control; 18-repository manifest, truthful failed/unexecuted evidence |
+| [HU-DOCS-97 / #256](https://github.com/code-corhuila/synkro-docs/issues/256) | AsolanoT | Open — documentation prepared; peer review, PR/main publication and closure pending | Service catalog, portal flows and architecture views |
 
 ---
 
@@ -1035,7 +1035,7 @@ Feature: Reconcile delivery evidence and assigned identifiers
 - [x] Prepare candidate Workflow replay/rejection/recovery clauses with private metadata, unchanged public fields/statuses and explicit decision dependency.
 - [x] Reconcile UTC/grouped reports, integer money, frozen prices, ownership and the stale FR-006 CHECK reference.
 - [x] Record TD-012–018 as unresolved discrepancies with owners and closing evidence, separately from accepted deferred improvements.
-- [x] Hand off acceptance of the modifying decision and its final normative references to HU-ARQ-28/#254. DOCS-95 delivered the explicitly marked candidate; the explicit 2026-10-25 project decision now records acceptance, while PR publication remains an unchecked ARQ-28 task.
+- [x] Hand off acceptance of the modifying decision and its final normative references to HU-ARQ-28/#254. DOCS-95 delivered the explicitly marked candidate; the explicit 2026-10-25 project decision now records acceptance, and publication is now verified through merged PR #259; individual approvals/checks are not inferred.
 - [x] Incorporate DOCS-95 through PR #258 and record issue #253 closure. Actual per-review/check evidence belongs to the PR records; architecture acceptance remains separate.
 
 **Acceptance criteria**
@@ -1089,7 +1089,7 @@ Feature: Domain, data and public-contract reconciliation
 | Sprint / Week | Sprint 12 — Week 12 |
 | Issue | [#254](https://github.com/code-corhuila/synkro-docs/issues/254) |
 | Branch | docs/formalize-saga-and-session-decisions |
-| Status | Architectural decisions accepted by explicit 2026-10-25 project instruction; actual PR/main review/checks and merge pending |
+| Status | Done — #254 closed on 2026-10-25; published through merged PR #259, main d43e1cfed2ce739c22026229e072dfaff1f7c317. Acceptance authority and remaining implementation/external gates stay separate. |
 | Dependencies | DOCS-95/#253 closed via PR #258; ADR-013 confirmation and root acceptance retain separate owners |
 
 **Tasks by phase**
@@ -1102,7 +1102,7 @@ Feature: Domain, data and public-contract reconciliation
 - [x] Record integration evidence levels without adopting a replacement acceptance method or the excluded unmerged proposal.
 - [x] Record the explicit 2026-10-25 project acceptance of ADR-013 Option A, ADR-015 Option B, ADR-016 Option B and ADR-017 Option A. Named reviewer GitHub approvals are not asserted.
 - [x] Reconcile downstream status labels and separate resolved decisions from open implementation/external confirmation.
-- [ ] Obtain required PR/main review and applicable checks, then record the actual incorporating PR/merge.
+- [x] Record actual publication: PR #259 merged to main d43e1cfed2ce739c22026229e072dfaff1f7c317 and #254 closed. Merge is not independent proof of every required approval/check.
 
 **Acceptance criteria**
 
@@ -1133,6 +1133,119 @@ Scenario: Missing acceptance or private integration
 ```
 
 **Deliverable:** three separately scoped Accepted records plus accepted ADR-013 Option A and complete downstream documents, with [verification](../15-project-control/documentation-verification.md#hu-arq-28-verification-entry--2026-10-24). No additional HU or issue is created by ADR numbering.
+
+---
+
+### HU-DOCS-96 — Document Real Deployment, Release Evidence and Project Control {#HU-DOCS-96}
+
+**As** the development team, **I want** deployment, operational procedures and release control to describe delivered revisions and remaining gates, **so that** a teammate can reproduce the supported setup and assess readiness from verifiable evidence.
+
+| Field | Value |
+|-------|-------|
+| Story Points | Not applicable — documentation story |
+| Priority | Must Have |
+| Assigned to | Fredman Santiago Plazas Artunduaga (SantiagoPlazas2005) |
+| Peer reviewer | AsolanoT — requested; no review approval fabricated |
+| Sprint / Week | Sprint 12 — Week 12 |
+| Issue | [#255](https://github.com/code-corhuila/synkro-docs/issues/255) |
+| Branch | docs/align-operations-and-release-evidence |
+| Commit / PR title | docs(devops): align operations release evidence and project control |
+| Status | Done — #255 closed on 2026-10-25; merged PR #260, main 5419a76c7bf4bf9643508721e3e7805b9486f91c. Individual approvals/checks are not inferred from merge. |
+| Traceability | FR-010; NFR-002/004/005/007/009; operational visibility of unfinished FR-004 |
+| Dependencies | DOCS-94/#252, DOCS-95/#253, ARQ-28/#254 closed; root acceptance/owner fixes remain independent |
+
+**Tasks by phase**
+
+- [x] Reconcile all 18 code repositories, actual tags/peeled main commits, release PR/promotion references and current Actions observations.
+- [x] Separate Infra main/qa scaffold, develop and open PR #13/#14 roots; retain exact Sales DB conflict, Products Portal exclusion, Sales API override and Worker scope/tag limits.
+- [x] Update deployment, local setup, environments, CI/CD, onboarding, initialization, observability, incidents and backup/recovery using actual commands and component-specific protected configuration.
+- [x] Add the bounded release record with original per-run roots/hashes/results; preserve sales-runtime failure, E2E-02 NOT EXECUTED, private access/independent review and CI gates.
+- [x] Reconcile risks/dependencies/questions and operational backlog, preserving unanswered PO/external decisions and required Worker functionality.
+- [x] Record actual publication: merged PR #260, main 5419a76c7bf4bf9643508721e3e7805b9486f91c; #255 closed. Required approval/check evidence remains separate from merge.
+
+**Acceptance criteria**
+
+```gherkin
+Scenario: Reproduce the documented candidate
+  Given the exact root and owner lock with protected inputs
+  When a teammate follows preparation, migration and initialization
+  Then commands and exit codes match owner sources
+  And application services never receive runner administrator credentials
+
+Scenario: Missing or failed evidence remains visible
+  Given an absent tag, failed suite, startup_failure or unexecuted E2E-02
+  When release readiness is read
+  Then it retains the revision, result, owner and closing proof
+  And separate successful subsets do not become a green full-head run
+
+Scenario: Scope and recovery remain unanswered
+  Given no linked PO response or reviewed persistent recovery procedure
+  When project control is updated
+  Then the current owner and Sprint 12 checkpoint remain explicit
+  And initialization or disposable restoration does not become recovery authority
+```
+
+**Deliverable:** complete updated operational/control documents and [2.0.0 evidence](../10-devops/releases/2.0.0.md), with [bounded documentation verification](../15-project-control/documentation-verification.md#hu-docs-96-verification-entry--2026-10-25). No new HU, ADR, tag, runtime fix or issue closure is created by this package.
+
+---
+
+### HU-DOCS-97 — Update the Service Catalog, Portal Flows and Architecture Views {#HU-DOCS-97}
+
+**As** the development team, **I want** the catalog, portal navigation and diagrams to show the delivered system and its gaps, **so that** a teammate/reviewer can follow real flows without treating planned screens or placeholder jobs as complete.
+
+| Field | Value |
+|-------|-------|
+| Priority | Must Have |
+| Assigned to | Angel Gustavo Solano Trujillo (AsolanoT) |
+| Story Points | Not applicable — documentation story |
+| Peer reviewer | JordanRG420 — requested, no approval invented |
+| Sprint / Week | Sprint 12 — Week 12 |
+| Issue | [#256](https://github.com/code-corhuila/synkro-docs/issues/256) |
+| Branch | docs/refresh-service-catalog-and-portal-flows |
+| Commit / PR title | docs(frontend): refresh service catalog and portal flows |
+| Traceability | FR-001 through FR-010; NFR-004/005/006/009 |
+| Status | Complete review package prepared; issue remains open, actual peer/main review/PR/merge pending |
+| Dependencies | DOCS-94/95, ARQ-28 and DOCS-96 published; root/product/UI implementation gates remain independent |
+
+**Tasks by phase**
+
+- [x] Reconcile 18 owner main heads and current canonical/domain/operation records; distinguish component and root states.
+- [x] Publish seven real numbered service records with existing template structure and source-backed ownership/contact boundaries; keep examples separate.
+- [x] Update catalog/dependencies/ownership, context/architecture and root README/CONTRIBUTING entry points.
+- [x] Map actual Auth/Customers/Products/Sales routes and four-state/error/metadata/cancellation/recovery behavior under Accepted ADR-016/017.
+- [x] Keep Worker automation, reporting/dashboard UI and Auth administration explicitly unfinished; PO/list/live-check questions remain unconfirmed.
+- [x] Reconcile diagram sources and SVG exports, matching C4/flow responsibility, auth, data and saga evidence boundaries.
+- [x] Map R-008 to exact route/tests/real author R8 revisions and its remaining limits; no new runtime execution claimed.
+- [ ] Obtain real peer/main review and applicable checks, submit/merge the PR and record its publication before closure.
+
+**Acceptance criteria**
+
+```gherkin
+Scenario: Follow a real authorized sales journey
+  Given a salesperson authenticated by the Host/Auth capability
+  When Customer/Product selection, Workflow registration and history/detail are read
+  Then routes, owner responsibilities and frozen values match pinned implementation
+  And independent root/browser acceptance remains separately attributed
+
+Scenario: Optional metadata or remote failure
+  Given an unavailable portal asset or Customer/Product display lookup
+  When its failure state is described
+  Then the Host confines the outage and valid Sale identifiers/amounts survive
+  And no fake name, replacement sale or cancelled backend saga is inferred
+
+Scenario: A menu or scheduler exists without the required feature
+  Given placeholder dashboard/Auth administration or Worker business scope
+  When the catalog and UX/diagrams are reviewed
+  Then missing UI/automation remains pending despite available APIs or startup logs
+
+Scenario: Bound routing evidence precisely
+  Given R8 and source/unit evidence for Customers
+  When R-008 is reassessed
+  Then each covered route/action/revision and remaining review/permutation is explicit
+  And route count or successful subset does not become whole-platform acceptance
+```
+
+**Deliverable:** current catalog and seven real service folders, portal/navigation/wireframe guidance, context/architecture and matching editable diagram/export pairs, with [bounded verification](../15-project-control/documentation-verification.md#hu-docs-97-verification-entry--2026-10-25). No new HU/ADR, API, product implementation, deployment or issue closure is created by preparation.
 
 ---
 
