@@ -1,0 +1,92 @@
+name: synkro-auth security proposal
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Scan repository history with Gitleaks
+        run: |
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -v "$PWD:/repo:ro" -w /repo \
+            ghcr.io/gitleaks/gitleaks:v8.30.1 \
+            git --redact --no-banner .
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Build Auth reactor dependencies
+        run: mvn -B -ntp -pl auth-app -am -DskipTests install
+
+      - name: Audit Auth dependencies with OWASP Dependency-Check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        shell: bash
+        run: |
+          args=(
+            "-DfailBuildOnCVSS=7"
+            "-DfailOnError=true"
+            "-DossIndexAnalyzerEnabled=false"
+          )
+          if [[ -n "${NVD_API_KEY:-}" ]]; then
+            args+=("-DnvdApiKeyEnvironmentVariable=NVD_API_KEY")
+          fi
+          mvn -B -ntp -pl auth-app -am \
+            org.owasp:dependency-check-maven:13.0.0:aggregate \
+            "${args[@]}"
+
+  authorization-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Require the proposed Auth test
+        run: |
+          test -f auth-app/src/test/java/co/edu/corhuila/synkro/auth/app/SynkroAuthRegisterAuthorizationTest.java
+
+      - name: Reject SALESPERSON on POST /api/v1/auth/register
+        run: |
+          mvn -B -ntp -pl auth-app -am \
+            -Dtest=SynkroAuthRegisterAuthorizationTest \
+            -Dsurefire.failIfNoSpecifiedTests=false clean test
+
+      - name: Verify the negative test actually executed
+        run: |
+          report=auth-app/target/surefire-reports/TEST-co.edu.corhuila.synkro.auth.app.SynkroAuthRegisterAuthorizationTest.xml
+          test -f "$report"
+          grep -q 'tests="1"' "$report"
+          grep -q 'skipped="0"' "$report"
+          grep -q 'failures="0"' "$report"
+          grep -q 'errors="0"' "$report"
