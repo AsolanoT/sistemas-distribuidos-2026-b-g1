@@ -76,9 +76,8 @@ The -o option reproduces the verified offline run using the dependencies
 already cached on this PC. If Maven reports a missing dependency, remove
 -o and rerun with internet access.
 
-The verification originally launched Maven through its Java launcher.
-The CMD command above runs the same Maven version with the same test
-selection and build goals.
+The CP8 verification used this Maven CMD entry point with the test
+selection and build goals shown above. Its real output is recorded below.
 
 The failIfNoSpecifiedTests setting lets prerequisite modules build
 without containing this app test. It does not prove that the selected
@@ -133,20 +132,30 @@ The additional OSS Index analyzer is disabled.
 A vulnerability finding or scanner failure must fail the gate;
 it must not be reported as a clean scan.
 
-## Execution evidence
+## CP8 execution evidence
 
 ### Negative authorization test
 
 - Date: 2026-10-30.
-- Completion time: 13:45:31, America/Bogota.
+- Start time: 15:35:46, America/Bogota (UTC-05:00).
+- Completion time: 15:36:34, America/Bogota (UTC-05:00).
 - Java: 21.0.12.
 - Maven: 3.9.16.
 - Spring Boot: 3.5.0.
 - Maven exit code: 0.
 - Source: a separate copy of the existing local Auth source snapshot.
+  All 98 selected POM and main-source/resource files matched the local
+  Auth export before execution. The build compiled Auth's real modules.
 - Git commit SHA: not recorded for this source export; no Git commands
   were executed during verification.
 - The executed Java file matched the workshop file exactly.
+
+The source-file manifest was recorded locally as relative paths and
+SHA-256 values. Its SHA-256 identifies the inspected source snapshot:
+
+```text
+A2733F67C0D9C285EA346DDA3D2526A0215AD0DD8FACE74C4ECB5458AE50EA3E
+```
 
 SHA-256 of the Java test that was executed:
 
@@ -158,33 +167,41 @@ The following lines are excerpts from the actual console output:
 
 ```text
 [INFO] Running co.edu.corhuila.synkro.auth.app.SynkroAuthRegisterAuthorizationTest
-[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.89 s -- in co.edu.corhuila.synkro.auth.app.SynkroAuthRegisterAuthorizationTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.29 s -- in co.edu.corhuila.synkro.auth.app.SynkroAuthRegisterAuthorizationTest
 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-[INFO] synkro-auth-api .................................... SUCCESS [  0.413 s]
-[INFO] auth-core .......................................... SUCCESS [  4.987 s]
-[INFO] auth-adapters ...................................... SUCCESS [  1.974 s]
-[INFO] auth-app ........................................... SUCCESS [ 36.131 s]
+[INFO] synkro-auth-api .................................... SUCCESS [  0.392 s]
+[INFO] auth-core .......................................... SUCCESS [  6.676 s]
+[INFO] auth-adapters ...................................... SUCCESS [  3.366 s]
+[INFO] auth-app ........................................... SUCCESS [ 34.236 s]
 [INFO] BUILD SUCCESS
-[INFO] Total time:  43.987 s
-[INFO] Finished at: 2026-10-30T13:45:31-05:00
+[INFO] Total time:  45.118 s
+[INFO] Finished at: 2026-10-30T15:36:34-05:00
 ```
 
 The successful assertions confirm a 403 FORBIDDEN response for the valid
 SALESPERSON token and no calls to the lookup/persistence collaborators.
 Gateway and PostgreSQL were not started.
 
-### Secret scan
+The generated Surefire XML was checked separately: tests=1, failures=0,
+errors=0 and skipped=0. Its executed test case was
+`synkroAuthApi_postApiV1AuthRegister_salespersonGets403WithoutPersistence`.
+This evidence satisfies CP8's module-run option and covers part of
+HU-AUTH-17 AC2. AC5 still requires the integrated environment, and the
+INVENTORY, SERVICE and replay cases remain outside this single test.
+
+### Historical CP4 secret scan
 
 Gitleaks 8.30.1 scanned the three workshop files during the original
-verification and returned exit code 0:
+CP4 verification at 13:45 on 2026-10-30 and returned exit code 0:
 
 ```text
 1:45PM INF scanned ~12091 bytes (12.09 KB) in 22.9ms
 1:45PM INF no leaks found
 ```
 
-This result applies to the files inspected at that time. Rerun the scan
-after editing them. Repository history was not scanned.
+This historical result applies to the files inspected at that time.
+Gitleaks was not rerun for CP8. Rerun it after editing the files;
+repository history was not scanned.
 
 ### Checks still pending
 
@@ -196,13 +213,26 @@ after editing them. Repository history was not scanned.
 
 These pending checks must not be described as passed.
 
-## YAML validation
+## CP8 YAML validation
 
-The workshop YAML passed a parser check for syntax, pull_request,
-three jobs, read-only contents permission and job timeouts.
+The current security.yml was checked with actionlint 1.7.12 on
+2026-10-30 at 15:36:14, America/Bogota. The command is in the local
+instructions above. It returned exit code 0 and printed no diagnostics.
+The captured validation result was:
 
-It also passed actionlint 1.7.12 with exit code 0 and no diagnostics.
-External ShellCheck and Pyflakes integrations were not run.
+```json
+{"ExitCode":0,"Diagnostics":"","Validated":"2026-10-30T15:36:14-05:00"}
+```
+
+SHA-256 of the validated security.yml:
+
+```text
+BF4FF721FF778FD99C3383CFA7C6EF0D58564CD86FB8B0B2A34795593D8EEBB5
+```
+
+Actionlint's own syntax, structure and workflow checks passed.
+External ShellCheck and Pyflakes integrations were disabled for this
+run with -shellcheck= and -pyflakes=.
 
 A valid YAML file and a successful module test do not demonstrate that
 all three jobs have passed in GitHub Actions.
