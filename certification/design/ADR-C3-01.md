@@ -2,11 +2,11 @@
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
-Our team's own architecture documentation records, as accepted technical debt, that the single PostgreSQL instance behind `synkro-db` is a single point of failure for four of our five bounded contexts — Auth, Customers, Products and the saga store managed by `synkro-workflow` (`05-architecture/overview.md` §9, AT-002; decided in `ADR-009-shared-instance-schema-per-domain.md`). ADR-009 accepted that risk deliberately, because the MVP runs on one developer's Docker Compose instance and a multi-instance topology was not worth the added operational cost at that scale. Section 4 of this certification's design note ("Disaster recovery") sets a target of RTO ≤ 5 minutes and RPO ≤ 1 minute for exactly this data store — a target the current single-instance topology cannot meet, since restoring from any backup-based process takes longer than 5 minutes and loses more than 1 minute of transactions.
+Our team's own architecture documentation records, as accepted technical debt, that the single PostgreSQL instance behind `synkro-db` is a single point of failure for Auth, Customers, Products and the saga store managed by `synkro-workflow` (`05-architecture/overview.md` §9, AT-002; decided in `ADR-009-shared-instance-schema-per-domain.md`); Sales no longer shares this risk because it moved to its own MongoDB instance in ADR-010. ADR-009 accepted that risk deliberately, because the MVP runs on one developer's Docker Compose instance and a multi-instance topology was not worth the added operational cost at that scale. Section 4 of this certification's design note ("Disaster recovery") sets a target of RTO ≤ 5 minutes and RPO ≤ 1 minute for exactly this data store — a target the current single-instance topology cannot meet, since restoring from any backup-based process takes longer than 5 minutes and loses more than 1 minute of transactions. Our `04-requirements/non-functional.md` (NFR-008) still lists disaster recovery as aspirational with no RTO/RPO defined, so these numbers are this certification's proposal for the cloud target and do not change ADR-009 in `synkro-docs`.
 
 ## Decision
 
@@ -19,5 +19,5 @@ We will run `synkro-db` on Huawei Cloud RDS for PostgreSQL in Multi-AZ mode: one
 
 ## Consequences
 
-- Positive: closes AT-002 for the three schemas that matter most to revenue (`products_schema` for stock/price checks, `workflow_schema` for in-flight sagas) without having to split the shared instance back into four, which ADR-009 already rejected for cost reasons.
+- Positive: closes AT-002 for all four schemas on the shared instance (`auth_schema`, `customers_schema`, `products_schema` and `workflow_schema`, the last holding in-flight sagas) without splitting the instance back into one per domain, which ADR-009 already rejected for operational cost.
 - Negative: Multi-AZ RDS costs roughly double a single-AZ instance of the same size, and it introduces a new operational dependency (failover testing, connection retry settings in every service) that the current Docker Compose setup does not have to manage.

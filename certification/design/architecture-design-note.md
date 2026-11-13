@@ -63,10 +63,10 @@ Three settings keep these policies from misbehaving. First, both scaling groups 
 |---|---|---|---|
 | Build | Push or PR to `develop`, `qa` or `main` | Maven (`auth-api`, `customers-api`, `workflow`) / Go build (`products-api`, `sales-api`, `worker`) | `synkro-products-api/.github/workflows/ci.yml` |
 | Test | Same trigger, same workflow run | Go vet/unit tests and architecture guard, or Maven verify, per service | `synkro-sales-api/.github/workflows/ci.yml` |
-| Image | After tests pass | Docker build of the service image | `synkro-products-api/Dockerfile` |
+| Image | After tests pass | Docker build of the service image | `synkro-products-api/deploy/Dockerfile` |
 | Deploy to qa | Push/merge to the `qa` branch | Existing CI job set, extended with a Huawei Cloud CodeArts deploy step (proposed) | `synkro-products-api/.github/workflows/ci.yml` (extend) |
-| Deploy to production | Push/merge to `main`, gated by CODEOWNERS review (`00-governance/git-conventions.md`) | Huawei Cloud CodeArts Pipeline deploying the RFS template | `infra/huawei-rfs/main.tf` (proposed, new) |
-| Rollback | Failed Cloud Eye health check after a production deploy | CodeArts Pipeline rollback to the previous image tag behind the ELB | `infra/huawei-rfs/main.tf` (proposed, new — rollback stage) |
+| Deploy to production | Push/merge to `main`, gated by CODEOWNERS review (`00-governance/git-conventions.md`) | Huawei Cloud CodeArts Pipeline deploying the RFS template | `synkro-infra-postgres/huawei-rfs/main.tf` (proposed, new) |
+| Rollback | Failed Cloud Eye health check after a production deploy | CodeArts Pipeline rollback to the previous image tag behind the ELB | `synkro-infra-postgres/huawei-rfs/main.tf` (proposed, new — rollback stage) |
 
 Build, test and image stages already exist today, per service, in the real `ci.yml` workflows our team maintains (`10-devops/ci-cd.md`). The qa/production/rollback stages are this exercise's proposal: our current pipeline builds and tests containers but, by our own `ci-cd.md`'s own words, "no complete hosted automatic deployment is evidenced by this snapshot" — so these three stages close that gap using Huawei Cloud's RFS/CodeArts tooling from chapter 12 instead of inventing an unrelated tool.
 

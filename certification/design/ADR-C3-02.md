@@ -2,11 +2,11 @@
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
-`04-requirements/non-functional.md` (NFR-001, Performance) states plainly that no capacity planning has ever been done for this project: "Minimum throughput / max RPS: Not yet defined." At the same time, `01-context/overview.md` already justifies building `synkro-products-api` in Go specifically because of its "high-frequency reads" on every sale, and `05-architecture/overview.md` §9 (AT-004) separately flags `synkro-api-gateway` as the one component whose failure makes "the system... unreachable from outside." Section 3 of this certification's design note proposes concrete scaling thresholds for exactly these two services; this ADR records the decision behind that proposal.
+`04-requirements/non-functional.md` (NFR-001, Performance) lists the minimum throughput and maximum RPS as not yet defined and states that no capacity planning has been done for this academic project. At the same time, `01-context/overview.md` already justifies building `synkro-products-api` in Go specifically because of its "high-frequency reads" on every sale, and `05-architecture/overview.md` §9 (AT-004) separately flags `synkro-api-gateway` as the only entry point, so if it stops the system is unreachable from outside. Section 3 of this certification's design note proposes concrete scaling thresholds for exactly these two services; this ADR records the decision behind that proposal.
 
 ## Decision
 
