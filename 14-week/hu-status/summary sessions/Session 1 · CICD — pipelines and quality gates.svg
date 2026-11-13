@@ -1,0 +1,353 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <title>CI/CD: pipelines and quality gates — Week 14 · Session 1</title>
+  <defs>
+    <filter id="sh" x="-3%" y="-3%" width="106%" height="112%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dy="3" result="b"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.10"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arG" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker>
+    <marker id="arD" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0F172A"/></marker>
+    <marker id="arR" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#DC2626"/></marker>
+    <marker id="arGr" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#16A34A"/></marker>
+    <linearGradient id="auto" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="0.5" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1920" height="1080" fill="#F1F5F9"/>
+
+  <!-- ================= ENCABEZADO ================= -->
+  <rect width="1920" height="168" fill="#0F172A"/>
+  <rect x="60" y="28" width="268" height="34" rx="17" fill="#1E3A8A"/>
+  <text x="194" y="51" text-anchor="middle" font-size="16" font-weight="700" fill="#BFDBFE" letter-spacing="2">WEEK 14 · SESSION 1</text>
+  <text x="60" y="112" font-size="52" font-weight="800" fill="#FFFFFF">CI/CD: pipelines and quality gates</text>
+  <text x="60" y="148" font-size="22" fill="#CBD5E1">How a distributed team ships many small changes — fast, without breaking things</text>
+
+  <rect x="1250" y="32" width="610" height="104" rx="16" fill="#1E293B" stroke="#334155"/>
+  <rect x="1250" y="32" width="8" height="104" fill="#F59E0B"/>
+  <text x="1282" y="62" font-size="14" font-weight="800" fill="#FBBF24" letter-spacing="2">KEY IDEA</text>
+  <text x="1282" y="92" font-size="21" fill="#F8FAFC">Quality stops being a <tspan font-weight="700">promise</tspan>:</text>
+  <text x="1282" y="120" font-size="21" fill="#F8FAFC">a <tspan font-weight="700" fill="#86EFAC">machine</tspan> checks it on every change.</text>
+
+  <!-- ================= 1. CI vs CD vs CD ================= -->
+  <g transform="translate(60,185)">
+    <rect width="1180" height="250" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#sh)"/>
+    <circle cx="34" cy="36" r="18" fill="#2563EB"/>
+    <text x="34" y="43" text-anchor="middle" font-size="20" font-weight="800" fill="#FFFFFF">1</text>
+    <text x="64" y="45" font-size="26" font-weight="800" fill="#0F172A">CI, CD and CD: how far do I automate?</text>
+
+    <!-- Tarjeta CI -->
+    <g transform="translate(25,62)">
+      <rect width="340" height="134" rx="14" fill="#FFFFFF"/>
+      <path d="M0,14 Q0,0 14,0 H326 Q340,0 340,14 V44 H0 Z" fill="#DBEAFE"/>
+      <rect width="340" height="134" rx="14" fill="none" stroke="#2563EB" stroke-width="2"/>
+      <text x="18" y="31" font-size="26" font-weight="800" fill="#2563EB">CI</text>
+      <text x="68" y="30" font-size="19" font-weight="700" fill="#1E3A8A">Continuous Integration</text>
+      <circle cx="24" cy="66" r="4" fill="#2563EB"/><text x="38" y="72" font-size="18" fill="#334155">Merge changes daily</text>
+      <circle cx="24" cy="90" r="4" fill="#2563EB"/><text x="38" y="96" font-size="18" fill="#334155">Automatic build + tests</text>
+      <circle cx="24" cy="114" r="4" fill="#2563EB"/><text x="38" y="120" font-size="18" fill="#334155">Fast feedback (minutes)</text>
+    </g>
+    <line x1="371" y1="129" x2="413" y2="129" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Tarjeta CD Entrega -->
+    <g transform="translate(420,62)">
+      <rect width="340" height="134" rx="14" fill="#FFFFFF"/>
+      <path d="M0,14 Q0,0 14,0 H326 Q340,0 340,14 V44 H0 Z" fill="#EDE9FE"/>
+      <rect width="340" height="134" rx="14" fill="none" stroke="#7C3AED" stroke-width="2"/>
+      <text x="18" y="31" font-size="26" font-weight="800" fill="#7C3AED">CD</text>
+      <text x="68" y="30" font-size="19" font-weight="700" fill="#4C1D95">Continuous Delivery</text>
+      <circle cx="24" cy="66" r="4" fill="#7C3AED"/><text x="38" y="72" font-size="18" fill="#334155">Green build = releasable</text>
+      <circle cx="24" cy="90" r="4" fill="#7C3AED"/><text x="38" y="96" font-size="18" fill="#334155">To production in 1 click</text>
+      <circle cx="24" cy="114" r="4" fill="#7C3AED"/><text x="38" y="120" font-size="18" fill="#334155">A person decides when</text>
+    </g>
+    <line x1="766" y1="129" x2="808" y2="129" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Tarjeta CD Despliegue -->
+    <g transform="translate(815,62)">
+      <rect width="340" height="134" rx="14" fill="#FFFFFF"/>
+      <path d="M0,14 Q0,0 14,0 H326 Q340,0 340,14 V44 H0 Z" fill="#D1FAE5"/>
+      <rect width="340" height="134" rx="14" fill="none" stroke="#059669" stroke-width="2"/>
+      <text x="18" y="31" font-size="26" font-weight="800" fill="#059669">CD</text>
+      <text x="68" y="30" font-size="19" font-weight="700" fill="#064E3B">Continuous Deployment</text>
+      <circle cx="24" cy="66" r="4" fill="#059669"/><text x="38" y="72" font-size="18" fill="#334155">Green build → production</text>
+      <circle cx="24" cy="90" r="4" fill="#059669"/><text x="38" y="96" font-size="18" fill="#334155">100% automated</text>
+      <circle cx="24" cy="114" r="4" fill="#059669"/><text x="38" y="120" font-size="18" fill="#334155">Nobody presses the button</text>
+    </g>
+
+    <!-- Barra de automatización -->
+    <rect x="25" y="207" width="1112" height="8" rx="4" fill="url(#auto)"/>
+    <path d="M1135,201 L1155,211 L1135,221 Z" fill="#059669"/>
+    <text x="590" y="236" text-anchor="middle" font-size="17" fill="#475569"><tspan font-weight="700" fill="#0F172A">More automation →</tspan>   same pipeline; you choose how far to go</text>
+  </g>
+
+  <!-- ================= EJEMPLO COTIDIANO ================= -->
+  <g transform="translate(1265,185)">
+    <rect width="595" height="250" rx="18" fill="#FFFBEB" stroke="#FDE68A" filter="url(#sh)"/>
+    <circle cx="34" cy="36" r="18" fill="#F59E0B"/>
+    <text x="34" y="42" text-anchor="middle" font-size="16" font-weight="800" fill="#FFFFFF">Ex</text>
+    <text x="64" y="45" font-size="25" font-weight="800" fill="#0F172A">Everyday example: the airport</text>
+
+    <g transform="translate(12,0)">
+    <!-- pasajero -->
+    <circle cx="40" cy="74" r="10" fill="#0F172A"/>
+    <path d="M25,118 Q25,90 40,90 Q55,90 55,118 Z" fill="#0F172A"/>
+    <text x="40" y="141" text-anchor="middle" font-size="15" fill="#475569">Your change</text>
+    <line x1="64" y1="95" x2="100" y2="95" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- filtros -->
+    <g transform="translate(108,0)">
+      <path d="M0,120 V72 Q0,64 8,64 H68 Q76,64 76,72 V120" fill="#F0FDF4" stroke="#16A34A" stroke-width="5"/>
+      <circle cx="38" cy="95" r="11" fill="#16A34A"/>
+      <path d="M32,95 L36.5,100 L44,90" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="38" y="141" text-anchor="middle" font-size="15" fill="#475569">Passport</text>
+    </g>
+    <line x1="189" y1="95" x2="218" y2="95" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+    <g transform="translate(223,0)">
+      <path d="M0,120 V72 Q0,64 8,64 H68 Q76,64 76,72 V120" fill="#F0FDF4" stroke="#16A34A" stroke-width="5"/>
+      <circle cx="38" cy="95" r="11" fill="#16A34A"/>
+      <path d="M32,95 L36.5,100 L44,90" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="38" y="141" text-anchor="middle" font-size="15" fill="#475569">X-ray</text>
+    </g>
+    <line x1="304" y1="95" x2="333" y2="95" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+    <g transform="translate(338,0)">
+      <path d="M0,120 V72 Q0,64 8,64 H68 Q76,64 76,72 V120" fill="#F0FDF4" stroke="#16A34A" stroke-width="5"/>
+      <circle cx="38" cy="95" r="11" fill="#16A34A"/>
+      <path d="M32,95 L36.5,100 L44,90" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="38" y="141" text-anchor="middle" font-size="15" fill="#475569">Metal detector</text>
+    </g>
+    <line x1="419" y1="95" x2="448" y2="95" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- avión -->
+    <path transform="translate(-14,0)" d="M578,92 Q572,86 560,86 L540,86 L520,60 L508,60 L520,86 L488,86 L478,74 L470,74 L474,92 L470,110 L478,110 L488,98 L520,98 L508,124 L520,124 L540,98 L560,98 Q572,98 578,92 Z" fill="#0284C7"/>
+    <text x="510" y="141" text-anchor="middle" font-size="15" fill="#475569">Takeoff!</text>
+    </g>
+
+    <text x="28" y="177" font-size="19" fill="#334155"><tspan font-weight="700">Passenger</tspan> = your change · <tspan font-weight="700">Checks</tspan> = quality gates</text>
+    <text x="28" y="203" font-size="19" fill="#334155">A check beeps → <tspan font-weight="700" fill="#DC2626">you don't board</tspan> (no merge)</text>
+    <text x="28" y="229" font-size="19" fill="#334155">Pass them all → <tspan font-weight="700" fill="#15803D">ready to fly</tspan> (releasable)</text>
+  </g>
+
+  <!-- ================= 2. PIPELINE + QUALITY GATES ================= -->
+  <g transform="translate(60,455)">
+    <rect width="1800" height="250" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#sh)"/>
+    <circle cx="34" cy="36" r="18" fill="#7C3AED"/>
+    <text x="34" y="43" text-anchor="middle" font-size="20" font-weight="800" fill="#FFFFFF">2</text>
+    <text x="64" y="45" font-size="26" font-weight="800" fill="#0F172A">The pipeline enforces quality — on every push and every PR</text>
+    <text x="1774" y="45" text-anchor="end" font-size="19" font-weight="700" fill="#7C3AED">Quality gates = automated Definition of Done</text>
+
+    <!-- Etapa 1: Build -->
+    <g transform="translate(26,64)">
+      <rect width="205" height="120" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#15803D" letter-spacing="1.5">GATE</text>
+      <circle cx="183" cy="22" r="12" fill="#16A34A"/>
+      <path d="M177,22 L181.5,27 L189,17" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Build</text>
+      <text x="16" y="86" font-size="17" fill="#475569">Does it compile</text>
+      <text x="16" y="108" font-size="17" fill="#475569">and build?</text>
+    </g>
+    <line x1="236" y1="124" x2="278" y2="124" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Etapa 2: Lint + tipos -->
+    <g transform="translate(283,64)">
+      <rect width="205" height="120" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#15803D" letter-spacing="1.5">GATE</text>
+      <circle cx="183" cy="22" r="12" fill="#16A34A"/>
+      <path d="M177,22 L181.5,27 L189,17" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Lint + types</text>
+      <text x="16" y="86" font-size="17" fill="#475569">Style, strict types,</text>
+      <text x="16" y="108" font-size="17" fill="#475569">no TODO/FIXME</text>
+    </g>
+    <line x1="493" y1="124" x2="535" y2="124" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Etapa 3: Tests -->
+    <g transform="translate(540,64)">
+      <rect width="205" height="120" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#15803D" letter-spacing="1.5">GATE</text>
+      <circle cx="183" cy="22" r="12" fill="#16A34A"/>
+      <path d="M177,22 L181.5,27 L189,17" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Tests</text>
+      <text x="16" y="86" font-size="17" fill="#475569">Unit, integration</text>
+      <text x="16" y="108" font-size="17" fill="#475569">and contract</text>
+    </g>
+    <line x1="750" y1="124" x2="792" y2="124" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Etapa 4: Cobertura -->
+    <g transform="translate(797,64)">
+      <rect width="205" height="120" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#15803D" letter-spacing="1.5">GATE</text>
+      <circle cx="183" cy="22" r="12" fill="#16A34A"/>
+      <path d="M177,22 L181.5,27 L189,17" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Coverage</text>
+      <text x="16" y="86" font-size="17" fill="#475569">≥ minimum floor</text>
+      <text x="16" y="108" font-size="17" fill="#475569">declared ≤ measured</text>
+    </g>
+    <line x1="1007" y1="124" x2="1049" y2="124" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Etapa 5: Seguridad -->
+    <g transform="translate(1054,64)">
+      <rect width="205" height="120" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#15803D" letter-spacing="1.5">GATE</text>
+      <circle cx="183" cy="22" r="12" fill="#16A34A"/>
+      <path d="M177,22 L181.5,27 L189,17" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Security</text>
+      <text x="16" y="86" font-size="17" fill="#475569">Dependencies,</text>
+      <text x="16" y="108" font-size="17" fill="#475569">secrets, SAST</text>
+    </g>
+    <line x1="1264" y1="124" x2="1306" y2="124" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Etapa 6: Empaquetar -->
+    <g transform="translate(1311,64)">
+      <rect width="205" height="120" rx="14" fill="#EFF6FF" stroke="#0284C7" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#0369A1" letter-spacing="1.5">DELIVERY</text>
+      <circle cx="183" cy="22" r="12" fill="#0284C7"/>
+      <path d="M177,22 H188 M184,17.5 L188.5,22 L184,26.5" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Package</text>
+      <text x="16" y="86" font-size="17" fill="#475569">Versioned</text>
+      <text x="16" y="108" font-size="17" fill="#475569">artifact</text>
+    </g>
+    <line x1="1521" y1="124" x2="1563" y2="124" stroke="#64748B" stroke-width="3" marker-end="url(#arG)"/>
+
+    <!-- Etapa 7: Desplegar -->
+    <g transform="translate(1568,64)">
+      <rect width="205" height="120" rx="14" fill="#EFF6FF" stroke="#0284C7" stroke-width="2"/>
+      <text x="16" y="26" font-size="13" font-weight="800" fill="#0369A1" letter-spacing="1.5">DELIVERY</text>
+      <circle cx="183" cy="22" r="12" fill="#0284C7"/>
+      <path d="M177,22 H188 M184,17.5 L188.5,22 L184,26.5" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="16" y="58" font-size="23" font-weight="800" fill="#0F172A">Deploy</text>
+      <text x="16" y="86" font-size="17" fill="#475569">Staging →</text>
+      <text x="16" y="108" font-size="17" fill="#475569">production</text>
+    </g>
+
+    <!-- Resultados -->
+    <rect x="26" y="196" width="868" height="40" rx="20" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <circle cx="48" cy="216" r="12" fill="#DC2626"/>
+    <path d="M43,211 L53,221 M53,211 L43,221" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+    <text x="70" y="223" font-size="19" fill="#7F1D1D"><tspan font-weight="700">Any red gate</tspan> → the build fails and the merge / deploy is <tspan font-weight="700">blocked</tspan></text>
+
+    <rect x="906" y="196" width="868" height="40" rx="20" fill="#F0FDF4" stroke="#86EFAC"/>
+    <circle cx="928" cy="216" r="12" fill="#16A34A"/>
+    <path d="M922,216 L926.5,221 L934,211" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="950" y="223" font-size="19" fill="#14532D"><tspan font-weight="700">All green</tspan> → <tspan font-weight="700">releasable</tspan> artifact, ready for production</text>
+  </g>
+
+  <!-- ================= 3. TRUNK-BASED + PR CHECKS ================= -->
+  <g transform="translate(60,725)">
+    <rect width="583" height="325" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#sh)"/>
+    <circle cx="34" cy="36" r="18" fill="#2563EB"/>
+    <text x="34" y="43" text-anchor="middle" font-size="20" font-weight="800" fill="#FFFFFF">3</text>
+    <text x="64" y="45" font-size="26" font-weight="800" fill="#0F172A">Trunk-based + PR checks</text>
+
+    <text x="205" y="77" text-anchor="middle" font-size="16" font-style="italic" fill="#2563EB">short-lived branch (hours, not weeks)</text>
+    <line x1="28" y1="150" x2="546" y2="150" stroke="#0F172A" stroke-width="6" stroke-linecap="round" marker-end="url(#arD)"/>
+    <text x="28" y="134" font-size="17" font-weight="800" fill="#0F172A">main</text>
+    <path d="M90,150 C125,150 120,94 160,94 L300,94 C345,94 370,118 394,138" fill="none" stroke="#2563EB" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="185" cy="94" r="8" fill="#2563EB" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="240" cy="94" r="8" fill="#2563EB" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="295" cy="94" r="8" fill="#2563EB" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="62" cy="150" r="9" fill="#0F172A" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="500" cy="150" r="9" fill="#0F172A" stroke="#FFFFFF" stroke-width="3"/>
+    <rect x="394" y="126" width="52" height="48" rx="10" fill="#16A34A"/>
+    <path d="M408,150 L416,158 L432,141" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="420" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#15803D">PR: green CI + approved</text>
+
+    <rect x="24" y="214" width="535" height="94" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
+    <text x="44" y="241" font-size="17" fill="#1E293B"><tspan font-weight="700">Protected main:</tspan> no direct pushes</text>
+    <text x="44" y="266" font-size="17" fill="#1E293B">required checks + required review</text>
+    <text x="44" y="292" font-size="17" font-weight="700" fill="#1D4ED8">→ main always releasable = foundation of CD</text>
+  </g>
+
+  <!-- ================= 4. MÉTRICAS DORA ================= -->
+  <g transform="translate(668,725)">
+    <rect width="584" height="325" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#sh)"/>
+    <circle cx="34" cy="36" r="18" fill="#2563EB"/>
+    <text x="34" y="43" text-anchor="middle" font-size="20" font-weight="800" fill="#FFFFFF">4</text>
+    <text x="64" y="45" font-size="25" font-weight="800" fill="#0F172A">DORA metrics: is delivery healthy?</text>
+
+    <!-- Velocidad -->
+    <rect x="22" y="60" width="540" height="102" rx="12" fill="#EFF6FF"/>
+    <rect x="22" y="60" width="30" height="102" rx="12" fill="#2563EB"/>
+    <rect x="40" y="60" width="12" height="102" fill="#2563EB"/>
+    <text transform="translate(41.5,111) rotate(-90)" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="1">SPEED</text>
+
+    <rect x="60" y="64" width="494" height="44" rx="8" fill="#FFFFFF" stroke="#DBEAFE"/>
+    <text x="74" y="83" font-size="17" font-weight="700" fill="#0F172A">Deployment frequency</text>
+    <text x="74" y="101" font-size="14.5" fill="#475569">How often do we reach production?</text>
+    <rect x="356" y="72" width="190" height="28" rx="14" fill="#DBEAFE"/>
+    <text x="451" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="#1E40AF">Elite: many per day</text>
+
+    <rect x="60" y="114" width="494" height="44" rx="8" fill="#FFFFFF" stroke="#DBEAFE"/>
+    <text x="74" y="133" font-size="17" font-weight="700" fill="#0F172A">Lead time for changes</text>
+    <text x="74" y="151" font-size="14.5" fill="#475569">From commit to production</text>
+    <rect x="356" y="122" width="190" height="28" rx="14" fill="#DBEAFE"/>
+    <text x="451" y="141" text-anchor="middle" font-size="14" font-weight="700" fill="#1E40AF">Elite: &lt; 1 day</text>
+
+    <!-- Estabilidad -->
+    <rect x="22" y="170" width="540" height="102" rx="12" fill="#FFF7ED"/>
+    <rect x="22" y="170" width="30" height="102" rx="12" fill="#EA580C"/>
+    <rect x="40" y="170" width="12" height="102" fill="#EA580C"/>
+    <text transform="translate(41.5,221) rotate(-90)" text-anchor="middle" font-size="12" font-weight="800" fill="#FFFFFF" letter-spacing="1">STABILITY</text>
+
+    <rect x="60" y="174" width="494" height="44" rx="8" fill="#FFFFFF" stroke="#FED7AA"/>
+    <text x="74" y="193" font-size="17" font-weight="700" fill="#0F172A">Change failure rate</text>
+    <text x="74" y="211" font-size="14.5" fill="#475569">% of deploys that cause failures</text>
+    <rect x="356" y="182" width="190" height="28" rx="14" fill="#FFEDD5"/>
+    <text x="451" y="201" text-anchor="middle" font-size="14" font-weight="700" fill="#9A3412">Elite: 0–15%</text>
+
+    <rect x="60" y="224" width="494" height="44" rx="8" fill="#FFFFFF" stroke="#FED7AA"/>
+    <text x="74" y="243" font-size="17" font-weight="700" fill="#0F172A">Time to restore</text>
+    <text x="74" y="261" font-size="14.5" fill="#475569">How long until we recover?</text>
+    <rect x="356" y="232" width="190" height="28" rx="14" fill="#FFEDD5"/>
+    <text x="451" y="251" text-anchor="middle" font-size="14" font-weight="700" fill="#9A3412">Elite: &lt; 1 hour</text>
+
+    <text x="292" y="302" text-anchor="middle" font-size="17" fill="#0F172A"><tspan font-weight="700">Small batches + automation</tspan> → fast and stable</text>
+  </g>
+
+  <!-- ================= 5. CASO REAL: MAIN ROTO ================= -->
+  <g transform="translate(1277,725)">
+    <rect width="583" height="325" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#sh)"/>
+    <circle cx="34" cy="36" r="18" fill="#DC2626"/>
+    <text x="34" y="43" text-anchor="middle" font-size="20" font-weight="800" fill="#FFFFFF">5</text>
+    <text x="64" y="45" font-size="26" font-weight="800" fill="#0F172A">Real case: the broken main</text>
+
+    <!-- Sin gates -->
+    <rect x="22" y="62" width="539" height="104" rx="12" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <circle cx="42" cy="84" r="10" fill="#DC2626"/>
+    <path d="M38,80 L46,88 M46,80 L38,88" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="60" y="90" font-size="15" font-weight="800" fill="#B91C1C" letter-spacing="1.5">WITHOUT GATES</text>
+    <rect x="38" y="100" width="150" height="54" rx="10" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="113" y="122" text-anchor="middle" font-size="15" fill="#7F1D1D">Code that doesn't</text>
+    <text x="113" y="142" text-anchor="middle" font-size="15" fill="#7F1D1D">compile is merged</text>
+    <line x1="192" y1="127" x2="213" y2="127" stroke="#DC2626" stroke-width="3" marker-end="url(#arR)"/>
+    <rect x="217" y="100" width="150" height="54" rx="10" fill="#FFFFFF" stroke="#FCA5A5"/>
+    <text x="292" y="122" text-anchor="middle" font-size="15" fill="#7F1D1D">Everyone</text>
+    <text x="292" y="142" text-anchor="middle" font-size="15" fill="#7F1D1D">pulls it</text>
+    <line x1="371" y1="127" x2="392" y2="127" stroke="#DC2626" stroke-width="3" marker-end="url(#arR)"/>
+    <rect x="396" y="100" width="150" height="54" rx="10" fill="#FEE2E2" stroke="#F87171"/>
+    <text x="471" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#991B1B">Whole team</text>
+    <text x="471" y="142" text-anchor="middle" font-size="15" font-weight="700" fill="#991B1B">blocked for hours</text>
+
+    <!-- Con gates -->
+    <rect x="22" y="176" width="539" height="104" rx="12" fill="#F0FDF4" stroke="#86EFAC"/>
+    <circle cx="42" cy="198" r="10" fill="#16A34A"/>
+    <path d="M37,198 L40.5,202 L47,194" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="204" font-size="15" font-weight="800" fill="#15803D" letter-spacing="1.5">WITH GATES</text>
+    <rect x="38" y="214" width="150" height="54" rx="10" fill="#FFFFFF" stroke="#86EFAC"/>
+    <text x="113" y="236" text-anchor="middle" font-size="15" fill="#14532D">Required CI</text>
+    <text x="113" y="256" text-anchor="middle" font-size="15" fill="#14532D">on every PR</text>
+    <line x1="192" y1="241" x2="213" y2="241" stroke="#16A34A" stroke-width="3" marker-end="url(#arGr)"/>
+    <rect x="217" y="214" width="150" height="54" rx="10" fill="#FFFFFF" stroke="#86EFAC"/>
+    <text x="292" y="236" text-anchor="middle" font-size="15" fill="#14532D">Red build:</text>
+    <text x="292" y="256" text-anchor="middle" font-size="15" fill="#14532D">merge blocked</text>
+    <line x1="371" y1="241" x2="392" y2="241" stroke="#16A34A" stroke-width="3" marker-end="url(#arGr)"/>
+    <rect x="396" y="214" width="150" height="54" rx="10" fill="#DCFCE7" stroke="#4ADE80"/>
+    <text x="471" y="236" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">main stays green</text>
+    <text x="471" y="256" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">&amp; releasable</text>
+
+    <text x="291" y="306" text-anchor="middle" font-size="17" font-weight="700" font-style="italic" fill="#0F172A">“The pipeline protects the team from the team”</text>
+  </g>
+</svg>

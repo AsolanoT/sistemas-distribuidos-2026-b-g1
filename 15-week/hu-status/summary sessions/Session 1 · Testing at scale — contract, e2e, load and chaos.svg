@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E9E6B"/>
+      <stop offset="0.4" stop-color="#2F6FD6"/>
+      <stop offset="0.7" stop-color="#E8871E"/>
+      <stop offset="1" stop-color="#D64545"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1920" height="1080" fill="#F4F6FB"/>
+
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+
+    <!-- ================= HEADER ================= -->
+    <rect x="50" y="44" width="10" height="88" rx="5" fill="url(#accent)"/>
+    <text x="80" y="90" font-size="46" font-weight="800" fill="#1F2937">Testing at scale: <tspan fill="#2F6FD6">contract, e2e, load and chaos</tspan></text>
+    <text x="80" y="126" font-size="22" fill="#5B6474">Unit tests prove <tspan font-weight="700" fill="#1F2937">a function</tspan>; they do not prove a <tspan font-weight="700" fill="#1F2937">distributed system</tspan> survives production.</text>
+
+    <rect x="1626" y="50" width="244" height="40" rx="20" fill="#1F2937"/>
+    <text x="1748" y="76" font-size="17.5" font-weight="600" fill="#FFFFFF" text-anchor="middle">Week 15 · Session 1</text>
+
+    <!-- Goals -->
+    <text x="80" y="171" font-size="16" font-weight="700" fill="#5B6474" letter-spacing="1.5">GOALS</text>
+
+    <rect x="170" y="146" width="328" height="38" rx="19" fill="#FFFFFF" stroke="#D9DEE8" stroke-width="1.5"/>
+    <circle cx="191" cy="165" r="12" fill="#2E9E6B"/>
+    <text x="191" y="170" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="212" y="171" font-size="16.5" fill="#1F2937">Apply the distributed pyramid</text>
+
+    <rect x="512" y="146" width="410" height="38" rx="19" fill="#FFFFFF" stroke="#D9DEE8" stroke-width="1.5"/>
+    <circle cx="533" cy="165" r="12" fill="#2F6FD6"/>
+    <text x="533" y="170" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="554" y="171" font-size="16.5" fill="#1F2937">Contract + integration (testcontainers)</text>
+
+    <rect x="936" y="146" width="272" height="38" rx="19" fill="#FFFFFF" stroke="#D9DEE8" stroke-width="1.5"/>
+    <circle cx="957" cy="165" r="12" fill="#E8871E"/>
+    <text x="957" y="170" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="978" y="171" font-size="16.5" fill="#1F2937">Load tests against SLOs</text>
+
+    <rect x="1222" y="146" width="309" height="38" rx="19" fill="#FFFFFF" stroke="#D9DEE8" stroke-width="1.5"/>
+    <circle cx="1243" cy="165" r="12" fill="#D64545"/>
+    <text x="1243" y="170" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="1264" y="171" font-size="16.5" fill="#1F2937">Prove resilience with chaos</text>
+
+    <!-- ================= SECTION 1 · PYRAMID ================= -->
+    <circle cx="66" cy="230" r="16" fill="#1F2937"/>
+    <text x="66" y="236" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="92" y="238" font-size="24" font-weight="700" fill="#1F2937">The pyramid, adapted</text>
+
+    <rect x="50" y="255" width="540" height="590" rx="18" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+
+    <!-- layers -->
+    <polygon points="240,285 287.8,395 192.2,395" fill="#7B4FD6"/>
+    <polygon points="188.8,403 291.2,403 344.2,525 135.8,525" fill="#2F6FD6"/>
+    <polygon points="132.3,533 347.7,533 405,665 75,665" fill="#2E9E6B"/>
+
+    <text x="240" y="381" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">E2E</text>
+    <text x="240" y="459" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">Contract +</text>
+    <text x="240" y="484" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">integration</text>
+    <text x="240" y="613" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">Unit tests</text>
+
+    <!-- annotations -->
+    <line x1="272" y1="337" x2="418" y2="337" stroke="#B8C0CE" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="428" y="333" font-size="16" font-weight="700" fill="#1F2937">few, slow</text>
+    <text x="428" y="354" font-size="16" fill="#5B6474">high value</text>
+
+    <line x1="326" y1="464" x2="418" y2="464" stroke="#B8C0CE" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="428" y="460" font-size="16" font-weight="700" fill="#1F2937">boundaries</text>
+    <text x="428" y="481" font-size="16" fill="#5B6474">+ real DB</text>
+
+    <line x1="387" y1="602" x2="418" y2="602" stroke="#B8C0CE" stroke-width="1.5" stroke-dasharray="4 4"/>
+    <text x="428" y="598" font-size="16" font-weight="700" fill="#1F2937">many, fast</text>
+    <text x="428" y="619" font-size="16" fill="#5B6474">cheap</text>
+
+    <!-- what the pyramid omits -->
+    <text x="75" y="728" font-size="18" font-weight="700" fill="#1F2937">Plus what the pyramid usually omits:</text>
+
+    <rect x="75" y="745" width="240" height="72" rx="14" fill="#FFF4E6" stroke="#E8871E" stroke-width="2"/>
+    <text x="95" y="775" font-size="20" font-weight="700" fill="#B9650C">+ Load</text>
+    <text x="95" y="800" font-size="15.5" fill="#5B6474">Handles the traffic?</text>
+    <rect x="270" y="785" width="7" height="12" rx="1.5" fill="#E8871E"/>
+    <rect x="280" y="777" width="7" height="20" rx="1.5" fill="#E8871E"/>
+    <rect x="290" y="767" width="7" height="30" rx="1.5" fill="#E8871E"/>
+
+    <rect x="330" y="745" width="240" height="72" rx="14" fill="#FDECEC" stroke="#D64545" stroke-width="2"/>
+    <text x="350" y="775" font-size="20" font-weight="700" fill="#B03A3A">+ Chaos</text>
+    <text x="350" y="800" font-size="15.5" fill="#5B6474">Survives failures?</text>
+    <polygon points="542,763 531,782 539,782 535,797 549,776 541,776 546,763" fill="#D64545"/>
+
+    <!-- ================= SECTION 2 · TEST TYPES ================= -->
+    <circle cx="631" cy="230" r="16" fill="#1F2937"/>
+    <text x="631" y="236" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="657" y="238" font-size="24" font-weight="700" fill="#1F2937">What each type proves</text>
+
+    <!-- Card: Integration -->
+    <rect x="615" y="255" width="350" height="285" rx="16" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <path d="M615,301 V271 Q615,255 631,255 H949 Q965,255 965,271 V301 Z" fill="#2F6FD6"/>
+    <text x="635" y="285" font-size="19" font-weight="700" fill="#FFFFFF">Integration · Testcontainers</text>
+    <text x="635" y="332" font-size="17" font-weight="700" font-style="italic" fill="#2F6FD6">“Mocks lie about the database”</text>
+
+    <rect x="635" y="354" width="105" height="50" rx="10" fill="#EEF4FF" stroke="#2F6FD6" stroke-width="1.5"/>
+    <text x="687.5" y="385" font-size="16" font-weight="700" fill="#1F2937" text-anchor="middle">Your test</text>
+    <line x1="744" y1="379" x2="782" y2="379" stroke="#2F6FD6" stroke-width="2.5"/>
+    <polygon points="780,372 792,379 780,386" fill="#2F6FD6"/>
+    <rect x="796" y="346" width="150" height="66" rx="10" fill="#F3F7FF" stroke="#2F6FD6" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <path d="M810,362 v26 a14,5 0 0 0 28,0 v-26 z" fill="#2F6FD6"/>
+    <ellipse cx="824" cy="362" rx="14" ry="5" fill="#7FA6EC"/>
+    <text x="848" y="374" font-size="15" font-weight="700" fill="#1F2937">Postgres</text>
+    <text x="848" y="394" font-size="14" fill="#5B6474">or Kafka</text>
+    <text x="796" y="432" font-size="13.5" fill="#5B6474">temporary container</text>
+
+    <path d="M636,472 l4.5,4.5 l8.5,-9.5" fill="none" stroke="#2E9E6B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="656" y="478" font-size="16" fill="#1F2937">Real driver, SQL and migrations</text>
+    <path d="M636,502 l4.5,4.5 l8.5,-9.5" fill="none" stroke="#2E9E6B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="656" y="508" font-size="16" fill="#1F2937">Catches the bugs mocks hide</text>
+
+    <!-- Card: Contract + E2E -->
+    <rect x="985" y="255" width="350" height="285" rx="16" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <path d="M985,301 V271 Q985,255 1001,255 H1319 Q1335,255 1335,271 V301 Z" fill="#7B4FD6"/>
+    <text x="1005" y="285" font-size="19" font-weight="700" fill="#FFFFFF">Contract (Pact) + E2E</text>
+
+    <text x="1005" y="332" font-size="16" font-weight="700" fill="#0E9AA7">Contract: protect the boundary</text>
+    <rect x="1005" y="348" width="108" height="42" rx="9" fill="#E8F7F8" stroke="#0E9AA7" stroke-width="1.5"/>
+    <text x="1059" y="374" font-size="14.5" font-weight="700" fill="#1F2937" text-anchor="middle">Producer</text>
+    <rect x="1207" y="348" width="108" height="42" rx="9" fill="#E8F7F8" stroke="#0E9AA7" stroke-width="1.5"/>
+    <text x="1261" y="374" font-size="14.5" font-weight="700" fill="#1F2937" text-anchor="middle">Consumer</text>
+    <line x1="1116" y1="369" x2="1144" y2="369" stroke="#0E9AA7" stroke-width="2"/>
+    <line x1="1178" y1="369" x2="1204" y2="369" stroke="#0E9AA7" stroke-width="2"/>
+    <path d="M1148,351 h16 l9,9 v27 h-25 z" fill="#FFFFFF" stroke="#0E9AA7" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M1164,351 v9 h9" fill="none" stroke="#0E9AA7" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="1153" y1="368" x2="1168" y2="368" stroke="#0E9AA7" stroke-width="1.5"/>
+    <line x1="1153" y1="374" x2="1168" y2="374" stroke="#0E9AA7" stroke-width="1.5"/>
+    <line x1="1153" y1="380" x2="1163" y2="380" stroke="#0E9AA7" stroke-width="1.5"/>
+    <text x="1160" y="414" font-size="13.5" fill="#5B6474" text-anchor="middle">always compatible with each other</text>
+
+    <text x="1005" y="448" font-size="16" font-weight="700" fill="#7B4FD6">E2E: a full critical journey</text>
+    <rect x="1005" y="462" width="62" height="32" rx="16" fill="#F1ECFC" stroke="#7B4FD6" stroke-width="1.3"/>
+    <text x="1036" y="482.5" font-size="13" font-weight="700" fill="#4B2A9E" text-anchor="middle">Order</text>
+    <polygon points="1070,472 1077,478 1070,484" fill="#7B4FD6"/>
+    <rect x="1081" y="462" width="70" height="32" rx="16" fill="#F1ECFC" stroke="#7B4FD6" stroke-width="1.3"/>
+    <text x="1116" y="482.5" font-size="13" font-weight="700" fill="#4B2A9E" text-anchor="middle">Reserve</text>
+    <polygon points="1154,472 1161,478 1154,484" fill="#7B4FD6"/>
+    <rect x="1165" y="462" width="50" height="32" rx="16" fill="#F1ECFC" stroke="#7B4FD6" stroke-width="1.3"/>
+    <text x="1190" y="482.5" font-size="13" font-weight="700" fill="#4B2A9E" text-anchor="middle">Pay</text>
+    <polygon points="1218,472 1225,478 1218,484" fill="#7B4FD6"/>
+    <rect x="1229" y="462" width="84" height="32" rx="16" fill="#F1ECFC" stroke="#7B4FD6" stroke-width="1.3"/>
+    <text x="1271" y="482.5" font-size="13" font-weight="700" fill="#4B2A9E" text-anchor="middle">Confirm</text>
+    <text x="1005" y="524" font-size="15" font-style="italic" fill="#5B6474">Keep them few: cover the money paths</text>
+
+    <!-- Card: Load -->
+    <rect x="615" y="555" width="350" height="290" rx="16" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <path d="M615,601 V571 Q615,555 631,555 H949 Q965,555 965,571 V601 Z" fill="#E8871E"/>
+    <text x="635" y="585" font-size="19" font-weight="700" fill="#FFFFFF">Load &amp; performance</text>
+    <text x="635" y="626" font-size="15" fill="#5B6474">Tools: <tspan font-weight="700" fill="#1F2937">k6 · Gatling · JMeter</tspan></text>
+
+    <line x1="662" y1="640" x2="662" y2="735" stroke="#9AA3B2" stroke-width="1.5"/>
+    <line x1="662" y1="735" x2="945" y2="735" stroke="#9AA3B2" stroke-width="1.5"/>
+    <text transform="translate(652,688) rotate(-90)" font-size="12" fill="#5B6474" text-anchor="middle">p99 latency</text>
+    <text x="945" y="752" font-size="12" fill="#5B6474" text-anchor="end">requests / sec</text>
+    <line x1="662" y1="668" x2="945" y2="668" stroke="#D64545" stroke-width="2" stroke-dasharray="7 5"/>
+    <text x="670" y="661" font-size="12.5" font-weight="700" fill="#D64545">SLO limit (p99)</text>
+    <path d="M664,725 C760,723 830,715 858,698 C882,684 896,662 906,642" fill="none" stroke="#E8871E" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="858" cy="698" r="6" fill="#FFFFFF" stroke="#E8871E" stroke-width="3"/>
+    <text x="846" y="694" font-size="13" font-weight="700" fill="#B9650C" text-anchor="end">knee = capacity</text>
+
+    <circle cx="641" cy="775" r="3.5" fill="#E8871E"/>
+    <text x="652" y="780" font-size="15" fill="#1F2937">Measure latency &amp; errors vs. the SLO</text>
+    <circle cx="641" cy="798" r="3.5" fill="#E8871E"/>
+    <text x="652" y="803" font-size="15" fill="#1F2937">Find the bottleneck with your traces</text>
+    <circle cx="641" cy="821" r="3.5" fill="#E8871E"/>
+    <text x="652" y="826" font-size="15" fill="#1F2937">Verify autoscaling actually kicks in</text>
+
+    <!-- Card: Chaos -->
+    <rect x="985" y="555" width="350" height="290" rx="16" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <path d="M985,601 V571 Q985,555 1001,555 H1319 Q1335,555 1335,571 V601 Z" fill="#D64545"/>
+    <text x="1005" y="585" font-size="19" font-weight="700" fill="#FFFFFF">Chaos · fault injection</text>
+    <text x="1005" y="626" font-size="15" font-style="italic" fill="#5B6474">Break things on purpose, under control</text>
+
+    <text x="1005" y="658" font-size="15.5" font-weight="700" fill="#D64545">You inject</text>
+    <line x1="1108" y1="653" x2="1150" y2="653" stroke="#9AA3B2" stroke-width="2"/>
+    <polygon points="1148,647 1158,653 1148,659" fill="#9AA3B2"/>
+    <text x="1170" y="658" font-size="15.5" font-weight="700" fill="#1E7F55">You verify</text>
+
+    <path d="M1006,676 l9,9 M1015,676 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1024" y="686" font-size="15" fill="#1F2937">Kill a service</text>
+    <path d="M1006,702 l9,9 M1015,702 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1024" y="712" font-size="15" fill="#1F2937">Network latency</text>
+    <path d="M1006,728 l9,9 M1015,728 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1024" y="738" font-size="15" fill="#1F2937">Lost messages</text>
+
+    <path d="M1170,680 l4,4 l8,-9" fill="none" stroke="#1E7F55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1188" y="686" font-size="15" fill="#1F2937">Retries</text>
+    <path d="M1170,706 l4,4 l8,-9" fill="none" stroke="#1E7F55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1188" y="712" font-size="15" fill="#1F2937">Circuit breaker</text>
+    <path d="M1170,732 l4,4 l8,-9" fill="none" stroke="#1E7F55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1188" y="738" font-size="14.5" fill="#1F2937">Saga compensates</text>
+    <path d="M1170,758 l4,4 l8,-9" fill="none" stroke="#1E7F55" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1188" y="764" font-size="15" fill="#1F2937">Fallbacks</text>
+
+    <rect x="1005" y="790" width="310" height="38" rx="9" fill="#FDECEC"/>
+    <text x="1160" y="814" font-size="14" font-style="italic" fill="#8A2B2B" text-anchor="middle">You designed for failure; now prove it</text>
+
+    <!-- ================= SECTION 3 · REAL CASE ================= -->
+    <circle cx="1376" cy="230" r="16" fill="#1F2937"/>
+    <text x="1376" y="236" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="1402" y="238" font-size="24" font-weight="700" fill="#1F2937">“All green, dead on launch”</text>
+
+    <rect x="1360" y="255" width="510" height="340" rx="16" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <rect x="1376" y="271" width="478" height="112" rx="10" fill="#FFF5F5" stroke="#F3C9C9" stroke-width="1"/>
+    <text x="1394" y="294" font-size="12.5" font-weight="700" fill="#B03A3A" letter-spacing="1.5">LAUNCH DAY</text>
+
+    <path d="M1394,314 l4.5,4.5 l8.5,-9.5" fill="none" stroke="#2E9E6B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1416" y="320" font-size="16.5" fill="#1F2937">Every unit test passes</text>
+    <path d="M1395,334 l9,9 M1404,334 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1416" y="345" font-size="16.5" fill="#1F2937">Checkout collapses at <tspan font-weight="700">200 req/s</tspan></text>
+    <path d="M1395,359 l9,9 M1404,359 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1416" y="370" font-size="16.5" fill="#1F2937">A payments hiccup takes it all down</text>
+
+    <polyline points="1775,300 1775,366 1846,366" fill="none" stroke="#E0B4B4" stroke-width="1.5"/>
+    <polyline points="1777,358 1791,348 1803,340 1813,328 1821,316 1827,312 1832,364 1845,364" fill="none" stroke="#D64545" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <text x="1378" y="412" font-size="18" font-weight="700" fill="#2F6FD6">Fix it before release</text>
+    <line x1="1600" y1="406" x2="1852" y2="406" stroke="#DCE6F7" stroke-width="2"/>
+
+    <rect x="1376" y="426" width="478" height="58" rx="10" fill="#FFF4E6"/>
+    <circle cx="1402" cy="455" r="14" fill="#E8871E"/>
+    <text x="1402" y="460.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="1428" y="450" font-size="16.5" font-weight="700" fill="#1F2937">Load test up to the SLO</text>
+    <text x="1428" y="473" font-size="14.5" fill="#5B6474">find the knee, fix the bottleneck the trace reveals</text>
+
+    <rect x="1376" y="492" width="478" height="58" rx="10" fill="#FDECEC"/>
+    <circle cx="1402" cy="521" r="14" fill="#D64545"/>
+    <text x="1402" y="526.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="1428" y="516" font-size="16.5" font-weight="700" fill="#1F2937">Chaos: kill payments mid-flow</text>
+    <text x="1428" y="539" font-size="14.5" fill="#5B6474">saga compensates · circuit breaker protects checkout</text>
+
+    <text x="1615" y="580" font-size="16" font-weight="700" fill="#1F2937" text-anchor="middle">Unit tests: table stakes  ·  <tspan fill="#1E7F55">Resilience: load + failure</tspan></text>
+
+    <!-- ================= SECTION 4 · MISTAKES ================= -->
+    <rect x="1360" y="610" width="510" height="235" rx="16" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="1392" cy="641" r="16" fill="#1F2937"/>
+    <text x="1392" y="647" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="1418" y="648" font-size="21" font-weight="700" fill="#1F2937">Common mistakes</text>
+
+    <path d="M1386,668 l9,9 M1395,668 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1408" y="678" font-size="16" font-weight="700" fill="#1F2937">Only unit tests</text>
+    <text x="1408" y="698" font-size="14.5" fill="#5B6474">→ distributed failures ship to production</text>
+
+    <path d="M1386,710 l9,9 M1395,710 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1408" y="720" font-size="16" font-weight="700" fill="#1F2937">Mocking the DB instead of testcontainers</text>
+    <text x="1408" y="740" font-size="14.5" fill="#5B6474">→ false confidence</text>
+
+    <path d="M1386,752 l9,9 M1395,752 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1408" y="762" font-size="16" font-weight="700" fill="#1F2937">Too many brittle e2e tests</text>
+    <text x="1408" y="782" font-size="14.5" fill="#5B6474">→ slow, flaky pipeline</text>
+
+    <path d="M1386,794 l9,9 M1395,794 l-9,9" stroke="#D64545" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="1408" y="804" font-size="16" font-weight="700" fill="#1F2937">Never load or chaos testing</text>
+    <text x="1408" y="824" font-size="14.5" fill="#5B6474">→ you discover your limits in production</text>
+
+    <!-- ================= SECTION 5 · FLOW + EXAMPLE ================= -->
+    <circle cx="66" cy="886" r="16" fill="#1F2937"/>
+    <text x="66" y="892" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+    <text x="92" y="894" font-size="22" font-weight="700" fill="#1F2937">The pre-release flow, explained as a restaurant</text>
+    <text x="1870" y="894" font-size="16" fill="#5B6474" text-anchor="end">from fast &amp; cheap  →  to realistic</text>
+
+    <!-- 1 Unit -->
+    <rect x="50" y="910" width="255" height="130" rx="14" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="82" cy="942" r="15" fill="#2E9E6B"/>
+    <text x="82" y="947.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="106" y="949" font-size="19" font-weight="700" fill="#2E9E6B">Unit</text>
+    <text x="290" y="948" font-size="12.5" fill="#8A93A3" text-anchor="end">one function</text>
+    <text x="70" y="987" font-size="16" fill="#1F2937">Taste each ingredient</text>
+    <text x="70" y="1012" font-size="16" fill="#1F2937">on its own</text>
+    <polygon points="312,968 321,975 312,982" fill="#9AA3B2"/>
+
+    <!-- 2 Integration -->
+    <rect x="327" y="910" width="255" height="130" rx="14" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="359" cy="942" r="15" fill="#2F6FD6"/>
+    <text x="359" y="947.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="383" y="949" font-size="19" font-weight="700" fill="#2F6FD6">Integration</text>
+    <text x="567" y="948" font-size="12.5" fill="#8A93A3" text-anchor="end">real DB</text>
+    <text x="347" y="987" font-size="16" fill="#1F2937">Cook in the real kitchen,</text>
+    <text x="347" y="1012" font-size="16" fill="#1F2937">not with plastic food</text>
+    <polygon points="589,968 598,975 589,982" fill="#9AA3B2"/>
+
+    <!-- 3 Contract -->
+    <rect x="604" y="910" width="255" height="130" rx="14" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="636" cy="942" r="15" fill="#0E9AA7"/>
+    <text x="636" y="947.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="660" y="949" font-size="19" font-weight="700" fill="#0E9AA7">Contract</text>
+    <text x="844" y="948" font-size="12.5" fill="#8A93A3" text-anchor="end">Pact</text>
+    <text x="624" y="987" font-size="16" fill="#1F2937">Waiter and kitchen agree</text>
+    <text x="624" y="1012" font-size="16" fill="#1F2937">on how orders are written</text>
+    <polygon points="866,968 875,975 866,982" fill="#9AA3B2"/>
+
+    <!-- 4 E2E -->
+    <rect x="881" y="910" width="255" height="130" rx="14" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="913" cy="942" r="15" fill="#7B4FD6"/>
+    <text x="913" y="947.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="937" y="949" font-size="19" font-weight="700" fill="#7B4FD6">E2E</text>
+    <text x="1121" y="948" font-size="12.5" fill="#8A93A3" text-anchor="end">critical journey</text>
+    <text x="901" y="987" font-size="16" fill="#1F2937">A guest orders, eats</text>
+    <text x="901" y="1012" font-size="16" fill="#1F2937">and pays, start to finish</text>
+    <polygon points="1143,968 1152,975 1143,982" fill="#9AA3B2"/>
+
+    <!-- 5 Load -->
+    <rect x="1158" y="910" width="255" height="130" rx="14" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="1190" cy="942" r="15" fill="#E8871E"/>
+    <text x="1190" y="947.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+    <text x="1214" y="949" font-size="19" font-weight="700" fill="#E8871E">Load</text>
+    <text x="1398" y="948" font-size="12.5" fill="#8A93A3" text-anchor="end">k6 · SLO</text>
+    <text x="1178" y="987" font-size="16" fill="#1F2937">Friday night rush:</text>
+    <text x="1178" y="1012" font-size="16" fill="#1F2937">200 guests at once</text>
+    <polygon points="1420,968 1429,975 1420,982" fill="#9AA3B2"/>
+
+    <!-- 6 Chaos -->
+    <rect x="1435" y="910" width="255" height="130" rx="14" fill="#FFFFFF" stroke="#E2E6EE" stroke-width="1.5"/>
+    <circle cx="1467" cy="942" r="15" fill="#D64545"/>
+    <text x="1467" y="947.5" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">6</text>
+    <text x="1491" y="949" font-size="19" font-weight="700" fill="#D64545">Chaos</text>
+    <text x="1675" y="948" font-size="12.5" fill="#8A93A3" text-anchor="end">fault injection</text>
+    <text x="1455" y="987" font-size="16" fill="#1F2937">A cook calls in sick:</text>
+    <text x="1455" y="1012" font-size="16" fill="#1F2937">does food still go out?</text>
+    <polygon points="1697,968 1706,975 1697,982" fill="#9AA3B2"/>
+
+    <!-- Launch -->
+    <rect x="1712" y="910" width="158" height="130" rx="14" fill="#1E7F55"/>
+    <circle cx="1791" cy="948" r="17" fill="#FFFFFF"/>
+    <path d="M1783,948 l5.5,5.5 l10,-11" fill="none" stroke="#1E7F55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1791" y="992" font-size="21" font-weight="700" fill="#FFFFFF" text-anchor="middle">Launch</text>
+    <text x="1791" y="1015" font-size="15" fill="#FFFFFF" text-anchor="middle">with confidence</text>
+
+  </g>
+</svg>

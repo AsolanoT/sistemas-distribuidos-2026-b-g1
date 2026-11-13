@@ -1,0 +1,310 @@
+<svg xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1200" viewBox="0 0 1920 1200">
+  <defs>
+    <style>
+      text { font-family: Inter, 'Segoe UI', Helvetica, Arial, sans-serif; fill: #0F172A; }
+      .tag { font-size: 15px; font-weight: 700; fill: #FFFFFF; letter-spacing: 1.5px; }
+      .title { font-size: 54px; font-weight: 800; }
+      .subtitle { font-size: 22px; fill: #475569; }
+      .h { font-size: 21px; font-weight: 800; letter-spacing: 0.5px; }
+      .hlight { font-size: 19px; font-weight: 400; fill: #64748B; letter-spacing: 0; }
+      .num { font-size: 18px; font-weight: 800; fill: #FFFFFF; }
+      .numsm { font-size: 15px; font-weight: 800; fill: #FFFFFF; }
+      .lead { font-size: 17px; fill: #475569; font-style: italic; }
+      .phase { font-size: 12.5px; font-weight: 800; letter-spacing: 1.5px; fill: #2563EB; }
+      .ctitle { font-size: 19px; font-weight: 700; }
+      .csub { font-size: 15px; fill: #475569; }
+      .body { font-size: 17px; fill: #0F172A; }
+      .small { font-size: 14px; fill: #475569; }
+      .foot { font-size: 16px; font-weight: 700; }
+      .glyph { font-size: 12px; font-weight: 800; fill: #FFFFFF; letter-spacing: 0.5px; }
+    </style>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#60A5FA"/>
+    </marker>
+    <marker id="arrGrey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#94A3B8"/>
+    </marker>
+    <g id="xmark">
+      <circle r="14" fill="#DC2626"/>
+      <path d="M-4.5 -4.5 L4.5 4.5 M4.5 -4.5 L-4.5 4.5" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round"/>
+    </g>
+    <g id="check">
+      <circle r="14" fill="#16A34A"/>
+      <path d="M-5.5 0.5 L-1.5 4.5 L5.5 -4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <g id="checkTeal">
+      <circle r="14" fill="#0D9488"/>
+      <path d="M-5.5 0.5 L-1.5 4.5 L5.5 -4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1920" height="1200" fill="#F5F7FB"/>
+  <rect x="0" y="0" width="1920" height="8" fill="#2563EB"/>
+
+  <!-- ================= HEADER ================= -->
+  <rect x="60" y="44" width="250" height="34" rx="17" fill="#2563EB"/>
+  <text x="185" y="67" text-anchor="middle" class="tag">WEEK 16 · SESSION 1</text>
+  <text x="60" y="138" class="title">Final Presentation &amp; Documentation</text>
+  <text x="60" y="180" class="subtitle">Present your distributed system like a pro — and document it so another team can run and extend it.</text>
+
+  <rect x="1320" y="44" width="540" height="146" rx="16" fill="#0F172A"/>
+  <text x="1350" y="80" style="font-size:13px;font-weight:800;letter-spacing:2px;fill:#93C5FD">THE BIG IDEA</text>
+  <text x="1350" y="117" style="font-size:25px;font-weight:800;fill:#FFFFFF">A system nobody can understand</text>
+  <text x="1350" y="149" style="font-size:25px;font-weight:800;fill:#FFFFFF">or explain has little value.</text>
+  <text x="1350" y="176" style="font-size:15px;fill:#CBD5E1">Communicating it clearly is a senior skill — and it is graded.</text>
+
+  <!-- ================= 1. NARRATIVE ================= -->
+  <rect x="60" y="215" width="1800" height="190" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+  <circle cx="96" cy="250" r="17" fill="#2563EB"/>
+  <text x="96" y="256" text-anchor="middle" class="num">1</text>
+  <text x="126" y="258" class="h">STRUCTURE THE PITCH<tspan class="hlight" dx="12">·  a narrative that lands</tspan></text>
+  <text x="1830" y="258" text-anchor="end" style="font-size:17px;font-weight:600;fill:#64748B">Context → Decisions → Proof → Honesty → Future</text>
+
+  <!-- arrows between cards -->
+  <g stroke="#60A5FA" stroke-width="3" marker-end="url(#arrBlue)">
+    <line x1="354" y1="331" x2="380" y2="331"/>
+    <line x1="650" y1="331" x2="676" y2="331"/>
+    <line x1="946" y1="331" x2="972" y2="331"/>
+    <line x1="1242" y1="331" x2="1268" y2="331"/>
+    <line x1="1538" y1="331" x2="1564" y2="331"/>
+  </g>
+
+  <!-- card 1 -->
+  <rect x="90" y="278" width="260" height="107" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <circle cx="120" cy="308" r="15" fill="#2563EB"/><text x="120" y="313.5" text-anchor="middle" class="numsm">1</text>
+  <text x="144" y="313" class="phase">CONTEXT</text>
+  <text x="110" y="347" class="ctitle">Problem &amp; Goal</text>
+  <text x="110" y="371" class="csub">Why does this system exist?</text>
+  <!-- card 2 -->
+  <rect x="386" y="278" width="260" height="107" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <circle cx="416" cy="308" r="15" fill="#2563EB"/><text x="416" y="313.5" text-anchor="middle" class="numsm">2</text>
+  <text x="440" y="313" class="phase">DECISIONS</text>
+  <text x="406" y="347" class="ctitle">Architecture + ADRs</text>
+  <text x="406" y="371" class="csub">Key choices &amp; trade-offs</text>
+  <!-- card 3 -->
+  <rect x="682" y="278" width="260" height="107" rx="14" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="712" cy="308" r="15" fill="#2563EB"/><text x="712" y="313.5" text-anchor="middle" class="numsm">3</text>
+  <text x="736" y="313" class="phase">PROOF</text>
+  <text x="702" y="347" class="ctitle">Live Demo</text>
+  <text x="702" y="371" class="csub">Show it working, for real</text>
+  <!-- card 4 -->
+  <rect x="978" y="278" width="260" height="107" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <circle cx="1008" cy="308" r="15" fill="#2563EB"/><text x="1008" y="313.5" text-anchor="middle" class="numsm">4</text>
+  <text x="1032" y="313" class="phase">PROOF</text>
+  <text x="998" y="347" class="ctitle">Metrics &amp; Resilience</text>
+  <text x="998" y="371" class="csub">Evidence that it operates</text>
+  <!-- card 5 -->
+  <rect x="1274" y="278" width="260" height="107" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <circle cx="1304" cy="308" r="15" fill="#2563EB"/><text x="1304" y="313.5" text-anchor="middle" class="numsm">5</text>
+  <text x="1328" y="313" class="phase">HONESTY</text>
+  <text x="1294" y="347" class="ctitle">Lessons Learned</text>
+  <text x="1294" y="371" class="csub">What went wrong, and why</text>
+  <!-- card 6 -->
+  <rect x="1570" y="278" width="260" height="107" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <circle cx="1600" cy="308" r="15" fill="#2563EB"/><text x="1600" y="313.5" text-anchor="middle" class="numsm">6</text>
+  <text x="1624" y="313" class="phase">FUTURE</text>
+  <text x="1590" y="347" class="ctitle">Next Steps</text>
+  <text x="1590" y="371" class="csub">Where it goes from here</text>
+
+  <!-- ================= 2. ARCHITECTURE STORY ================= -->
+  <rect x="60" y="430" width="580" height="385" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+  <circle cx="96" cy="465" r="17" fill="#0D9488"/>
+  <text x="96" y="471" text-anchor="middle" class="num">2</text>
+  <text x="126" y="473" class="h">TELL THE ARCHITECTURE STORY</text>
+  <text x="90" y="508" class="lead">Explain decisions — not technologies.</text>
+
+  <rect x="90" y="526" width="520" height="66" rx="12" fill="#FEF2F2" stroke="#FECACA"/>
+  <use href="#xmark" xlink:href="#xmark" transform="translate(120,559)"/>
+  <text x="146" y="554" style="font-size:16px;font-weight:700;fill:#991B1B">“We used Kafka, Postgres, Docker, K8s v1.29…”</text>
+  <text x="146" y="578" style="font-size:14.5px;fill:#B91C1C">Just a list of tools — nobody remembers it</text>
+
+  <rect x="90" y="604" width="520" height="170" rx="12" fill="#F0FDFA" stroke="#99F6E4"/>
+  <use href="#checkTeal" xlink:href="#checkTeal" transform="translate(120,634)"/>
+  <text x="146" y="640" style="font-size:17px;font-weight:700;fill:#115E59">Tell the WHY behind each choice:</text>
+  <g fill="#0D9488">
+    <circle cx="154" cy="667" r="4"/><circle cx="154" cy="695" r="4"/>
+    <circle cx="154" cy="723" r="4"/><circle cx="154" cy="751" r="4"/>
+  </g>
+  <text x="168" y="673" class="body">Why these bounded contexts?</text>
+  <text x="168" y="701" class="body">Why sync here and async there?</text>
+  <text x="168" y="729" class="body">Why saga + outbox for consistency?</text>
+  <text x="168" y="757" class="body">What did we reject? → point to the ADRs</text>
+
+  <text x="90" y="801" class="foot" style="fill:#0D9488">One clear diagram — people remember the WHY.</text>
+
+  <!-- ================= 3. DOCUMENTATION SET ================= -->
+  <rect x="670" y="430" width="580" height="385" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+  <circle cx="706" cy="465" r="17" fill="#D97706"/>
+  <text x="706" y="471" text-anchor="middle" class="num">3</text>
+  <text x="736" y="473" class="h">SHIP THE DOCUMENTATION SET</text>
+  <text x="700" y="508" class="lead">What a new engineer needs to run &amp; extend it.</text>
+
+  <!-- tiles: col x 700 / 965, rows y 526 / 610 / 694 -->
+  <g>
+    <rect x="700" y="526" width="255" height="74" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="714" y="545" width="36" height="36" rx="8" fill="#D97706"/>
+    <text x="732" y="567.5" text-anchor="middle" class="glyph">MD</text>
+    <text x="762" y="556" class="ctitle" style="font-size:17px">README</text>
+    <text x="762" y="579" class="small">what · why · how to run</text>
+
+    <rect x="965" y="526" width="255" height="74" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="979" y="545" width="36" height="36" rx="8" fill="#D97706"/>
+    <text x="997" y="567.5" text-anchor="middle" class="glyph">ADR</text>
+    <text x="1027" y="556" class="ctitle" style="font-size:17px">Architecture + ADRs</text>
+    <text x="1027" y="579" class="small">diagram + key decisions</text>
+
+    <rect x="700" y="610" width="255" height="74" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="714" y="629" width="36" height="36" rx="8" fill="#D97706"/>
+    <text x="732" y="651.5" text-anchor="middle" class="glyph">API</text>
+    <text x="762" y="640" class="ctitle" style="font-size:17px">API Docs</text>
+    <text x="762" y="663" class="small">OpenAPI / proto contracts</text>
+
+    <rect x="965" y="610" width="255" height="74" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="979" y="629" width="36" height="36" rx="8" fill="#D97706"/>
+    <text x="997" y="651.5" text-anchor="middle" class="glyph">OPS</text>
+    <text x="1027" y="640" class="ctitle" style="font-size:17px">Runbooks</text>
+    <text x="1027" y="663" class="small">operate &amp; handle incidents</text>
+
+    <rect x="700" y="694" width="255" height="74" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="714" y="713" width="36" height="36" rx="8" fill="#D97706"/>
+    <text x="732" y="735.5" text-anchor="middle" class="glyph">LOG</text>
+    <text x="762" y="724" class="ctitle" style="font-size:17px">CHANGELOG</text>
+    <text x="762" y="747" class="small">versions &amp; what changed</text>
+
+    <rect x="965" y="694" width="255" height="74" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="979" y="713" width="36" height="36" rx="8" fill="#D97706"/>
+    <text x="997" y="735.5" text-anchor="middle" class="glyph" style="font-size:10.5px">FLOW</text>
+    <text x="1027" y="724" class="ctitle" style="font-size:17px">Data-flow Diagrams</text>
+    <text x="1027" y="747" class="small">how data moves</text>
+  </g>
+
+  <text x="700" y="801" class="foot" style="fill:#B45309">Test: could another team run it without calling you?</text>
+
+  <!-- ================= 4. DEMO ================= -->
+  <rect x="1280" y="430" width="580" height="385" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+  <circle cx="1316" cy="465" r="17" fill="#7C3AED"/>
+  <text x="1316" y="471" text-anchor="middle" class="num">4</text>
+  <text x="1346" y="473" class="h">PREPARE A DEMO THAT PROVES IT</text>
+  <text x="1310" y="508" class="lead">A live demo beats 20 slides of architecture.</text>
+
+  <rect x="1310" y="526" width="520" height="52" rx="12" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <rect x="1310" y="588" width="520" height="52" rx="12" fill="#F5F3FF" stroke="#DDD6FE"/>
+  <rect x="1310" y="650" width="520" height="52" rx="12" fill="#FEF2F2" stroke="#FECACA"/>
+  <rect x="1310" y="712" width="520" height="52" rx="12" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <line x1="1340" y1="552" x2="1340" y2="738" stroke="#C4B5FD" stroke-width="3"/>
+
+  <circle cx="1340" cy="552" r="15" fill="#7C3AED"/><text x="1340" y="557.5" text-anchor="middle" class="numsm">1</text>
+  <text x="1368" y="549" style="font-size:18px;font-weight:700">Place an order</text>
+  <text x="1368" y="569" class="small">send a real request through the system</text>
+  <text x="1812" y="558" text-anchor="end" style="font-size:12.5px;font-weight:800;letter-spacing:1.2px;fill:#7C3AED">ACT</text>
+
+  <circle cx="1340" cy="614" r="15" fill="#7C3AED"/><text x="1340" y="619.5" text-anchor="middle" class="numsm">2</text>
+  <text x="1368" y="611" style="font-size:18px;font-weight:700">Show it persist</text>
+  <text x="1368" y="631" class="small">the data is really saved</text>
+  <text x="1812" y="620" text-anchor="end" style="font-size:12.5px;font-weight:800;letter-spacing:1.2px;fill:#7C3AED">PERSIST</text>
+
+  <circle cx="1340" cy="676" r="15" fill="#DC2626"/><text x="1340" y="681.5" text-anchor="middle" class="numsm">3</text>
+  <text x="1368" y="673" style="font-size:18px;font-weight:700">Kill a service</text>
+  <text x="1368" y="693" class="small">simulate a failure, live</text>
+  <text x="1812" y="682" text-anchor="end" style="font-size:12.5px;font-weight:800;letter-spacing:1.2px;fill:#DC2626">BREAK</text>
+
+  <circle cx="1340" cy="738" r="15" fill="#16A34A"/><text x="1340" y="743.5" text-anchor="middle" class="numsm">4</text>
+  <text x="1368" y="735" style="font-size:18px;font-weight:700">Show it recover</text>
+  <text x="1368" y="755" class="small">retries · saga · outbox do their job</text>
+  <text x="1812" y="744" text-anchor="end" style="font-size:12.5px;font-weight:800;letter-spacing:1.2px;fill:#16A34A">RECOVER</text>
+
+  <text x="1310" y="801" class="foot" style="fill:#6D28D9">Show working software first — explain second.</text>
+
+  <!-- ================= 5. REAL-LIFE SCENARIO ================= -->
+  <rect x="60" y="840" width="1030" height="240" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+  <path d="M96 858 L115 891 L77 891 Z" fill="#EA580C" stroke="#EA580C" stroke-width="4" stroke-linejoin="round"/>
+  <text x="96" y="888" text-anchor="middle" style="font-size:18px;font-weight:800;fill:#FFFFFF">!</text>
+  <text x="126" y="883" class="h">REAL-LIFE SCENARIO<tspan class="hlight" dx="12">·  great system, terrible pitch</tspan></text>
+
+  <rect x="90" y="903" width="380" height="160" rx="12" fill="#FEF2F2" stroke="#FECACA"/>
+  <use href="#xmark" xlink:href="#xmark" transform="translate(118,931) scale(0.93)"/>
+  <text x="142" y="937" style="font-size:17px;font-weight:700;fill:#991B1B">What happened</text>
+  <g fill="#F87171">
+    <circle cx="114" cy="962" r="4"/><circle cx="114" cy="988" r="4"/><circle cx="114" cy="1014" r="4"/>
+  </g>
+  <text x="128" y="968" style="font-size:16px;fill:#7F1D1D">20 slides of architecture</text>
+  <text x="128" y="994" style="font-size:16px;fill:#7F1D1D">No running software</text>
+  <text x="128" y="1020" style="font-size:16px;fill:#7F1D1D">No ADRs — no decisions explained</text>
+  <text x="112" y="1050" style="font-size:16px;font-weight:800;fill:#DC2626">→ Stakeholder leaves unconvinced</text>
+
+  <!-- fix arrow -->
+  <path d="M480 970 L514 970 L514 958 L534 983 L514 1008 L514 996 L480 996 Z" fill="#CBD5E1"/>
+  <text x="505" y="1030" text-anchor="middle" style="font-size:12.5px;font-weight:800;letter-spacing:1.5px;fill:#64748B">FIX</text>
+
+  <rect x="544" y="903" width="516" height="160" rx="12" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <use href="#check" xlink:href="#check" transform="translate(572,931) scale(0.93)"/>
+  <text x="596" y="937" style="font-size:17px;font-weight:700;fill:#166534">Same system, better story</text>
+  <g fill="#16A34A">
+    <circle cx="576" cy="963" r="10"/><circle cx="576" cy="989" r="10"/>
+    <circle cx="576" cy="1015" r="10"/><circle cx="576" cy="1041" r="10"/>
+  </g>
+  <g style="font-size:12px;font-weight:800" text-anchor="middle">
+    <text x="576" y="967.5" style="fill:#FFFFFF">1</text>
+    <text x="576" y="993.5" style="fill:#FFFFFF">2</text>
+    <text x="576" y="1019.5" style="fill:#FFFFFF">3</text>
+    <text x="576" y="1045.5" style="fill:#FFFFFF">4</text>
+  </g>
+  <text x="596" y="969" style="font-size:16px;fill:#14532D">Open with the problem</text>
+  <text x="596" y="995" style="font-size:16px;fill:#14532D">Live demo: order → saved → kill → recover</text>
+  <text x="596" y="1021" style="font-size:16px;fill:#14532D">One architecture diagram + key decisions</text>
+  <text x="596" y="1047" style="font-size:16px;fill:#14532D">Metrics and honest lessons learned</text>
+
+  <!-- ================= 6. COMMON MISTAKES ================= -->
+  <rect x="1120" y="840" width="740" height="240" rx="18" fill="#FFFFFF" stroke="#E2E8F0" filter="url(#shadow)"/>
+  <use href="#xmark" xlink:href="#xmark" transform="translate(1156,875) scale(1.2)"/>
+  <text x="1186" y="883" class="h">COMMON MISTAKES<tspan class="hlight" dx="12">→  how to fix them</tspan></text>
+
+  <!-- rows y 903 / 945 / 987 / 1029 -->
+  <g>
+    <rect x="1150" y="903" width="300" height="36" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+    <use href="#xmark" xlink:href="#xmark" transform="translate(1170,921) scale(0.68)"/>
+    <text x="1188" y="926.5" style="font-size:15.5px;fill:#991B1B">Listing technologies</text>
+    <line x1="1458" y1="921" x2="1490" y2="921" stroke="#94A3B8" stroke-width="2.5" marker-end="url(#arrGrey)"/>
+    <rect x="1500" y="903" width="330" height="36" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/>
+    <use href="#check" xlink:href="#check" transform="translate(1520,921) scale(0.68)"/>
+    <text x="1538" y="926.5" style="font-size:15.5px;fill:#166534">Explain the decisions (the why)</text>
+
+    <rect x="1150" y="945" width="300" height="36" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+    <use href="#xmark" xlink:href="#xmark" transform="translate(1170,963) scale(0.68)"/>
+    <text x="1188" y="968.5" style="font-size:15.5px;fill:#991B1B">Slides instead of software</text>
+    <line x1="1458" y1="963" x2="1490" y2="963" stroke="#94A3B8" stroke-width="2.5" marker-end="url(#arrGrey)"/>
+    <rect x="1500" y="945" width="330" height="36" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/>
+    <use href="#check" xlink:href="#check" transform="translate(1520,963) scale(0.68)"/>
+    <text x="1538" y="968.5" style="font-size:15.5px;fill:#166534">Run a live, working demo</text>
+
+    <rect x="1150" y="987" width="300" height="36" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+    <use href="#xmark" xlink:href="#xmark" transform="translate(1170,1005) scale(0.68)"/>
+    <text x="1188" y="1010.5" style="font-size:15.5px;fill:#991B1B">No README / runbooks</text>
+    <line x1="1458" y1="1005" x2="1490" y2="1005" stroke="#94A3B8" stroke-width="2.5" marker-end="url(#arrGrey)"/>
+    <rect x="1500" y="987" width="330" height="36" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/>
+    <use href="#check" xlink:href="#check" transform="translate(1520,1005) scale(0.68)"/>
+    <text x="1538" y="1010.5" style="font-size:15.5px;fill:#166534">Docs so anyone can run it</text>
+
+    <rect x="1150" y="1029" width="300" height="36" rx="10" fill="#FEF2F2" stroke="#FECACA"/>
+    <use href="#xmark" xlink:href="#xmark" transform="translate(1170,1047) scale(0.68)"/>
+    <text x="1188" y="1052.5" style="font-size:15.5px;fill:#991B1B">Hiding what went wrong</text>
+    <line x1="1458" y1="1047" x2="1490" y2="1047" stroke="#94A3B8" stroke-width="2.5" marker-end="url(#arrGrey)"/>
+    <rect x="1500" y="1029" width="330" height="36" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/>
+    <use href="#check" xlink:href="#check" transform="translate(1520,1047) scale(0.68)"/>
+    <text x="1538" y="1052.5" style="font-size:15.5px;fill:#166534">Share honest lessons learned</text>
+  </g>
+
+  <!-- ================= ANALOGY STRIP ================= -->
+  <rect x="60" y="1100" width="1800" height="62" rx="16" fill="#1E293B"/>
+  <!-- simple car icon -->
+  <path d="M101 1127 L110 1114 L130 1114 L140 1127 Z" fill="#60A5FA"/>
+  <rect x="88" y="1126" width="64" height="17" rx="6" fill="#3B82F6"/>
+  <circle cx="104" cy="1144" r="6.5" fill="#1E293B" stroke="#93C5FD" stroke-width="2.5"/>
+  <circle cx="136" cy="1144" r="6.5" fill="#1E293B" stroke="#93C5FD" stroke-width="2.5"/>
+  <text x="176" y="1124" style="font-size:12.5px;font-weight:800;letter-spacing:2px;fill:#93C5FD">SIMPLE ANALOGY</text>
+  <text x="176" y="1149" style="font-size:19px;fill:#FFFFFF">Like selling a used car: a <tspan style="font-weight:700;fill:#BFDBFE">test drive</tspan> first (demo), then <tspan style="font-weight:700;fill:#99F6E4">why that engine</tspan> (decisions), the <tspan style="font-weight:700;fill:#FDE68A">owner’s manual</tspan> (docs), and the <tspan style="font-weight:700;fill:#FECACA">honest scratches</tspan> (lessons).</text>
+</svg>

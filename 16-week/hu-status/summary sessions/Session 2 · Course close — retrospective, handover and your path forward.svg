@@ -1,0 +1,307 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Inter, 'Segoe UI', Arial, Helvetica, sans-serif">
+  <title>Course Close: Retrospective, Handover and Your Path Forward</title>
+  <defs>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4F46E5"/>
+    </marker>
+    <clipPath id="card1"><rect x="60" y="190" width="420" height="420" rx="18"/></clipPath><clipPath id="card2"><rect x="520" y="190" width="420" height="420" rx="18"/></clipPath><clipPath id="card3"><rect x="980" y="190" width="420" height="420" rx="18"/></clipPath><clipPath id="card4"><rect x="1440" y="190" width="420" height="420" rx="18"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1920" height="1080" fill="#F5F7FB"/>
+
+  <!-- ================= HEADER ================= -->
+  <rect x="60" y="34" width="390" height="34" rx="17" fill="#0F172A"/>
+  <text x="255" y="57" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF" letter-spacing="1.5">WEEK 16 · SESSION 2 · COURSE CLOSE</text>
+
+  <text x="60" y="122" font-size="44" font-weight="800" fill="#0F172A">Course Close: Retrospective, Handover &amp; Your Path Forward</text>
+  <text x="60" y="160" font-size="21" fill="#475569">You built and operated a real distributed system as a team. Now close it like a pro: <tspan font-weight="700" fill="#0F172A">look back, hand it over, show it, keep growing.</tspan></text>
+
+  <!-- ================= ROW 1: FOUR CLOSING MOVES ================= -->
+
+  <!-- Card shadows -->
+  <rect x="60" y="194" width="420" height="420" rx="18" fill="#E2E8F0"/>
+  <rect x="520" y="194" width="420" height="420" rx="18" fill="#E2E8F0"/>
+  <rect x="980" y="194" width="420" height="420" rx="18" fill="#E2E8F0"/>
+  <rect x="1440" y="194" width="420" height="420" rx="18" fill="#E2E8F0"/>
+
+  <!-- CARD 1: RETROSPECTIVE -->
+  <rect x="60" y="190" width="420" height="420" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <rect x="60" y="190" width="420" height="8" fill="#4F46E5" clip-path="url(#card1)"/>
+  <circle cx="108" cy="242" r="26" fill="#4F46E5"/>
+  <text x="108" y="251" text-anchor="middle" font-size="26" font-weight="800" fill="#FFFFFF">1</text>
+  <text x="148" y="238" font-size="25" font-weight="800" fill="#0F172A">Final Retrospective</text>
+  <text x="148" y="263" font-size="15" font-weight="600" fill="#4F46E5">Blameless · concrete · whole semester</text>
+  <line x1="84" y1="286" x2="456" y2="286" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <text x="84" y="308" font-size="13" font-weight="700" fill="#64748B" letter-spacing="1.5">ASK THE TEAM</text>
+
+  <rect x="84" y="320" width="372" height="54" rx="12" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <circle cx="108" cy="347" r="7" fill="#16A34A"/>
+  <text x="126" y="353" font-size="18" font-weight="600" fill="#0F172A">What made the system reliable?</text>
+
+  <rect x="84" y="384" width="372" height="62" rx="12" fill="#FEF2F2" stroke="#FECACA"/>
+  <circle cx="108" cy="407" r="7" fill="#DC2626"/>
+  <text x="126" y="413" font-size="18" font-weight="600" fill="#0F172A">Where was the pain?</text>
+  <text x="126" y="435" font-size="15" fill="#64748B">integration · consistency · operations</text>
+
+  <rect x="84" y="456" width="372" height="54" rx="12" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <circle cx="108" cy="483" r="7" fill="#2563EB"/>
+  <text x="126" y="489" font-size="18" font-weight="600" fill="#0F172A">What would we do from day one?</text>
+
+  <line x1="270" y1="514" x2="270" y2="530" stroke="#4F46E5" stroke-width="2.5" marker-end="url(#arrowDown)"/>
+
+  <rect x="84" y="538" width="372" height="54" rx="12" fill="#4F46E5"/>
+  <text x="270" y="571" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">Insights → principles for real jobs</text>
+
+  <!-- CARD 2: HANDOVER -->
+  <rect x="520" y="190" width="420" height="420" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <rect x="520" y="190" width="420" height="8" fill="#EA580C" clip-path="url(#card2)"/>
+  <circle cx="568" cy="242" r="26" fill="#EA580C"/>
+  <text x="568" y="251" text-anchor="middle" font-size="26" font-weight="800" fill="#FFFFFF">2</text>
+  <text x="608" y="238" font-size="25" font-weight="800" fill="#0F172A">Handover</text>
+  <text x="608" y="263" font-size="15" font-weight="600" fill="#EA580C">Beat the bus factor</text>
+  <line x1="544" y1="286" x2="916" y2="286" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <rect x="544" y="298" width="372" height="34" rx="17" fill="#FEE2E2" stroke="#FCA5A5"/>
+  <text x="730" y="320" text-anchor="middle" font-size="15" font-weight="700" fill="#B91C1C">Bus factor = 1: only one person knows it</text>
+
+  <!-- 2x2 handover quadrant -->
+  <rect x="544" y="344" width="180" height="56" rx="10" fill="#FFF7ED" stroke="#FED7AA"/>
+  <text x="634" y="368" text-anchor="middle" font-size="17" font-weight="700" fill="#0F172A">Run it</text>
+  <text x="634" y="389" text-anchor="middle" font-size="14" fill="#64748B">one command</text>
+
+  <rect x="736" y="344" width="180" height="56" rx="10" fill="#FFF7ED" stroke="#FED7AA"/>
+  <text x="826" y="368" text-anchor="middle" font-size="17" font-weight="700" fill="#0F172A">Operate it</text>
+  <text x="826" y="389" text-anchor="middle" font-size="14" fill="#64748B">runbooks</text>
+
+  <rect x="544" y="410" width="180" height="56" rx="10" fill="#FFF7ED" stroke="#FED7AA"/>
+  <text x="634" y="434" text-anchor="middle" font-size="17" font-weight="700" fill="#0F172A">Extend it</text>
+  <text x="634" y="455" text-anchor="middle" font-size="14" fill="#64748B">ADRs + API contracts</text>
+
+  <rect x="736" y="410" width="180" height="56" rx="10" fill="#FFF7ED" stroke="#FED7AA"/>
+  <text x="826" y="434" text-anchor="middle" font-size="17" font-weight="700" fill="#0F172A">Understand it</text>
+  <text x="826" y="455" text-anchor="middle" font-size="14" fill="#64748B">architecture diagram</text>
+
+  <text x="730" y="490" text-anchor="middle" font-size="14" fill="#64748B">+ README · clean CHANGELOG · <tspan font-weight="700" fill="#0F172A">all kept current</tspan></text>
+
+  <rect x="544" y="504" width="372" height="88" rx="12" fill="#16A34A"/>
+  <text x="730" y="532" text-anchor="middle" font-size="19" font-weight="800" fill="#FFFFFF">Bus factor &gt; 1</text>
+  <text x="730" y="556" text-anchor="middle" font-size="15" fill="#FFFFFF">A stranger can run, operate &amp; extend it</text>
+  <text x="730" y="577" text-anchor="middle" font-size="15" fill="#FFFFFF">from the docs alone.</text>
+
+  <!-- CARD 3: PORTFOLIO -->
+  <rect x="980" y="190" width="420" height="420" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <rect x="980" y="190" width="420" height="8" fill="#0D9488" clip-path="url(#card3)"/>
+  <circle cx="1028" cy="242" r="26" fill="#0D9488"/>
+  <text x="1028" y="251" text-anchor="middle" font-size="26" font-weight="800" fill="#FFFFFF">3</text>
+  <text x="1068" y="238" font-size="25" font-weight="800" fill="#0F172A">Portfolio</text>
+  <text x="1068" y="263" font-size="15" font-weight="600" fill="#0D9488">Make your effort visible</text>
+  <line x1="1004" y1="286" x2="1376" y2="286" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <text x="1004" y="308" font-size="13" font-weight="700" fill="#64748B" letter-spacing="1.5">PORTFOLIO GOLD — CURATE IT</text>
+
+  <g font-size="18" font-weight="600" fill="#0F172A">
+    <rect x="1004" y="324" width="22" height="22" rx="5" fill="#0D9488"/>
+    <path d="M1009,335 l4,4 l8,-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1040" y="342">Clean repo + strong README</text>
+
+    <rect x="1004" y="362" width="22" height="22" rx="5" fill="#0D9488"/>
+    <path d="M1009,373 l4,4 l8,-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1040" y="380">Architecture diagram</text>
+
+    <rect x="1004" y="400" width="22" height="22" rx="5" fill="#0D9488"/>
+    <path d="M1009,411 l4,4 l8,-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1040" y="418">ADRs that show your reasoning</text>
+
+    <rect x="1004" y="438" width="22" height="22" rx="5" fill="#0D9488"/>
+    <path d="M1009,449 l4,4 l8,-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1040" y="456">Short demo video</text>
+
+    <rect x="1004" y="476" width="22" height="22" rx="5" fill="#0D9488"/>
+    <path d="M1009,487 l4,4 l8,-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1040" y="494">Your individual contribution</text>
+  </g>
+  <text x="1040" y="515" font-size="14" fill="#64748B">your hu-status history = the evidence</text>
+
+  <rect x="1004" y="534" width="372" height="58" rx="12" fill="#0D9488"/>
+  <text x="1190" y="558" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Proof you can build &amp; run distributed</text>
+  <text x="1190" y="579" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">systems — not just pass an exam</text>
+
+  <!-- CARD 4: GROW NEXT -->
+  <rect x="1440" y="190" width="420" height="420" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <rect x="1440" y="190" width="420" height="8" fill="#2563EB" clip-path="url(#card4)"/>
+  <circle cx="1488" cy="242" r="26" fill="#2563EB"/>
+  <text x="1488" y="251" text-anchor="middle" font-size="26" font-weight="800" fill="#FFFFFF">4</text>
+  <text x="1528" y="238" font-size="25" font-weight="800" fill="#0F172A">Grow Next</text>
+  <text x="1528" y="263" font-size="15" font-weight="600" fill="#2563EB">Deepen the foundation</text>
+  <line x1="1464" y1="286" x2="1836" y2="286" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- timeline -->
+  <line x1="1478" y1="316" x2="1478" y2="556" stroke="#BFDBFE" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="1478" cy="316" r="11" fill="#2563EB" stroke="#DBEAFE" stroke-width="4"/>
+  <circle cx="1478" cy="376" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <circle cx="1478" cy="436" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <circle cx="1478" cy="496" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <circle cx="1478" cy="556" r="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+
+  <text x="1502" y="322" font-size="18" font-weight="700" fill="#0F172A">This course</text>
+  <rect x="1622" y="305" width="110" height="24" rx="12" fill="#2563EB"/>
+  <text x="1677" y="322" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="1">YOU ARE HERE</text>
+  <text x="1502" y="343" font-size="14" fill="#64748B">the foundation you just built</text>
+
+  <text x="1502" y="382" font-size="18" font-weight="700" fill="#0F172A">Kubernetes &amp; SRE</text>
+  <text x="1502" y="403" font-size="14" fill="#64748B">cloud-native operations · platform practices</text>
+
+  <text x="1502" y="442" font-size="18" font-weight="700" fill="#0F172A">Event streaming</text>
+  <text x="1502" y="463" font-size="14" fill="#64748B">Kafka · event-driven architecture at scale</text>
+
+  <text x="1502" y="502" font-size="18" font-weight="700" fill="#0F172A">Data-intensive systems</text>
+  <text x="1502" y="523" font-size="14" fill="#64748B">read the “DDIA” book (Kleppmann)</text>
+
+  <text x="1502" y="562" font-size="18" font-weight="700" fill="#0F172A">Observability &amp; security</text>
+  <text x="1502" y="583" font-size="14" fill="#64748B">SLO engineering · security engineering</text>
+
+  <!-- arrows between cards -->
+  <g>
+    <circle cx="500" cy="400" r="15" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <path d="M495,393 l7,7 l-7,7" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="960" cy="400" r="15" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <path d="M955,393 l7,7 l-7,7" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="1420" cy="400" r="15" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <path d="M1415,393 l7,7 l-7,7" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= ROW 2 ================= -->
+
+  <!-- PANEL A: TOOLKIT -->
+  <rect x="60" y="640" width="820" height="340" rx="18" fill="#E2E8F0"/>
+  <rect x="60" y="636" width="820" height="340" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="84" y="676" font-size="22" font-weight="800" fill="#0F172A">What you leave with <tspan font-weight="500" fill="#64748B">— a pro distributed-systems toolkit</tspan></text>
+
+  <!-- row 1 tiles -->
+  <g>
+    <rect x="84" y="696" width="184" height="104" rx="12" fill="#EEF2FF"/>
+    <rect x="84" y="696" width="6" height="104" rx="3" fill="#4F46E5"/>
+    <text x="104" y="730" font-size="19" font-weight="800" fill="#312E81">Model</text>
+    <text x="104" y="756" font-size="14" fill="#475569">the domain with</text>
+    <text x="104" y="776" font-size="14" fill="#475569">DDD</text>
+
+    <rect x="280" y="696" width="184" height="104" rx="12" fill="#EEF2FF"/>
+    <rect x="280" y="696" width="6" height="104" rx="3" fill="#4F46E5"/>
+    <text x="300" y="730" font-size="19" font-weight="800" fill="#312E81">Shape</text>
+    <text x="300" y="756" font-size="14" fill="#475569">services with</text>
+    <text x="300" y="776" font-size="14" fill="#475569">hexagonal architecture</text>
+
+    <rect x="476" y="696" width="184" height="104" rx="12" fill="#EFF6FF"/>
+    <rect x="476" y="696" width="6" height="104" rx="3" fill="#2563EB"/>
+    <text x="496" y="730" font-size="19" font-weight="800" fill="#1E3A8A">Communicate</text>
+    <text x="496" y="756" font-size="14" fill="#475569">REST · gRPC ·</text>
+    <text x="496" y="776" font-size="14" fill="#475569">events</text>
+
+    <rect x="672" y="696" width="184" height="104" rx="12" fill="#EFF6FF"/>
+    <rect x="672" y="696" width="6" height="104" rx="3" fill="#2563EB"/>
+    <text x="692" y="730" font-size="18" font-weight="800" fill="#1E3A8A">Stay consistent</text>
+    <text x="692" y="756" font-size="14" fill="#475569">saga pattern +</text>
+    <text x="692" y="776" font-size="14" fill="#475569">outbox pattern</text>
+  </g>
+
+  <!-- row 2 tiles -->
+  <g>
+    <rect x="84" y="812" width="184" height="104" rx="12" fill="#F0FDFA"/>
+    <rect x="84" y="812" width="6" height="104" rx="3" fill="#0D9488"/>
+    <text x="104" y="846" font-size="19" font-weight="800" fill="#134E4A">Ship</text>
+    <text x="104" y="872" font-size="14" fill="#475569">containers +</text>
+    <text x="104" y="892" font-size="14" fill="#475569">zero-downtime deploys</text>
+
+    <rect x="280" y="812" width="184" height="104" rx="12" fill="#F0FDFA"/>
+    <rect x="280" y="812" width="6" height="104" rx="3" fill="#0D9488"/>
+    <text x="300" y="846" font-size="19" font-weight="800" fill="#134E4A">Observe</text>
+    <text x="300" y="872" font-size="14" fill="#475569">metrics · logs ·</text>
+    <text x="300" y="892" font-size="14" fill="#475569">traces · security</text>
+
+    <rect x="476" y="812" width="184" height="104" rx="12" fill="#F0FDFA"/>
+    <rect x="476" y="812" width="6" height="104" rx="3" fill="#0D9488"/>
+    <text x="496" y="846" font-size="19" font-weight="800" fill="#134E4A">Stress-test</text>
+    <text x="496" y="872" font-size="14" fill="#475569">load tests +</text>
+    <text x="496" y="892" font-size="14" fill="#475569">chaos experiments</text>
+
+    <rect x="672" y="812" width="184" height="104" rx="12" fill="#FFF7ED"/>
+    <rect x="672" y="812" width="6" height="104" rx="3" fill="#EA580C"/>
+    <text x="692" y="846" font-size="19" font-weight="800" fill="#7C2D12">Team up</text>
+    <text x="692" y="872" font-size="14" fill="#475569">agile · git-flow ·</text>
+    <text x="692" y="892" font-size="14" fill="#475569">contracts · CI/CD</text>
+  </g>
+
+  <text x="470" y="952" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">
+    <tspan fill="#4F46E5">Design it</tspan>&#160;&#160;→&#160;&#160;<tspan fill="#2563EB">connect it</tspan>&#160;&#160;→&#160;&#160;<tspan fill="#0D9488">ship &amp; run it</tspan>&#160;&#160;→&#160;&#160;<tspan fill="#EA580C">as a team</tspan>
+  </text>
+
+  <!-- PANEL B: EVERYDAY EXAMPLE -->
+  <rect x="910" y="640" width="480" height="340" rx="18" fill="#E2E8F0"/>
+  <rect x="910" y="636" width="480" height="340" rx="18" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5"/>
+  <text x="934" y="676" font-size="22" font-weight="800" fill="#0F172A">Example: a restaurant kitchen</text>
+  <text x="934" y="704" font-size="15" font-style="italic" fill="#92400E">The head chef quits. Can the kitchen still cook</text>
+  <text x="934" y="724" font-size="15" font-style="italic" fill="#92400E">tomorrow — without calling her?</text>
+
+  <g font-size="15">
+    <text x="934" y="762" fill="#334155">Recipe book</text>
+    <text x="1186" y="762" text-anchor="middle" fill="#B45309" font-weight="700">→</text>
+    <rect x="1202" y="742" width="164" height="28" rx="14" fill="#FFFFFF" stroke="#FCD34D"/>
+    <text x="1284" y="761" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">README</text>
+
+    <text x="934" y="798" fill="#334155">Why we cook it this way</text>
+    <text x="1186" y="798" text-anchor="middle" fill="#B45309" font-weight="700">→</text>
+    <rect x="1202" y="778" width="164" height="28" rx="14" fill="#FFFFFF" stroke="#FCD34D"/>
+    <text x="1284" y="797" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">ADRs</text>
+
+    <text x="934" y="834" fill="#334155">“Oven broke? Do this” sheet</text>
+    <text x="1186" y="834" text-anchor="middle" fill="#B45309" font-weight="700">→</text>
+    <rect x="1202" y="814" width="164" height="28" rx="14" fill="#FFFFFF" stroke="#FCD34D"/>
+    <text x="1284" y="833" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">Runbooks</text>
+
+    <text x="934" y="870" fill="#334155">Kitchen floor plan</text>
+    <text x="1186" y="870" text-anchor="middle" fill="#B45309" font-weight="700">→</text>
+    <rect x="1202" y="850" width="164" height="28" rx="14" fill="#FFFFFF" stroke="#FCD34D"/>
+    <text x="1284" y="869" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">Architecture diagram</text>
+
+    <text x="934" y="906" fill="#334155">Menu the waiters use</text>
+    <text x="1186" y="906" text-anchor="middle" fill="#B45309" font-weight="700">→</text>
+    <rect x="1202" y="886" width="164" height="28" rx="14" fill="#FFFFFF" stroke="#FCD34D"/>
+    <text x="1284" y="905" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">API contracts</text>
+  </g>
+
+  <rect x="934" y="928" width="432" height="34" rx="17" fill="#16A34A"/>
+  <text x="1150" y="950" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">A new cook runs it on day one → bus factor &gt; 1</text>
+
+  <!-- PANEL C: COMMON MISTAKES -->
+  <rect x="1420" y="640" width="440" height="340" rx="18" fill="#E2E8F0"/>
+  <rect x="1420" y="636" width="440" height="340" rx="18" fill="#FFFFFF" stroke="#FECACA" stroke-width="1.5"/>
+  <text x="1444" y="676" font-size="22" font-weight="800" fill="#0F172A">Common mistakes at the close</text>
+
+  <g>
+    <circle cx="1458" cy="714" r="13" fill="#FEE2E2"/>
+    <path d="M1453,709 l10,10 M1463,709 l-10,10" stroke="#DC2626" stroke-width="2.6" stroke-linecap="round"/>
+    <text x="1482" y="720" font-size="17" font-weight="700" fill="#0F172A">Stale or missing handover docs</text>
+    <text x="1482" y="742" font-size="15" fill="#64748B">bus factor stays at 1</text>
+
+    <circle cx="1458" cy="782" r="13" fill="#FEE2E2"/>
+    <path d="M1453,777 l10,10 M1463,777 l-10,10" stroke="#DC2626" stroke-width="2.6" stroke-linecap="round"/>
+    <text x="1482" y="788" font-size="17" font-weight="700" fill="#0F172A">Repo with no README or diagram</text>
+    <text x="1482" y="810" font-size="15" fill="#64748B">your effort becomes invisible</text>
+
+    <circle cx="1458" cy="850" r="13" fill="#FEE2E2"/>
+    <path d="M1453,845 l10,10 M1463,845 l-10,10" stroke="#DC2626" stroke-width="2.6" stroke-linecap="round"/>
+    <text x="1482" y="856" font-size="17" font-weight="700" fill="#0F172A">Retro treated as a formality</text>
+    <text x="1482" y="878" font-size="15" fill="#64748B">no principles extracted</text>
+
+    <circle cx="1458" cy="918" r="13" fill="#FEE2E2"/>
+    <path d="M1453,913 l10,10 M1463,913 l-10,10" stroke="#DC2626" stroke-width="2.6" stroke-linecap="round"/>
+    <text x="1482" y="924" font-size="17" font-weight="700" fill="#0F172A">Stopping learning</text>
+    <text x="1482" y="946" font-size="15" fill="#64748B">the field moves: keep the mindset, add tools</text>
+  </g>
+
+  <!-- ================= FOOTER: MINDSET ================= -->
+  <rect x="60" y="998" width="1800" height="46" rx="23" fill="#0F172A"/>
+  <text x="960" y="1028" text-anchor="middle" font-size="18" fill="#CBD5E1"><tspan font-weight="800" fill="#FFFFFF" letter-spacing="1.5">THE MINDSET TRANSFERS TO ANY STACK</tspan>&#160;&#160;&#160;→&#160;&#160;&#160;<tspan fill="#A5B4FC" font-weight="700">Design for failure</tspan>&#160;&#160;&#160;·&#160;&#160;&#160;<tspan fill="#5EEAD4" font-weight="700">Make quality mechanical</tspan>&#160;&#160;&#160;·&#160;&#160;&#160;<tspan fill="#FDBA74" font-weight="700">Decide with evidence</tspan></text>
+</svg>

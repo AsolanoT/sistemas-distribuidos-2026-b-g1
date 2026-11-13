@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200" lang="en" role="img" aria-labelledby="t d">
+<title id="t">Planning: your pipeline, DoD as gates and branch protection</title>
+<desc id="d">Week 14, session 2. Every Definition of Done item becomes an automated gate; branch protection makes it unavoidable; each service has its own pipeline; the work is sliced into MVP 3 stories.</desc>
+<defs>
+<clipPath id="clip1"><rect x="50" y="148" width="440" height="96" rx="12"/></clipPath>
+<clipPath id="clip2"><rect x="510" y="148" width="440" height="96" rx="12"/></clipPath>
+<clipPath id="clip3"><rect x="970" y="148" width="440" height="96" rx="12"/></clipPath>
+<clipPath id="clip4"><rect x="1430" y="148" width="440" height="96" rx="12"/></clipPath>
+<clipPath id="clip5"><rect x="50" y="262" width="640" height="476" rx="16"/></clipPath>
+<clipPath id="clip6"><rect x="715" y="262" width="540" height="476" rx="16"/></clipPath>
+<clipPath id="clip7"><rect x="1280" y="262" width="590" height="476" rx="16"/></clipPath>
+<clipPath id="clip8"><rect x="50" y="756" width="640" height="344" rx="16"/></clipPath>
+<clipPath id="clip9"><rect x="715" y="756" width="540" height="344" rx="16"/></clipPath>
+<clipPath id="clip10"><rect x="1280" y="756" width="590" height="344" rx="16"/></clipPath>
+</defs>
+<rect x="0.0" y="0.0" width="1920.0" height="1200.0" fill="#F4F6FA"/>
+<text xml:space="preserve" x="50.0" y="48.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#2563EB" font-weight="700" letter-spacing="2">WEEK 14 · SESSION 2 · PLANNING</text>
+<text xml:space="preserve" x="50.0" y="94.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="40" fill="#1E2A3A" font-weight="700">Your pipeline: DoD as gates and branch protection</text>
+<text xml:space="preserve" x="50.0" y="128.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="19" fill="#5B6575">Every item in the Definition of Done becomes an automated check that nobody can skip</text>
+<rect x="1620.0" y="30.0" width="250.0" height="84.0" rx="16" fill="#1E2A3A"/>
+<text xml:space="preserve" x="1745.0" y="70.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="32" fill="#FFFFFF" font-weight="700" text-anchor="middle">MVP 3</text>
+<text xml:space="preserve" x="1745.0" y="98.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#C7D2FE" text-anchor="middle">ships next week</text>
+<rect x="50.0" y="148.0" width="440.0" height="96.0" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="50" y="148" width="7" height="96" fill="#2563EB" clip-path="url(#clip1)"/>
+<text xml:space="preserve" x="76.0" y="181.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="18" fill="#1E40AF" font-weight="700">DoD · Definition of Done</text>
+<text xml:space="preserve" x="76.0" y="207.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">The checklist that lets you say</text>
+<text xml:space="preserve" x="76.0" y="229.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">“this is really done.”</text>
+<rect x="510.0" y="148.0" width="440.0" height="96.0" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="510" y="148" width="7" height="96" fill="#16A34A" clip-path="url(#clip2)"/>
+<text xml:space="preserve" x="536.0" y="181.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="18" fill="#166534" font-weight="700">Gate</text>
+<text xml:space="preserve" x="536.0" y="207.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">An automated check that can</text>
+<text xml:space="preserve" x="536.0" y="229.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">reject your change if something fails.</text>
+<rect x="970.0" y="148.0" width="440.0" height="96.0" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="970" y="148" width="7" height="96" fill="#0D9488" clip-path="url(#clip3)"/>
+<text xml:space="preserve" x="996.0" y="181.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="18" fill="#115E59" font-weight="700">Branch protection</text>
+<text xml:space="preserve" x="996.0" y="207.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">Repository rules: nothing reaches</text>
+<text xml:space="preserve" x="996.0" y="229.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">develop / qa / main without passing gates.</text>
+<rect x="1430.0" y="148.0" width="440.0" height="96.0" rx="12" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="1430" y="148" width="7" height="96" fill="#7C3AED" clip-path="url(#clip4)"/>
+<text xml:space="preserve" x="1456.0" y="181.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="18" fill="#5B21B6" font-weight="700">CI/CD pipeline</text>
+<text xml:space="preserve" x="1456.0" y="207.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">The automated chain: build →</text>
+<text xml:space="preserve" x="1456.0" y="229.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#5B6575">test → scan → publish.</text>
+<rect x="50.0" y="265.0" width="640.0" height="476.0" rx="16" fill="#E6EBF2"/>
+<rect x="50.0" y="262.0" width="640.0" height="476.0" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="50" y="262" width="640" height="6" fill="#2563EB" clip-path="url(#clip5)"/>
+<circle cx="96.0" cy="304.0" r="19.0" fill="#2563EB"/>
+<text xml:space="preserve" x="96.0" y="311.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="20" fill="#FFFFFF" font-weight="700" text-anchor="middle">1</text>
+<text xml:space="preserve" x="126.0" y="313.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="25" fill="#1E2A3A" font-weight="700">DoD becomes machines</text>
+<text xml:space="preserve" x="78.0" y="346.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#5B6575">Every DoD item needs a verifier that can reject it</text>
+<text xml:space="preserve" x="74.0" y="378.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="12.5" fill="#5B6575" font-weight="700" letter-spacing="1">DoD ITEM</text>
+<text xml:space="preserve" x="342.0" y="378.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="12.5" fill="#5B6575" font-weight="700" letter-spacing="1">GATE THAT VERIFIES IT</text>
+<rect x="70.0" y="390.0" width="230.0" height="38.0" rx="8" fill="#EEF3FE"/>
+<text xml:space="preserve" x="86.0" y="415.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Consistent code style</text>
+<path d="M304.0,409.0 L325.0,409.0" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="332.0,409.0 325.0,413.2 325.0,404.8" fill="#2563EB"/>
+<rect x="338.0" y="390.0" width="332.0" height="38.0" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1.2"/>
+<circle cx="358.0" cy="409.0" r="9.5" fill="#16A34A"/>
+<path d="M353.7,409.2 L357.1,412.6 L362.6,405.8" fill="none" stroke="#FFFFFF" stroke-width="2.09" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="376.0" y="415.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#14532D" font-weight="700">Linter (blocking)</text>
+<rect x="70.0" y="436.0" width="230.0" height="38.0" rx="8" fill="#EEF3FE"/>
+<text xml:space="preserve" x="86.0" y="461.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Correct types</text>
+<path d="M304.0,455.0 L325.0,455.0" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="332.0,455.0 325.0,459.2 325.0,450.8" fill="#2563EB"/>
+<rect x="338.0" y="436.0" width="332.0" height="38.0" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1.2"/>
+<circle cx="358.0" cy="455.0" r="9.5" fill="#16A34A"/>
+<path d="M353.7,455.2 L357.1,458.6 L362.6,451.8" fill="none" stroke="#FFFFFF" stroke-width="2.09" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="376.0" y="461.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#14532D" font-weight="700">Strict type-check</text>
+<rect x="70.0" y="482.0" width="230.0" height="38.0" rx="8" fill="#EEF3FE"/>
+<text xml:space="preserve" x="86.0" y="507.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Behavior tested</text>
+<path d="M304.0,501.0 L325.0,501.0" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="332.0,501.0 325.0,505.2 325.0,496.8" fill="#2563EB"/>
+<rect x="338.0" y="482.0" width="332.0" height="38.0" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1.2"/>
+<circle cx="358.0" cy="501.0" r="9.5" fill="#16A34A"/>
+<path d="M353.7,501.2 L357.1,504.6 L362.6,497.8" fill="none" stroke="#FFFFFF" stroke-width="2.09" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="376.0" y="507.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#14532D" font-weight="700">Unit + integration + contract</text>
+<rect x="70.0" y="528.0" width="230.0" height="38.0" rx="8" fill="#EEF3FE"/>
+<text xml:space="preserve" x="86.0" y="553.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Enough coverage</text>
+<path d="M304.0,547.0 L325.0,547.0" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="332.0,547.0 325.0,551.2 325.0,542.8" fill="#2563EB"/>
+<rect x="338.0" y="528.0" width="332.0" height="38.0" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1.2"/>
+<circle cx="358.0" cy="547.0" r="9.5" fill="#16A34A"/>
+<path d="M353.7,547.2 L357.1,550.6 L362.6,543.8" fill="none" stroke="#FFFFFF" stroke-width="2.09" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="376.0" y="553.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#14532D" font-weight="700">Coverage: declared ≤ measured</text>
+<rect x="70.0" y="574.0" width="230.0" height="38.0" rx="8" fill="#EEF3FE"/>
+<text xml:space="preserve" x="86.0" y="599.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">No secrets / known CVEs</text>
+<path d="M304.0,593.0 L325.0,593.0" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="332.0,593.0 325.0,597.2 325.0,588.8" fill="#2563EB"/>
+<rect x="338.0" y="574.0" width="332.0" height="38.0" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1.2"/>
+<circle cx="358.0" cy="593.0" r="9.5" fill="#16A34A"/>
+<path d="M353.7,593.2 L357.1,596.6 L362.6,589.8" fill="none" stroke="#FFFFFF" stroke-width="2.09" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="376.0" y="599.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#14532D" font-weight="700">Secret + dependency scan</text>
+<rect x="70.0" y="620.0" width="230.0" height="38.0" rx="8" fill="#EEF3FE"/>
+<text xml:space="preserve" x="86.0" y="645.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Runs for real</text>
+<path d="M304.0,639.0 L325.0,639.0" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="332.0,639.0 325.0,643.2 325.0,634.8" fill="#2563EB"/>
+<rect x="338.0" y="620.0" width="332.0" height="38.0" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1.2"/>
+<circle cx="358.0" cy="639.0" r="9.5" fill="#16A34A"/>
+<path d="M353.7,639.2 L357.1,642.6 L362.6,635.8" fill="none" stroke="#FFFFFF" stroke-width="2.09" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="376.0" y="645.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#14532D" font-weight="700">Smoke: compose up + /health</text>
+<rect x="70.0" y="672.0" width="600.0" height="46.0" rx="10" fill="#FFF7ED" stroke="#FED7AA" stroke-width="1.2"/>
+<polygon points="94.0,683.0 106.0,703.0 82.0,703.0" fill="#D97706"/>
+<text xml:space="preserve" x="94.0" y="700.5" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14" fill="#FFFFFF" font-weight="700" text-anchor="middle">!</text>
+<text xml:space="preserve" x="118.0" y="701.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#9A3412"><tspan font-weight="700">No machine can reject it? </tspan>It’s “self-certified”: a risk</text>
+<rect x="715.0" y="265.0" width="540.0" height="476.0" rx="16" fill="#E6EBF2"/>
+<rect x="715.0" y="262.0" width="540.0" height="476.0" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="715" y="262" width="540" height="6" fill="#0D9488" clip-path="url(#clip6)"/>
+<circle cx="761.0" cy="304.0" r="19.0" fill="#0D9488"/>
+<text xml:space="preserve" x="761.0" y="311.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="20" fill="#FFFFFF" font-weight="700" text-anchor="middle">2</text>
+<text xml:space="preserve" x="791.0" y="313.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="25" fill="#1E2A3A" font-weight="700">Branch protection</text>
+<text xml:space="preserve" x="743.0" y="346.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#5B6575">Makes the gates unavoidable</text>
+<path d="M979,390 V382 H1231 V390" fill="none" stroke="#0D9488" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="990.9" y="366.0" width="11.0" height="8.5" rx="1.6" fill="#0D9488"/>
+<path d="M993.6,366.0 V363.4 A2.8,2.8 0 0 1 999.2,363.4 V366.0" fill="none" stroke="#0D9488" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1008.9" y="374.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13.5" fill="#0D9488" font-weight="700">protected environment branches</text>
+<rect x="739.0" y="394.0" width="88.0" height="44.0" rx="22" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+<text xml:space="preserve" x="783.0" y="422.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#1E2A3A" text-anchor="middle">feature</text>
+<path d="M831.0,416.0 L846.0,416.0" fill="none" stroke="#5B6575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="853.0,416.0 846.0,420.2 846.0,411.8" fill="#5B6575"/>
+<rect x="857.0" y="394.0" width="92.0" height="44.0" rx="10" fill="#ECFDF3" stroke="#16A34A" stroke-width="1.8"/>
+<text xml:space="preserve" x="888.0" y="422.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="17" fill="#14532D" font-weight="700" text-anchor="middle">PR</text>
+<circle cx="922.0" cy="416.0" r="10.5" fill="#16A34A"/>
+<path d="M917.3,416.2 L921.0,420.0 L927.0,412.4" fill="none" stroke="#FFFFFF" stroke-width="2.31" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M953.0,416.0 L968.0,416.0" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="975.0,416.0 968.0,420.2 968.0,411.8" fill="#0D9488"/>
+<rect x="979.0" y="394.0" width="88.0" height="44.0" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.8"/>
+<text xml:space="preserve" x="1023.0" y="422.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#115E59" font-weight="700" text-anchor="middle">develop</text>
+<rect x="1093.0" y="394.0" width="52.0" height="44.0" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.8"/>
+<text xml:space="preserve" x="1119.0" y="422.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#115E59" font-weight="700" text-anchor="middle">qa</text>
+<rect x="1171.0" y="394.0" width="60.0" height="44.0" rx="10" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.8"/>
+<text xml:space="preserve" x="1201.0" y="422.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#115E59" font-weight="700" text-anchor="middle">main</text>
+<path d="M1071.0,416.0 L1082.0,416.0" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1089.0,416.0 1082.0,420.2 1082.0,411.8" fill="#0D9488"/>
+<path d="M1149.0,416.0 L1160.0,416.0" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1167.0,416.0 1160.0,420.2 1160.0,411.8" fill="#0D9488"/>
+<text xml:space="preserve" x="783.0" y="456.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13.5" fill="#5B6575" text-anchor="middle">your change</text>
+<text xml:space="preserve" x="903.0" y="456.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13.5" fill="#16A34A" font-weight="700" text-anchor="middle">gates green</text>
+<rect x="739.0" y="474.0" width="492.0" height="42.0" rx="10" fill="#F8FAFC" stroke="#EDF1F6" stroke-width="1"/>
+<circle cx="761.0" cy="495.0" r="13.0" fill="#DC2626"/>
+<rect x="753.7" y="493.2" width="14.6" height="3.6" rx="1.5" fill="#FFFFFF"/>
+<text xml:space="preserve" x="784.0" y="501.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A"><tspan font-weight="700">No direct pushes</tspan><tspan fill="#5B6575"> — everything goes through a PR</tspan></text>
+<rect x="739.0" y="524.0" width="492.0" height="42.0" rx="10" fill="#F8FAFC" stroke="#EDF1F6" stroke-width="1"/>
+<circle cx="761.0" cy="545.0" r="13.0" fill="#16A34A"/>
+<path d="M755.1,545.3 L759.7,549.9 L767.2,540.6" fill="none" stroke="#FFFFFF" stroke-width="2.86" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="784.0" y="551.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A"><tspan font-weight="700">Required status checks</tspan><tspan fill="#5B6575"> — gates must be green</tspan></text>
+<rect x="739.0" y="574.0" width="492.0" height="42.0" rx="10" fill="#F8FAFC" stroke="#EDF1F6" stroke-width="1"/>
+<circle cx="761.0" cy="595.0" r="13.0" fill="#2563EB"/>
+<circle cx="761.0" cy="591.6" r="3.4" fill="#FFFFFF"/>
+<path d="M754.5,602.1 Q754.5,596.0 761.0,596.0 Q767.5,596.0 767.5,602.1 Z" fill="#FFFFFF"/>
+<text xml:space="preserve" x="784.0" y="601.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A"><tspan font-weight="700">Required review</tspan><tspan fill="#5B6575"> — at least 1 approval</tspan></text>
+<rect x="739.0" y="624.0" width="492.0" height="42.0" rx="10" fill="#F8FAFC" stroke="#EDF1F6" stroke-width="1"/>
+<circle cx="761.0" cy="645.0" r="13.0" fill="#7C3AED"/>
+<path d="M755.1,644.0 A5.9,5.9 0 0 1 766.9,644.0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="763.6,643.0 770.1,643.0 766.9,647.6" fill="#FFFFFF"/>
+<path d="M766.9,646.0 A5.9,5.9 0 0 1 755.1,646.0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="751.9,647.0 758.4,647.0 755.1,642.4" fill="#FFFFFF"/>
+<text xml:space="preserve" x="784.0" y="651.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A"><tspan font-weight="700">Up to date with base</tspan><tspan fill="#5B6575"> — tested against the latest</tspan></text>
+<rect x="739.0" y="676.0" width="492.0" height="42.0" rx="10" fill="#0F766E"/>
+<text xml:space="preserve" x="985.0" y="703.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="17" fill="#FFFFFF" font-weight="700" text-anchor="middle">Enforced by the platform, not by trust</text>
+<rect x="1280.0" y="265.0" width="590.0" height="476.0" rx="16" fill="#E6EBF2"/>
+<rect x="1280.0" y="262.0" width="590.0" height="476.0" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="1280" y="262" width="590" height="6" fill="#7C3AED" clip-path="url(#clip7)"/>
+<circle cx="1326.0" cy="304.0" r="19.0" fill="#7C3AED"/>
+<text xml:space="preserve" x="1326.0" y="311.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="20" fill="#FFFFFF" font-weight="700" text-anchor="middle">3</text>
+<text xml:space="preserve" x="1356.0" y="313.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="25" fill="#1E2A3A" font-weight="700">Pipeline for many services</text>
+<text xml:space="preserve" x="1308.0" y="346.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#5B6575">Each service has its own pipeline with gates</text>
+<rect x="1304.0" y="362.0" width="542.0" height="36.0" rx="10" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="1.2"/>
+<polygon points="1316.0,373.0 1332.0,373.0 1326.0,380.0 1326.0,387.0 1322.0,385.0 1322.0,380.0" fill="#7C3AED"/>
+<text xml:space="preserve" x="1342.0" y="386.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#1E2A3A"><tspan font-weight="700" fill="#5B21B6">Path filters: </tspan>a change in /orders only runs orders CI</text>
+<rect x="1304.0" y="412.0" width="132.0" height="40.0" rx="10" fill="#7C3AED"/>
+<text xml:space="preserve" x="1370.0" y="438.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#FFFFFF" font-weight="700" text-anchor="middle">orders CI</text>
+<rect x="1448.0" y="416.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1490.0" y="437.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">build</text>
+<path d="M1534.0,432.0 L1540.0,432.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1546.0,432.0 1540.0,435.6 1540.0,428.4" fill="#22C55E"/>
+<rect x="1548.0" y="416.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1590.0" y="437.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">test</text>
+<path d="M1634.0,432.0 L1640.0,432.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1646.0,432.0 1640.0,435.6 1640.0,428.4" fill="#22C55E"/>
+<rect x="1648.0" y="416.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1690.0" y="437.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">scan</text>
+<path d="M1734.0,432.0 L1740.0,432.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1746.0,432.0 1740.0,435.6 1740.0,428.4" fill="#22C55E"/>
+<rect x="1748.0" y="416.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1790.0" y="437.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">image</text>
+<rect x="1304.0" y="460.0" width="132.0" height="40.0" rx="10" fill="#7C3AED"/>
+<text xml:space="preserve" x="1370.0" y="486.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#FFFFFF" font-weight="700" text-anchor="middle">inventory CI</text>
+<rect x="1448.0" y="464.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1490.0" y="485.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">build</text>
+<path d="M1534.0,480.0 L1540.0,480.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1546.0,480.0 1540.0,483.6 1540.0,476.4" fill="#22C55E"/>
+<rect x="1548.0" y="464.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1590.0" y="485.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">test</text>
+<path d="M1634.0,480.0 L1640.0,480.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1646.0,480.0 1640.0,483.6 1640.0,476.4" fill="#22C55E"/>
+<rect x="1648.0" y="464.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1690.0" y="485.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">scan</text>
+<path d="M1734.0,480.0 L1740.0,480.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1746.0,480.0 1740.0,483.6 1740.0,476.4" fill="#22C55E"/>
+<rect x="1748.0" y="464.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1790.0" y="485.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">image</text>
+<rect x="1304.0" y="508.0" width="132.0" height="40.0" rx="10" fill="#7C3AED"/>
+<text xml:space="preserve" x="1370.0" y="534.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#FFFFFF" font-weight="700" text-anchor="middle">payments CI</text>
+<rect x="1448.0" y="512.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1490.0" y="533.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">build</text>
+<path d="M1534.0,528.0 L1540.0,528.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1546.0,528.0 1540.0,531.6 1540.0,524.4" fill="#22C55E"/>
+<rect x="1548.0" y="512.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1590.0" y="533.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">test</text>
+<path d="M1634.0,528.0 L1640.0,528.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1646.0,528.0 1640.0,531.6 1640.0,524.4" fill="#22C55E"/>
+<rect x="1648.0" y="512.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1690.0" y="533.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">scan</text>
+<path d="M1734.0,528.0 L1740.0,528.0" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1746.0,528.0 1740.0,531.6 1740.0,524.4" fill="#22C55E"/>
+<rect x="1748.0" y="512.0" width="84.0" height="32.0" rx="8" fill="#ECFDF3" stroke="#86EFAC" stroke-width="1.2"/>
+<text xml:space="preserve" x="1790.0" y="533.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#166534" text-anchor="middle">image</text>
+<path d="M1575.0,550.0 L1575.0,557.0" fill="none" stroke="#5B6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1575.0,563.0 1571.4,557.0 1578.6,557.0" fill="#5B6575"/>
+<rect x="1304.0" y="564.0" width="542.0" height="36.0" rx="10" fill="#EEF2FF" stroke="#818CF8" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text xml:space="preserve" x="1575.0" y="588.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15.5" fill="#1E2A3A" text-anchor="middle"><tspan font-weight="700" fill="#3730A3">Contract tests </tspan>across services: do they still agree?</text>
+<path d="M1575.0,602.0 L1575.0,609.0" fill="none" stroke="#5B6575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1575.0,615.0 1571.4,609.0 1578.6,609.0" fill="#5B6575"/>
+<rect x="1304.0" y="616.0" width="542.0" height="64.0" rx="12" fill="#1E2A3A"/>
+<text xml:space="preserve" x="1324.0" y="644.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="18" fill="#FFFFFF" font-weight="700">Release</text>
+<text xml:space="preserve" x="1324.0" y="666.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14" fill="#CBD5E1">promotes tagged images</text>
+<rect x="1580.0" y="630.0" width="88.0" height="36.0" rx="8" fill="#334155" stroke="#64748B" stroke-width="1.2"/>
+<text xml:space="preserve" x="1624.0" y="654.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF" font-weight="700" text-anchor="middle">develop</text>
+<rect x="1694.0" y="630.0" width="50.0" height="36.0" rx="8" fill="#334155" stroke="#64748B" stroke-width="1.2"/>
+<text xml:space="preserve" x="1719.0" y="654.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF" font-weight="700" text-anchor="middle">qa</text>
+<rect x="1770.0" y="630.0" width="62.0" height="36.0" rx="8" fill="#334155" stroke="#64748B" stroke-width="1.2"/>
+<text xml:space="preserve" x="1801.0" y="654.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#FFFFFF" font-weight="700" text-anchor="middle">main</text>
+<path d="M1670.0,648.0 L1684.0,648.0" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1690.0,648.0 1684.0,651.6 1684.0,644.4" fill="#94A3B8"/>
+<path d="M1746.0,648.0 L1760.0,648.0" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1766.0,648.0 1760.0,651.6 1760.0,644.4" fill="#94A3B8"/>
+<text xml:space="preserve" x="1575.0" y="714.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#5B6575" font-style="italic" text-anchor="middle">Each service is gated independently; only green gets promoted</text>
+<circle cx="702.5" cy="500.0" r="15.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<path d="M699.5,494 L706.5,500 L699.5,506" fill="none" stroke="#5B6575" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1267.5" cy="500.0" r="15.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<path d="M1264.5,494 L1271.5,500 L1264.5,506" fill="none" stroke="#5B6575" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="50.0" y="759.0" width="640.0" height="344.0" rx="16" fill="#E6EBF2"/>
+<rect x="50.0" y="756.0" width="640.0" height="344.0" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="50" y="756" width="640" height="6" fill="#D97706" clip-path="url(#clip8)"/>
+<circle cx="96.0" cy="798.0" r="19.0" fill="#D97706"/>
+<text xml:space="preserve" x="96.0" y="805.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="20" fill="#FFFFFF" font-weight="700" text-anchor="middle">4</text>
+<text xml:space="preserve" x="126.0" y="807.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="25" fill="#1E2A3A" font-weight="700">CI/CD stories for MVP 3</text>
+<text xml:space="preserve" x="78.0" y="840.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#5B6575">Each story has a testable acceptance criterion</text>
+<rect x="70.0" y="856.0" width="600.0" height="38.0" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.2"/>
+<rect x="82.0" y="863.0" width="40.0" height="24.0" rx="12" fill="#D97706"/>
+<text xml:space="preserve" x="102.0" y="880.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13" fill="#FFFFFF" font-weight="700" text-anchor="middle">S1</text>
+<text xml:space="preserve" x="136.0" y="881.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">PRs to develop require green build + tests + lint</text>
+<rect x="70.0" y="902.0" width="600.0" height="38.0" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.2"/>
+<rect x="82.0" y="909.0" width="40.0" height="24.0" rx="12" fill="#D97706"/>
+<text xml:space="preserve" x="102.0" y="926.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13" fill="#FFFFFF" font-weight="700" text-anchor="middle">S2</text>
+<text xml:space="preserve" x="136.0" y="927.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">The coverage gate fails below the floor</text>
+<rect x="70.0" y="948.0" width="600.0" height="38.0" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.2"/>
+<rect x="82.0" y="955.0" width="40.0" height="24.0" rx="12" fill="#D97706"/>
+<text xml:space="preserve" x="102.0" y="972.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13" fill="#FFFFFF" font-weight="700" text-anchor="middle">S3</text>
+<text xml:space="preserve" x="136.0" y="973.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Secret + dependency scans block on findings</text>
+<rect x="70.0" y="994.0" width="600.0" height="38.0" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.2"/>
+<rect x="82.0" y="1001.0" width="40.0" height="24.0" rx="12" fill="#D97706"/>
+<text xml:space="preserve" x="102.0" y="1018.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13" fill="#FFFFFF" font-weight="700" text-anchor="middle">S4</text>
+<text xml:space="preserve" x="136.0" y="1019.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Merge to main builds and pushes a versioned image</text>
+<rect x="70.0" y="1040.0" width="600.0" height="38.0" rx="8" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.2"/>
+<rect x="82.0" y="1047.0" width="40.0" height="24.0" rx="12" fill="#D97706"/>
+<text xml:space="preserve" x="102.0" y="1064.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="13" fill="#FFFFFF" font-weight="700" text-anchor="middle">S5</text>
+<text xml:space="preserve" x="136.0" y="1065.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">A smoke test verifies the deployed system responds</text>
+<rect x="715.0" y="759.0" width="540.0" height="344.0" rx="16" fill="#E6EBF2"/>
+<rect x="715.0" y="756.0" width="540.0" height="344.0" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="715" y="756" width="540" height="6" fill="#DC2626" clip-path="url(#clip9)"/>
+<circle cx="761.0" cy="798.0" r="19.0" fill="#DC2626"/>
+<text xml:space="preserve" x="761.0" y="805.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="20" fill="#FFFFFF" font-weight="700" text-anchor="middle">5</text>
+<text xml:space="preserve" x="791.0" y="807.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="25" fill="#1E2A3A" font-weight="700">Real case: “just merge it”</text>
+<text xml:space="preserve" x="743.0" y="840.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#5B6575" font-style="italic">“Deadline is tomorrow and this gate is being annoying…”</text>
+<path d="M749,870 V966" fill="none" stroke="#FECACA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="749.0" cy="870.0" r="11.0" fill="#DC2626"/>
+<text xml:space="preserve" x="749.0" y="874.5" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="12.5" fill="#FFFFFF" font-weight="700" text-anchor="middle">1</text>
+<text xml:space="preserve" x="770.0" y="876.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Under pressure, a test is disabled and force-merged</text>
+<circle cx="749.0" cy="902.0" r="11.0" fill="#DC2626"/>
+<text xml:space="preserve" x="749.0" y="906.5" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="12.5" fill="#FFFFFF" font-weight="700" text-anchor="middle">2</text>
+<text xml:space="preserve" x="770.0" y="908.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">The bug ships to production</text>
+<circle cx="749.0" cy="934.0" r="11.0" fill="#DC2626"/>
+<text xml:space="preserve" x="749.0" y="938.5" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="12.5" fill="#FFFFFF" font-weight="700" text-anchor="middle">3</text>
+<text xml:space="preserve" x="770.0" y="940.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#1E2A3A">Trust in the pipeline erodes</text>
+<circle cx="749.0" cy="966.0" r="11.0" fill="#DC2626"/>
+<text xml:space="preserve" x="749.0" y="970.5" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="12.5" fill="#FFFFFF" font-weight="700" text-anchor="middle">4</text>
+<text xml:space="preserve" x="770.0" y="972.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#DC2626" font-weight="700">Soon everyone bypasses the gates</text>
+<rect x="739.0" y="992.0" width="492.0" height="88.0" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+<circle cx="761.0" cy="1016.0" r="11.0" fill="#16A34A"/>
+<path d="M756.0,1016.2 L759.9,1020.2 L766.3,1012.3" fill="none" stroke="#FFFFFF" stroke-width="2.42" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="782.0" y="1022.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="17" fill="#166534" font-weight="700">Fix the cause, not the gate</text>
+<text xml:space="preserve" x="759.0" y="1047.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#1E2A3A">Gate is wrong? Fix it deliberately (reviewed), never skip it</text>
+<text xml:space="preserve" x="759.0" y="1069.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="15" fill="#991B1B" font-weight="700">A pipeline you bypass is theater</text>
+<rect x="1280.0" y="759.0" width="590.0" height="344.0" rx="16" fill="#E6EBF2"/>
+<rect x="1280.0" y="756.0" width="590.0" height="344.0" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+<rect x="1280" y="756" width="590" height="6" fill="#0284C7" clip-path="url(#clip10)"/>
+<circle cx="1326.0" cy="798.0" r="19.0" fill="#0284C7"/>
+<circle cx="1326.0" cy="795.0" r="6.5" fill="#FFFFFF"/>
+<rect x="1322.5" y="801.0" width="7.0" height="6.0" rx="1.5" fill="#FFFFFF"/>
+<text xml:space="preserve" x="1356.0" y="807.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="25" fill="#1E2A3A" font-weight="700">Example: airport security</text>
+<text xml:space="preserve" x="1308.0" y="840.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#5B6575">This is how a pipeline with protected branches feels</text>
+<path d="M1372.0,884.0 L1419.0,884.0" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1426.0,884.0 1419.0,888.2 1419.0,879.8" fill="#0284C7"/>
+<path d="M1490.0,884.0 L1537.0,884.0" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1544.0,884.0 1537.0,888.2 1537.0,879.8" fill="#0284C7"/>
+<path d="M1608.0,884.0 L1655.0,884.0" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1662.0,884.0 1655.0,888.2 1655.0,879.8" fill="#0284C7"/>
+<path d="M1726.0,884.0 L1773.0,884.0" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1780.0,884.0 1773.0,888.2 1773.0,879.8" fill="#0284C7"/>
+<circle cx="1340.0" cy="884.0" r="28.0" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+<rect x="1328.0" y="878.0" width="24.0" height="16.0" rx="3" fill="#FFFFFF" stroke="#0284C7" stroke-width="2.2"/>
+<path d="M1335.5,878 V873.5 H1344.5 V878" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1328,885 H1352" fill="none" stroke="#0284C7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1340.0" y="936.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#1E2A3A" font-weight="700" text-anchor="middle">Your change</text>
+<circle cx="1458.0" cy="884.0" r="28.0" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+<rect x="1445.0" y="875.0" width="26.0" height="18.0" rx="3" fill="#FFFFFF" stroke="#0284C7" stroke-width="2.2"/>
+<circle cx="1452.0" cy="882.5" r="3.4" fill="#0284C7"/>
+<path d="M1448,889.5 Q1452,885.5 1456,889.5" fill="none" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1459,881 H1467" fill="none" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1459,886 H1465" fill="none" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1479.0" cy="863.0" r="9.5" fill="#FFFFFF"/>
+<circle cx="1479.0" cy="863.0" r="8.0" fill="#16A34A"/>
+<path d="M1475.4,863.2 L1478.2,866.0 L1482.8,860.3" fill="none" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1458.0" y="936.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#1E2A3A" font-weight="700" text-anchor="middle">Documents</text>
+<circle cx="1576.0" cy="884.0" r="28.0" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+<rect x="1563.0" y="875.0" width="26.0" height="15.0" rx="2.5" fill="#FFFFFF" stroke="#0284C7" stroke-width="2.2"/>
+<path d="M1568,882 q4,-4 8,0 t8,0" fill="none" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1560,894 H1592" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1597.0" cy="863.0" r="9.5" fill="#FFFFFF"/>
+<circle cx="1597.0" cy="863.0" r="8.0" fill="#16A34A"/>
+<path d="M1593.4,863.2 L1596.2,866.0 L1600.8,860.3" fill="none" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1576.0" y="936.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#1E2A3A" font-weight="700" text-anchor="middle">X-ray</text>
+<circle cx="1694.0" cy="884.0" r="28.0" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+<path d="M1684,896 V880 Q1684,872 1694,872 Q1704,872 1704,880 V896" fill="none" stroke="#0284C7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1694.0" cy="883.0" r="2.6" fill="#0284C7"/>
+<path d="M1694,886 V892" fill="none" stroke="#0284C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1715.0" cy="863.0" r="9.5" fill="#FFFFFF"/>
+<circle cx="1715.0" cy="863.0" r="8.0" fill="#16A34A"/>
+<path d="M1711.4,863.2 L1714.2,866.0 L1718.8,860.3" fill="none" stroke="#FFFFFF" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+<text xml:space="preserve" x="1694.0" y="936.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#1E2A3A" font-weight="700" text-anchor="middle">Detector</text>
+<circle cx="1812.0" cy="884.0" r="28.0" fill="#0284C7" stroke="#0284C7" stroke-width="2"/>
+<polygon points="1825.0,884.0 1821.0,882.0 1814.0,882.0 1809.0,872.0 1805.5,872.0 1809.0,882.0 1803.0,882.0 1800.0,877.5 1797.5,877.5 1799.5,884.0 1799.5,884.0 1797.5,890.5 1800.0,890.5 1803.0,886.0 1809.0,886.0 1805.5,896.0 1809.0,896.0 1814.0,886.0 1821.0,886.0" fill="#FFFFFF"/>
+<text xml:space="preserve" x="1812.0" y="936.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="14.5" fill="#1E2A3A" font-weight="700" text-anchor="middle">Boarding</text>
+<circle cx="1312.0" cy="972.5" r="4.0" fill="#0284C7"/>
+<text xml:space="preserve" x="1326.0" y="978.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#1E2A3A"><tspan font-weight="700">Each checkpoint</tspan><tspan fill="#5B6575"> = a gate (linter, tests, scans)</tspan></text>
+<circle cx="1312.0" cy="1003.5" r="4.0" fill="#0284C7"/>
+<text xml:space="preserve" x="1326.0" y="1009.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#1E2A3A"><tspan font-weight="700">The barriers</tspan><tspan fill="#5B6575"> = branch protection: no shortcut</tspan></text>
+<circle cx="1312.0" cy="1034.5" r="4.0" fill="#0284C7"/>
+<text xml:space="preserve" x="1326.0" y="1040.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#1E2A3A"><tspan font-weight="700">Running late?</tspan><tspan fill="#5B6575"> You still go through the detector</tspan></text>
+<circle cx="1312.0" cy="1065.5" r="4.0" fill="#0284C7"/>
+<text xml:space="preserve" x="1326.0" y="1071.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16" fill="#1E2A3A"><tspan font-weight="700">Boarding</tspan><tspan fill="#5B6575"> = reaching main (production)</tspan></text>
+<text xml:space="preserve" x="387.3" y="1145.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="17" fill="#5B6575" font-weight="700">In one line:</text>
+<rect x="499.0" y="1118.0" width="69.9" height="42.0" rx="21" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text xml:space="preserve" x="534.0" y="1145.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#2563EB" font-weight="700" text-anchor="middle">DoD</text>
+<path d="M577.0,1139.0 L594.0,1139.0" fill="none" stroke="#5B6575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="601.0,1139.0 594.0,1143.2 594.0,1134.8" fill="#5B6575"/>
+<rect x="609.0" y="1118.0" width="169.8" height="42.0" rx="21" fill="#FFFFFF" stroke="#16A34A" stroke-width="2"/>
+<text xml:space="preserve" x="693.9" y="1145.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#16A34A" font-weight="700" text-anchor="middle">Automated gates</text>
+<path d="M786.8,1139.0 L803.8,1139.0" fill="none" stroke="#5B6575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="810.8,1139.0 803.8,1143.2 803.8,1134.8" fill="#5B6575"/>
+<rect x="818.8" y="1118.0" width="190.0" height="42.0" rx="21" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+<text xml:space="preserve" x="913.8" y="1145.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#0D9488" font-weight="700" text-anchor="middle">Protected branches</text>
+<path d="M1016.8,1139.0 L1033.8,1139.0" fill="none" stroke="#5B6575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1040.8,1139.0 1033.8,1143.2 1033.8,1134.8" fill="#5B6575"/>
+<rect x="1048.8" y="1118.0" width="191.8" height="42.0" rx="21" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2"/>
+<text xml:space="preserve" x="1144.7" y="1145.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#7C3AED" font-weight="700" text-anchor="middle">Per-service pipeline</text>
+<path d="M1248.7,1139.0 L1265.7,1139.0" fill="none" stroke="#5B6575" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1272.7,1139.0 1265.7,1143.2 1265.7,1134.8" fill="#5B6575"/>
+<rect x="1280.7" y="1118.0" width="252.0" height="42.0" rx="21" fill="#1E2A3A" stroke="#1E2A3A" stroke-width="2"/>
+<text xml:space="preserve" x="1406.7" y="1145.0" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="16.5" fill="#FFFFFF" font-weight="700" text-anchor="middle">MVP 3: green &amp; trustworthy</text>
+</svg>
