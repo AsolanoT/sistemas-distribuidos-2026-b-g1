@@ -20,29 +20,26 @@
 
 | Date | Hours | Chapters or labs | Evidence file |
 |---|---|---|---|
-| 2026-11-01 | 1.5 | Enrollment + Pre-class Guidance | [evidence/00-enrollment.png](evidence/00-enrollment.png) |
+| 2026-11-01 | 2.5 | Enrollment + Pre-class Guidance | [evidence/00-enrollment.png](evidence/00-enrollment.png) |
 | 2026-11-02 | 1 | Chapter 1: Architecture Design Methodology on Huawei Cloud | [evidence/01-chapter-01.png](evidence/01-chapter-01.png) |
 | 2026-11-02 | 1 | Chapter 2: Typical Service Implementation Solutions on the Cloud | [evidence/02-chapter-02.png](evidence/02-chapter-02.png) |
 | 2026-11-02 | 1 | Chapter 3: Cloud Compute Solution Design | [evidence/03-chapter-03.png](evidence/03-chapter-03.png) |
 | 2026-11-02 | 1 | Chapter 4: Cloud Storage Solution Design | [evidence/04-chapter-04.png](evidence/04-chapter-04.png) |
 | 2026-11-02 | 1 | Chapter 5: Cloud Network Solution Design | [evidence/05-chapter-05.png](evidence/05-chapter-05.png) |
 | 2026-11-02 | 1 | Chapter 6: Cloud Database Solution Design | [evidence/06-chapter-06.png](evidence/06-chapter-06.png) |
-| 2026-11-04 | 2.5 | Review of chapters 1-3 (methodology, compute, storage) and own notes | [evidence/03-chapter-03.png](evidence/03-chapter-03.png) |
-| 2026-11-05 | 2.5 | Review of chapters 4-6 (storage, network, database) and own notes | [evidence/06-chapter-06.png](evidence/06-chapter-06.png) |
-| 2026-11-06 | 3 | Reading synkro-docs (overview, AT-002, AT-004, NFR-001, ADR-009) to pick the design problems | [evidence/06-chapter-06.png](evidence/06-chapter-06.png) |
-| 2026-11-07 | 3 | Chapter 7: Cloud Security Solution Design | [evidence/07-chapter-07.png](evidence/07-chapter-07.png) |
-| 2026-11-07 | 2 | Chapter 8: Cloud O&M Solution Design | [evidence/08-chapter-08.png](evidence/08-chapter-08.png) |
+| 2026-11-06 | 4 | Reading synkro-docs (overview, AT-002, AT-004, NFR-001, ADR-009) to pick the design problems | [evidence/06-chapter-06.png](evidence/06-chapter-06.png) |
+| 2026-11-07 | 3.5 | Chapter 7: Cloud Security Solution Design | [evidence/07-chapter-07.png](evidence/07-chapter-07.png) |
+| 2026-11-07 | 2.5 | Chapter 8: Cloud O&M Solution Design | [evidence/08-chapter-08.png](evidence/08-chapter-08.png) |
 | 2026-11-08 | 2 | Chapter 9: Distributed Architecture Design | [evidence/09-chapter-09.png](evidence/09-chapter-09.png) |
 | 2026-11-08 | 1.5 | Chapter 10: Highly Scalable System Design | [evidence/10-chapter-10.png](evidence/10-chapter-10.png) |
 | 2026-11-08 | 1.5 | Chapter 11: Disaster Recovery System Design | [evidence/11-chapter-11.png](evidence/11-chapter-11.png) |
 | 2026-11-08 | 1 | Chapter 12: Automated Deployment | [evidence/12-chapter-12.png](evidence/12-chapter-12.png) |
-| 2026-11-09 | 3.5 | Outline of the design note and mapping of components to synkro-docs | [evidence/12-chapter-12.png](evidence/12-chapter-12.png) |
-| 2026-11-10 | 2.5 | Chapter 13: Containers and Agility | [evidence/13-chapter-13.png](evidence/13-chapter-13.png) |
-| 2026-11-10 | 2.5 | Chapter 14: Huawei Cloud Advanced Services | [evidence/14-chapter-14.png](evidence/14-chapter-14.png) |
-| 2026-11-11 | 5 | Writing the design note and drawing the target architecture diagram | [evidence/14-chapter-14.png](evidence/14-chapter-14.png) |
-| 2026-11-12 | 2 | Review of chapters 9-13 for the final exam | [evidence/13-chapter-13.png](evidence/13-chapter-13.png) |
-| 2026-11-12 | 1 | Final exam | [evidence/19-final-exam.png](evidence/19-final-exam.png) |
-| 2026-11-12 | 2 | Writing ADR-C3-01 and ADR-C3-02 | [evidence/19-final-exam.png](evidence/19-final-exam.png) |
+| 2026-11-09 | 4.5 | Outline of the design note and mapping of components to synkro-docs | [evidence/12-chapter-12.png](evidence/12-chapter-12.png) |
+| 2026-11-10 | 3 | Chapter 13: Containers and Agility | [evidence/13-chapter-13.png](evidence/13-chapter-13.png) |
+| 2026-11-10 | 3 | Chapter 14: Huawei Cloud Advanced Services | [evidence/14-chapter-14.png](evidence/14-chapter-14.png) |
+| 2026-11-11 | 6 | Writing the design note and drawing the target architecture diagram | [evidence/14-chapter-14.png](evidence/14-chapter-14.png) |
+| 2026-11-12 | 1.5 | Final exam | [evidence/19-final-exam.png](evidence/19-final-exam.png) |
+| 2026-11-12 | 2.5 | Writing ADR-C3-01 and ADR-C3-02 | [evidence/19-final-exam.png](evidence/19-final-exam.png) |
 | 2026-11-13 | 1.5 | Lab 1: Design Cases and Practices of an O&M Solution | [evidence/15-lab-1.png](evidence/15-lab-1.png) |
 | 2026-11-13 | 1 | Lab 2: High-Performance Network Solution | [evidence/16-lab-2.png](evidence/16-lab-2.png) |
 | 2026-11-13 | 1 | Lab 3: Highly Elastic Service System | [evidence/17-lab-3.png](evidence/17-lab-3.png) |
